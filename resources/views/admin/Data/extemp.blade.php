@@ -23,6 +23,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h4><a href="{{ url('admin/addextemp')}}"  class="btn btn-primary btn-sm mt-2"> <i class="fa fa-plus mr-2"></i> Add Topics</a></h4>
+                        <h4><a href="{{ url('admin/data')}}"  class="btn btn-primary btn-sm mt-2">  Back</a></h4>
                       
 
                         

@@ -41,7 +41,7 @@
       
       </div>
     
-      <a href="{{url('admin/data')}}" class="btn btn-danger">Cancel</a>
+      <a href="{{url('admin/topicroles')}}" class="btn btn-danger">Cancel</a>
       
       <button type="submit" name="submit" class="btn btn-success">Submit</button>
     </form>

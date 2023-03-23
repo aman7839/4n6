@@ -22,7 +22,10 @@
             <div class="col-md-12 mt-2">
                 <div class="card">
                     <div class="card-header">
+                        
                         <h4><a href="{{ url('admin/addisg')}}"  class="btn btn-primary btn-sm mt-2"> <i class="fa fa-plus mr-2"></i> Add Record</a></h4>
+                        <h4><a href="{{ url('admin/data')}}"  class="btn btn-primary btn-sm mt-2">  Back</a></h4>
+
                         {{-- <h4><a href="{{url('/admin/logout')}}" class="btn btn-primary btn-sm mt-3">Logout</a></h4> --}}
                         
                         
