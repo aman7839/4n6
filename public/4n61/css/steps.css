@@ -1,0 +1,92 @@
+span.current-info.audible {
+  display: none;
+}
+.actions.clearfix ul {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.actions.clearfix ul li {
+  list-style: none;
+}
+.actions.clearfix ul li a {
+  background: #ef8a17;
+  padding: 10px 15px;
+  border-radius: 6px;
+  color: #000;
+  text-decoration: unset;
+  font-weight: 500;
+  display: inline-block;
+  margin-right: 10px;
+  min-width: 120px;
+  text-align: center;
+}
+.actions.clearfix ul li {
+  list-style: none;
+}
+.actions li.disabled {
+  display: none;
+}
+.wizard > .steps a {
+  color: #000;
+  text-decoration: unset;
+}
+.wizard a p {
+  font-weight: 500;
+  color: #000;
+  font-size: 18px;
+}
+.wizard .title {
+  display: none;
+}
+/* .steps  ul > li.first.current::after, */
+.steps  ul > li.first.done::after,
+.steps  ul > li.done::after
+ {
+
+  background: #ef8a17;
+}
+.steps  ul > li::after {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: grey;
+  content: "";
+  left: 50%;
+  bottom: 12px;
+}
+
+.steps  ul > li:last-child::after {
+  display: none;
+}
+.steps  ul > li.first.current span,
+.steps  ul > li.first.done span,
+.steps  ul > li.done span
+ {
+    background-color: #ef8a17;
+    border: unset;
+  }
+  .steps  ul > li span {
+    width: 15px;
+    height: 15px;
+    background-color: #fff;
+    border-radius: 50%;
+    position: relative;
+    display: inline-block;
+    z-index: 2;
+    border: 2px solid #ef8a17;
+  }
+  
+.steps  ul {
+    padding: 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  .steps  ul > li {
+    flex-grow: 1;
+    width: 100%;
+    text-align: center;
+    list-style: none;
+    position: relative;
+  }
