@@ -9,7 +9,7 @@
             <div class="col-md-12 mt-2">
                 <div class="card">
                     <div class="card-header">
-                        <h4><a href="{{ url('admin/addofferprice')}}"  class="btn btn-primary btn-sm mt-2"> <i class="fa fa-plus mr-2"></i> Add Offer</a></h4>
+                        {{-- <h4><a href="{{ url('admin/addofferprice')}}"  class="btn btn-primary btn-sm mt-2"> <i class="fa fa-plus mr-2"></i> Add Offer</a></h4> --}}
                         
                         
                     </div>
@@ -18,7 +18,7 @@
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    {{-- <th>ID</th> --}}
                                     <th>Actual Price</th>
                                      
                                     <th>Offer Price</th> 
@@ -34,7 +34,7 @@
                             <tbody>
                                @foreach ($offerPrice as $item)
                                 <tr>
-                                    <td>{{ $item->id }}</td>
+                                    {{-- <td>{{ $item->id }}</td> --}}
                                     <td>{{ $item->price ?? '' }}</td>
                                     <td>{{ $item->offer_price ??''}}</td> 
                             

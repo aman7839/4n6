@@ -14,15 +14,26 @@ use Illuminate\Http\Request;
 class DataController extends Controller
 {
     //
-    public function index(){
-   $data = Data::with(['awards', 'theme', 'category'])->paginate(10);
+    public function index(Request $request){
 
+$search = $request['search'];
 
-   
-
-   return view('admin.Data.data',compact('data'));
+if ($search != ""){
         
-    }
+            $data = Data::where('title', 'Like', '%'.$search. '%' )->orWhere('author', 'Like', '%'.$search. '%')->paginate('10');
+           
+        }
+        else
+        
+        {
+        
+           $data = Data::with(['awards','theme', 'category'])->paginate(10);
+        
+        }
+        
+             return view('admin.Data.data',compact('data','search'));
+                
+            }
    
     public function adddata(){
         $awards = awards::all();

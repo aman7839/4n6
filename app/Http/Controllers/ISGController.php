@@ -8,11 +8,19 @@ use Illuminate\Http\Request;
 class ISGController extends Controller
 {
     //
-    public function index(){
+    public function index(Request $request){
+
+        $search = $request['search'];
+        if ($search != ""){
+
+            $topic = ISG::where('topic', 'Like', '%'.$search. '%' )->orWhere('info', 'Like', '%'.$search. '%')->paginate('10');
+           
+        }else{
 
         $topic = ISG::paginate(10);
+    }
 
-        return view('admin.Data.isg',compact('topic'));
+        return view('admin.Data.isg',compact('topic','search'));
     }
     public function saveIsg(Request $request){
         $request->validate([

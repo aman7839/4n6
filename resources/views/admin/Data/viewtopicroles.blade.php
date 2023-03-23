@@ -7,17 +7,17 @@
     <div class="container">
         <div class="row m-2">
            <div class="col-md-12">
-            {{-- <form action="">
+            <form action="">
                 <div class="form-group mt-4 search_bar">
                
                   <input type="search" name="search" id="" class="form-control" placeholder="Search Here" aria-describedby="helpId" value = "{{$search}}">
                   <button  class="btn btn-primary">Search</button>
-                  <a href="{{url('admin/users')}}"><i class="fa fa-times"></i></a>
+                  <a href="{{url('admin/topicroles')}}"><i class="fa fa-times"></i></a>
                   
                 </div>
 
                 
-            </form> --}}
+            </form>
            </div>
             <div class="col-md-12 mt-2">
                 <div class="card">
