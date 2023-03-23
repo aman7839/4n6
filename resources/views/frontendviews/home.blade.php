@@ -63,50 +63,20 @@
             <div class="cmn_heading">
                <h2>Our Services</h2>
             </div>
-            <div class="row mt-5 mb-5">
-                <div class="col-md-6 service_outer space_bt_mobile">
-                    <div class="service_content">
-                        <h3 class="scondary_heading">Vault</h3>
-
-                        <ul class="p-0 mb-3">
-                            <li>2,000 + performance-ready selections timed
-                                for length with suggested introductions and
-                                source information.</li>
-                            <li>More cuttings added each week during the
-                                school year.</li>
-                            <li>Add Sample Cutting Link.</li>
-                            <li>#’s of cuttings available – I like this, but need
-                                ability to change these numbers</li>
-                            <li>Split Solo Interp into two sections (Humorous
-                                Interp and Dramatic Interp) – Leave off
-                                Declamation, not a huge draw for most states.</li>
-                        </ul>
-                        <a href="{{url('register')}}" class="cmn_btn">Become a Member</a>
-                    </div>
-                </div>
-                <div class="col-md-6 service_image ">
+            <div class="row mt-5">
+                <div class="col-md-6 col-lg-4">
+                   <div class="service_outer">
                     <div class="service_img">
                         <img src="{{asset('/public/4n61/images/valut.jpg')}}" class="img-fluid" alt="">
                     </div>
-                    <div class="servic_icon text-end">
-                        <img src="{{asset('/public/4n61/images/valut_icon.png')}}" class=" mt-3" alt="">
-                    </div>
-                </div>
-            </div>
-            <div class="row space">
-                <div class="col-md-6 service_image order-2-sm">
-                    <div class="service_img space_bt_mobile">
-                        <img src="{{asset('/public/4n61/images/database.jpg')}}" class="img-fluid" alt="">
-                    </div>
-                    <div class="servic_icon">
-                        <img src="{{asset('/public/4n61/images/data_icon.png')}}" class=" mt-3" alt="">
-                    </div>
-                </div>
-                <div class="col-md-6 service_outer database space_bt_mobile order-1-sm">
                     <div class="service_content">
-                        <h3 class="scondary_heading">Database</h3>
+                        <div class="service_header">
 
-                        <ul class="p-0 mb-3">
+                            <h3 class="scondary_heading">Vault</h3>
+                            <img src="{{asset('/public/4n61/images/vault_icon.png')}}" class="img-fluid" alt="">
+                        </div>
+
+                        <ul class="p-0 mb-3 pt-3">
                             <li>2,000 + performance-ready selections timed
                                 for length with suggested introductions and
                                 source information.</li>
@@ -122,39 +92,65 @@
                         <a href="{{url('register')}}" class="cmn_btn">Become a Member</a>
                     </div>
                 </div>
-
-            </div>
-            <div class="row mt-5 mb-5">
-                <div class="col-md-6 service_outer">
-                    <div class="service_content">
-                        <h3 class="scondary_heading">Extemp & Limited <br>
-                            Prep Events</h3>
-
-                        <ul class="p-0 mb-3">
-                            <li>2,000 + performance-ready selections timed
-                                for length with suggested introductions and
-                                source information.</li>
-                            <li>More cuttings added each week during the
-                                school year.</li>
-                            <li>Add Sample Cutting Link.</li>
-                            <li>#’s of cuttings available – I like this, but need
-                                ability to change these numbers</li>
-                            <li>Split Solo Interp into two sections (Humorous
-                                Interp and Dramatic Interp) – Leave off
-                                Declamation, not a huge draw for most states.</li>
-                        </ul>
-                        <a href="{{url('register')}}" class="cmn_btn">Become a Member</a>
+                   </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="service_outer">
+                        <div class="service_img ">
+                            <img src="{{asset('/public/4n61/images/database.jpg')}}" class="img-fluid" alt="">
+                        </div>
+                        <div class="service_content">
+                            <div class="service_header">
+                            <h3 class="scondary_heading">Database</h3>
+                            <img src="{{asset('/public/4n61/images/database_icon.png')}}" class="img-fluid" alt="">
+                            </div>
+                            <ul class="p-0 mb-3 pt-3">
+                                <li>24,000+ records tracking state and national 
+                                    qualifiers since 2003. </li>
+                                <li> Search by Event, Awards, 100+ Themes Leave 
+                                    out Gender (so many of our students are 
+                                    outside the binary gender norms) .</li>
+                            </ul>
+                            <a href="{{url('register')}}" class="cmn_btn">Become a Member</a>
+                        </div>
                     </div>
+                   
                 </div>
-                <div class="col-md-6 service_image">
+                <div class="col-md-6 col-lg-4 ">
+                   <div class="service_outer events">
                     <div class="service_img">
                         <img src="{{asset('/public/4n61/images/extemp.jpg')}}" class="img-fluid" alt="">
                     </div>
-                    <div class="servic_icon text-end">
-                        <img src="{{asset('/public/4n61/images/extemp_icon.png')}}" class=" mt-3" alt="">
+                    <div class="service_content">
+                        <div class="service_header">
+                        <h3 class="scondary_heading">Extemp & Limited <br>
+                            Prep Events</h3>
+                            <img src="{{asset('/public/4n61/images/event_icon.png')}}" class="img-fluid" alt="">
+                        </div>
+                        <ul class="p-0 mb-3 pt-3">
+                            <li>Extemp Topic Generator (ETB)  - 100+ Extemp 
+                                Topics each month. - The ETG functions the 
+                                same way an Extemp Draw takes place at a 
+                                tournament.  (Link to Tutorial) Both video and 
+                                text.</li>
+                                <li>
+                                    Our Impromptu Speech Topic Generator with 28+ 
+                                    categories and over 1,400 topics -- from "Social 
+                                    Issues" to "Harry Potter Quotes" 
+                                    
+                                </li>
+                                <li>
+                                    Duo Improv Scene Generator – 3 professions, 
+                                    locations and activities – Give students 30 
+                                    minutes to create a short skit.</li>
+                                
+                               
+                        </ul>
+                        <a href="{{url('register')}}" class="cmn_btn">Become a Member</a>
                     </div>
+                   </div>
                 </div>
             </div>
+       
         </div>
     </section>
 
