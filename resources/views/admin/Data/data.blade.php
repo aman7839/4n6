@@ -7,17 +7,17 @@
     <div class="container">
         <div class="row m-2">
            <div class="col-md-12">
-            {{-- <form action="">
+            <form action="">
                 <div class="form-group mt-4 search_bar">
                
-                  <input type="search" name="search" id="" class="form-control" placeholder="Search Here" aria-describedby="helpId" value = "{{$search}}">
+                  <input type="search" name="search" id="" class="form-control" placeholder="Search by author or title" aria-describedby="helpId" value = "">
                   <button  class="btn btn-primary">Search</button>
-                  <a href="{{url('admin/users')}}"><i class="fa fa-times"></i></a>
+                  <a href="{{url('admin/data')}}"><i class="fa fa-times"></i></a>
                   
                 </div>
 
                 
-            </form> --}}
+            </form>
            </div>
             <div class="col-md-12 mt-2">
                 <div class="card">
@@ -44,7 +44,7 @@
                                     <th>Category Name</th>                                      
                                     <th>Award Name</th>                                      
                                     <th>Theme Name</th>  
-                                    <th>Public</th>  
+                                    {{-- <th>Public</th>   --}}
 
 
                                     
@@ -65,7 +65,7 @@
 
 
                                     <td>{{ $item->theme['name'] ?? '' }}</td> 
-                                    <td>{{ $item->public ? 'Public' : 'Hidden'  }}</td>
+                                    {{-- <td>{{ $item->public ? 'Public' : 'Hidden'  }}</td> --}}
 
 
 

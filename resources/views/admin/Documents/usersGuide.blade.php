@@ -6,6 +6,18 @@
 <div class="container pt-4 pb-4">
     <div class="row">
         <div class="col-md-12">
+            <form action="">
+                <div class="form-group mt-4 search_bar">
+               
+                  <input type="search" name="search" id="" class="form-control" placeholder="Search here" aria-describedby="helpId" value = "{{$search}}">
+                  <button  class="btn btn-primary">Search</button>
+                  <a href="{{url('admin/documents')}}"><i class="fa fa-times"></i></a>
+                  
+                </div>
+
+                
+            </form>
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
                     <h4><a href="{{ url('admin/adddocuments')}}"  class="btn btn-primary btn-sm mt-2"><i class="fa fa-plus mr-2"></i> Add Documents</a></h4>

@@ -29,11 +29,19 @@ class TopicRoles extends Controller
 
         return view('admin.Data.topicroles');
     }
-    public function ViewTopicRole(){
+    public function ViewTopicRole(Request $request){
+        $search = $request['search'];
 
+        if ($search != ""){
+
+            $topic = TopicRole::where('name', 'Like', '%'.$search. '%' )->orWhere('info', 'Like', '%'.$search. '%')->paginate('10');
+           
+        }else
+        {
 
         $topic = TopicRole::paginate(10);
-        return view('admin.Data.viewtopicroles',compact('topic'));
+    }
+        return view('admin.Data.viewtopicroles',compact('topic','search'));
     }
     public function editTopicRole($id){
 

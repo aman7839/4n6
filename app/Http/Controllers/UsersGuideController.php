@@ -14,11 +14,24 @@ class UsersGuideController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
+
     {   
-        $document = users_guide::paginate(10);
+
+        $search = $request['search'] ?? "";
+
+        if ($search != ""){
+
+            $document = users_guide::where('image', 'Like', '%'.$search. '%' )->paginate('10');
+
+           
+        }
+        else{
         
-        return view('admin.Documents.usersGuide',compact('document'));
+        $document = users_guide::paginate(10);
+    }
+        
+        return view('admin.Documents.usersGuide',compact('document','search'));
     }
     public function addDocuments()
     {   
