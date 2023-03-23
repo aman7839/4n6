@@ -19,15 +19,15 @@
           
            @foreach ($offerPrice as $item)
 
-                @if ($item->status == '1')
-                @if($item->from_date == $today || $item->to_date == $today )
+                @if ($item->status == '1' && $item->to_date >= $today )
+                {{-- @if($item->from_date == $today || $item->to_date == $today ) --}}
 
                 <div class="col-lg-3">
                     <div class="fanatic_offer">
                         <p>
-                           {{$item->description ?? ''}}<br>
-                           Now Get 365 days <br>
-                            For <br>
+                           {{$item->description ?? ''}}
+                           <strong class="prev-price">${{$item->price ?? ''}}</strong><span></span>
+                            
                             <strong>${{$item->offer_price ?? ''}}</strong><span>only</span>
                         </p>
                     </div>
@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 @endif
-                @endif
+                {{-- @endif --}}
           @endforeach
 
             </div>

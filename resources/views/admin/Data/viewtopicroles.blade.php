@@ -23,9 +23,12 @@
                 <div class="card">
                     <div class="card-header">
                         <h4><a href="{{ url('admin/addtopicroles')}}"  class="btn btn-primary btn-sm mt-2"> <i class="fa fa-plus mr-2"></i> Add Record</a></h4>
+                        <h4><a href="{{ url('admin/data')}}"  class="btn btn-primary btn-sm mt-2">  Back</a></h4>
                         
                         
                     </div>
+
+                    
                     <div class="card-body">     
     
                         <table class="table table-bordered table-striped">

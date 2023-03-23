@@ -9,11 +9,21 @@ use App\Models\categoryLinks;
 class LinksController extends Controller
 {
     //
-    public function getCategory(){
+    public function getCategory(Request $request){
 
+        $search = $request['search'];
+
+        if($search != "")
+        {
+
+            $category = category::where('name', 'Like', '%'.$search. '%' )->orWhere('description', 'Like', '%'.$search. '%')->paginate('10');
+        }
+      else{
         $category = category::paginate(10);
+    
+    }
 
-        return view('admin.Links.links',compact('category'));
+        return view('admin.Links.links',compact('category','search'));
 
     }
     public function addCategory(){

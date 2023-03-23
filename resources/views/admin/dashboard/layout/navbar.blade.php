@@ -198,23 +198,28 @@
 
                     </li>
 
-                    <li class="nav-item {{ request()->is('admin/topics') ? 'active' : ''}}">
+                    {{-- <li class="nav-item {{ request()->is('admin/topics') ? 'active' : ''}}">
 
                         <a href="{{url('admin/topics')}}"><i class="menu-icon fa fa-star    "></i> Topics </a>
 
-                    </li>
+                    </li> --}}
 
                     <li class="nav-item {{ request()->is('admin/documents') ? 'active' : ''}}">
 
                         <a href="{{url('admin/documents')}}"><i class="menu-icon fa fa-file-text"></i>Manage Documents </a>
 
                     </li>
+                    <li class="nav-item {{ request()->is('admin/offerprice') ? 'active' : ''}}">
 
-                    <li class="nav-item {{ request()->is('admin/states') ? 'active' : ''}}">
+                        <a href="{{url('admin/offerprice')}}"><i class="menu-icon fa fa-file-text"></i>Offer Price </a>
+
+                    </li>
+
+                    {{-- <li class="nav-item {{ request()->is('admin/states') ? 'active' : ''}}">
 
                         <a href="{{url('admin/states')}}"><i class="menu-icon fa fa-globe"></i>States</a>
 
-                    </li>
+                    </li> --}}
 
                     <li class="nav-item {{ request()->is('admin/category') ? 'active' : ''}}">
 

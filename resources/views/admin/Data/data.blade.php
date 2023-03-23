@@ -10,7 +10,7 @@
             <form action="">
                 <div class="form-group mt-4 search_bar">
                
-                  <input type="search" name="search" id="" class="form-control" placeholder="Search by author or title" aria-describedby="helpId" value = "">
+                  <input type="search" name="search" id="" class="form-control" placeholder="Search by author or title" aria-describedby="helpId" value = "{{$search}}">
                   <button  class="btn btn-primary">Search</button>
                   <a href="{{url('admin/data')}}"><i class="fa fa-times"></i></a>
                   
