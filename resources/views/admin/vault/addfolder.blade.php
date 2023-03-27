@@ -532,7 +532,7 @@
                         },
                         success: function(data) {
                             if (data.status == true) {
-                              $(selected_row).parent('tr').remove();
+                              jQuery(selected_row).parent('tr').remove();
                             }
                         },
                         error: function(error) {

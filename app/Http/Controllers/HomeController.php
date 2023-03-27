@@ -82,8 +82,8 @@ class HomeController extends Controller
 
     public function reviews()
     {
-
-    return view('frontendviews.reviews');
+    $review =   Reviews::where('approved',1)->with('review')->get();
+    return view('frontendviews.reviews', compact('review'));
     }
 
     public function adminViewReviews()
@@ -137,9 +137,8 @@ class HomeController extends Controller
 
       $review->save();
 
-      return redirect()->back()->with('success','Screenshot added successfully');
+      return redirect()->back()->with('success','Review screenshot added successfully');
     
-    //   return view('admin.Reviews.reviews')->with('success','Screenshot added successfully');
 
       
     }
@@ -160,10 +159,15 @@ class HomeController extends Controller
     public function deleteReview($id )
     {
        
-      $review =  Reviews::where('id', $id)->delete();
+      $review =  Reviews::find($id);
 
-      
+      if($review->count()>0){
+        unlink(public_path('images/'.$review->screenshot));
+        $review->delete();
       return redirect()->back()->with('error','Review deleted successfully');
+
+      }
+      
 
     }
 
@@ -171,7 +175,7 @@ class HomeController extends Controller
     public function getReviews()
     {
      
-    $review = Review::all();
+    $review = Reviews::paginate(10);
 
     return view('frontendviews.reviews', compact('review'));
 

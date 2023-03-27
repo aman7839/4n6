@@ -28,6 +28,15 @@
                         <img src="{{asset('/public/4n61/images/contact_image.jpg')}}" class="img-fluid" alt="contact image">
                     </div>
                 </div> --}}
+                @foreach ($review as $review_list)
+                    
+              <div class="review_list">
+            <p> {{$review_list->comment ?? ""}}</p>
+            <p> {{$review_list->review->name ?? ""}}</p>
+
+            <p>  <img src= "{{ asset('/public/images/'.$review_list->screenshot) }}" width="100" class=" rounded-circle "  title=""></p>
+            </div>
+            @endforeach
 
                 @auth
                     

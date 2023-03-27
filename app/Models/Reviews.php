@@ -20,5 +20,9 @@ class Reviews extends Model
        
     ];
 
+    public function review() {
+        return $this->belongsTo(User::class,"user_id","id");
+    }
+
     
 }

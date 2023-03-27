@@ -43,7 +43,7 @@
 
                             <div class="">
                                 <div class="form-group">
-                                    <label for="screenshot"> Folder Name <span class="text-danger"></span> </label>
+                                    <label for="screenshot"> Screenshot <span class="text-danger"></span> </label>
                                     <input type="file" id="" name="screenshot" class="form-control"
                                         placeholder="Folder Name">
                                 </div>
@@ -73,7 +73,7 @@
         </div>
     </div>
                
-           
+           {{-- end modal --}}
 
 
 
@@ -94,7 +94,7 @@
                                     <th> Review</th>
                                      
                                     <th>Screenshot</th> 
-                                    {{-- <th>Hidden</th>                                       --}}
+                                    <th>Status</th>                                      
                                     <th>Approve</th>
                                     
                                     {{-- <th>Edit</th> --}}
@@ -106,13 +106,10 @@
                                 <tr>
                                     <td>{{ $reviews->id }}</td>
                                     <td>{{ $reviews->comment }}</td>
-                                    {{-- <td><img src= "/images/{{$reviews->screenshot}}" width="30%" class="img-circle" ></td> --}}
                                     <td><img src= "{{ asset('/public/images/'.$reviews->screenshot) }}" width="100" class=" rounded-circle "  title=""></td>
 
-                                    {{-- <td><img src= "" width="30%" class=" rounded-circle "  title="">{{$item->file}}</td> --}}
                                   
-                                  
-                                    {{-- <td>{{ $item->hidden }}</td> --}}
+                                        <td>{{ $reviews->approved == 1 ? 'Approved' : 'Pending' }}</td>
                                     
                                    
                                     {{-- <td>

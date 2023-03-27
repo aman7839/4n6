@@ -50,6 +50,14 @@
                         <span class ="text-danger">@error('description'){{$message}} @enderror</span>
 
                                     </div>
+
+                                     <!-- Google reCaptcha v2 -->
+                             <p> {!! htmlFormSnippet() !!} </p>
+                  @if($errors->has('g-recaptcha-response'))
+                   <div>
+                     <small class="text-danger">{{ $errors->first('g-recaptcha-response') }}</small>
+                       </div>
+                         @endif
                                     <div>
                                         <button type="submit" class="cmn_btn">Send</button>
                                     </div>
