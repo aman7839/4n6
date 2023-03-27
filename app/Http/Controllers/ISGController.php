@@ -60,8 +60,6 @@ class ISGController extends Controller
         return redirect('admin/viewisg')->with('success','Record Updated Successfully');
     }
     public function deleteIsg($id){
-
-
         $topic = ISG::find($id);
         return redirect()->back()->with('error','Record Deleted Successfuly', compact('topic'));
     }

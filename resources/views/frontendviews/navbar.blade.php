@@ -41,8 +41,11 @@
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('tutorial') ? 'active' : ''}}" href="{{url('tutorial')}}">Tutorial</a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link {{ request()->is('school') ? 'active' : ''}}" href="{{url('school')}}">4N6 USA</a>
+                        </li> --}}
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is('reviews') ? 'active' : ''}}" href="{{url('reviews')}}">Reviews</a>
                         </li>
                         <li class="nav-item">
                             

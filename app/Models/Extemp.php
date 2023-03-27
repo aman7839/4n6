@@ -14,14 +14,9 @@ class Extemp extends Model
         'type',
         'question',
         'month',
-
         'year',
-
         'topic_id',
-        'public',
-
-
-       
+        'public',      
     ];
 
     public function topic() {

@@ -12,6 +12,9 @@ use App\Models\Theme;
 use App\Models\Data;
 use Illuminate\Support\Facades\DB;
 use App\Models\playCategory;
+use App\Models\Reviews;
+use Illuminate\Support\Facades\Auth;
+
 
 
 
@@ -76,6 +79,106 @@ class HomeController extends Controller
 
     return view('frontendviews.services');
     }
+
+    public function reviews()
+    {
+
+    return view('frontendviews.reviews');
+    }
+
+    public function adminViewReviews()
+    {
+        $review = Reviews::paginate(10);
+
+        return view('admin.Reviews.reviews', compact('review'));
+    }
+
+
+    public function addreview(Request $request)
+    {
+        $request->validate([      
+
+            'comment' => 'required',
+        ]);
+
+      $review = new Reviews;
+
+      $review->comment = $request->comment;
+      $review->user_id = Auth::user()->id;
+      $review->save();
+
+      return redirect()->back()->with('success','Review added successfully');
+
+    }
+
+    public function addScreenshot(Request $request)
+    {
+        $request->validate([      
+
+            'screenshot' => 'required',
+
+        ]);
+
+            
+           
+        
+
+      $review = new Reviews;
+
+      $request->hasfile('screenshot');
+      $file = $request->file('screenshot');
+      
+      $screenshot = time() . '-' . $file->getClientOriginalName();
+      $file->move('public/images/', $screenshot);
+
+      $review->screenshot = $screenshot;
+      $review->user_id = Auth::user()->id;
+      $review->approved = 1;
+
+      $review->save();
+
+      return redirect()->back()->with('success','Screenshot added successfully');
+    
+    //   return view('admin.Reviews.reviews')->with('success','Screenshot added successfully');
+
+      
+    }
+
+    public function approveReview($id )
+    {
+       
+
+      $review =  Reviews::find($id);
+
+      $review->approved = 1;
+      $review->save();
+
+      return redirect()->back()->with('success','Review approved successfully');
+
+    }
+
+    public function deleteReview($id )
+    {
+       
+      $review =  Reviews::where('id', $id)->delete();
+
+      
+      return redirect()->back()->with('error','Review deleted successfully');
+
+    }
+
+
+    public function getReviews()
+    {
+     
+    $review = Review::all();
+
+    return view('frontendviews.reviews', compact('review'));
+
+    }
+
+
+
     public function login()
     {
 

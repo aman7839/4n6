@@ -178,6 +178,15 @@ Route::post('/editfolder/{id}', [VaultController::class, 'editFolder']);
 Route::post('/deletefolder/{id}', [VaultController::class, 'deleteFolder']);
 Route::post('/deletefile/{id}', [VaultController::class, 'deleteFile']);
 Route::post('/uploadfile',[VaultController::class, 'fileUpload'])->name('uploadfile');
+Route::get('/reviews',[HomeController::class, 'adminViewReviews']);
+Route::post('/addscreenshot',[HomeController::class, 'addScreenshot']);
+
+Route::get('/approveview/{id}', [HomeController::class, 'approveReview']);
+Route::get('/deletereview/{id}', [HomeController::class, 'deleteReview']);
+
+
+
+
 });
 
 });
@@ -190,6 +199,10 @@ Route::get('/', [HomeController::class,'Home']);
 
 
 Route::get('/contactUs', [HomeController::class,'contactUs']);
+Route::get('/reviews', [HomeController::class,'reviews']);
+Route::post('/addreview', [HomeController::class,'addreview']);
+
+
 Route::get('/documents', [HomeController::class,'documents']);
 Route::get('/download/{file}', [HomeController::class, 'download']);
 

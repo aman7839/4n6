@@ -226,6 +226,11 @@
                         <a href="{{url('admin/category')}}"><i class="menu-icon fa fa-link"></i> Manage Links</a>
 
                     </li>
+                    <li class="nav-item {{ request()->is('admin/reviews') ? 'active' : ''}}">
+
+                        <a href="{{url('admin/reviews')}}"><i class="menu-icon fa fa-commenting"></i> Reviews</a>
+
+                    </li>
 
                     <li class="nav-item {{ request()->is('admin/data') ? 'active' : ''}}">
 
