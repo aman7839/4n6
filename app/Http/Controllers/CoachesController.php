@@ -11,6 +11,7 @@ use Illuminate\Validation\Rule;
 
 
 
+
 use Illuminate\Support\Facades\Auth;
 
 
@@ -149,7 +150,7 @@ class CoachesController extends Controller
 
     {
      
-    echo
+
           User::where('id', $id)->delete();
           CoachStudent::where('student_id',$id)->delete();
          
