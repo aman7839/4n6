@@ -92,7 +92,6 @@
                                 <tr>
                                     <th>ID</th>
                                     <th> Review</th>
-                                     
                                     <th>Screenshot</th> 
                                     <th>Status</th>                                      
                                     <th>Approve</th>
@@ -106,7 +105,8 @@
                                 <tr>
                                     <td>{{ $reviews->id }}</td>
                                     <td>{{ $reviews->comment }}</td>
-                                    <td><img src= "{{ asset('/public/images/'.$reviews->screenshot) }}" width="100" class=" rounded-circle "  title=""></td>
+                                    <td><a class="example-image-link" href="{{ asset('/public/images/'.$reviews->screenshot) }}"
+                                        data-lightbox="example-set" data-title="Click the right half of the image to move forward."><img src= "{{ asset('/public/images/'.$reviews->screenshot) }}" width="100" class=" rounded-circle "  title=""></a></td>
 
                                   
                                         <td>{{ $reviews->approved == 1 ? 'Approved' : 'Pending' }}</td>

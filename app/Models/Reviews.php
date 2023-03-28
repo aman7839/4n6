@@ -11,7 +11,6 @@ class Reviews extends Model
 
     protected $table = 'reviews';
     protected $fillable = [
-        
         'user_id',
         'type',
         'screenshot',
@@ -20,7 +19,7 @@ class Reviews extends Model
        
     ];
 
-    public function review() {
+    public function user() {
         return $this->belongsTo(User::class,"user_id","id");
     }
 

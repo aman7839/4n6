@@ -11,6 +11,7 @@
    
 
     <link rel="stylesheet" href="{{asset('/public/4n61/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('/public/4n61/css/lightbox.css')}}">
     <link rel="stylesheet" href="{{asset('/public/css/font.min.css')}}">
     <link rel="stylesheet" href="{{asset('/public/4n61/css/steps.css')}}">
     <link rel="stylesheet" href="{{asset('/public/css/toast.css')}}">
@@ -41,9 +42,6 @@
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('tutorial') ? 'active' : ''}}" href="{{url('tutorial')}}">Tutorial</a>
                         </li>
-                        {{-- <li class="nav-item">
-                            <a class="nav-link {{ request()->is('school') ? 'active' : ''}}" href="{{url('school')}}">4N6 USA</a>
-                        </li> --}}
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('reviews') ? 'active' : ''}}" href="{{url('reviews')}}">Reviews</a>
                         </li>

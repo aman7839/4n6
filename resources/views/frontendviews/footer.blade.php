@@ -55,6 +55,7 @@
     
 
     <script src="{{asset('/public/4n61/js/jquery.steps.js')}}"></script>
+    <script src="{{asset('/public/4n61/js/lightbox.js')}}"></script>
     
 
     

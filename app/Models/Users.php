@@ -29,8 +29,7 @@ class Users extends Model
         'billing_contact_name',
         'billing_email_address',
         'billing_phone_no',
-        'role_as',
-        
+        'role_as' 
        ];
 
        

@@ -37,6 +37,7 @@
     <link rel="stylesheet" href="{{asset('/public/css/normalize.min.css')}}">
 
     <link rel="stylesheet" href="{{asset('/public/4n61/assets/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('/public/4n61/css/lightbox.css')}}">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
 

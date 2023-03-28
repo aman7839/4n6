@@ -231,12 +231,12 @@ Route::get('/logout', [userController::class, 'logout']);
 
 
 
-// Route::get('/clear_view_cache', function(){
-//     Artisan::call('route:cache');
-//     Artisan::call('config:cache');
-//     Artisan::call('cache:clear');
-//     Artisan::call('view:clear');
-// });
+Route::get('/clear_view_cache', function(){
+    Artisan::call('route:cache');
+    Artisan::call('config:cache');
+    Artisan::call('cache:clear');
+    Artisan::call('view:clear');
+});
 
 
 Route::prefix('coach')->group(function () {

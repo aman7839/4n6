@@ -82,7 +82,7 @@ class HomeController extends Controller
 
     public function reviews()
     {
-    $review =   Reviews::where('approved',1)->with('review')->get();
+    $review =   Reviews::where('approved',1)->with(['user'])->get();
     return view('frontendviews.reviews', compact('review'));
     }
 

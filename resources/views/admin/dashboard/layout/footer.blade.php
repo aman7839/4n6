@@ -7,6 +7,7 @@
 <script src="{{asset('/public/assets/js/popper.js')}}"></script>
 
 <script src="{{asset('/public/assets/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('/public/4n61/js/lightbox.js')}}"></script>
 
 <script src="{{asset('/public/assets/js/matchheight.min.js')}}"></script>
 
