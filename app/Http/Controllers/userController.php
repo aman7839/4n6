@@ -159,7 +159,7 @@ class userController extends Controller
        public function importData(Request $request){
 
             $this->validate($request, [
-                'uploaded_file' => 'required|file|mimes:xls,xlsx'
+                'uploaded_file' => 'required|file|mimes:xls,xlsx,csv'
             ]);
             $the_file = $request->file('uploaded_file');
             try{
@@ -182,7 +182,9 @@ class userController extends Controller
                     ];
                     $startcount++;
                 }
-                DB::table('users')->insert($data);
+                echo "<pre>"; print_r($data); echo "</pre>";
+                exit;
+                // DB::table('users')->insert($data);
             } catch (Exception $e) {
                 // $error_code = $e->errorInfo[1];
                 return redirect()->back()->withErrors('There was a problem uploading the data!');

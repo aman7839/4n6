@@ -21,18 +21,19 @@
         </p> --}}
     </div>
 </div>
-<section class="contact_content space pt-0">
-    <div class="custom_container ">
+<section class="contact_content space pt-0 ">
+   <div class="p-3">
+    <div class="container ">
         <div class="row">
-            {{-- <div class="col-md-6 col-lg-5">
-                <div class="contact_image">
-                    <img src="{{asset('/public/4n61/images/contact_image.jpg')}}" class="img-fluid" alt="contact image">
-                </div>
-            </div> --}}
+          
             @foreach ($review as $review_list)
 
             <div class="review_list">
-                <b> {{$review_list['user']['name'] ?? ""}}</b>
+                <div class="review_user_image">
+                      <img alt="" src="{{ asset('/public/4n61/images/account_circle.svg') }}">  
+                </div>
+                <div class="review_content">
+                    <b> {{$review_list['user']['name'] ?? ""}}</b>
                 @if($review_list->comment)
                 <p> {{$review_list->comment ?? ""}}</p>
                 @endif
@@ -40,14 +41,15 @@
                 <p> <a class="example-image-link" href="{{ asset('/public/images/'.$review_list->screenshot) }}"
                         data-lightbox="example-set" data-title="Click the right half of the image to move forward."><img
                             src="{{ asset('/public/images/'.$review_list->screenshot) }}" width="100"
-                            class=" rounded-circle " title=""></a></p>
+                            class="image-fluid" title=""></a></p>
                 @endif
+                </div>
             </div>
             @endforeach
 
             @auth
 
-            <div class="col-md-5">
+            <div class="">
                 <div class="contact_form">
                     <form action="{{url('addreview')}}" method="post">
                         @csrf
@@ -64,8 +66,8 @@
 
                         </div> --}}
                         <div class="form-group">
-                            <label for="comment">Add Review</label>
-                            <textarea name="comment" class="form-control" id="" cols="30" rows="10"
+                            <h2 class="comment">Add Review</h2>
+                            <textarea name="comment" class="form-control" id="" cols="30" rows="5"
                                 placeholder="Add your review here"></textarea>
                             <span class="text-danger">@error('comment'){{$message}} @enderror</span>
 
@@ -80,6 +82,7 @@
 
         </div>
     </div>
+   </div>
 </section>
 
 

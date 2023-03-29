@@ -1240,3 +1240,51 @@ section.space.our_services .row> div {
 strong.prev-price {
   text-decoration: line-through;
 }
+.review_list b {
+  font-size: 32px;
+  text-transform: capitalize;
+}
+
+.review_list {
+  background: #f1f8ff;
+  padding: 30px;
+  margin-bottom: 20px;
+}
+.review_list {
+  display: flex;
+  align-items: center;
+}
+
+.review_user_image {
+  flex: 0 0 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  object-fit: cover;
+  margin-right:20px;
+}
+
+.review_user_image img {
+  width: 100%;
+}
+h2.comment {
+  font-family: "Barlow";
+}
+.review_content {
+  width: 100%;
+}
+
+.review_content img {
+  width: 30%;
+  margin-top: 10px  ;
+}
+@media(max-width:767px){
+  .review_user_image {
+    flex: 0 0 100px;
+    height: 100px;
+}
+.review_list b {
+  font-size: 22px;
+  text-transform: capitalize;
+}
+}
