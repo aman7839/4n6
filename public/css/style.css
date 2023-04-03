@@ -1278,6 +1278,23 @@ h2.comment {
   width: 30%;
   margin-top: 10px  ;
 }
+li.nav-item.dropdown ul.dropdown-menu {
+  padding: 0;
+}
+
+li.nav-item.dropdown a.dropdown-item {
+  padding: 10px;
+  border-bottom: 1px solid #ef8a17;
+  font-weight: 500;
+}
+
+li.nav-item.dropdown li:last-child a.dropdown-item {
+  border-bottom: unset;
+}
+li.nav-item.dropdown a.dropdown-item:active,li.nav-item.dropdown a.dropdown-item:hover{
+  background-color: #ef8a17;
+  color: #fff;
+}
 @media(max-width:767px){
   .review_user_image {
     flex: 0 0 100px;
