@@ -20,6 +20,7 @@ use App\Http\Controllers\LinksController;
 use App\Http\Controllers\TopicRoles;
 use App\Http\Controllers\ExtempController;
 use App\Http\Controllers\StudentsController;
+use App\Http\Controllers\Paypal\PayPalController;
 
 // Route::get('/', function () {
 //     return view('frontendviews.login');
@@ -291,6 +292,13 @@ Route::prefix('users')->group(function () {
 
 
 });
+
+/// PAYPAL ROUTES
+Route::get('create-transaction', [PayPalController::class, 'createTransaction'])->name('createTransaction');
+Route::get('process-transaction', [PayPalController::class, 'processTransaction'])->name('processTransaction');
+Route::get('success-transaction', [PayPalController::class, 'successTransaction'])->name('successTransaction');
+Route::get('cancel-transaction', [PayPalController::class, 'cancelTransaction'])->name('cancelTransaction');
+/////
 
 
 
