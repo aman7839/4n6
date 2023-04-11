@@ -21,7 +21,8 @@ use App\Http\Controllers\TopicRoles;
 use App\Http\Controllers\ExtempController;
 use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\Paypal\PayPalController;
-
+use App\Http\Controllers\cheque\ChequeController;
+use App\Http\Controllers\Admin\UserController as AdminUsers;
 // Route::get('/', function () {
 //     return view('frontendviews.login');
 // });
@@ -188,6 +189,7 @@ Route::get('/deletereview/{id}', [HomeController::class, 'deleteReview']);
 Route::post('/importdata', [userController::class,'importData']);
 Route::get('/exporttdata', [userController::class,'exportData']);
 
+Route::post('/changeuserpassword', [AdminUsers::class,'updatePassword'])->name('changeuser');
 
 
 
@@ -299,7 +301,10 @@ Route::get('process-transaction', [PayPalController::class, 'processTransaction'
 Route::get('success-transaction', [PayPalController::class, 'successTransaction'])->name('successTransaction');
 Route::get('cancel-transaction', [PayPalController::class, 'cancelTransaction'])->name('cancelTransaction');
 /////
+////CHEQUE ROUTES
+Route::post('submitcheque', [ChequeController::class, 'submitcheque'])->name('submitcheque');
 
+//////
 
 
 

@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Paypal;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Price;
+use App\Models\offerPrice;
+use Carbon\Carbon;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 class PayPalController extends Controller
@@ -11,11 +14,17 @@ class PayPalController extends Controller
     //
     public function createTransaction()
     {
-        return view('paypal.transaction');
+        $price = Price::first();
+        $offerPrice = offerPrice::where('from_date','<=',Carbon::now())->where('to_date','>=',Carbon::now())->first();
+        $payablePrice= $offerPrice ? (($price->price)-($offerPrice->offer_price)) : $price->price;
+        return view('paypal.transaction',compact('price','offerPrice','payablePrice'));
     }
 
     public function processTransaction(Request $request)
     {
+        $price = Price::first();
+        $offerPrice = offerPrice::where('from_date','<=',Carbon::now())->where('to_date','>=',Carbon::now())->first();
+        $payablePrice= $offerPrice ? (($price->price)-($offerPrice->offer_price)) : $price->price;
         $provider = new PayPalClient;
         $provider->setApiCredentials(config('paypal'));
         $paypalToken = $provider->getAccessToken();
@@ -29,8 +38,8 @@ class PayPalController extends Controller
                 0 => [
                     "amount" => [
                         "currency_code" => "USD",
-                        "value" => "1000.00"
-                    ]
+                        "value" => $payablePrice
+                    ]   
                 ]
             ]
         ]);
@@ -57,6 +66,8 @@ class PayPalController extends Controller
         $provider->setApiCredentials(config('paypal'));
         $provider->getAccessToken();
         $response = $provider->capturePaymentOrder($request['token']);
+        
+        echo "<pre>"; print_r($response); exit;
         if (isset($response['status']) && $response['status'] == 'COMPLETED') {
             return redirect()
                 ->route('createTransaction')

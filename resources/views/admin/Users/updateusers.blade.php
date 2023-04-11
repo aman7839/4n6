@@ -67,11 +67,93 @@
        <a href="{{url('/admin/users')}}" class="btn btn-danger">Cancel</a>
        
        <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+       <button type="button" class="btn btn-secondary" id="change_pass">Change Password</button>
      </form>
     </div>
     </div>
-    </div>
+     <!-- Edit Modal -->
+     <div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+     <div class="modal-dialog" role="document">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <h5 class="modal-title" id="fileuploadmodel">Change Password<button type="button" class="close"
+                         data-dismiss="modal" aria-label="Close">
+                         <span aria-hidden="true">&times;</span>
+                     </button></h5>
+                 <!-- <input type="text" id="selectedid"> -->
+ 
+             </div>
+             <div class="modal-body">
+                 <form class="vault_form" action="{{ route('changeuser') }}" id="change_password" method="post">
+ 
+                     @csrf
+ 
+                 <div class="row">
+                    <div class="col-md-12 mb-3">
+                      <label for="">New Password</label>
+                      <input type="text" name="password" class="form-control required" required>
+                     
+                 </div>
+                    <div class="col-md-12">
+                      <label for="">Confirm Password</label>
+                      <input type="text" name="confirmpassword" class="form-control required" required>
+                      <input type="hidden" name="user_id" class="form-control"  value="{{$user->id}}">
+                     
+                     
+                 </div>
+                 <div class="col-12 mt-3">
+                  <button type="submit" class="btn btn-success">Update Password</button>
+                 </div>
 
+                    </div>
+                 </div>
+ 
+ 
+                 </form>
+             </div>
+ 
+         </div>
+     </div>
+ </div>
+ <!-- //Modal -->
+    </div>
+    @section('footer-scripts')
+    <script>
+jQuery(document).ready(function() {
+  jQuery("#change_pass").on('click', function() {
+                jQuery('#passwordModal').modal('toggle');
+            })           
+jQuery("#change_password").validate({
+              rules: {
+                password: {
+                  required: true,
+                  minlength: 5,
+                },
+                confirmpassword: {
+          minlength: 5,
+          equalTo: '[name="password"]'
+      }
+              },
+              messages: {
+                password: {
+                  required: "Password is required",
+                  minlength: "Password should be at least 5 characters long"
+                },
+                confirmpassword:{
+                  equalTo: "Password and Confirm Password did not matches"
+                }
+              },
+              submitHandler: function(form, event) {
+                  // event.preventDefault();
+                  jQuery(form).submit();
+                  
+              }
+          });
+
+})
+</script>
+@endsection
     @endsection
 
 {{-- </body>
