@@ -72,11 +72,11 @@
        <a href="{{url('/admin/users')}}" class="btn btn-danger ">Cancel</a>
        
        <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+     
      </form>
      </div>
       </div>
       </div>
-  
       @endsection
   
   {{-- </body>

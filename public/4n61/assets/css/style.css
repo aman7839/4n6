@@ -2653,3 +2653,6 @@ div#folder_breadcrumb {
 .delete_file{
   cursor: pointer;
 }
+label.error {
+  color: red;
+}

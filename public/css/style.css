@@ -486,6 +486,15 @@ h3.scondary_heading {
 }
 
 /* footer starts here */
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  margin-top: auto;
+}
 footer {
   background: #000;
 }
@@ -662,7 +671,11 @@ input.form-control.required.valid {
   font-weight: 500;
   margin-bottom: 10px;
 }
-
+.form-group label.error {
+  color: red;
+  font-weight: 400;
+  margin-bottom: 0px;
+}
 /*  */
 
 .form-group {
@@ -1295,6 +1308,44 @@ li.nav-item.dropdown a.dropdown-item:active,li.nav-item.dropdown a.dropdown-item
   background-color: #ef8a17;
   color: #fff;
 }
+/* transaction */
+.transactions ul.nav.nav-tabs {
+  justify-content: center;
+  align-items: center;
+  border: unset;
+  gap: 16px;
+}
+
+.transactions ul.nav.nav-tabs li {
+  width: 21%;
+}
+
+.transactions ul.nav.nav-tabs li button {
+  width: 100%;
+  font-weight: 600;
+  background: #ffa50029;
+  border-radius: 35px;
+  color: orange;
+  box-shadow: 0px 0px 5px rgba(0,0,0,15%);
+}
+
+.transactions ul.nav.nav-tabs li button.active {
+  border-radius: 35px;
+  border: unset;
+  background: orange;
+  color: #fff;
+}
+.transcetion_card {
+  width: 50%;
+  margin: auto;
+  padding: 30px;
+  background: #ffff;
+  box-shadow: 0px 0px 3px rgba(0,0,0,20%);
+  border-radius: 7px;
+}
+
+.paypal_info {text-align: center;}
+/*  */
 @media(max-width:767px){
   .review_user_image {
     flex: 0 0 100px;
