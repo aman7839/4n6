@@ -48,6 +48,7 @@
     <link rel="stylesheet" href="{{asset('/public/4n61/assets/css/style.css')}}">
 
     <link rel="stylesheet" href="{{asset('/public/css/toast.css')}}">
+    <link rel="stylesheet" href="{{asset('/public/css/daterangepicker.css')}}">
 
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
 
@@ -65,7 +66,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet" />
 
-    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" />
+    {{-- <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" /> --}}
 
   
 
@@ -177,7 +178,7 @@
 
                     <li class="nav-item {{ request()->is('admin/editProfile/'.Auth::user()->id) ? 'active' : ''}}">  
 
-                        <a class="nav-link" href="{{ url('admin/editProfile/'.Auth::user()->id)}}"><i class=" menu-icon fa fa-users"></i>My Profile</a>
+                        <a class="" href="{{ url('admin/editProfile/'.Auth::user()->id)}}"><i class=" menu-icon fa fa-users"></i>My Profile</a>
 
 
 
@@ -185,7 +186,7 @@
 
                     <li class="nav-item {{ request()->is('admin/changePassword') ? 'active' : ''}}">  
 
-                        <a class="nav-link" href="{{ url('admin/changePassword') }}"><i class=" menu-icon  fa fa-key"></i>Change Password </a>
+                        <a class="" href="{{ url('admin/changePassword') }}"><i class=" menu-icon  fa fa-key"></i>Change Password </a>
 
 
 
@@ -198,6 +199,16 @@
                         <a href="{{url('admin/users')}}"><i class="menu-icon fa fa-user"></i>Manage Users </a>
 
                     </li>
+                    <li class="nav-item dropdown admin_dropdown">
+                        <a class=" dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="menu-icon fa fa-id-card" aria-hidden="true"></i> Membership <i class="fa fa-chevron-right arrown_style"></i>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="{{route('admin.activeMembership')}}"> <i class="menu-icon fa fa-id-card" aria-hidden="true"></i>Active Memberships</a>
+                          <a class="dropdown-item" href="{{route('admin.pastMembership')}}"> <i class="menu-icon fa fa-id-card" aria-hidden="true"></i>Past Memberships</a>
+                        
+                        </div>
+                      </li>
 
                     {{-- <li class="nav-item {{ request()->is('admin/topics') ? 'active' : ''}}">
 
@@ -252,7 +263,7 @@
 
                     <li class="nav-item {{ request()->is('admin/editProfile') ? 'active' : ''}}">  
 
-                        <a class="nav-link" href="{{url('admin/logout')}}"><i class=" menu-icon fa fa-sign-out"></i>Logout</a>
+                        <a class="" href="{{url('admin/logout')}}"><i class=" menu-icon fa fa-sign-out"></i>Logout</a>
 
 
 
@@ -309,6 +320,21 @@
                         <a href="{{url('coach/dashboard')}}"><i class="menu-icon fa fa-tachometer"></i>Dashboard </a>
 
                     </li>
+                    {{-- <li class="nav-item {{ request()->is('coach/dashboard') ? 'active' : ''}}">
+
+                        <a href="{{route('createTransaction')}}"><i class="menu-icon fa fa-id-card" aria-hidden="true"></i>Membership</a>
+
+                    </li>    --}}
+                    <li class="nav-item dropdown admin_dropdown">
+                        <a class=" dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="menu-icon fa fa-id-card" aria-hidden="true"></i> Membership <i class="fa fa-chevron-right arrown_style"></i>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="{{route('coachmembership')}}"> <i class="menu-icon fa fa-id-card" aria-hidden="true"></i> Active Membership</a>
+                          <a class="dropdown-item" href="{{route('createTransaction')}}"> <i class="menu-icon fa fa-id-card" aria-hidden="true"></i>New Membership</a>
+                        
+                        </div>
+                      </li>
 
                     <li class="nav-item {{ request()->is('coach/students') ? 'active' : ''}}">  
 
@@ -320,7 +346,7 @@
 
                     <li class="nav-item ">  
 
-                        <a class="nav-link" href="{{url('coach/logout')}}"><i class=" menu-icon fa fa-sign-out"></i>Logout</a>
+                        <a class="" href="{{url('coach/logout')}}"><i class=" menu-icon fa fa-sign-out"></i>Logout</a>
 
                            
 
@@ -348,7 +374,7 @@
 
                     <li class="nav-item ">  
 
-                        <a class="nav-link" href="{{url('student/logout')}}"><i class=" menu-icon fa fa-sign-out"></i>Logout</a>
+                        <a class="" href="{{url('student/logout')}}"><i class=" menu-icon fa fa-sign-out"></i>Logout</a>
 
                            
 

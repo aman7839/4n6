@@ -17,7 +17,7 @@ class PayPalController extends Controller
         $price = Price::first();
         $offerPrice = offerPrice::where('from_date','<=',Carbon::now())->where('to_date','>=',Carbon::now())->first();
         $payablePrice= $offerPrice ? (($price->price)-($offerPrice->offer_price)) : $price->price;
-        return view('paypal.transaction',compact('price','offerPrice','payablePrice'));
+        return view('admin.paypal.transaction',compact('price','offerPrice','payablePrice'));
     }
 
     public function processTransaction(Request $request)

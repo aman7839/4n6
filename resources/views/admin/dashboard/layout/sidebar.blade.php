@@ -188,11 +188,16 @@
 
                 <div class="user-area dropdown float-right">
 
+                    @if(file_exists(asset('/public/images/'. Auth::user()->image)))   
                     <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
+                    {{-- <?php    // print_r(Auth::user()->image); exit; ?> --}}
                         <img class="user-avatar rounded-circle" src="{{asset('/public/images/'. Auth::user()->image)}}" alt="User Avatar">
-
                     </a>
+                        @else
+                        <p class="empty_image">{{ substr(Auth::user()->name, 0, 2) }}</p>
+
+                        @endif
+                    
 
                     
 

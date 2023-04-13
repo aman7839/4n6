@@ -258,6 +258,18 @@ class DashboardController extends Controller
     }
 
 
+    public function viewUser($id){
+        $user = user::find($id);
+        if($user){
+            // echo "<pre>"; print_r($user->toArray()); exit;
+        return view('admin.Users.viewuser', compact('user'));
+        }
+        else{
+            return redirect()->back();
+        }
+    }
+
+
     public function updateUsers(Request $request, $id)
     {
         $user = user::find($id);

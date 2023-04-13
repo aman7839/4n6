@@ -64,6 +64,19 @@
                             
                             <a class="nav-link  {{ request()->is('demosearch') ? 'active' : ''}}" href="{{url('demosearch')}}">Demo Search</a>
                         </li>
+                        @auth
+                        @if(auth()->user()->role == 'coach')
+                        <li class="nav-item">
+                            <a class="nav-link  {{ request()->is('dashboard') ? 'active' : ''}}" href="{{url('/coach/dashboard')}}">Dashboard</a>
+                        </li>
+                    @endif                      
+                        @if(auth()->user()->role == 'student')
+                        <li class="nav-item">
+                            <a class="nav-link  {{ request()->is('dashboard') ? 'active' : ''}}" href="{{url('/student/dashboard')}}">Dashboard</a>
+                        </li>
+                    @endif                      
+                        @endauth
+                        
                         <div class="navigates mobile">
                             <a href="#" class="facebook_link"><img src="{{asset('/public/4n61/images/facebook-square.svg')}}"></a>
                             <a href="{{url('login')}}" class="cmn_btn">Member Login</a>

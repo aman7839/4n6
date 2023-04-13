@@ -4,7 +4,7 @@
 
     @section('content')
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="row m-2">
            <div class="col-md-12">
             <form action="">
@@ -45,14 +45,10 @@
            </div>
             <div class="col-md-12 mt-2">
                 <div class="card">
-                    <div class="card-header">
-                        <h4><a href="{{ url('admin/addusers')}}"  class="btn btn-primary btn-sm mt-2"> <i class="fa fa-plus mr-2"></i> Add Users</a></h4>
-                        
-                        
-                    </div>
+      
 
-                    <div class="card-header">
-                        <a href="{{url("admin/exporttdata")}}" class="btn btn-primary" style="margin-left:85%">Export Excel Data</a>
+                    <div class="card-header d-flex">
+                        <a href="{{ url('admin/addusers')}}"  class="btn btn-primary btn-sm "> <i class="fa fa-plus mr-2"></i> Add Users</a>  <a href="{{url("admin/exporttdata")}}" class="btn btn-success ml-auto" >Export Excel Data</a>
                     </div>
                     <div class="card-body">     
     
@@ -67,8 +63,7 @@
                                     <th>Mobile</th>
                                     <th>Role</th>
                                     <th>Location</th>
-                                    <th>Edit</th>
-                                    <th>Delete</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -77,23 +72,22 @@
                                     <td>{{ $item->id }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->email }}</td>
-                                    <td><img src= "{{ asset('/public/images/'.$item->image) }}" width="30%" class=" rounded-circle "  title=""></td>
-                                  
-                                  
+                                    <td><img src= "{{ asset('/public/images/'.$item->image) }}" width="80" height="80" class=" rounded-circle "  title=""></td>
                                     <td>{{ $item->personal_phone_no }}</td>
-                                    
-                                    <td>{{$item->role}}</td>
-                                    
+                                    <td>{{ucfirst($item->role)}}</td>
                                     <td>{{ $item->school_city }}</td>
                                     <td>
-                                        <a href={{url('admin/editUsers/'.$item->id)}} class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        
-                                        <a href={{url('admin/deleteuser/'.$item->id)}} class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')" ><i class="fa fa-trash" aria-hidden="true"></i>
-                                        </a>
-                                    </td>
+                                        <div class="d-flex">
+                                            <a href={{url('admin/editUsers/'.$item->id)}} class="btn btn-primary btn-sm m-1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                            </a>
+                                            <a href={{url('admin/viewUsers/'.$item->id)}} class="btn btn-success btn-sm m-1"><i class="fa fa-eye" aria-hidden="true"></i>
+                                            </a>
+                                            @if($item->role != 'admin')
+                                            <a href={{url('admin/deleteuser/'.$item->id)}} class="btn btn-danger btn-sm m-1" onclick="return confirm('Are you sure?')" ><i class="fa fa-trash" aria-hidden="true"></i>
+                                            </a>
+                                                @endif
+                                        </div>
+                                        </td>
                                 </tr>
                                 @endforeach
                             </tbody>

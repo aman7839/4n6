@@ -641,7 +641,23 @@ aside.left-panel {
      }
         .navbar .navbar-nav li > a:hover, .navbar .navbar-nav li > a:hover .menu-icon {
           color: #03a9f3; }
-        .navbar .navbar-nav li > a .menu-icon {
+          li.nav-item.dropdown.admin_dropdown .dropdown-menu {
+            padding-left: 9px;
+            padding-top: 0px;
+            padding-bottom: 0px;
+        }
+        .arrown_style {
+          position: absolute;
+          right: 12px;
+          top: 13px;
+      }
+      
+      
+      
+      li.nav-item.dropdown.admin_dropdown.show .arrown_style {
+          transform: rotate(90deg);
+      }
+         .menu-icon {
           color: #c2c6dc;
           float: left;
           margin-top: 8px;
@@ -850,6 +866,7 @@ aside.left-panel {
 /* Right panel */
 .right-panel {
   background: #f1f2f7;
+  min-height: 100vh;
   margin-left: 280px;
   margin-top: 55px; }
   .right-panel .top-left {
@@ -1149,9 +1166,22 @@ header .form-inline {
       padding: 5px 0; }
       .user-area .user-menu .nav-link > i {
         margin-right: 10px; }
+        
   .user-area .user-avatar {
     float: right;
     width: 40px; }
+    p.empty_image {
+      width: 40px;
+      height: 40px;
+      text-align: center;
+      border-radius: 50%;
+      line-height: 40px;
+      background: orange;
+      color: #fff;
+      font-weight: 600;
+      margin: 0;
+      margin-top: 7px;
+  }
   .user-area .user-info .name {
     color: #8c8c8c;
     font-size: 14px;
@@ -2655,4 +2685,215 @@ div#folder_breadcrumb {
 }
 label.error {
   color: red;
+}
+/* // transaction */
+li.nav-item.dropdown ul.dropdown-menu {
+  padding: 0;
+}
+.cmn_btn {
+  background: #ef8a17;
+  padding: 10px 15px;
+  border-radius: 6px;
+  color: #000;
+  text-decoration: unset;
+  font-weight: 500;
+  display: inline-block;
+  border: transparent;
+  min-width: 120px;
+  text-align: center;
+}
+/* li.nav-item.dropdown a.dropdown-item {
+  padding: 10px;
+  border-bottom: 1px solid #ef8a17;
+  font-weight: 500;
+}
+
+
+li.nav-item.dropdown a.dropdown-item:active,li.nav-item.dropdown a.dropdown-item:hover{
+  background-color: #ef8a17;
+  color: #fff;
+} */
+.admin_dropdown .dropdown-menu {
+  position: relative !important;
+  top: 0;
+  background: unset;
+}
+.admin_dropdown .dropdown-menu a.dropdown-item:hover,.admin_dropdown .dropdown-menu a.dropdown-item:focus{
+  background: unset;
+}
+.admin_dropdown .dropdown-menu a.dropdown-item {
+  color: #c2c6dc;
+  display: inline-block;
+  font-size: 14px;
+  line-height: 26px;
+  padding: 10px 15px;
+  position: relative;
+  width: 100%;
+}
+/* transaction */
+.transactions ul.nav.nav-tabs {
+  justify-content: center;
+  align-items: center;
+  border: unset;
+  margin-bottom: 20px;
+  gap: 15px;
+}
+
+.transactions ul.nav.nav-tabs li {
+  width: 21%;
+}
+
+.transactions ul.nav.nav-tabs li a {
+  width: 100%;
+  font-weight: 600;
+  background: #ffa50029;
+  border-radius: 35px;
+  color: orange;
+  box-shadow: 0px 0px 5px rgba(0,0,0,15%);
+  text-align: center;
+}
+
+.transactions ul.nav.nav-tabs li a.active {
+  border-radius: 35px;
+  border: unset;
+  background: orange;
+  color: #fff;
+}
+.transcetion_card {
+  width: 50%;
+  margin: auto;
+  padding: 30px;
+  background: #ffff;
+  box-shadow: 0px 0px 3px rgba(0,0,0,20%);
+  border-radius: 7px;
+}
+
+.paypal_info {text-align: center;}
+.my_membership {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.my_membership h5 {
+  text-transform: capitalize;
+  font-weight: 600;
+  color: #ffa500;
+}
+
+.my_membership h5 span {
+  font-weight: 500;
+  color: #000;
+}
+.no_membership img {
+  width: 250px;
+}
+
+.no_membership {
+  text-align: center;
+}
+
+.no_membership p {
+  font-size: 20px;
+  margin-top: 20px;
+  color: orange;
+}
+.card thead {
+  background: orange;
+  color: #fff;
+}
+
+.card thead th {
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+}
+
+.card tbody tr td {
+  font-size: 14px;
+  text-align: center;
+}
+
+.card table.table {
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.form-group .form-control {
+  background: #fff;
+  border: transparent;
+  box-shadow: 0px 0px 5px rgba(0,0,0,14%);
+  font-size: 14px;
+}
+.content label {
+  font-weight: 600;
+  font-size: 15px;
+}
+/*  */
+
+/* userprofile styles */
+.user_profile_image_wrapper{
+display: flex;
+min-height: 100vh;
+}
+.user_profile_image {
+  flex: 0 0 25%;
+  text-align: center;
+}
+
+.user_profile_image h3 {
+  padding: 10px 0px;
+  text-transform: capitalize;
+}
+
+.user_profile_image img {
+  width: 100%;
+}
+.user_profile_content {
+  padding: 0px 2em;
+}
+.user_profile_content h3 strong{
+font-weight: 500;
+font-size: 16x;
+}
+.user_profile_content h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.user_profile_content {
+  border-left: 1px solid #ddd;
+  margin-left: 30px;
+  flex-grow: 1;
+}
+
+.profile_head {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+}
+.user_info_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.user_info_wrapper .profile_list {
+  width: 33%;
+  margin-bottom: 20px;
+}
+
+.user_info_wrapper strong {
+  margin-top: 10px;
+}
+.profile_list strong {
+  font-weight: 600;
+  font-size: 16px;
+}
+.profile_head h3 {
+  font-size: 16px;
+  font-weight: 600;
+}
+.user_profile_image img {
+  width: 70%;
+  margin-bottom: 14px;
 }

@@ -39,6 +39,8 @@ class ChequeController extends Controller
                 $membership->cheque_number = $request->cheque_number;
                 $membership->bank_name = $request->accountholder_name;
                 $membership->accountholder_name = $request->accountholder_name;
+                $membership->start_date = date("Y-m-d H:i:s");
+                $membership->end_date = date('Y-m-d H:i:s', strtotime(' + 1 year'));
                 if($offerPrice){
                     $membership->discount=$offerPrice->offer_price;
                     $membership->offer_id=$offerPrice->id;

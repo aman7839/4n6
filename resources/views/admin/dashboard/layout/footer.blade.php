@@ -8,11 +8,12 @@
 
 <script src="{{asset('/public/assets/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('/public/4n61/js/lightbox.js')}}"></script>
-
+<script src="{{asset('/public/js/moment.min.js')}}"></script>
 <script src="{{asset('/public/assets/js/matchheight.min.js')}}"></script>
 
 <script src="{{asset('/public/assets/js/main.js')}}"></script>
 <script src="{{asset('/public/assets/js/jquery.validate.min.js')}}"></script>
+<script src="{{asset('/public/js/daterangepicker.min.js')}}"></script>
 
 
 
@@ -44,11 +45,11 @@
 
 
 
-<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
+{{-- <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script> --}}
 
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
+{{-- <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
 
-<script src="{{asset('/public/assets/js/init/fullcalendar-init.js')}}"></script>
+<script src="{{asset('/public/assets/js/init/fullcalendar-init.js')}}"></script> --}}
 
 <script src="{{asset('/public/js/toast.js')}}"></script>
 
