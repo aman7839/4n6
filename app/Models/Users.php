@@ -15,7 +15,7 @@ class Users extends Model
         'password',
         'image',
         'school_email_address',
-        'personal_email_address',
+        'email',
         'name',
         'school_phone_no',
         'school_name',

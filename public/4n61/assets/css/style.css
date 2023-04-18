@@ -2687,6 +2687,20 @@ label.error {
   color: red;
 }
 /* // transaction */
+.admin_view_mem.my_membership {
+  background: #fff;
+  padding: 20px;
+  flex-wrap: wrap;
+  justify-content: unset;
+}
+.admin_view_mem.my_membership span{
+  margin-top: 10px;
+  display: inline-block;
+}
+.admin_view_mem.my_membership h5 {
+  width: 25%;
+  margin-bottom: 10px;
+}
 li.nav-item.dropdown ul.dropdown-menu {
   padding: 0;
 }

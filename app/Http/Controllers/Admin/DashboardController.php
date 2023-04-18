@@ -44,7 +44,7 @@ class DashboardController extends Controller
             'password' => 'required',
         ]);
         
-        $fieldType = filter_var($request->user_name, FILTER_VALIDATE_EMAIL) ? 'personal_email_address' : 'user_name';
+        $fieldType = filter_var($request->user_name, FILTER_VALIDATE_EMAIL) ? 'email' : 'user_name';
         if(auth()->attempt(array($fieldType => $input['user_name'], 'password' => $input['password']))){
             
              $request->session()->regenerate();
