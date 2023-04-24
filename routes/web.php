@@ -60,6 +60,7 @@ Route::get('/changePassword',[DashboardController::class, 'showChangePasswordGet
 Route::post('/changePassword',[DashboardController::class, 'changePasswordPost'])->name('changePasswordPost');
 
 Route::get('/users', [DashboardController::class, 'users']);
+Route::get('/viewstudentlist/{id}', [DashboardController::class, 'users']);
 
 Route::get('/addusers', [DashboardController::class, 'addusers']);
 
@@ -67,6 +68,7 @@ Route::post('/saveUsers', [DashboardController::class, 'saveUsers'])->name('user
 
 Route::get('/editUsers/{id}', [DashboardController::class, 'editUsers']);
 Route::get('/viewUsers/{id}', [DashboardController::class, 'viewUser']);
+
 
 Route::put('/updateUsers/{id}', [DashboardController::class, 'updateUsers'])->name('update.users');
 
@@ -192,6 +194,8 @@ Route::post('/importdata', [userController::class,'importData']);
 Route::get('/exporttdata', [userController::class,'exportData']);
 
 Route::post('/changeuserpassword', [AdminUsers::class,'updatePassword'])->name('changeuser');
+Route::post('/addstudentbycoach', [AdminUsers::class,'addstudentbycoach'])->name('addstudentbycoach');
+
 Route::get('/activemembership',[MembershipController::class, 'adminActiveMemberships'])->name('admin.activeMembership');
 Route::get('/pastmembership',[MembershipController::class, 'adminPastMembership'])->name('admin.pastMembership');
 Route::get('/viewmembership/{id}',[MembershipController::class, 'adminViewMembership'])->name('admin.viewMembership');

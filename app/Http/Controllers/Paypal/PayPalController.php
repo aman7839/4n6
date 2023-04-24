@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Paypal;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Price;
 use App\Models\offerPrice;
+use App\Models\Membership;
 use Carbon\Carbon;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
@@ -38,7 +40,7 @@ class PayPalController extends Controller
                 0 => [
                     "amount" => [
                         "currency_code" => "USD",
-                        "value" => 100
+                        "value" => $payablePrice
                     ]   
                 ]
             ]
@@ -66,9 +68,24 @@ class PayPalController extends Controller
         $provider->setApiCredentials(config('paypal'));
         $provider->getAccessToken();
         $response = $provider->capturePaymentOrder($request['token']);
-        
-        echo "<pre>"; print_r($response); exit;
+        $price = Price::first();
+        $offerPrice = offerPrice::where('from_date','<=',Carbon::now())->where('to_date','>=',Carbon::now())->first();
+        $payablePrice= $offerPrice ? (($price->price)-($offerPrice->offer_price)) : $price->price;
         if (isset($response['status']) && $response['status'] == 'COMPLETED') {
+            $membership = new Membership;
+            $membership->user_id=Auth::user()->id;
+            $membership->paypal_transaction_id=$response['id'];
+            $membership->amount = $payablePrice;
+            $membership->payment_mode = 'paypal';
+            $membership->accountholder_name = $response['payer']['name']['given_name'].' '.$response['payer']['name']['surname'];
+            $membership->start_date = date("Y-m-d H:i:s");
+            $membership->end_date = date('Y-m-d H:i:s', strtotime(' + 1 year'));
+            $membership->status = 1;
+            if($offerPrice){
+                $membership->discount=$offerPrice->offer_price;
+                $membership->offer_id=$offerPrice->id;
+            }
+            $membership->save();
             return redirect()
                 ->route('createTransaction')
                 ->with('success', 'Transaction complete.');

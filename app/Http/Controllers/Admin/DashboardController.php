@@ -10,7 +10,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Response;
-
+use DB;
 
 
 
@@ -176,22 +176,27 @@ class DashboardController extends Controller
 
 
     public function users(Request $request)
-
     {
+		
         $search = $request['search'] ?? "";
+        $coach_id = $request->id ?? "";
         if ($search != ""){
-
-            $user = user::where('name', 'Like', '%'.$search. '%' )->orwhere('email', 'Like','%'.$search.'%')->paginate('10');
-
-           
+			if($coach_id){
+				
+				$user = DB::table('coach_student as a')->leftjoin('users as b', 'a.student_id', '=', 'b.id')->where('a.coach_id','=',$request->id)->where('name', 'Like', '%'.$search. '%' )->orwhere('email', 'Like','%'.$search.'%')->orderBy('a.id')->paginate(10);
+				
+			} else {	
+				$user = user::where('name', 'Like', '%'.$search. '%' )->orwhere('email', 'Like','%'.$search.'%')->paginate('10');
+			}
         }
         else{
-
-            $user = User::paginate(10);
-
+			if($coach_id){
+				$user = DB::table('coach_student as a')->leftjoin('users as b', 'a.student_id', '=', 'b.id')->where('a.coach_id','=',$request->id)->orderBy('a.id')->paginate(10);
+			} else {
+				$user = User::paginate(10);
+			}
         }
-
-       return view('admin.Users.users', compact('user','search'));
+       return view('admin.Users.users', compact('user','search','coach_id'));
     }
 
 
@@ -247,7 +252,6 @@ class DashboardController extends Controller
 
 
         $user = user::find($id);
-
         if($user){
 
         return view('admin.Users.updateusers', compact('user'));
@@ -273,9 +277,8 @@ class DashboardController extends Controller
     public function updateUsers(Request $request, $id)
     {
         $user = user::find($id);
-
-        
-
+        $role = $user->role;
+	
         $request->validate([
             
             'personal_phone_no'   =>  [
@@ -314,6 +317,22 @@ class DashboardController extends Controller
 
         $user->personal_phone_no = $request->input('personal_phone_no');
         $user->school_city = $request->input('school_city');
+		if($role=="coach") { 
+			
+			 $user->school_phone_no = $request->input('school_phone_no');
+			 $user->school_name = $request->input('school_name');
+			 $user->personal_phone_no = $request->input('personal_phone_no');
+			 $user->school_address = $request->input('school_address');
+			 $user->assistant_coach_name = $request->input('assistant_coach_name');
+			 $user->school_city = $request->input('school_city');
+			 $user->assistant_coach_email_address = $request->input('assistant_coach_email_address');
+			 $user->school_state = $request->input('school_state');
+			 $user->school_zip_code = $request->input('school_zip_code');
+			 $user->billing_contact_name = $request->input('billing_contact_name');
+			 $user->billing_email_address = $request->input('billing_email_address');
+			 $user->billing_phone_no = $request->input('billing_phone_no');
+			
+		}	
         $user->update();
 
         return redirect('admin/users')->with('success', 'User updated Successfully');

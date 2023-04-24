@@ -19,6 +19,7 @@
                 
             </form>
 
+@if($coach_id=="")
             <div class="">
 
                 <form action="{{url("admin/importdata")}}" method="post" enctype="multipart/form-data">
@@ -39,17 +40,20 @@
                        
                     </fieldset>
                 </form>
-
+@endif
 
             </div>
+			
+			
            </div>
             <div class="col-md-12 mt-2">
                 <div class="card">
       
-
-                    <div class="card-header d-flex">
-                        <a href="{{ url('admin/addusers')}}"  class="btn btn-primary btn-sm "> <i class="fa fa-plus mr-2"></i> Add Users</a>  <a href="{{url("admin/exporttdata")}}" class="btn btn-success ml-auto" >Export Excel Data</a>
-                    </div>
+					@if($coach_id=="")
+						<div class="card-header d-flex">
+							<a href="{{ url('admin/addusers')}}"  class="btn btn-primary btn-sm "> <i class="fa fa-plus mr-2"></i> Add Users</a>  <a href="{{url("admin/exporttdata")}}" class="btn btn-success ml-auto" >Export Excel Data</a>
+						</div>
+					@endif	
                     <div class="card-body">     
     
                         <table class="table table-bordered table-striped">
