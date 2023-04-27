@@ -8,9 +8,9 @@
 
             <div class="navbar-header">
 
-                <a class="navbar-brand" href="./"><img src="{{asset('/public/images/fanatic_logo.svg')}}" alt="Logo"></a>
+                <a class="navbar-brand" href="{{URL::to('/admin')}}"><img src="{{asset('/public/images/fanatic_logo.svg')}}" alt="Logo"></a>
 
-                <a class="navbar-brand hidden" href="./"><img src="{{asset('/public/images/logo2.png')}}" alt="Logo"></a>
+                <a class="navbar-brand hidden" href="{{URL::to('/admin')}}"><img src="{{asset('/public/images/logo2.png')}}" alt="Logo"></a>
 
                 {{-- <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a> --}}
 
@@ -188,11 +188,16 @@
 
                 <div class="user-area dropdown float-right">
 
+                    @if(file_exists(asset('/public/images/'. Auth::user()->image)))   
                     <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
+                    {{-- <?php    // print_r(Auth::user()->image); exit; ?> --}}
                         <img class="user-avatar rounded-circle" src="{{asset('/public/images/'. Auth::user()->image)}}" alt="User Avatar">
-
                     </a>
+                        @else
+                        <p class="empty_image">{{ substr(Auth::user()->name, 0, 2) }}</p>
+
+                        @endif
+                    
 
                     
 

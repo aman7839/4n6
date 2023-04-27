@@ -23,6 +23,7 @@ use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\Paypal\PayPalController;
 use App\Http\Controllers\cheque\ChequeController;
 use App\Http\Controllers\Admin\UserController as AdminUsers;
+use App\Http\Controllers\Admin\MembershipController;
 // Route::get('/', function () {
 //     return view('frontendviews.login');
 // });
@@ -59,12 +60,15 @@ Route::get('/changePassword',[DashboardController::class, 'showChangePasswordGet
 Route::post('/changePassword',[DashboardController::class, 'changePasswordPost'])->name('changePasswordPost');
 
 Route::get('/users', [DashboardController::class, 'users']);
+Route::get('/viewstudentlist/{id}', [DashboardController::class, 'users']);
 
 Route::get('/addusers', [DashboardController::class, 'addusers']);
 
 Route::post('/saveUsers', [DashboardController::class, 'saveUsers'])->name('users.save');
 
 Route::get('/editUsers/{id}', [DashboardController::class, 'editUsers']);
+Route::get('/viewUsers/{id}', [DashboardController::class, 'viewUser']);
+
 
 Route::put('/updateUsers/{id}', [DashboardController::class, 'updateUsers'])->name('update.users');
 
@@ -190,6 +194,13 @@ Route::post('/importdata', [userController::class,'importData']);
 Route::get('/exporttdata', [userController::class,'exportData']);
 
 Route::post('/changeuserpassword', [AdminUsers::class,'updatePassword'])->name('changeuser');
+Route::post('/addstudentbycoach', [AdminUsers::class,'addstudentbycoach'])->name('addstudentbycoach');
+
+Route::get('/activemembership',[MembershipController::class, 'adminActiveMemberships'])->name('admin.activeMembership');
+Route::get('/pastmembership',[MembershipController::class, 'adminPastMembership'])->name('admin.pastMembership');
+Route::get('/viewmembership/{id}',[MembershipController::class, 'adminViewMembership'])->name('admin.viewMembership');
+Route::get('/editmembership/{id}',[MembershipController::class, 'adminEditMembership'])->name('admin.editMembership');
+Route::post('/updatemembership',[MembershipController::class, 'updateMembership'])->name('admin.updateMembership');
 
 
 
@@ -258,6 +269,19 @@ Route::get('/deletestudent/{id}', [CoachesController::class, 'DeleteStudent']);
 Route::get('/editProfile/{id}', [DashboardController::class, 'editProfile']);
 Route::put('/updateProfile/{id}', [DashboardController::class, 'updateprofile']);
 
+/// PAYPAL ROUTES
+Route::get('create-transaction', [PayPalController::class, 'createTransaction'])->name('createTransaction');
+Route::get('process-transaction', [PayPalController::class, 'processTransaction'])->name('processTransaction');
+Route::get('success-transaction', [PayPalController::class, 'successTransaction'])->name('successTransaction');
+Route::get('cancel-transaction', [PayPalController::class, 'cancelTransaction'])->name('cancelTransaction');
+/////
+////CHEQUE ROUTES
+Route::post('submitcheque', [ChequeController::class, 'submitcheque'])->name('submitcheque');
+
+//////
+
+///Membership Route//
+Route::get('user-membership', [MembershipController::class, 'coachMemberships'])->name('coachmembership');
 
 
 
@@ -295,16 +319,7 @@ Route::prefix('users')->group(function () {
 
 });
 
-/// PAYPAL ROUTES
-Route::get('create-transaction', [PayPalController::class, 'createTransaction'])->name('createTransaction');
-Route::get('process-transaction', [PayPalController::class, 'processTransaction'])->name('processTransaction');
-Route::get('success-transaction', [PayPalController::class, 'successTransaction'])->name('successTransaction');
-Route::get('cancel-transaction', [PayPalController::class, 'cancelTransaction'])->name('cancelTransaction');
-/////
-////CHEQUE ROUTES
-Route::post('submitcheque', [ChequeController::class, 'submitcheque'])->name('submitcheque');
 
-//////
 
 
 

@@ -3,7 +3,7 @@
 
     @section('content')
 
-<div class="container pt-4 pb-4">
+<div class="container-fluid pt-4 pb-4">
     <div class="row">
         <div class="col-md-12">
             <form action="">
@@ -17,7 +17,7 @@
 
                 
             </form>
-        <div class="col-md-12">
+      
             <div class="card">
                 <div class="card-header">
                     <h4><a href="{{ url('admin/adddocuments')}}"  class="btn btn-primary btn-sm mt-2"><i class="fa fa-plus mr-2"></i> Add Documents</a></h4>
@@ -80,7 +80,7 @@
                 </div>
                
             </div>
-        </div>
+   
     </div>
 </div>
 
