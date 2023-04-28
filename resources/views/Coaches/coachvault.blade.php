@@ -18,6 +18,7 @@
         <div class="">
 
             <div class="row">
+                @if($membership)
                 <div class="col-md-3 border-right pl-0">
                     <div class="tree">
                         <ul id="myUL">
@@ -64,6 +65,7 @@
                             </div> --}}
                         </div>
                     </div>
+                  
                     <div class="get_files">
 
                         <table class="table table-bordered">
@@ -84,6 +86,9 @@
 
 
                     </div>
+                    @else
+                    <div> You are not authorised to view vault.</div>
+                    @endif
                 </div>
             </div>
 
