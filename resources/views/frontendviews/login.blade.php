@@ -42,15 +42,15 @@
 
 
                     </div>
-                    <div class="remeber_password">
+                    {{-- <div class="remeber_password">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                            <input class="form-check-input" type="checkbox" value=""  name = "remember_me" id="flexCheckChecked">
                             <label class="form-check-label" for="flexCheckChecked">
                              Remember me
                             </label>
                           </div>
                           <!--<a href="{{url('forget-password')}}">Forget Password</a>-->
-                    </div>
+                    </div> --}}
                     <div>
                         <button class="cmn_btn">Login</button>
                         <p>Didn't have an account? <a href="{{url('register')}}">Sign up</a></p>

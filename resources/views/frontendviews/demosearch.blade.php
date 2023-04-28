@@ -121,12 +121,20 @@
                         <option value="" >--Select Type --</option>
 
 
+                        <option value="all " {{$characters == 'all' ? 'selected':''}}>All</option>
 
                         <option value="male" {{$characters == 'male' ? 'selected':''}}>Male</option>                
 
                         <option value="female" {{$characters == 'female' ? 'selected':''}} >Female</option>
 
-                        <option value="all " {{$characters == 'all' ? 'selected':''}}>Other</option>
+                        <option value="F/F " {{$characters == 'F/F' ? 'selected':''}}>F/F</option>
+
+                        <option value="M/M " {{$characters == 'M/M' ? 'selected':''}}>M/M</option>
+
+                        <option value="M/F " {{$characters == 'M/F' ? 'selected':''}}>M/F</option>
+
+
+
 
                       </select>
 

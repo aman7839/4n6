@@ -10,7 +10,7 @@
          
       
             <div class="paypal_info">
-               <h3>Membership amount: <strong>{!! $offerPrice ? '<del>': ''!!}{{$price->price}}{!! $offerPrice ? '</del>': '' !!} {{$payablePrice}}</strong></h3>
+               <h3>Membership amount: <strong> @if($offerPrice){!! $offerPrice ? '<del>': ''!!}{{$price->price}}{!! $offerPrice ? '</del>': '' !!} @endif {{$payablePrice}}</strong></h3>
             </div>
    
 

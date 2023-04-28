@@ -26,7 +26,10 @@ class CreateDataTable extends Migration
           $table->enum('rating', ['G-All Ages','PG-Middle School Appropriate','PG-13-High School','R-rating'])->nullable();
             $table->integer('isbn')->nullable();
             $table->timestamps();
+
         });
+
+
     }
 
     /**
@@ -38,4 +41,12 @@ class CreateDataTable extends Migration
     {
         Schema::dropIfExists('data');
     }
+
+
+    
+
+
+    
 }
+
+

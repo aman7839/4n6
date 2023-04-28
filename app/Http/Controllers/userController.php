@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\awards;
+use App\Models\CoachStudent;
+use App\Models\Membership;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -113,7 +115,7 @@ class userController extends Controller
             $fieldType = filter_var($request->user_name, FILTER_VALIDATE_EMAIL) ? 'email' : 'user_name';
 
        
-
+            // $remember_me = $request->has('remember_me') ? true : false; 
            
             if(auth()->attempt(array($fieldType => $input['user_name'], 'password' => $input['password'])))
 
@@ -158,6 +160,8 @@ class userController extends Controller
 
        public function importData(Request $request){
 
+           set_time_limit(0);
+
             $this->validate($request, [
                 'uploaded_file' => 'required|file|mimes:xls,xlsx'
             ]);
@@ -172,15 +176,107 @@ class userController extends Controller
                 $startcount = 2;
                 $data = array();
                 foreach ( $row_range as $row ) {
-                    $data[] = [
-                        'name' =>$sheet->getCell( 'A' . $row )->getValue(),
-                        'personal_phone_no' => $sheet->getCell( 'B' . $row )->getValue(),
-                        'school_address' => $sheet->getCell( 'W' . $row )->getValue(),
-                        'school_city' => $sheet->getCell( 'D' . $row )->getValue(),
-                        'school_zip_code' => $sheet->getCell( 'E' . $row )->getValue(),
-                        'school_state' =>$sheet->getCell( 'F' . $row )->getValue(),
-                    ];
-                    $startcount++;
+                    // $data = [
+                    //     'name' =>$sheet->getCell( 'A' . $row )->getValue(),
+                    //     'personal_phone_no' => $sheet->getCell( 'B' . $row )->getValue(),
+                    //     'school_address' => $sheet->getCell( 'W' . $row )->getValue(),
+                    //     'school_city' => $sheet->getCell( 'D' . $row )->getValue(),
+                    //     'school_zip_code' => $sheet->getCell( 'E' . $row )->getValue(),
+                    //     'school_state' =>$sheet->getCell( 'F' . $row )->getValue(),
+                    //     'user_name' => $sheet->getCell( 'N' . $row )->getValue(),
+                    //     'password' => $sheet->getCell( 'O' . Hash::make($row->getValue())),
+                    // ];
+                    /// SAVE COACH DATA
+                    ///
+                    $coachUsername=$sheet->getCell( 'N' . $row )->getValue();
+                    $password=Hash::make($sheet->getCell('O'.$row)->getValue());
+                    $name = $sheet->getCell( 'E' . $row )->getValue();
+                    $schoolName = $sheet->getCell( 'F' . $row )->getValue();
+                    $schoolState = $sheet->getCell( 'G' . $row )->getValue();
+                    $schoolAddress = $sheet->getCell( 'W' . $row )->getValue();
+                    $schoolCity = $sheet->getCell( 'X' . $row )->getValue();
+                    $schoolZip = $sheet->getCell( 'Y' . $row )->getValue();
+                    $schoolPhone = $sheet->getCell( 'Z' . $row )->getValue();
+                    $schoolState = $sheet->getCell( 'G' . $row )->getValue();
+                    $startDate = $sheet->getCell('L' . $row )->getFormattedValue();
+
+                 
+                    $endDate = $sheet->getCell( 'K' . $row )->getFormattedValue();     
+                                        
+                    $amount = $sheet->getCell( 'I' . $row )->getValue();
+                    $payMethod = $sheet->getCell( 'U' . $row )->getValue();
+                    $cheque = $sheet->getCell( 'V' . $row )->getValue();
+                        
+                    $email = $sheet->getCell( 'AA' . $row )->getValue();
+                    $schoolEmailAddress = $sheet->getCell( 'AB' . $row )->getValue();
+                    $assistantCoachEmailAddress = $sheet->getCell( 'AC' . $row )->getValue();
+
+                   
+                    $student_username= $sheet->getCell( 'R' . $row )->getFormattedValue();
+
+                
+                   $student_password=Hash::make($sheet->getCell('S'.$row)->getValue());
+                    // $school_city = $sheet->getCell( 'D' . $row )->getValue();
+
+                    $new_coach = new User;
+                    $new_coach->user_name= $coachUsername;
+                    $new_coach->password= $password;
+                    $new_coach->school_city= $schoolCity;
+                    $new_coach->name= $name;
+                    $new_coach->school_name= $schoolName;
+                    $new_coach->school_state= $schoolState;
+                    $new_coach->school_address= $schoolAddress;
+                    $new_coach->school_zip_code= $schoolZip;
+                    $new_coach->school_phone_no= $schoolPhone;
+                    $new_coach->school_phone_no= $schoolPhone;
+                    $new_coach->email= $email;
+                    $new_coach->school_email_address= $schoolEmailAddress;
+                    $new_coach->assistant_coach_email_address =  $assistantCoachEmailAddress;
+
+
+
+                    $new_coach->role='coach';
+
+                    $new_coach->save();
+
+                    $new_coach_id=  $new_coach->id;
+
+                    $new_student=  new User;
+                    $new_student->user_name= $student_username;
+                    $new_student->password=$student_password;
+                    $new_student->school_city=$schoolCity;
+                    $new_student->school_name= $schoolName;
+                    $new_student->school_state= $schoolState;
+                    $new_student->school_address= $schoolAddress;
+                    $new_student->school_zip_code= $schoolZip;
+                    $new_student->school_phone_no= $schoolPhone;
+                    $new_student->school_phone_no= $schoolPhone;
+                    $new_student->role='student';
+                    $new_student->save();
+
+                    $new_student_id=  $new_student->id;
+
+                    $coach_student=new CoachStudent;
+                    $coach_student->coach_id= $new_coach_id;
+                    $coach_student->student_id= $new_student_id;
+                    $coach_student->save();
+
+                    $coachMembership = new Membership;
+
+                    $coachMembership->user_id =  $new_coach_id;
+                    $coachMembership->amount =  $amount;
+                    $newDate = date('Y-m-d H:i:s', strtotime($startDate));
+
+                    $coachMembership->start_date =  date('Y-m-d H:i:s', strtotime($startDate));
+                    $coachMembership->end_date =  date('Y-m-d H:i:s', strtotime($endDate));
+                    $coachMembership->payment_mode =  $payMethod;
+                    $coachMembership->paypal_transaction_id =  ($cheque == "Credit Card") ? 'Credit Card' : '';
+                    $coachMembership->cheque_number =  ($cheque != "Credit Card") ? $cheque : '';
+                    
+                    $coachMembership->save();
+
+                    //// SAVE STUDENT DATA
+                    // $startcount++;
                 }
                 // echo "<pre>"; print_r($data); echo "</pre>";
                 // exit;

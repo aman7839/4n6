@@ -63,9 +63,13 @@
         <label for="characters"> Characters </label>
         <select name="characters" id="characters" class="form-control required">    
             <option   value="" disabled>Select One</option>
+            <option value="all">All</option>  
+            <option value="F/F">F/F</option>  
+            <option value="M/F">M/F</option>  
+            <option value="M/M">M/M</option>  
+
             <option value="male" selected>Male</option>
               <option value="female">Female</option>
-              <option value="all">All</option>  
             </select>
             <span class ="text-danger">@error('characters'){{$message}} @enderror</span>
       

@@ -341,6 +341,11 @@
                         <a href="{{url('coach/students')}}"><i class="menu-icon fa fa-commenting-o"></i> Manage Students</a>
 
                     </li>
+                    <li class="nav-item {{ request()->is('coach/vault') ? 'active' : ''}}">  
+
+                        <a href="{{url('coach/vault')}}"><i class="menu-icon fa fa-table"></i> Vault</a>
+
+                    </li>
 
 
 

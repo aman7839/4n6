@@ -14,6 +14,8 @@ use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\PlayCategoty;
 use App\Http\Controllers\DataController;
 use App\Http\Controllers\VaultController;
+use App\Http\Controllers\Admin\CoachController;
+
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ISGController;
 use App\Http\Controllers\LinksController;
@@ -245,12 +247,12 @@ Route::get('/logout', [userController::class, 'logout']);
 
 
 
-Route::get('/clear_view_cache', function(){
-    Artisan::call('route:cache');
-    Artisan::call('config:cache');
-    Artisan::call('cache:clear');
-    Artisan::call('view:clear');
-});
+// Route::get('/clear_view_cache', function(){
+//     Artisan::call('route:cache');
+//     Artisan::call('config:cache');
+//     Artisan::call('cache:clear');
+//     Artisan::call('view:clear');
+// });
 
 
 Route::prefix('coach')->group(function () {
@@ -283,6 +285,11 @@ Route::post('submitcheque', [ChequeController::class, 'submitcheque'])->name('su
 ///Membership Route//
 Route::get('user-membership', [MembershipController::class, 'coachMemberships'])->name('coachmembership');
 
+///VaultRoute//
+
+Route::get('vault', [CoachController::class, 'getData']);
+
+Route::get('coach_folder_data/{id}', [VaultController::class, 'getFolderData']);
 
 
 });
