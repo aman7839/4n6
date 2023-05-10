@@ -218,7 +218,7 @@
 
                     <li class="nav-item {{ request()->is('admin/documents') ? 'active' : ''}}">
 
-                        <a href="{{url('admin/documents')}}"><i class="menu-icon fa fa-file-text"></i>Manage Documents </a>
+                        <a href="{{url('admin/documents')}}"><i class="menu-icon fa fa-file-text"></i>User Guides/Documents </a>
 
                     </li>
                     <li class="nav-item {{ request()->is('admin/offerprice') ? 'active' : ''}}">
@@ -249,6 +249,8 @@
                         <a href="{{url('admin/data')}}"><i class="menu-icon fa fa-table"></i> Manage Data</a>
 
                     </li>
+
+                   
                         <li class="nav-item {{ request()->is('admin/vault') ? 'active' : ''}}">
 
                         <a href="{{url('admin/vault')}}"><i class="menu-icon fa fa-table"></i> Vault</a>

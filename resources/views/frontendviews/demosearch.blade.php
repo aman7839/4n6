@@ -56,11 +56,21 @@
 
             </ul>
 
+           
+
             <form action="">
 
                <div class="row">
 
                 <div class="col-md-6">
+
+                  <div class="form-group" >
+
+                    <label for="wide_search">Search</label>
+
+                    <input type="text" name ="wide_search"   class="form-control" placeholder="Search by any keyword" value = "{{$fullSearch}}">
+
+                </div>
 
                     <div class="form-group">
 
@@ -114,18 +124,18 @@
 
                     <div class="form-group">
 
-                        <label for="characters">Select Gender</label>
+                        <label for="characters">Select Characters</label>
 
                       <select name="characters" id="characters" class="form-control " >
 
                         <option value="" >--Select Type --</option>
 
 
-                        <option value="all " {{$characters == 'all' ? 'selected':''}}>All</option>
+                        <option value="all " {{$characters == 'All' ? 'selected':''}}>All</option>
 
-                        <option value="male" {{$characters == 'male' ? 'selected':''}}>Male</option>                
+                        <option value="male" {{$characters == 'Male' ? 'selected':''}}>Male</option>                
 
-                        <option value="female" {{$characters == 'female' ? 'selected':''}} >Female</option>
+                        <option value="female" {{$characters == 'Female' ? 'selected':''}} >Female</option>
 
                         <option value="F/F " {{$characters == 'F/F' ? 'selected':''}}>F/F</option>
 
@@ -292,7 +302,7 @@
 
 
 
-    @if($title || $author || $type || $characters || $award || $themes ||  $categories != "")
+    @if($title || $author || $type || $characters || $award || $themes ||  $categories || $fullSearch != "")
 
            <div class="all_results">
 
@@ -302,7 +312,9 @@
 
                         <div>
 
-                            <p>Records-found: <b>{{$pendingsession>0 ? $search->count() :$pendingsession }}</b></p>
+                            {{-- <p>Records-found: <b>{{$pendingsession>0 ? $search->count() :$pendingsession }}</b></p> --}}
+                            <p>Records-found: <b>{{ $search->count() }}</b></p>
+
 
                             <p>Searches Remaining: <b>{{$pendingsession}}</b></p>
 
@@ -336,17 +348,17 @@
 
                                         <tr>
 
-                                        <th scope="col">Book</th>
+                                        <th scope="col">Book/Link</th>
 
                                           <th scope="col">Publisher</th>
 
                                           <th scope="col">ISBN #</th>
 
-                                          <th scope="col">Awards</th>
+                                          <th scope="col">Award History</th>
 
                                           <th scope="col">Type</th>
 
-                                          <th scope="col">Gender</th>
+                                          <th scope="col">Character</th>
 
                                           <th scope="col">Category</th>
 
@@ -362,7 +374,7 @@
 
                                         <tr>
 
-                                          <td> <a href="{{$item->book}}" target="_blank">{{$item->book}}</a></td> 
+                                          <td> <a href="{{$item->book}}" target="_blank">Link</a></td> 
 
                                             <td>{{$item->publisher}}</td>
 

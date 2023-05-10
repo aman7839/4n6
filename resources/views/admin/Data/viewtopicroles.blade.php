@@ -18,6 +18,24 @@
 
                 
             </form>
+            <form action="{{url("admin/importisgdata")}}" method="post" enctype="multipart/form-data">
+                @csrf
+                <fieldset>
+                    <label>Select File to Upload  <small class="warning text-muted">{{__('Please upload only Excel (.xlsx or .xls) files')}}</small></label>
+                    <div class="input-group d-flex">
+                        <input type="file" required class="form-control" style="height:44px" name="uploaded_file" id="uploaded_file">
+                        <div class="input-group-append" id="button-addon2">
+                            <button class="btn btn-primary square" type="submit"><i class="ft-upload mr-1"></i> Import Data</button>
+                        </div>
+                    </div>
+                    @if ($errors->has('uploaded_file'))
+                    <p class="mb-0">
+                        <small class="text-danger" id="file-error">{{ $errors->first('uploaded_file') }}</small>
+                    </p>
+                @endif
+                   
+                </fieldset>
+            </form>
            </div>
             <div class="col-md-12 mt-2">
                 <div class="card">

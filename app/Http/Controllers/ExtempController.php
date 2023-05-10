@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 use App\Models\ExtempTopic;
 use App\Models\Extemp;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Reader\Exception;
+use PhpOffice\PhpSpreadsheet\Writer\Xls;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 
 use Illuminate\Http\Request;
@@ -137,4 +141,53 @@ return view('admin.Data.extemptopics',compact('topic'));
         
                            
                        }
+
+                       public function importData(Request $request){
+
+                        set_time_limit(0);
+                
+                         $this->validate($request, [
+                             'uploaded_file' => 'required|file|mimes:xls,xlsx'
+                         ]);
+                         $the_file = $request->file('uploaded_file');
+                         try{
+                             $spreadsheet = IOFactory::load($the_file->getRealPath());
+                             $sheet        = $spreadsheet->getActiveSheet();
+                             $row_limit    = $sheet->getHighestDataRow();
+                             $column_limit = $sheet->getHighestDataColumn();
+                             $row_range    = range( 2, $row_limit );
+                             $column_range = range( 'F', $column_limit );
+                             $startcount = 2;
+                             $data = array();
+                             foreach ( $row_range as $row ) {   
+                                 
+                                 $type = $sheet->getCell( 'A' . $row )->getValue();  
+                                                                                 
+                                 $question = $sheet->getCell( 'B' . $row )->getValue();   
+                                 $year = $sheet->getCell( 'D' . $row )->getValue();   
+                                $month = $sheet->getCell( 'C' . $row )->getValue();
+                                $topic_id = $sheet->getCell( 'E' . $row )->getValue();   
+
+
+                                 
+                                 $extempTopic = new Extemp;               
+                                 $extempTopic->type= $type;               
+                                 $extempTopic->question= $question;  
+                                 $extempTopic->month= $month;             
+
+                                 $extempTopic->year= $year;             
+                                 $extempTopic->topic_id= $topic_id;             
+
+                                 $extempTopic->save();
+                              
+                             }
+                             // echo "<pre>"; print_r($data); echo "</pre>";
+                             // exit;
+                             // DB::table('users')->insert($data);
+                         } catch (Exception $e) {
+                             // $error_code = $e->errorInfo[1];
+                             return redirect()->back()->withErrors('There was a problem uploading the data!');
+                         }
+                         return redirect()->back()->withSuccess('Great! Data has been successfully uploaded.');
+                     }
 }

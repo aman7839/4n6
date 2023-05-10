@@ -87,7 +87,7 @@
 
                     </div>
                     @else
-                    <div> You are not authorised to view vault.</div>
+                    <div> You are not authorised to view the Vault.</div>
                     @endif
                 </div>
             </div>
@@ -136,9 +136,9 @@
                             <input type="text" name="description" class="form-control" value="" />
 
                             <div class="checks">
-                                <div>
+                                {{-- <div>
                                     <input type="checkbox" name="email_notification"> Send Notification Email
-                                </div>
+                                </div> --}}
 
                                 <div>
                                     <input type="checkbox" name="coach_access"> Coach Access

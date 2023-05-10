@@ -128,9 +128,9 @@
                             <input type="text" name="description" class="form-control" value="" />
 
                             <div class="checks">
-                                <div>
+                                {{-- <div>
                                     <input type="checkbox" name="email_notification"> Send Notification Email
-                                </div>
+                                </div> --}}
 
                                 <div>
                                     <input type="checkbox" name="coach_access"> Coach Access
@@ -269,7 +269,7 @@
 
                         @csrf
 
-                        <input type="file" name="file" required>
+                        <input type="file" name="files[]" required multiple >
                         <input type="hidden" name="vault_id" id="vault_id" value="">
                         <button type="submit" class="btn btn-success">Upload</button>
 
@@ -320,7 +320,7 @@
                     this.classList.toggle("caret-down");
                 });
             }
-            jQuery("#create_folder_form").validate({
+            jQuery("#create_folder_form").validate({ 
                 rules: {
                     name: "required",
                 },
@@ -346,9 +346,11 @@
                         jQuery.ajax({
                             url: actionurl,
                             type: 'post',
-                            data: paramObj,
+                            data: paramObj, 
                             success: function(data) {
                                 if (data.status == true) {
+                                    // jQuery('#foldermodel').modal('hide');
+            
                                     window.location.reload()
                                 }
                             },
@@ -466,7 +468,7 @@
                                     let day = date.getDate();
                                     let month = date.getMonth();
                                     let year = date.getFullYear();
-                                    console.log("value---", data.data.items[i].updated_at);
+                                    console.log("value--", data.data.items[i].updated_at);
                                     filesHtml += "<tr>";
                                     filesHtml += "<td><a href='" + storagePath + data.data.items[i].file + "' target='_blank'>" + data.data.items[i].name + "</a></td>";
                                     filesHtml += "<td>" + `${month+1}/${day}/${year}` + "</td>";

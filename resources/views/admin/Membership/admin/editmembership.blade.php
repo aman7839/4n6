@@ -6,6 +6,11 @@
         <div class="content">
          
              <div class="card p-3">
+
+                {{-- <div class="col-12 text-center mt-2"> --}}
+                    {{-- <button class="btn btn-primary btn-lg" type="submit">Update</button> --}}
+                    <a href="{{ route('admin.activeMembership') }}" class="btn btn-primary">Go Back</a>
+                {{-- </div> --}}
                 <form action="{{route('admin.updateMembership')}}" id="transaction_form" method="POST" enctype="multipart/form-data">
                     @csrf
                 <div class="row">
@@ -54,8 +59,8 @@
                             <div class="form-group">
                                 <label for="">Upload Image</label>
                                 <input type="file" placeholder="Full Name" name="file" class="form-control required mb-4    " onchange="readURL(this);">
-                                <a class="example-image-link mt-3" href="{{asset('public/'.$membership->cheque_image)}}" id="light-cheque"
-                                    data-lightbox="example-set" data-title="Click the right half of the image to move forward." ><img id="blah" src="{{asset('public/'.$membership->cheque_image)}}" alt="your image" width="300" height="300"  /></a>
+                                {{-- <a class="example-image-link mt-3" href="{{asset('public/'.$membership->cheque_image)}}" id="light-cheque"
+                                    data-lightbox="example-set" data-title="Click the right half of the image to move forward." ><img id="blah" src="{{asset('public/'.$membership->cheque_image)}}" alt="your image" width="300" height="300"  /></a> --}}
                             </div>
                     </div>
                     @endif
@@ -68,7 +73,7 @@
                 </div>
                     @endif
                     <div class="col-12 text-center mt-2">
-                        <button class="btn btn-primary btn-lg" type="submit">Upate</button>
+                        <button class="btn btn-primary btn-lg" type="submit">Update</button>
                         <a href="{{ route('admin.activeMembership') }}" class="btn btn-danger btn-lg">Cancel</a>
                     </div>
                 </div>

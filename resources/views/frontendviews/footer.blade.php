@@ -22,7 +22,8 @@
                 <div class="quick_links">
                     <ul>
                         <li><a href="{{url('aboutUs')}}">About Us</a></li>
-                        <li><a href="{{url('documents')}}">Documents</a></li>
+                        <li><a href="{{url('documents')}}">Documents
+                        </a></li>
                         <li><a href="{{url('contactUs')}}">Contact Us</a></li>
                         <li><a href="">Privacy Policy</a></li>
                     </ul>

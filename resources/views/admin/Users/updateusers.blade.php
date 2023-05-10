@@ -43,9 +43,9 @@
             <div class="form-group">
              <label for="image">Images</label>
              <input type="file" name="image"  class="form-control" id="image" aria-describedby="emailHelp" >
-           <div class="mt-3">
+           {{-- <div class="mt-3">
             <img class="user-avatar rounded-circle" width="120" height="120" src="{{asset('/public/images/'. $user->image)}}" alt="User Avatar">
-           </div>
+           </div> --}}
 
               
 

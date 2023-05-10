@@ -149,7 +149,7 @@
     <span class ="text-danger">@error('summary'){{$message}} @enderror</span>
       </div>
 
-      <div class="form-group mt-3">
+      {{-- <div class="form-group mt-3">
         <label for="book" >  Public  </label> <br>
 
         <label for="book">  Yes  </label>
@@ -162,7 +162,7 @@
 
         <span class ="text-danger">@error('book'){{$message}} @enderror</span>
       
-      </div>
+      </div> --}}
     
       <a href="{{url('admin/data')}}" class="btn btn-danger">Cancel</a>
       

@@ -11,12 +11,12 @@ class PlayCategoty extends Controller
     //
     public function index(){
    $category = PlayCategory::paginate(5);
-        return view('admin.dashboard.Links.playcategory',compact('category'));
+        return view('admin.Links.playcategory',compact('category'));
     }
     
     public function addCategory(){
 
-             return view('admin.dashboard.Links.addplaycategory');
+             return view('admin.Links.addplaycategory');
          }
         
          public function  saveCategory(Request $request){
@@ -40,7 +40,7 @@ class PlayCategoty extends Controller
 
             $category = PlayCategory::find($id);
     
-            return view('admin.dashboard.Links.editplaycategory', compact('category'));
+            return view('admin.Links.editplaycategory', compact('category'));
         }
        
         public function updateCategory( Request $request,$id){

@@ -61,7 +61,7 @@ Route::get('/changePassword',[DashboardController::class, 'showChangePasswordGet
 
 Route::post('/changePassword',[DashboardController::class, 'changePasswordPost'])->name('changePasswordPost');
 
-Route::get('/users', [DashboardController::class, 'users']);
+Route::get('/users', [DashboardController::class, 'users'])->name('users.index');
 Route::get('/viewstudentlist/{id}', [DashboardController::class, 'users']);
 
 Route::get('/addusers', [DashboardController::class, 'addusers']);
@@ -149,11 +149,16 @@ Route::get('/deletedata/{id}', [DataController::class, 'delete']);
 Route::get('/addtopicroles', [TopicRoles::class, 'TopicRole']);
 Route::post('/savetopicroles', [TopicRoles::class, 'saveTopicRole']);
 Route::get('/topicroles', [TopicRoles::class, 'viewTopicRole']);
+
+Route::post('/importisgdata', [TopicRoles::class,'importData']);
+
 Route::get('/edittopicroles/{id}', [TopicRoles::class, 'editTopicRole']);
 Route::put('/updatetopicroles/{id}', [TopicRoles::class, 'updateTopicRole']);
 Route::get('/deletetopicroles/{id}', [TopicRoles::class, 'deleteTopicRole']);
 Route::get('/viewisg', [ISGController::class, 'index']);
 Route::get('/addisg', [ISGController::class, 'addIsg']);
+Route::post('/importidadata', [ISGController::class, 'importData']);
+
 Route::post('/saveisg', [ISGController::class, 'saveIsg']);
 Route::get('/editisg/{id}', [ISGController::class, 'editIsg']);
 Route::put('/updateisg/{id}', [ISGController::class, 'updateIsg']);
@@ -164,6 +169,8 @@ Route::post('/saveextemptopics', [ExtempController::class, 'saveExtempTopics']);
 Route::get('/editextemptopics/{id}', [ExtempController::class, 'editExtempTopics']);
 Route::put('/updateextemptopics/{id}', [ExtempController::class, 'updateExtempTopics']);
 Route::get('/extemp', [ExtempController::class, 'viewEXtemp']);
+Route::post('/importextempdata', [ExtempController::class, 'importData']);
+
 Route::get('/addextemp', [ExtempController::class, 'addEXtemp']);
 Route::post('/saveextemp', [ExtempController::class, 'saveEXtemp']);
 Route::get('/editextemp/{id}', [ExtempController::class, 'editExtemp']);
@@ -233,6 +240,10 @@ Route::get('/view/{file}', [statesController::class, 'view']);
 
 Route::get('/tutorial', [HomeController::class,'tutorial']);
 Route::get('/regeneratetopics', [HomeController::class,'RandomTopics']);
+Route::get('/isg', [HomeController::class,'IsgTopicGenerator']);
+Route::get('/extemp', [HomeController::class,'extempTopicGenerator']);
+
+
 
 Route::get('/services', [HomeController::class,'services'])->name('user.services');
 Route::get('/login', [HomeController::class,'login'])->middleware('login');

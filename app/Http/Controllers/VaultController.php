@@ -102,17 +102,38 @@ public function fileUpload(Request $req){
     // 'file' => 'required|mimes:csv,txt,xlx,xls,pdf|max:2048'
     // ]);
     $fileModel = new VaultFiles;
-    if($req->file()) {
-        $fileName = time().'_'.$req->file->getClientOriginalName();
-        $filePath = $req->file('file')->storeAs('uploads', $fileName, 'public');
-        $fileModel->name = $req->file->getClientOriginalName();
+    
+if($req->hasFile('files')) {
+    $files = $req->file('files');
+    foreach($files as $file) {
+        $fileName = time().'_'.$file->getClientOriginalName();
+        $filePath = $file->storeAs('uploads', $fileName, 'public');
+        $fileModel = new VaultFiles;
+        $fileModel->name = $file->getClientOriginalName();
         $fileModel->file = '/storage/' . $filePath;
         $fileModel->vault_id = $req->vault_id;
         $fileModel->save();
-        return back()
-        ->with('success','File has been uploaded.')
-        ->with('file', $fileName);
     }
+    return back()
+        ->with('success','Files have been uploaded.');
+} else {
+    return back()
+        ->with('error','No files were selected for upload.');
+}
+
+    // $fileModel = new VaultFiles; 
+    
+    // if($req->file()) {
+    //     $fileName = time().'_'.$req->file->getClientOriginalName();
+    //     $filePath = $req->file('file')->storeAs('uploads', $fileName, 'public');
+    //     $fileModel->name = $req->file->getClientOriginalName();
+    //     $fileModel->file = '/storage/' . $filePath;
+    //     $fileModel->vault_id = $req->vault_id;
+    //     $fileModel->save();
+    //     return back()
+    //     ->with('success','File has been uploaded.')
+    //     ->with('file', $fileName);
+    // }
 }
 
     public function deleteFile($id){

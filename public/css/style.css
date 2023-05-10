@@ -949,6 +949,66 @@ margin-bottom: 15px;
 .all_results {
   padding-bottom: 60px;
 }
+/* extemps */
+.extemps th {
+  background: #ef8a17 !important;
+}
+.extemps table{
+  border-radius: 10px;
+}
+.extemps_filter_list {
+  background: #fff;
+  padding: 10px;
+  box-shadow: 0px 0px 5px rgba(0,0,0,10%);
+  border-radius: 8px;
+}
+.view_filters {
+  padding-top: 30px;
+}
+
+.view_filters div {
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+h6.domestic {
+  color: #1f7691;
+  font-weight: 500;
+}
+
+h6.foreign {
+  color: #b64926 !important;
+  font-weight: 5000;
+}
+.extemps_filter .form-group {
+  width: 100%;
+}
+.filter_wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+button.cmn_btn.reset {
+  background: gainsboro;
+}
+.select_topic_filter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.select_topic_filter .form-group {
+  flex-grow: 1;
+  margin: 0;
+}
+
+.select_topic_filter input.cmn_btn {
+  min-width: 180px;
+  align-self: end;
+}
 /* media query starts here */
 
 @media(max-width:1799px){
@@ -1346,6 +1406,7 @@ li.nav-item.dropdown a.dropdown-item:active,li.nav-item.dropdown a.dropdown-item
 
 .paypal_info {text-align: center;}
 /*  */
+
 @media(max-width:767px){
   .review_user_image {
     flex: 0 0 100px;

@@ -177,26 +177,44 @@ class DashboardController extends Controller
 
     public function users(Request $request)
     {
-		
+		$sortColumn = $request->get('sort');
+        $sortOrder = $request->get('order', 'asc');
+        if ($sortColumn === $request->get('sort') && $sortOrder === 'asc') {
+            $sortDirection = 'desc';
+        } else {
+            $sortDirection = 'asc';
+        }
         $search = $request['search'] ?? "";
         $coach_id = $request->id ?? "";
         if ($search != ""){
 			if($coach_id){
+
 				
-				$user = DB::table('coach_student as a')->leftjoin('users as b', 'a.student_id', '=', 'b.id')->where('a.coach_id','=',$request->id)->where('name', 'Like', '%'.$search. '%' )->orwhere('email', 'Like','%'.$search.'%')->orderBy('a.id')->paginate(10);
+				$user = DB::table('coach_student as a')->leftjoin('users as b', 'a.student_id', '=', 'b.id')->where('a.coach_id','=',$request->id)->where('name', 'Like', '%'.$search. '%' )->orwhere('email', 'Like','%'.$search.'%')->orderBy('a.id')->paginate(20);
 				
 			} else {	
-				$user = user::where('name', 'Like', '%'.$search. '%' )->orwhere('email', 'Like','%'.$search.'%')->paginate('10');
+
+				$user = user::where('name', 'Like', '%'.$search. '%' )->orwhere('email', 'Like','%'.$search.'%')->orwhere('school_name', 'Like','%'.$search.'%')->paginate('10');
+                $user->appends(['search' => $search]);
+
 			}
         }
         else{
 			if($coach_id){
-				$user = DB::table('coach_student as a')->leftjoin('users as b', 'a.student_id', '=', 'b.id')->where('a.coach_id','=',$request->id)->orderBy('a.id')->paginate(10);
-			} else {
-				$user = User::paginate(10);
-			}
+				$user = DB::table('coach_student as a')->leftjoin('users as b', 'a.student_id', '=', 'b.id')->where('a.coach_id','=',$request->id)->orderBy('a.id')->paginate(20);
+			} elseif($sortColumn != null)
+            {
+				// $user = User::paginate(10);
+                $user = User::orderBy($sortColumn, $sortOrder)->paginate(20);
+                $user->appends(['sort' => $sortColumn, 'order' => $sortOrder]);
+			}else {
+
+				$user = User::paginate(20);
+
+            }
+
         }
-       return view('admin.Users.users', compact('user','search','coach_id'));
+       return view('admin.Users.users', compact('user','search','coach_id','sortColumn','sortOrder','sortDirection'));
     }
 
 

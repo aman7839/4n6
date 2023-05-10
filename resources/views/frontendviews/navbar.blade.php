@@ -41,12 +41,12 @@
                         </li> --}}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                IDA 
+                                Impromptu Generators
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                              <li><a class="dropdown-item" href="#">Impromptu to Speech</a></li>
-                              <li><a class="dropdown-item" href="#">Topic Generator</a></li>                            
-                              <li><a class="dropdown-item" href="#">Extemp Topic Generator</a></li>
+                              <li><a class="dropdown-item" href="{{url('/regeneratetopics')}}">Impromptu Duet Acting (IDA)</a></li>
+                              <li><a class="dropdown-item" href="{{url('/isg')}}">Impromptu Speech Topic Generator</a></li>                            
+                              <li><a class="dropdown-item" href="{{url('/extemp')}}">Extemp Topic Generator</a></li>
                             </ul>
                           </li>
                         <li class="nav-item">

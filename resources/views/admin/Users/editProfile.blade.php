@@ -53,7 +53,7 @@
                            <div class="form-group">
                               <label for="image">Images</label>
                               <input type="file" name="image"  class="form-control mb-3" id="image" aria-describedby="emailHelp" >
-                              <img  src="{{asset('/public/images/'. $user->image)}}" width="20%" class="user-avatar rounded-circle" alt="User Avatar">
+                              {{-- <img  src="{{asset('/public/images/'. $user->image)}}" width="20%" class="user-avatar rounded-circle" alt="User Avatar"> --}}
                            </div>
                         </div>                   
                      </div>

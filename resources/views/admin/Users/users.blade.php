@@ -10,7 +10,7 @@
             <form action="">
                 <div class="form-group mt-4 search_bar">
                
-                  <input type="search" name="search" id="" class="form-control" placeholder="Search Here" aria-describedby="helpId" value = "{{$search}}">
+                  <input type="search" name="search" id="" class="form-control" placeholder="Search by username or email or schoolname" aria-describedby="helpId" value = "{{$search}}">
                   <button  class="btn btn-primary">Search</button>
                   <a href="{{url('admin/users')}}"><i class="fa fa-times"></i></a>
                   
@@ -61,9 +61,37 @@
                                 <tr>
                                     <th>ID</th>
                                     <th> User Name</th>
-                                     
-                                    <th>Email</th> 
-                                    <th>Profile Picture</th>                                      
+                                    
+                                    {{-- <th>Email</th>  --}}
+                                    <th>
+                                        <a class="text-white" href="{{ route('users.index', ['sort' => 'email', 'order' => $sortColumn === 'email' ? $sortDirection : 'asc']) }}">
+                                           Email
+                                            @if ($sortColumn === 'email')
+                                                @if ($sortOrder === 'asc')
+                                                <i class="fa fa-arrow-up"></i>
+                                                @else
+                                                    <i class="fa fa-arrow-down"></i>
+                                                @endif
+                                            @endif
+                                        </a>
+                                    </th>
+                                   
+                                    {{-- <th>Profile Picture</th> --}}
+                                    {{-- <th>School Name</th> --}}
+                                    <th>
+                                        <a class="text-white" href="{{ route('users.index', ['sort' => 'school_name', 'order' => $sortColumn === 'school_name' ? $sortDirection : 'asc']) }}">
+                                            School Name
+                                            @if ($sortColumn === 'school_name')
+                                                @if ($sortOrder === 'asc')
+                                                <i class="fa fa-arrow-up"></i>
+                                                @else
+                                                    <i class="fa fa-arrow-down"></i>
+                                                @endif
+                                            @endif
+                                        </a>
+                                    </th>
+                                    
+
                                     <th>Mobile</th>
                                     <th>Role</th>
                                     <th>Location</th>
@@ -76,7 +104,9 @@
                                     <td>{{ $item->id }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->email }}</td>
-                                    <td><img src= "{{ asset('/public/images/'.$item->image) }}" width="80" height="80" class=" rounded-circle "  title=""></td>
+                                    <td>{{ $item->school_name }}</td>
+
+                                    {{-- <td><img src= "{{ asset('/public/images/'.$item->image) }}" width="80" height="80" class=" rounded-circle "  title=""></td> --}}
                                     <td>{{ $item->personal_phone_no }}</td>
                                     <td>{{ucfirst($item->role)}}</td>
                                     <td>{{ $item->school_city }}</td>
@@ -116,3 +146,4 @@
    
     @endsection
  
+    

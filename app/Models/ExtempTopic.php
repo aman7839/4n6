@@ -13,8 +13,9 @@ class ExtempTopic extends Model
         
         'name',
     
-
-
        
     ];
+    public function topic() {
+        return $this->belongsTo(Extemp::class,"id","topic_id");
+    }
 }
