@@ -257,11 +257,11 @@
 
                     </li>
 
-                    {{-- <li class="nav-item {{ request()->is('admin/messages') ? 'active' : ''}}">  
+                    <li class="nav-item {{ request()->is('admin/messages') ? 'active' : ''}}">  
 
                         <a href="{{url('admin/messages')}}"><i class="menu-icon fa fa-commenting-o"></i> Messages</a>
 
-                    </li> --}}
+                    </li>
 
                     <li class="nav-item {{ request()->is('admin/editProfile') ? 'active' : ''}}">  
 

@@ -17,6 +17,6 @@ class categoryLinks extends Model
     
     ];
     public function category() {
-        return $this->belongsTo(category::class,"id","catid");
+        return $this->belongsTo(category::class,"catid","id");
     }
 }

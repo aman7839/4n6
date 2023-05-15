@@ -178,6 +178,8 @@ Route::put('/updateextemp/{id}', [ExtempController::class, 'updateExtemp']);
 Route::get('/messages', [contactusController::class, 'index']);
 Route::get('/viewmessages/{id}', [contactusController::class, 'viewMessages']);
 Route::get('/replymessages/{id}', [contactusController::class, 'replyMessages']);
+Route::post('/replymessages/{id}', [contactusController::class, 'replyMessagestoUser']);
+
 Route::get('/deletemessages/{id}', [contactusController::class, 'deleteMessages']);
 Route::get('/offerprice', [HomeController::class,'offerPrice']);
 Route::get('/addofferprice', [HomeController::class,'addofferPrice']);
@@ -242,12 +244,20 @@ Route::get('/tutorial', [HomeController::class,'tutorial']);
 Route::get('/regeneratetopics', [HomeController::class,'RandomTopics']);
 Route::get('/isg', [HomeController::class,'IsgTopicGenerator']);
 Route::get('/extemp', [HomeController::class,'extempTopicGenerator']);
+Route::post('/extemp', [HomeController::class,'extempTopicGeneratorPost']);
+
+Route::get('/freeresources', [HomeController::class,'freeResources']);
+Route::get('/links', [HomeController::class,'getResources']);
+
+
 
 
 
 Route::get('/services', [HomeController::class,'services'])->name('user.services');
 Route::get('/login', [HomeController::class,'login'])->middleware('login');
 Route::post('/contactUS', [contactusController::class,'saveContactUs']);
+Route::get('/sendemail', [contactusController::class,'replyMessagestoUser']);
+
 
 Route::get('/demosearch', [HomeController::class,'demoSearch']);
 
