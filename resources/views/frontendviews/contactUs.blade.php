@@ -34,19 +34,19 @@
                                     @csrf
                                     <div class="form-group">
                                         <label for="">Name</label>
-                                        <input type="text" name="name" placeholder="Enter your name" class="form-control">
+                                        <input type="text" name="name"  value="{{old('name')}}" placeholder="Enter your name" class="form-control">
                         <span class ="text-danger">@error('name'){{$message}} @enderror</span>
 
                                     </div>
                                     <div class="form-group">
                                         <label for="">Email Address</label>
-                                        <input type="email" name="email" placeholder="Enter your email" class="form-control">
+                                        <input type="email" name="email" value="{{old('email')}}" placeholder="Enter your email" class="form-control">
                         <span class ="text-danger">@error('email'){{$message}} @enderror</span>
 
                                     </div>
                                     <div class="form-group">
                                         <label for="">Add Comment</label>
-                                        <textarea name="description" class="form-control" id="" cols="30" rows="10" placeholder="Add your comment here"></textarea>
+                                        <textarea name="description"  value="{{old('description')}}" class="form-control" id="" cols="30" rows="10" placeholder="Add your comment here">{{old('description')}}</textarea>
                         <span class ="text-danger">@error('description'){{$message}} @enderror</span>
 
                                     </div>

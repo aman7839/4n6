@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ContactUs;
+use Exception;
+use Illuminate\Support\Facades\Mail;
 
 class contactusController extends Controller
 {
@@ -26,7 +28,13 @@ class contactusController extends Controller
        $user->email = $request->email;
        $user->description = $request->description;
        $user->save();
-       return redirect()->back()->with('success','we will contact you soon');
+    //    $details = [
+    //     'title' => 'Mail from ItSolutionStuff.com',
+    //     'body' => 'This is for testing email using smtp'
+    // ];
+
+    //     Mail::to($request->email)->send(new \App\Mail\ContactUs($details));
+       return redirect()->back()->with('success','We will contact you soon');
 
     }
 
@@ -59,6 +67,20 @@ class contactusController extends Controller
         $deleteMessage->delete();
 
         return redirect()->back()->with('error','Message Deleted Successfully');
+
+    }
+
+    public function replyMessagestoUser(){
+
+        $details = [
+            'title' => 'Mail from ItSolutionStuff.com',
+            'body' => 'This is for testing email using smtp'
+        ];
+
+        Mail::to('your_receiver_email@gmail.com')->send(new \App\Mail\ContactUs($details));
+
+
+        return view('admin.Message.replymessages',compact('messages'));
 
     }
 

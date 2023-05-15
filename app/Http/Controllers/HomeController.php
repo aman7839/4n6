@@ -8,6 +8,9 @@ use App\Models\users_guide;
 use App\Models\offerPrice;
 use App\Models\TopicRole;
 use App\Models\ISG;
+use App\Models\category;
+use App\Models\categoryLinks;
+
 
 use App\Models\awards;
 use App\Models\Extemp;
@@ -25,6 +28,30 @@ class HomeController extends Controller
     public function aboutUs()
     {
         return view("frontendviews.aboutUs");
+    }
+
+    public function freeResources()
+    {
+        $resources = category::all();
+
+        return view("frontendviews.freeresources", compact('resources'));
+    }
+
+    public function getResources(Request $request)
+    {
+        $catid = $request->cat_id;
+    
+                if($catid){
+
+                    $catlinks = DB::table('categories')
+                    ->leftJoin('category_links', 'categories.id', '=', 'category_links.catid')
+                    ->where('categories.id','=',$catid)
+                    ->get();
+                    // $catlinks = categoryLinks::where('catid', $catid)->with('category')->get();
+                // echo "<pre>"; print_r($catlinks); echo "</pre>";
+                // exit;
+                    return view('frontendviews.links',compact(['catlinks',"catid"]));
+                }
     }
     public function Home()
     {
@@ -303,35 +330,124 @@ class HomeController extends Controller
     }
 
     public function extempTopicGenerator(Request $request)
-
     {
+
+       
+        $topicListData ='';
+        $allDomesticTopics ='';
+        $allForeignTopics ='';   
+        $domesticName = $request['topic_name_domestic'];
+        $foriegnName = $request['topic_name_foriegn']; 
+        $type = strtolower($request['doAction']);
+        $allExtempQuestions =    $request['View All Extemp Questions'];
+        $dateSelected = $request['date'];
+        $monthName = array('01'=>'JAN','02'=>'FEB','03'=>'MAR','04'=>'APR','05'=>'MAY','06'=>'JUNE','07'=>'JULY','08'=>'AUG','09'=>'SEP','10'=>'OCT','11'=>'NOV','12'=>'DEC',);
+
+        
+        $domesticTopic = Extemp::where('type','domestic')->with('topic')->groupBy('topic_id')->get();
+
+        $foreignTopic = Extemp::where('type','foreign')->with('topic')->groupBy('topic_id')->get();
+
+        $monthdate = Extemp::groupBy('month','year')->orderBy('year', 'ASC')->orderBy('month', 'ASC')->get();
+       
+        $topicData = DB::table('extemps')->leftJoin('extemp_topics', 'extemps.topic_id', '=', 'extemp_topics.id')->limit(3)->get();
+
+        return view("frontendviews.extemptopic", compact('monthName','allDomesticTopics','allForeignTopics','allExtempQuestions','type', 'allForeignTopics','allDomesticTopics', 'domesticTopic','foreignTopic','monthdate','domesticName','foriegnName','dateSelected', 'topicData') );
+        //   echo "<pre>"; print_r($domesticTopicList->toArray()); echo "</pre>";
+    //        exit;   
+    }
+
+    public function extempTopicGeneratorPost(Request $request){
+        $allDomesticTopics ='';
+        $allForeignTopics ='';
+        $topicListData ='';
+        $topicListData =''; 
         $domesticName = $request['topic_name_domestic'];
         $foriegnName = $request['topic_name_foriegn'];
         $both = $request['doBoth'];
         $all = $request['doAll'];
+        $dateSelected = $request['date'];
+        $type = strtolower($request['doAction']);
+        $allExtempQuestions =$request['View All Extemp Questions'];
+        
+        $monthName = array('01'=>'JAN','02'=>'FEB','03'=>'MAR','04'=>'APR','05'=>'MAY','06'=>'JUNE','07'=>'JULY','08'=>'AUG','09'=>'SEP','10'=>'OCT','11'=>'NOV','12'=>'DEC',);
+        $domesticTopic = Extemp::where('type','domestic')->with('topic')->groupBy('topic_id')->get();
+        $foreignTopic = Extemp::where('type','foreign')->with('topic')->groupBy('topic_id')->get();
+        $monthdate = Extemp::groupBy('month','year')->orderBy('year', 'ASC')->orderBy('month', 'ASC')->get();
+       
+        $topicData = DB::table('extemps')->leftJoin('extemp_topics', 'extemps.topic_id', '=', 'extemp_topics.id')->limit(3)->get();
+        
 
-        $dateSelected = $request['domesticDate'];
-        // $domestic = $request->domestic??null;
-        // $foreign = $request->foreign??null;
+        switch($request->input('doAction')){
 
-           $domesticTopic = Extemp::where('type','domestic')->with('topic')->groupBy('topic_id')->get();
-           $domesticTopicList = Extemp::where('topic_id',$domesticName)->where('type','domestic')->with('topic')->inRandomOrder()->limit(3)->get();
+           
+            case 'Foreign':
+                
 
-           $foreignTopic = Extemp::where('type','foreign')->with('topic')->groupBy('topic_id')->get();
-           $foreignTopicList = Extemp::where('topic_id',$foriegnName)->where('type','foreign')->with('topic')->groupBy('topic_id')->inRandomOrder()->limit(3)->get();
+                $topicListData = DB::table('extemps')->leftJoin('extemp_topics', 'extemps.topic_id', '=', 'extemp_topics.id')->where('extemps.type','=',$type)->where('extemps.topic_id','=',$foriegnName);
 
-           $bothTopics = Extemp::where('type','foreign')->orwhere('type','domestic')->with('topic')->groupBy('topic_id')->inRandomOrder()->limit(3)->get();
-           $allDomesticTopics = Extemp::where('type','domestic')->with('topic')->inRandomOrder()->limit(3)->get();
-           $allForeignTopics = Extemp::where('type','foreign')->with('topic')->inRandomOrder()->limit(3)->get();
+                if($request['date']){
 
-            
-           $monthdate = Extemp::groupBy('month','year')->orderBy('year', 'ASC')->orderBy('month', 'ASC')->get();
+                    $topicListData->where('extemps.month','=',trim(explode(' ', $dateSelected)[0]));
+                    $topicListData->where('extemps.year','=',trim(explode(' ', $dateSelected)[1]));
+
+                }
+                               
+                 $topicData =   $topicListData->limit(3)->inRandomOrder()->get();
+
+            break;
+
+            case 'Domestic':
+
+                $topicListData = DB::table('extemps')->leftJoin('extemp_topics', 'extemps.topic_id', '=', 'extemp_topics.id')->where('extemps.type','=',$type)->where('extemps.topic_id','=',$domesticName);
+
+                if($request['date']){
+
+                    $topicListData->where('extemps.month','=',trim(explode(' ', $dateSelected)[0]));
+                    $topicListData->where('extemps.year','=',trim(explode(' ', $dateSelected)[1]));
+
+                }
+                               
+                $topicData =   $topicListData->limit(3)->inRandomOrder()->get();
+             
+            break;
+
+            case 'View Questions From Both':
+
+                $topicListData = DB::table('extemps')->leftJoin('extemp_topics', 'extemps.topic_id', '=', 'extemp_topics.id');
+
+                if($request['date']){
+
+                    $topicListData->where('extemps.month','=',trim(explode(' ', $dateSelected)[0]));
+                    $topicListData->where('extemps.year','=',trim(explode(' ', $dateSelected)[1]));
+
+                }
+                               
+                $topicData =   $topicListData->limit(3)->inRandomOrder()->get();
+               
+            break;
+
+            case 'View All Extemp Questions':
+
+                $allDomesticTopics = Extemp::where('type','domestic')->with('topic')->get();
+                $allForeignTopics = Extemp::where('type','foreign')->with('topic')->get();
+     
+            break;
+
+            default:
+
+            $topicData = DB::table('extemps')->limit(3)->get();
 
 
-    //   echo "<pre>"; print_r($domesticTopicList->toArray()); echo "</pre>";
-    //        exit;   
-        return view("frontendviews.extemptopic", compact('allDomesticTopics', 'allForeignTopics','both','all','domesticTopic', 'domesticTopicList','foreignTopic', 'foreignTopicList','monthdate','bothTopics','domesticName','foriegnName'));
+        }
+
+
+        return view("frontendviews.extemptopic", compact('topicData','allExtempQuestions','allDomesticTopics','allForeignTopics','topicData','type', 'dateSelected','domesticName','foriegnName','monthName','domesticTopic','foreignTopic','monthdate'));
+
+        
     }
+
+
 
     public function demoSearch(Request $request)
     {
@@ -380,7 +496,9 @@ class HomeController extends Controller
                 DB::raw("group_concat(award_id) as award_id")
             )
                 ->orwhere("title", "Like", "%" . $fullSearch . "%")
-        
+                ->orwhere("publisher", "Like", "%" . $fullSearch . "%")
+                ->orwhere("isbn", "Like", "%" . $fullSearch . "%")
+
                 ->orwhere("author", "Like", "%" . $fullSearch . "%")
                 ->orwhere("type", "Like", "%" . $fullSearch . "%")
                 ->orwhere("characters", "Like", $fullSearch)
@@ -434,8 +552,7 @@ class HomeController extends Controller
                     ->get();
 
 
-        
-                }      
+               }      
 
         //    echo "<pre>"; print_r($search->toArray()); echo "</pre>";
         //    exit;

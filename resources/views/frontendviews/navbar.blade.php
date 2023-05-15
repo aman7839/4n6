@@ -41,7 +41,7 @@
                         </li> --}}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Impromptu Generators
+                                Limited Prep Events
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                               <li><a class="dropdown-item" href="{{url('/regeneratetopics')}}">Impromptu Duet Acting (IDA)</a></li>
@@ -62,6 +62,11 @@
 
                         <li class="nav-item">
                             
+                            <a class="nav-link  {{ request()->is('freeresources') ? 'active' : ''}}" href="{{url('freeresources')}}">Free Resources</a>
+                        </li>
+
+                        <li class="nav-item">
+                            
                             <a class="nav-link  {{ request()->is('demosearch') ? 'active' : ''}}" href="{{url('demosearch')}}">Demo Search</a>
                         </li>
                         @auth
@@ -74,7 +79,12 @@
                         <li class="nav-item">
                             <a class="nav-link  {{ request()->is('dashboard') ? 'active' : ''}}" href="{{url('/student/dashboard')}}">Dashboard</a>
                         </li>
-                    @endif                      
+                    @endif     
+                    @if(auth()->user()->role == 'admin')
+                    <li class="nav-item">
+                        <a class="nav-link  {{ request()->is('dashboard') ? 'active' : ''}}" href="{{url('/admin/dashboard')}}">Dashboard</a>
+                    </li>
+                @endif                         
                         @endauth
                         
                         <div class="navigates mobile">

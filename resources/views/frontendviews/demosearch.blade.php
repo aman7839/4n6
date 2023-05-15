@@ -315,8 +315,8 @@
                             {{-- <p>Records-found: <b>{{$pendingsession>0 ? $search->count() :$pendingsession }}</b></p> --}}
                             <p>Records-found: <b>{{ $search->count() }}</b></p>
 
-
-                            <p>Searches Remaining: <b>{{$pendingsession}}</b></p>
+                            
+                             <p>Searches Remaining: <b>{{$pendingsession}}</b></p>
 
                         </div>
 
@@ -328,15 +328,9 @@
 
                 @foreach($search as $item)
 
-
-
-
-
                 <div class="search_item">
 
                         <h5 class="mb-3"><b> Title : {{$item->title}}</b></h5>
-
-
 
                         <h5 class="mb-3"><b> Author(s):  {{$item->author}}</b></h5>
 
@@ -406,50 +400,27 @@
 
                 </div>
 
-
-
                 @endforeach
-
              
 
-                @elseif ($pendingsession ==0)
+                @elseif ($pendingsession == 0)
                 
                 <h5 class="text-center mt-3">You are out of Demo Searches! Please subscribe to 4N6 Fanatics to <a href="{{url('login')}}">continue your research!</a></h5>
 
-
-                @endif
+               @endif
 
                  @else 
 
-                  
                 <h5 class="text-center mt-3">You must specify at least one search criteria</h5> 
-  
-             
 
-                @endif
 
-                
+      @endif    
                
 
            </div>
 
         </div>
-
-
-
-       
-
       </section>
-
-
-
-   
-
-
-
-
-
-
 
     @endsection
 

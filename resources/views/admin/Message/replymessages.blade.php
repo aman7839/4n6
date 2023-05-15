@@ -12,9 +12,9 @@
         </div>
   
   <div class="card-body">
-    <form action="" method =""  >
+    <form action="{{url('admin/replymessages/'.$messages->id)}}" method ="Post"  >
     @csrf
-    @method('PUT')
+
    <div class="form-group">
        <label for="name"> Name</label>
        <input type="text" name ="name" value="{{$messages->name}}" class="form-control" id="name" aria-describedby="emailHelp" >
@@ -45,12 +45,13 @@
     <textarea name="description"  class="form-control"  id="description" cols="30" rows="10">{{$messages->description}} </textarea>      
       <span class ="text-danger">@error('name'){{$message}} @enderror</span>
  
+      <input type="submit" name = "reply" Value = "Send Reply" class="btn btn-primary"> 
     
        
       </div>
-     
+     {{-- <input type="submt" name = "submit" value = "Send Reply"  class="btn btn-primary"> --}}
 
-       <a href="" class="btn btn-primary"> Send Reply</a>
+       {{-- <a href="" class="btn btn-primary"> Send Reply</a> --}}
        <a href="{{url('admin/messages')}}" class="btn btn-primary">Cancel</a>
 
 
