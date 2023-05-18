@@ -58,7 +58,7 @@
 
            
 
-            <form action="{{url('demosearch')}}" method = "POST">
+            <form action="{{url('coach/search')}}" method = "POST">
               @csrf
                <div class="row">
 
@@ -290,7 +290,7 @@
 
                        {{-- <button class="cmn_btn"> Search </button> --}}
 
-                        <a href="{{url('demosearch')}}" class="cmn_btn">Reset</a> 
+                        <a href="{{url('coach/search')}}" class="cmn_btn">Reset</a> 
 
 
 
@@ -318,99 +318,110 @@
                             <p>Records-found: <b>{{ $search->count() }}</b></p>
 
                             
-                             <p>Searches Remaining: <b>{{$pendingsession}}</b></p>
+                             {{-- <p>Searches Remaining: <b>{{$pendingsession}}</b></p> --}}
 
                         </div>
 
                 </div>
 
+    @if($search->count()>0)
+
+                {{-- @if($pendingsession>0) --}}
+                <form action="{{url('coach/searchprints')}}" method="POST" id="formSearch"  enctype="multipart/form-data">
+
+                  @csrf
+                  @foreach($search as $item)
+
+                  <div class="search_item">
+
+                          <h5 class="mb-3"><b> Title : {{$item->title}}</b></h5>
+
+                          <h5 class="mb-3"><b> Author(s):  {{$item->author}}</b></h5>
+
+                              <div class="table-responsive">
+
+                                  <table class="table table-bordered">
+
+                                      <thead>
+
+                                          <tr>
+
+                                          <th scope="col">Book/Link</th>
+
+                                            <th scope="col">Publisher</th>
+
+                                            <th scope="col">ISBN #</th>
+
+                                            <th scope="col">Award History</th>
+
+                                            <th scope="col">Type</th>
+
+                                            <th scope="col">Character</th>
+
+                                            <th scope="col">Category</th>
+
+                                            {{-- <th scope="col">Rating</th> --}}
+
+                                            <th scope="col">Theme</th>
+                                            <th scope="col">Select to Print Summary</th>
 
 
-                @if($pendingsession>0)
+                                          </tr>
 
-                @foreach($search as $item)
+                                        </thead>
 
-                <div class="search_item">
+                                        <tbody>
 
-                        <h5 class="mb-3"><b> Title : {{$item->title}}</b></h5>
+                                          <tr>
 
-                        <h5 class="mb-3"><b> Author(s):  {{$item->author}}</b></h5>
+                                            <td> <a href="{{$item->book}}" target="_blank">Link</a></td> 
 
-                            <div class="table-responsive">
+                                              <td>{{$item->publisher}}</td>
 
-                                <table class="table table-bordered">
+                                              <td> #{{$item->isbn}}</td>
 
-                                    <thead>
+                                              <td>{{$item->award_name}}</td>
 
-                                        <tr>
+                                              <td>{{$item->type}}</td>
 
-                                        <th scope="col">Book/Link</th>
+                                              <td>{{$item->characters}}</td>
 
-                                          <th scope="col">Publisher</th>
+                                              <td>{{$item->category->name}}</td>
 
-                                          <th scope="col">ISBN #</th>
+                                              {{-- <td>PG-13 - High School</td> --}}
 
-                                          <th scope="col">Award History</th>
+                                              <td>{{$item->theme->name}}</td>
 
-                                          <th scope="col">Type</th>
+                                               <td><input type="checkbox" id="{{$item->id}}" name="printBox[]" value={{$item->id}}></td>
 
-                                          <th scope="col">Character</th>
+                                          </tr>
+                                         
+                                        </tbody>
 
-                                          <th scope="col">Category</th>
+                                    </table>
 
-                                          {{-- <th scope="col">Rating</th> --}}
+                              </div>
 
-                                          <th scope="col">Theme</th>
+                              <h5 class="mb-3"><b>Summary</b></h5>
 
-                                        </tr>
+                              <p>{{$item->summary}}</p>
 
-                                      </thead>
+                  </div>
 
-                                      <tbody>
+                  @endforeach
 
-                                        <tr>
+                  <input type="submit" id="doPrint" name="doPrint" class="cmn_btn" value="Print Selected Items" onclick="checkNone(this)">
+		              <input type="submit" id="doPrint" name="doPrint" class="cmn_btn" value="Print All Items" onclick="checkAll(this)">
+                </form>
 
-                                          <td> <a href="{{$item->book}}" target="_blank">Link</a></td> 
+                <div id="validationError"></div>
 
-                                            <td>{{$item->publisher}}</td>
-
-                                            <td> #{{$item->isbn}}</td>
-
-                                            <td>{{$item->award_name}}</td>
-
-                                            <td>{{$item->type}}</td>
-
-                                            <td>{{$item->characters}}</td>
-
-                                            <td>{{$item->category->name}}</td>
-
-                                            {{-- <td>PG-13 - High School</td> --}}
-
-                                            <td>{{$item->theme->name}}</td>
-
-                                        </tr>
-
-                                      </tbody>
-
-                                  </table>
-
-                            </div>
-
-                            <h5 class="mb-3"><b>Summary</b></h5>
-
-                            <p>{{$item->summary}}</p>
-
-                </div>
-
-                @endforeach
-             
-
-                @elseif ($pendingsession == 0)
+                {{-- @elseif ($pendingsession == 0)
                 
                 <h5 class="text-center mt-3">You are out of Demo Searches! Please subscribe to 4N6 Fanatics to <a href="{{url('login')}}">continue your research!</a></h5>
 
-               @endif
-
+               @endif --}}
+     @endif
                  @else 
 
                 <h5 class="text-center mt-3">You must specify at least one search criteria</h5> 
@@ -424,6 +435,46 @@
         </div>
       </section>
 
+      <script>
+
+        function checkAll(){
+
+          var item = document.getElementsByName("printBox[]");
+          for (var i=0; i < item.length; i++) {
+              item[i].checked = true;
+          }
+
+        }
+
+        function checkNone(){
+
+          event.preventDefault();
+
+          var totalCheckedItems=0;
+
+          var item = document.getElementsByName("printBox[]");
+            for (var i=0; i < item.length; i++) {
+
+               if(item[i].checked == true){
+
+                  totalCheckedItems++;
+                }               
+            }
+
+           if(totalCheckedItems > 0){
+
+           document.getElementById('formSearch').submit();
+
+           }else{
+            
+              alert('please select checkbox to print');
+            // document.getElementById('validationError').innerHTML ="<div style='color:red'><b>please select checkbox to print </b></div>";
+           }
+          
+          }
+
+
+      </script>
     @endsection
 
    

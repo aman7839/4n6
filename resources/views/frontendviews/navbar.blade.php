@@ -45,8 +45,24 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                               <li><a class="dropdown-item" href="{{url('/regeneratetopics')}}">Impromptu Duet Acting (IDA)</a></li>
-                              <li><a class="dropdown-item" href="{{url('/isg')}}">Impromptu Speech Topic Generator</a></li>                            
-                              <li><a class="dropdown-item" href="{{url('/extemp')}}">Extemp Topic Generator</a></li>
+                              <li><a class="dropdown-item" href="{{url('/isg')}}">Impromptu Speech Topic Generator</a></li>  
+                              @auth
+                              @if(auth()->user()->role == 'coach' )                          
+                              <li><a class="dropdown-item" href="{{url('coach/extemp')}}">Extemp Topic Generator</a></li>
+
+                              @endif
+
+                              @if(auth()->user()->role == 'student' )                          
+                              <li><a class="dropdown-item" href="{{url('student/extemp')}}">Extemp Topic Generator</a></li>
+
+                              @endif
+
+                              @if(auth()->user()->role == 'admin' )                          
+                              <li><a class="dropdown-item" href="{{url('coach/extemp')}}">Extemp Topic Generator</a></li>
+
+                              @endif
+
+                              @endauth
                             </ul>
                           </li>
                         <li class="nav-item">
@@ -65,26 +81,41 @@
                             <a class="nav-link  {{ request()->is('freeresources') ? 'active' : ''}}" href="{{url('freeresources')}}">Free Resources</a>
                         </li>
 
+                    @if(!Auth::user())
+                     
+                     
                         <li class="nav-item">
                             
                             <a class="nav-link  {{ request()->is('demosearch') ? 'active' : ''}}" href="{{url('demosearch')}}">Demo Search</a>
                         </li>
+                     @endif
+                   
                         @auth
                         @if(auth()->user()->role == 'coach')
+
+                        <li class="nav-item">
+                            
+                            <a class="nav-link  {{ request()->is('coach/search') ? 'active' : ''}}" href="{{url('coach/search')}}">Search Database</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link  {{ request()->is('dashboard') ? 'active' : ''}}" href="{{url('/coach/dashboard')}}">Dashboard</a>
                         </li>
-                    @endif                      
+                        
+                    @endif     
+
                         @if(auth()->user()->role == 'student')
                         <li class="nav-item">
                             <a class="nav-link  {{ request()->is('dashboard') ? 'active' : ''}}" href="{{url('/student/dashboard')}}">Dashboard</a>
                         </li>
-                    @endif     
+                      @endif    
+
                     @if(auth()->user()->role == 'admin')
                     <li class="nav-item">
                         <a class="nav-link  {{ request()->is('dashboard') ? 'active' : ''}}" href="{{url('/admin/dashboard')}}">Dashboard</a>
                     </li>
-                @endif                         
+
+                    @endif  
+
                         @endauth
                         
                         <div class="navigates mobile">
@@ -102,7 +133,7 @@
                     <a href="#" class="facebook_link"><img src="{{asset('/public/4n61/images/facebook-square.svg')}}"></a>
                     <a href="{{url('login')}}" class="cmn_btn">Member Login</a>
             @endif
-                    @Auth
+                    @auth
                     @if(Auth::user())
 
                          <a href="{{url('logout')}}" class="cmn_btn">Logout</a>

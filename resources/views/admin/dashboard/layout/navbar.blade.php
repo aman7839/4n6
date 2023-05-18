@@ -338,6 +338,19 @@
                         </div>
                       </li>
 
+
+                      <li class="nav-item dropdown admin_dropdown">
+                        <a class=" dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="menu-icon fa fa-id-card" aria-hidden="true"></i> Limited Prep Events <i class="fa fa-chevron-right arrown_style"></i>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="{{url('/regeneratetopics')}}"> <i class="menu-icon fa fa-id-card" aria-hidden="true"></i> Impromptu Duet Acting (IDA)</a>
+                          <a class="dropdown-item" href="{{url('/isg')}}"> <i class="menu-icon fa fa-id-card" aria-hidden="true"></i>Impromptu Speech Topic Generator</a>
+                          <a class="dropdown-item" href="{{url('coach/extemp')}}"> <i class="menu-icon fa fa-id-card" aria-hidden="true"></i>Extemp Topic Generator</a>
+                            
+                        </div>
+                      </li>
+
                     <li class="nav-item {{ request()->is('coach/students') ? 'active' : ''}}">  
 
                         <a href="{{url('coach/students')}}"><i class="menu-icon fa fa-commenting-o"></i> Manage Students</a>
@@ -347,6 +360,41 @@
 
                         <a href="{{url('coach/vault')}}"><i class="menu-icon fa fa-table"></i> Vault</a>
 
+                    </li>
+                    <li class="nav-item {{ request()->is('coach/search') ? 'active' : ''}}">  
+
+                        <a href="{{url('coach/search')}}"><i class="menu-icon fa fa-table"></i> Search Database</a>
+
+                    </li>
+
+                    {{-- <li class="nav-item {{ request()->is('coach/extemp') ? 'active' : ''}}">  
+
+                        <a href="{{url('coach/extemp')}}"><i class="menu-icon fa fa-table"></i> Extemp Topic Generator</a>
+
+                    </li>
+                    <li class="nav-item {{ request()->is('/isg') ? 'active' : ''}}">  
+
+                        <a href="{{url('/isg')}}"><i class="menu-icon fa fa-table"></i> Impromptu Speech Topic Generator</a>
+
+                    </li> --}}
+                   
+
+                    <li class="nav-item {{ request()->is('/freeresources') ? 'active' : ''}}">  
+
+                        <a href="{{url('/freeresources')}}"><i class="menu-icon fa fa-table"></i> Resources</a>
+
+                    </li>
+
+                    <li class="nav-item {{ request()->is('/reviews') ? 'active' : ''}}">  
+
+                        <a href="{{url('/reviews')}}"><i class="menu-icon fa fa-table"></i> Reviews</a>
+
+                    </li>
+                    <li class="nav-item {{ request()->is('/contactUs') ? 'active' : ''}}">  
+
+                        <a href="{{url('/contactUs')}}"><i class="menu-icon fa fa-table"></i> Contact Us</a>
+                            
+                        {{-- <a class="nav-link  {{ request()->is('contactUs') ? 'active' : ''}}" href="{{url('contactUs')}}">Contact Us</a> --}}
                     </li>
 
 
@@ -359,10 +407,7 @@
 
                         </li>
 
-                      
-
-    
-
+                    
 
 
                     @endif
@@ -379,6 +424,33 @@
 
                     </li>
 
+                    <li class="nav-item dropdown admin_dropdown">
+                        <a class=" dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="menu-icon fa fa-id-card" aria-hidden="true"></i> Limited Prep Events <i class="fa fa-chevron-right arrown_style"></i>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="{{url('/regeneratetopics')}}"> <i class="menu-icon fa fa-id-card" aria-hidden="true"></i> Impromptu Duet Acting (IDA)</a>
+                          <a class="dropdown-item" href="{{url('/isg')}}"> <i class="menu-icon fa fa-id-card" aria-hidden="true"></i>Impromptu Speech Topic Generator</a>
+                          <a class="dropdown-item" href="{{url('student/extemp')}}"> <i class="menu-icon fa fa-id-card" aria-hidden="true"></i>Extemp Topic Generator</a>
+                            
+                        </div>
+                      </li>
+                      <li class="nav-item {{ request()->is('/demosearch') ? 'active' : ''}}">  
+
+                        <a href="{{url('/demosearch')}}"><i class="menu-icon fa fa-table"></i> Search Database</a>
+
+                    </li>
+
+                    <li class="nav-item {{ request()->is('/freeresources') ? 'active' : ''}}">  
+
+                        <a href="{{url('/freeresources')}}"><i class="menu-icon fa fa-table"></i> Resources</a>
+
+                    </li>
+                    <li class="nav-item {{ request()->is('student/vault') ? 'active' : ''}}">  
+
+                        <a href="{{url('student/vault')}}"><i class="menu-icon fa fa-table"></i> Vault</a>
+
+                    </li>
                     <li class="nav-item ">  
 
                         <a class="" href="{{url('student/logout')}}"><i class=" menu-icon fa fa-sign-out"></i>Logout</a>

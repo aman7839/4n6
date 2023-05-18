@@ -169,6 +169,8 @@ Route::post('/saveextemptopics', [ExtempController::class, 'saveExtempTopics']);
 Route::get('/editextemptopics/{id}', [ExtempController::class, 'editExtempTopics']);
 Route::put('/updateextemptopics/{id}', [ExtempController::class, 'updateExtempTopics']);
 Route::get('/extemp', [ExtempController::class, 'viewEXtemp']);
+Route::post('/extemp', [ExtempController::class, 'viewEXtempPost']);
+
 Route::post('/importextempdata', [ExtempController::class, 'importData']);
 
 Route::get('/addextemp', [ExtempController::class, 'addEXtemp']);
@@ -212,6 +214,8 @@ Route::get('/pastmembership',[MembershipController::class, 'adminPastMembership'
 Route::get('/viewmembership/{id}',[MembershipController::class, 'adminViewMembership'])->name('admin.viewMembership');
 Route::get('/editmembership/{id}',[MembershipController::class, 'adminEditMembership'])->name('admin.editMembership');
 Route::post('/updatemembership',[MembershipController::class, 'updateMembership'])->name('admin.updateMembership');
+// Route::post('/sendemail/{id}', [contactusController::class,'replyMessagestoUser']);
+
 
 
 
@@ -244,7 +248,7 @@ Route::get('/tutorial', [HomeController::class,'tutorial']);
 Route::get('/regeneratetopics', [HomeController::class,'RandomTopics']);
 Route::get('/isg', [HomeController::class,'IsgTopicGenerator']);
 Route::get('/extemp', [HomeController::class,'extempTopicGenerator']);
-Route::post('/extemp', [HomeController::class,'extempTopicGeneratorPost']);
+// Route::post('/extemp', [HomeController::class,'extempTopicGeneratorPost']);
 
 Route::get('/freeresources', [HomeController::class,'freeResources']);
 Route::get('/links', [HomeController::class,'getResources']);
@@ -256,10 +260,11 @@ Route::get('/links', [HomeController::class,'getResources']);
 Route::get('/services', [HomeController::class,'services'])->name('user.services');
 Route::get('/login', [HomeController::class,'login'])->middleware('login');
 Route::post('/contactUS', [contactusController::class,'saveContactUs']);
-Route::get('/sendemail', [contactusController::class,'replyMessagestoUser']);
 
 
 Route::get('/demosearch', [HomeController::class,'demoSearch']);
+Route::post('/demosearch', [HomeController::class,'demoSearchPost']);
+
 
 
 
@@ -312,6 +317,22 @@ Route::get('vault', [CoachController::class, 'getData']);
 
 Route::get('coach_folder_data/{id}', [VaultController::class, 'getFolderData']);
 
+//  extemp topic route
+Route::get('/extemp', [HomeController::class,'extempTopicGenerator']);
+Route::post('/extemp', [HomeController::class,'extempTopicGeneratorPost']);
+Route::get('/printdomestic', [CoachesController::class,'printDomesticTopic']);
+// Route::post('/printdomestic', [HomeController::class,'printDomesticTopic']);
+Route::get('/printforiegn', [CoachesController::class,'printForiegnTopic']);
+// Route::post('/printforiegn', [HomeController::class,'printForiegnTopic']);
+
+// search database 
+
+Route::get('/search', [CoachesController::class,'demoSearch']);
+Route::post('/search', [CoachesController::class,'demoSearchPost']);
+Route::post('/searchprints', [CoachesController::class,'demoSearchPrint']);
+Route::get('/searchprint', [CoachesController::class,'demoSearchPrint']);
+
+
 
 });
 });
@@ -320,16 +341,18 @@ Route::get('coach_folder_data/{id}', [VaultController::class, 'getFolderData']);
 
 
 Route::prefix('student')->group(function () {
-
+Route::middleware(['auth', 'student'])->group(function () {
 Route::get('/dashboard', [StudentsController::class, 'Dashboard']);
 Route::get('/logout', [StudentsController::class, 'logout']);
 Route::get('/logout', [StudentsController::class, 'logout']);
-
+Route::get('/extemp', [HomeController::class,'extempTopicGenerator']);
+Route::post('/extemp', [HomeController::class,'extempTopicGeneratorPost']);
+Route::get('vault', [CoachController::class, 'getData']);
 
   
     
     
-    
+});
     });
     
 

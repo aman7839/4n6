@@ -7,6 +7,8 @@
     <div class="container">
         <div class="row m-2">
            <div class="col-md-12">
+            <h2 >ISG Manager</h2>
+
             <form action="">
                 <div class="form-group mt-4 search_bar">
                

@@ -6,7 +6,9 @@
     <div class="container mt-1 pt-4 pb-4">
         <div class="card">
           <div class="card-header d-flex">
+
             <h4>Add Record</h4>
+            
           </div>
     
    <div class="card-body">

@@ -20,7 +20,15 @@
                 <div class="extemps_filter">
                    
                     <div class="extemps_filter_list">
-                        <form action="{{url('extemp')}}" method="POST" enctype="multipart/form-data">
+                        @auth
+                        @if(auth()->user()->role == "coach")
+                        <form action="{{url('coach/extemp')}}" method="POST" enctype="multipart/form-data">
+                            @endif
+                            @if(auth()->user()->role == "student")
+                        <form action="{{url('student/extemp')}}" method="POST" enctype="multipart/form-data">
+                            @endif
+
+                            @endauth
                             @csrf
                         <div class="row w-100">
 
@@ -98,13 +106,15 @@
                                                         selected="selected"
                                                     @endif
                                                     
-                                                    
-                                                    >{{$monthName[$monthday->month]}} {{$monthday->year}}</option>
+                                                                   >{{$monthName[$monthday->month]}} {{$monthday->year}}</option>
                                             @endforeach
                                             </select>
 
                                         @endif
+                                        
                                             <button  class="cmn_btn reset"><a href="{{url('/extemp')}}">Reset</a></button>
+                                  
+                                                                                                  
                                             </div>
                                         </div>
                                     </div>
@@ -167,10 +177,11 @@
                             
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="responsive mt-4">
+                                    <div class="responsive mt-4" id = "print_domestic">
                                         <table class="table table-bordered">
                                             <thead>
                                                 <th>Domestic Topics</th>
+                                               <h4> <a href="{{url('coach/printdomestic')}}" target = "_blank">click to print</a></h4>
                                                 <tbody>
                                                     @foreach ($allDomesticTopics as $domestictopics)
 
@@ -179,6 +190,8 @@
 
                                                     </tr>
                                                     @endforeach
+
+                                                    {{-- <input type="button" onclick="printDiv('print_domestic')" value="click to print" /> --}}
                                                 </tbody>
                                             </thead>
                                         </table>
@@ -189,6 +202,9 @@
                                         <table class="table table-bordered">
                                             <thead>
                                                 <th>Foreign Topics</th>
+                                               <h4> <a href="{{url('coach/printforiegn')}}" target = "_blank">click to print</a></h4>
+
+
                                                 <tbody>
                                             @foreach ($allForeignTopics as $questions)
                                                     
@@ -207,6 +223,25 @@
                           
             </div>
         </section>
+
+        {{-- @section('script')
+        <script>
+         
+
+           function printDiv("print_domestic") {
+
+
+     var printContents = document.getElementById("print_domestic").innerHTML;
+     var originalContents = document.body.innerHTML;
+
+     document.body.innerHTML = printContents;
+
+     window.print();
+
+     document.body.innerHTML = originalContents;
+}
+        </script>
+        @endsection --}}
     
 
     @endsection

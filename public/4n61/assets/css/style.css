@@ -2911,3 +2911,12 @@ font-size: 16x;
   width: 70%;
   margin-bottom: 14px;
 }
+.extemp_search {
+  background: #fff;
+  padding: 15px;
+  border-radius: 6px;
+  margin: 20px 0px;
+}
+a.cmn_btn.cmn_clear {
+  background: #efefef;
+}

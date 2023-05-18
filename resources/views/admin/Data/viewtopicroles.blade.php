@@ -7,6 +7,9 @@
     <div class="container">
         <div class="row m-2">
            <div class="col-md-12">
+
+            <h2 >IDA Manager</h2>
+
             <form action="">
                 <div class="form-group mt-4 search_bar">
                
@@ -40,6 +43,7 @@
             <div class="col-md-12 mt-2">
                 <div class="card">
                     <div class="card-header">
+
                         <h4><a href="{{ url('admin/addtopicroles')}}"  class="btn btn-primary btn-sm mt-2"> <i class="fa fa-plus mr-2"></i> Add Record</a></h4>
                         <h4><a href="{{ url('admin/data')}}"  class="btn btn-primary btn-sm mt-2">  Back</a></h4>
                         

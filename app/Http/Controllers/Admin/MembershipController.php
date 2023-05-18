@@ -12,8 +12,8 @@ class MembershipController extends Controller
     //
     public function coachMemberships(Request $request){
         $user_id= Auth::user()->id;
-        $activeMembership =  Membership::where('start_date','<=',Carbon::now())->where('end_date','>=',Carbon::now())->first();
-        $pastMemberships = Membership::where('end_date','<',Carbon::now())->get();
+        $activeMembership =  Membership::where('start_date','<=',Carbon::now())->where('end_date','>=',Carbon::now())->where('id',$user_id)->first();
+        $pastMemberships = Membership::where('end_date','<',Carbon::now())->where('id',$user_id)->get();
         // echo "<pre>"; print_r($pastMemberships->toArray()); 
         // exit;
         return view('admin.Membership.coach.activemembership',compact('activeMembership','pastMemberships'));

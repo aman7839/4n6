@@ -4,13 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Models\CoachStudent;
 use Illuminate\Http\Request;
-use App\Models\User;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use App\Models\states;
+use App\Models\users_guide;
+use App\Models\offerPrice;
+use App\Models\TopicRole;
+use App\Models\User;
+
+use App\Models\ISG;
+use App\Models\category;
+use App\Models\categoryLinks;
 
 
-
+use App\Models\awards;
+use App\Models\Extemp;
+use App\Models\Theme;
+use App\Models\Data;
+use App\Models\ExtempTopic;
+use Illuminate\Support\Facades\DB;
+use App\Models\playCategory;
+use App\Models\Reviews;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -110,27 +125,27 @@ class CoachesController extends Controller
       $studentid = $student->student->id;
 
       
-        $request->validate([
-            'personal_phone_no'   =>  [
-                'numeric',
-                'required',
-                'digits:10',
-                 Rule::unique('users')->ignore($studentid),
-            ],
-            'email'   =>  [
-                'required',
-                Rule::unique('users')->ignore($studentid),
+        // $request->validate([
+        //     'personal_phone_no'   =>  [
+        //         'numeric',
+        //         'required',
+        //         'digits:10',
+        //          Rule::unique('users')->ignore($studentid),
+        //     ],
+        //     'email'   =>  [
+        //         'required',
+        //         Rule::unique('users')->ignore($studentid),
 
-            ],
-            'name'   =>  [
-                'required',
-            ],
-            'school_city'   =>  [
-                'required',
-            ],
+        //     ],
+        //     'name'   =>  [
+        //         'required',
+        //     ],
+        //     'school_city'   =>  [
+        //         'required',
+        //     ],
             
 
-        ]);
+        // ]);
 
         
 
@@ -139,6 +154,7 @@ class CoachesController extends Controller
         $student->student->email =   $request->input('email');
         $student->student->personal_phone_no =   $request->input('personal_phone_no');
         $student->student->school_city =   $request->input('school_city');
+        $student->student->password = Hash::make($request->password);
 
         $student->student->update();
 
@@ -159,9 +175,358 @@ class CoachesController extends Controller
 
 
     }
-   
-   
 
+    public function demoSearch(Request $request)
+    {
+        $awards = awards::all();
+        $theme = Theme::all();
+        $category = playCategory::all();
+
+        $title = $request["title"];
+        $author = trim($request["author"]);
+        $type = $request["type"];
+        $characters = $request["characters"];
+        $award = $request["award_name"];
+        $themes = $request["theme_name"];
+        $categories = $request["category_name"];
+        $fullSearch = $request["wide_search"];
+
+    
+        // $pendingsession = 3;
+        // if (count($request->all()) > 0) {
+        //     if ($request->session()->has("search_count")) {
+        //         $pendingsession = $request->session()->get("search_count");
+        //         if ($pendingsession > 0) {
+        //             $request
+        //                 ->session()
+        //                 ->put("search_count", $pendingsession - 1);
+        //             $request->session()->save();
+        //             $pendingsession = $request->session()->get("search_count");
+        //         }
+        //     } else {
+        //         $request->session()->put("search_count", 3);
+        //         $request->session()->save();
+        //     }
+        // } else {
+        //     if (!$request->session()->has("search_count")) {
+        //         $request->session()->put("search_count", 3);
+        //         $request->session()->save();
+        //         $pendingsession = $request->session()->get("search_count");
+        //     }
+        // }
+
+        //Make author search by last name+first name
+        $authorname = implode(" ", array_reverse(explode(" ", $author)));
+        if ($fullSearch != null) {
+            $search = Data::select(
+                "data.*",
+                DB::raw("group_concat(award_id) as award_id")
+            )
+                ->orwhere("title", "Like", "%" . $fullSearch . "%")
+                ->orwhere("publisher", "Like", "%" . $fullSearch . "%")
+                ->orwhere("isbn", "Like", "%" . $fullSearch . "%")
+
+                ->orwhere("author", "Like", "%" . $fullSearch . "%")
+                ->orwhere("type", "Like", "%" . $fullSearch . "%")
+                ->orwhere("characters", "Like", $fullSearch)
+                ->orWhereHas('theme', function ($query) use ($fullSearch) {
+                                $query->where('name', 'like', '%' . $fullSearch . '%');
+                            })
+                 ->orWhereHas('awards', function ($query) use ($fullSearch) {
+                                $query->where('awards_name', 'like', '%' . $fullSearch . '%');
+                            })
+                  ->orWhereHas('category', function ($query) use ($fullSearch) {
+                                $query->where('name', 'like', '%' . $fullSearch . '%');
+                            })
+
+                
+                ->groupBy("category_id")
+    
+               ->get();
+   
+        //            echo "<pre>"; print_r($data->toArray()); echo "</pre>";
+        //    exit;
+
+            } else
+             {
+                
+                $search = Data::select(
+                    "data.*",
+                    DB::raw("group_concat(award_id) as award_id")
+                )
+                    ->where("title", "Like", "%" . $title . "%")
+                    ->where("author", "Like", "%" . $authorname . "%")
+                    ->where("type", "Like", "%" . $type . "%")
+                    ->where("characters", "Like", $characters)
+                    ->when($award, function ($q) use ($request) {
+                        return $q->whereHas("awards", function ($query) use ($request) {
+                            $query->where("id", $request->award_name);
+                        });
+                    })
+                    ->when($themes, function ($q) use ($request) {
+                        return $q->whereHas("theme", function ($query) use ($request) {
+                            $query->where("id", $request->theme_name);
+                        });
+                    })
+                    ->when($categories, function ($q) use ($request) {
+                        return $q->whereHas("category", function ($query) use (
+                            $request
+                        ) {
+                            $query->where("id", $request->category_name);
+                        });
+                    })
+                    ->groupBy("category_id")
+        
+                    ->get();
+
+
+               }      
+
+        //    echo "<pre>"; print_r($search->toArray()); echo "</pre>";
+        //    exit;
+        return view(
+            "Coaches.search",
+            compact(
+                "awards",
+                "award",
+                "theme",
+                "themes",
+                "fullSearch",
+                "category",
+                "categories",
+                "search",
+                "title",
+                "author",
+                "type",
+                "characters",
+                // "pendingsession"
+            )
+        );
+    }
+    public function demoSearchPost(Request $request)
+    {
+        $awards = awards::all();
+        $theme = Theme::all();
+        $category = playCategory::all();
+
+        $title = $request["title"];
+        $author = trim($request["author"]);
+        $type = $request["type"];
+        $characters = $request["characters"];
+        $award = $request["award_name"];
+        $themes = $request["theme_name"];
+        $categories = $request["category_name"];
+        $fullSearch = $request["wide_search"];
+
+    
+        // $pendingsession = 3;
+        // if (count($request->all()) > 0) {
+        //     if ($request->session()->has("search_count")) {
+        //         $pendingsession = $request->session()->get("search_count");
+        //         if ($pendingsession > 0) {
+        //             $request
+        //                 ->session()
+        //                 ->put("search_count", $pendingsession - 1);
+        //             $request->session()->save();
+        //             $pendingsession = $request->session()->get("search_count");
+        //         }
+        //     } else {
+        //         $request->session()->put("search_count", 3);
+        //         $request->session()->save();
+        //     }
+        // } else {
+        //     if (!$request->session()->has("search_count")) {
+        //         $request->session()->put("search_count", 3);
+        //         $request->session()->save();
+        //         $pendingsession = $request->session()->get("search_count");
+        //     }
+        // }
+
+        //Make author search by last name+first name
+        $authorname = implode(" ", array_reverse(explode(" ", $author)));
+        if ($fullSearch != null) {
+            $search = Data::select(
+                "data.*",
+                DB::raw("group_concat(award_id) as award_id")
+            )
+                ->orwhere("title", "Like", "%" . $fullSearch . "%")
+                ->orwhere("publisher", "Like", "%" . $fullSearch . "%")
+                ->orwhere("isbn", "Like", "%" . $fullSearch . "%")
+
+                ->orwhere("author", "Like", "%" . $fullSearch . "%")
+                ->orwhere("type", "Like", "%" . $fullSearch . "%")
+                ->orwhere("characters", "Like", $fullSearch)
+                ->orWhereHas('theme', function ($query) use ($fullSearch) {
+                                $query->where('name', 'like', '%' . $fullSearch . '%');
+                            })
+                 ->orWhereHas('awards', function ($query) use ($fullSearch) {
+                                $query->where('awards_name', 'like', '%' . $fullSearch . '%');
+                            })
+                  ->orWhereHas('category', function ($query) use ($fullSearch) {
+                                $query->where('name', 'like', '%' . $fullSearch . '%');
+                            })
+
+                
+                ->groupBy("category_id")
+    
+               ->get();
+   
+        //            echo "<pre>"; print_r($data->toArray()); echo "</pre>";
+        //    exit;
+
+            } else
+             {
+                $search = Data::select(
+                    "data.*",
+                    DB::raw("group_concat(award_id) as award_id")
+                )
+                    ->where("title", "Like", "%" . $title . "%")
+                    ->where("author", "Like", "%" . $authorname . "%")
+                    ->where("type", "Like", "%" . $type . "%")
+                    ->where("characters", "Like", $characters)
+                    ->when($award, function ($q) use ($request) {
+                        return $q->whereHas("awards", function ($query) use ($request) {
+                            $query->where("id", $request->award_name);
+                        });
+                    })
+                    ->when($themes, function ($q) use ($request) {
+                        return $q->whereHas("theme", function ($query) use ($request) {
+                            $query->where("id", $request->theme_name);
+                        });
+                    })
+                    ->when($categories, function ($q) use ($request) {
+                        return $q->whereHas("category", function ($query) use (
+                            $request)
+                         {
+                            $query->where("id", $request->category_name);
+                        });
+                    })
+                    ->groupBy("category_id")
+        
+                    ->get();
+
+
+               }      
+
+        //    echo "<pre>"; print_r($search->toArray()); echo "</pre>";
+        //    exit;
+        return view(
+            "Coaches.search",
+            compact(
+                "awards",
+                "award",
+                "theme",
+                "themes",
+                "fullSearch",
+                "category",
+                "categories",
+                "search",
+                "title",
+                "author",
+                "type",
+                "characters",
+                // "pendingsession"
+            )
+        );
+    }
+
+ public function demoSearchPrint(Request $request){
+
+       
+     $title = $request["title"];
+        $author = trim($request["author"]);
+        $type = $request["type"];
+        $characters = $request["characters"];
+        $award = $request["award_name"];
+        $themes = $request["theme_name"];
+        $categories = $request["category_name"];
+        $fullSearch = $request["wide_search"];
+        $printSelectedDataByIDs = $request->printBox;
+        //dd($printSelectedDataByIDs);
+        $authorname = implode(" ", array_reverse(explode(" ", $author)));
+
+      if(count($printSelectedDataByIDs)>0){
+
+    $search = Data::select(
+        "data.*",
+        DB::raw("group_concat(award_id) as award_id")
+    )
+        ->where("title", "Like", "%" . $title . "%")
+        ->where("author", "Like", "%" . $authorname . "%")
+        ->where("type", "Like", "%" . $type . "%")
+        ->where("characters", "Like", $characters)
+        ->whereIn('id', $printSelectedDataByIDs)
+        ->when($award, function ($q) use ($request) {
+            return $q->whereHas("awards", function ($query) use ($request) {
+                $query->where("id", $request->award_name);
+            });
+        })
+        ->when($themes, function ($q) use ($request) {
+            return $q->whereHas("theme", function ($query) use ($request) {
+                $query->where("id", $request->theme_name);
+            });
+        })
+        ->when($categories, function ($q) use ($request) {
+            return $q->whereHas("category", function ($query) use (
+                $request
+            ) {
+                $query->where("id", $request->category_name);
+            });
+        })
+        ->groupBy("category_id")
+
+        ->get();
+
+
+
+       // dd($search);
+        return view(
+            "Coaches.printsearch",
+            compact(
+                // "awards",
+                "award",
+                // "theme",
+                "themes",
+                "fullSearch",
+                // "category",
+                "categories",
+                "search",
+                "title",
+                "author",
+                "type",
+                "characters",
+                // "pendingsession"
+            )
+        );
+    
+     }
+        
+    }
+
+    public function printDomesticTopic(){
+
+        $allDomesticTopics = Extemp::where('type','domestic')->with('topic')->get();
+        return view(
+            "Coaches.printdomestictopic",
+            compact(
+                "allDomesticTopics",         
+            )
+        );
+
+    }
+
+    public function printForiegnTopic(){
+
+        $allForeignTopics = Extemp::where('type','foreign')->with('topic')->get();
+
+        return view(
+            "Coaches.printforiegntopic",
+            compact(
+                "allForeignTopics",         
+            )
+        );
+
+    }
 
 
 }

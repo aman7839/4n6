@@ -137,6 +137,22 @@
                               </div>
                           </div>
                           <div class="col-lg-6 ">
+                            <div class="form-group">
+                                <label for="student_username">Student Userame</label>
+                                <input  id="student_username" type="text" name="student_username" value="" class="form-control required" placeholder="Enter student username ">
+                      <span class ="text-danger">@error('student_username'){{$message}} @enderror</span>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-5 ms-auto">
+                            <div class="form-group">
+                                <label for="student_password">Student Password</label>
+                                <input  id="student_password" type="password" name="student_password" value="" class="form-control required" placeholder="Enter student password">
+                      <span class ="text-danger">@error('student_password'){{$message}} @enderror</span>
+
+                            </div>
+                        </div>
+                          <div class="col-lg-6 ">
                               <div class="form-group">
                                   <label for="school_name">School Name</label>
                                   <input  id="school_name" type="text" name="school_name" value="{{old('school_name')}}" class="form-control required" placeholder="Enter school name">

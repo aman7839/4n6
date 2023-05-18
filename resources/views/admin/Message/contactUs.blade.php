@@ -19,7 +19,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>From</th>                                   
-                                    <th>Date Sent</th> 
+                                    <th>Date </th> 
                                     <th>View</th>                                                                    
                                     <th>Reply</th>
                                     <th>Delete</th>
