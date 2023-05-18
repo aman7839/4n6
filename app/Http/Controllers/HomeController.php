@@ -32,6 +32,12 @@ class HomeController extends Controller
         return view("frontendviews.aboutUs");
     }
 
+    public function faq()
+    {
+        return view("frontendviews.faq");
+    }
+
+
     public function freeResources()
     {
         $resources = category::all();

@@ -32,7 +32,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarScroll">
-                    <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                    <ul class="navbar-nav me-auto my-2 my-lg-0 " style="--bs-scroll-height: 100px;">
                         <li class="nav-item ">
                             <a class="nav-link {{ request()->is('/') ? 'active' : ''}}" aria-current="page" href="{{url('/')}}">Home</a>
                         </li>
@@ -68,13 +68,18 @@
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('tutorial') ? 'active' : ''}}" href="{{url('tutorial')}}">Tutorial</a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link {{ request()->is('reviews') ? 'active' : ''}}" href="{{url('reviews')}}">Reviews</a>
-                        </li>
+                        </li> -->
                         <li class="nav-item">
                             
                             <a class="nav-link  {{ request()->is('contactUs') ? 'active' : ''}}" href="{{url('contactUs')}}">Contact Us</a>
                         </li>
+                        <!-- <li class="nav-item">
+                            
+                            <a class="nav-link  {{ request()->is('faq') ? 'active' : ''}}" href="{{url('faq')}}">FAQ</a>
+                        </li> -->
+
 
                         <li class="nav-item">
                             
@@ -88,8 +93,27 @@
                             
                             <a class="nav-link  {{ request()->is('demosearch') ? 'active' : ''}}" href="{{url('demosearch')}}">Demo Search</a>
                         </li>
-                     @endif
-                   
+                        
+                        @if(!Auth::user())
+                
+                
+                    <li class="nav-item mobile_menu">
+                            
+                            <a class="nav-link  {{ request()->is('demosearch') ? 'active' : ''}}"  href="{{url('login')}}">Log In</a>
+                        </li>
+            @endif
+                       
+            @Auth
+                    @if(Auth::user())
+                    <li class="nav-item mobile_menu">
+                            
+                            <a class="nav-link  {{ request()->is('demosearch') ? 'active' : ''}}"  href="{{url('logout')}}">Logout</a>
+                        </li>
+                      
+                    
+                    @endif
+                    @endauth
+                        
                         @auth
                         @if(auth()->user()->role == 'coach')
 

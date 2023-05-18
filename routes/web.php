@@ -235,6 +235,8 @@ Route::get('/', [HomeController::class,'Home']);
 Route::get('/contactUs', [HomeController::class,'contactUs']);
 Route::get('/reviews', [HomeController::class,'reviews']);
 Route::post('/addreview', [HomeController::class,'addreview']);
+Route::get('/faq', [HomeController::class,'faq']);
+
 
 
 Route::get('/documents', [HomeController::class,'documents']);
