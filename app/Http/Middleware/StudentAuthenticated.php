@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StudentAuthenticated
 {
@@ -16,6 +17,21 @@ class StudentAuthenticated
      */
     public function handle(Request $request, Closure $next)
     {
-        return $next($request);
+        if(Auth::check())
+        
+        if (Auth::user()->role == 'admin' ) {
+            return $next($request);
+        
+            }elseif(Auth::user()->role =='coach'){
+                
+                return redirect()->back()->with('error', 'Access Denied');
+
+
+               
+            }
+            elseif(Auth::user()->role =='student'){
+
+                return $next($request);
+            }
     }
 }

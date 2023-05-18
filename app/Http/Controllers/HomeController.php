@@ -7,6 +7,8 @@ use App\Models\states;
 use App\Models\users_guide;
 use App\Models\offerPrice;
 use App\Models\TopicRole;
+use App\Models\User;
+
 use App\Models\ISG;
 use App\Models\category;
 use App\Models\categoryLinks;
@@ -375,7 +377,7 @@ class HomeController extends Controller
         $foreignTopic = Extemp::where('type','foreign')->with('topic')->groupBy('topic_id')->get();
         $monthdate = Extemp::groupBy('month','year')->orderBy('year', 'ASC')->orderBy('month', 'ASC')->get();
        
-        $topicData = DB::table('extemps')->leftJoin('extemp_topics', 'extemps.topic_id', '=', 'extemp_topics.id')->limit(3)->get();
+        $topicData = DB::table('extemps')->leftJoin('extemp_topics', 'extemps.topic_id', '=', 'extemp_topics.id')->limit(3)->inRandomOrder()->get();
         
 
         switch($request->input('doAction')){
@@ -435,8 +437,9 @@ class HomeController extends Controller
             break;
 
             default:
+            $topicData = DB::table('extemps')->leftJoin('extemp_topics', 'extemps.topic_id', '=', 'extemp_topics.id')->limit(3)->inRandomOrder()->get();
 
-            $topicData = DB::table('extemps')->limit(3)->get();
+            // $topicData = DB::table('extemps')->limit(3)->get();
 
 
         }
@@ -450,6 +453,133 @@ class HomeController extends Controller
 
 
     public function demoSearch(Request $request)
+    {
+        $awards = awards::all();
+        $theme = Theme::all();
+        $category = playCategory::all();
+
+        $title = $request["title"];
+        $author = trim($request["author"]);
+        $type = $request["type"];
+        $characters = $request["characters"];
+        $award = $request["award_name"];
+        $themes = $request["theme_name"];
+        $categories = $request["category_name"];
+        $fullSearch = $request["wide_search"];
+
+    
+        $pendingsession = 3;
+        if (count($request->all()) > 0) {
+            if ($request->session()->has("search_count")) {
+                $pendingsession = $request->session()->get("search_count");
+                if ($pendingsession > 0) {
+                    $request
+                        ->session()
+                        ->put("search_count", $pendingsession - 1);
+                    $request->session()->save();
+                    $pendingsession = $request->session()->get("search_count");
+                }
+            } else {
+                $request->session()->put("search_count", 3);
+                $request->session()->save();
+            }
+        } else {
+            if (!$request->session()->has("search_count")) {
+                $request->session()->put("search_count", 3);
+                $request->session()->save();
+                $pendingsession = $request->session()->get("search_count");
+            }
+        }
+
+        //Make author search by last name+first name
+        $authorname = implode(" ", array_reverse(explode(" ", $author)));
+        if ($fullSearch != null) {
+            $search = Data::select(
+                "data.*",
+                DB::raw("group_concat(award_id) as award_id")
+            )
+                ->orwhere("title", "Like", "%" . $fullSearch . "%")
+                ->orwhere("publisher", "Like", "%" . $fullSearch . "%")
+                ->orwhere("isbn", "Like", "%" . $fullSearch . "%")
+
+                ->orwhere("author", "Like", "%" . $fullSearch . "%")
+                ->orwhere("type", "Like", "%" . $fullSearch . "%")
+                ->orwhere("characters", "Like", $fullSearch)
+                ->orWhereHas('theme', function ($query) use ($fullSearch) {
+                                $query->where('name', 'like', '%' . $fullSearch . '%');
+                            })
+                 ->orWhereHas('awards', function ($query) use ($fullSearch) {
+                                $query->where('awards_name', 'like', '%' . $fullSearch . '%');
+                            })
+                  ->orWhereHas('category', function ($query) use ($fullSearch) {
+                                $query->where('name', 'like', '%' . $fullSearch . '%');
+                            })
+
+                
+                ->groupBy("category_id")
+    
+               ->get();
+   
+        //            echo "<pre>"; print_r($data->toArray()); echo "</pre>";
+        //    exit;
+
+            } else
+             {
+                
+                $search = Data::select(
+                    "data.*",
+                    DB::raw("group_concat(award_id) as award_id")
+                )
+                    ->where("title", "Like", "%" . $title . "%")
+                    ->where("author", "Like", "%" . $authorname . "%")
+                    ->where("type", "Like", "%" . $type . "%")
+                    ->where("characters", "Like", $characters)
+                    ->when($award, function ($q) use ($request) {
+                        return $q->whereHas("awards", function ($query) use ($request) {
+                            $query->where("id", $request->award_name);
+                        });
+                    })
+                    ->when($themes, function ($q) use ($request) {
+                        return $q->whereHas("theme", function ($query) use ($request) {
+                            $query->where("id", $request->theme_name);
+                        });
+                    })
+                    ->when($categories, function ($q) use ($request) {
+                        return $q->whereHas("category", function ($query) use (
+                            $request
+                        ) {
+                            $query->where("id", $request->category_name);
+                        });
+                    })
+                    ->groupBy("category_id")
+        
+                    ->get();
+
+
+               }      
+
+        //    echo "<pre>"; print_r($search->toArray()); echo "</pre>";
+        //    exit;
+        return view(
+            "frontendviews.demosearch",
+            compact(
+                "awards",
+                "award",
+                "theme",
+                "themes",
+                "fullSearch",
+                "category",
+                "categories",
+                "search",
+                "title",
+                "author",
+                "type",
+                "characters",
+                "pendingsession"
+            )
+        );
+    }
+    public function demoSearchPost(Request $request)
     {
         $awards = awards::all();
         $theme = Theme::all();
@@ -542,8 +672,8 @@ class HomeController extends Controller
                     })
                     ->when($categories, function ($q) use ($request) {
                         return $q->whereHas("category", function ($query) use (
-                            $request
-                        ) {
+                            $request)
+                         {
                             $query->where("id", $request->category_name);
                         });
                     })
@@ -575,4 +705,6 @@ class HomeController extends Controller
             )
         );
     }
+
+   
 }

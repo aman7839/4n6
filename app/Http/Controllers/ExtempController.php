@@ -7,6 +7,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Reader\Exception;
 use PhpOffice\PhpSpreadsheet\Writer\Xls;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+use Illuminate\Support\Facades\DB;
 
 
 use Illuminate\Http\Request;
@@ -14,8 +15,9 @@ use Illuminate\Http\Request;
 class ExtempController extends Controller
 {
     public function index(){
- $topic = ExtempTopic::paginate(5);
-return view('admin.Data.extemptopics',compact('topic'));
+       
+    $topic = ExtempTopic::paginate(10);
+   return view('admin.Data.extemptopics',compact('topic'));
         
     }
     public function addExtempTopics(){
@@ -61,11 +63,55 @@ return view('admin.Data.extemptopics',compact('topic'));
  
              return redirect('admin/extemptopics')->with('success', 'Record Updated successfully');
      }
-     public function viewExtemp(){
-        $topic = Extemp::with('topic')->paginate(10);
-       return view('admin.Data.extemp',compact('topic'));
+     public function viewExtemp(Request $request){
+        $date = Extemp::groupBy('month','year')->orderBy('year', 'ASC')->orderBy('month', 'ASC')->get();
+        $Topic = Extemp::groupBy('topic_id')->with('topic')->get();
+        $monthName = array('01'=>'JAN','02'=>'FEB','03'=>'MAR','04'=>'APR','05'=>'MAY','06'=>'JUNE','07'=>'JULY','08'=>'AUG','09'=>'SEP','10'=>'OCT','11'=>'NOV','12'=>'DEC',);
+        $dateselected = $request->date;
+        $topicName = $request->topic_name;
+        $topic = Extemp::with('topic');
+
+
+         if($topicName != ""){
+            $topic = Extemp::with('topic')->where('topic_id',$topicName );
+             }
+         if($dateselected != ""){
+
+             $topic->where('month','=',trim(explode(' ', $dateselected)[0]));
+             $topic->where('year','=',trim(explode(' ', $dateselected)[1]));
+
+            }
+                               
+          $topic =   $topic->paginate(10);
+
+           return view('admin.Data.extemp',compact('topic','date','Topic','dateselected','monthName','topicName'));
                
-           }
+        }
+
+        public function viewExtempPost(Request $request){
+            $date = Extemp::groupBy('month','year')->orderBy('year', 'ASC')->orderBy('month', 'ASC')->get();
+            $Topic = Extemp::groupBy('topic_id')->with('topic')->get();
+            $monthName = array('01'=>'JAN','02'=>'FEB','03'=>'MAR','04'=>'APR','05'=>'MAY','06'=>'JUNE','07'=>'JULY','08'=>'AUG','09'=>'SEP','10'=>'OCT','11'=>'NOV','12'=>'DEC',);
+            $dateselected = $request->date;
+            $topicName = $request->topic_name;
+            $topic = Extemp::with('topic');
+    
+    
+             if($topicName != ""){
+                $topic = Extemp::with('topic')->where('topic_id',$topicName );
+                 }
+             if($dateselected != ""){
+    
+                 $topic->where('month','=',trim(explode(' ', $dateselected)[0]));
+                 $topic->where('year','=',trim(explode(' ', $dateselected)[1]));
+    
+                }
+                                   
+              $topic =   $topic->paginate(10);
+    
+               return view('admin.Data.extemp',compact('topic','date','Topic','dateselected','monthName','topicName'));
+                   
+            }
            public function saveExtemp(Request $request){
 
             $request->validate([

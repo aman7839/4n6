@@ -9,10 +9,10 @@
     <div class="content">
         <ul class="nav nav-tabs mt-3" id="myTab" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" id="active-tab" data-toggle="tab" href="#activememberships" role="tab" aria-controls="activememberships" aria-selected="true">Active Mambership</a>
+              <a class="nav-link active" id="active-tab" data-toggle="tab" href="#activememberships" role="tab" aria-controls="activememberships" aria-selected="true">Active Membership</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="previous-tab" data-toggle="tab" href="#pastsMembership" role="tab" aria-controls="pastMembership" aria-selected="false">Past Memberships</a>
+              <a class="nav-link" id="previous-tab" data-toggle="tab" href="#pastsMembership" role="tab" aria-controls="pastMembership" aria-selected="false">Past Membership</a>
             </li>
 
           </ul>
@@ -30,9 +30,15 @@
                 Admin message: {{$activeMembership->user_message}}
                 @endif
                 @else
+
+                <p><a class="btn btn-primary" href="{{route('createTransaction')}}">Add New Membership</a></p>
+
                    <div class="no_membership">
-                    No active Membership
-                    <a class="btn btn-primary" href="{{route('createTransaction')}}">Add New Membership</a>
+
+                    <div class="no_membership">
+                      <img src="{{asset('/public/4n61/images/undraw_subscribe_vspl.svg')}}" class="img-fluid" alt="">
+                      <p>No membership found.</p>
+                     </div>
                    </div>
                 @endif
                </div>

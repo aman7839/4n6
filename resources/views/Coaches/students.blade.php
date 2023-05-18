@@ -20,21 +20,28 @@
            </div>
             <div class="col-md-12 mt-2">
                 <div class="card">
-                    <div class="card-header">
+                    {{-- <div class="card-header">
                         <h4><a href="{{ url('coach/addstudent')}}"  class="btn btn-primary btn-sm mt-2"> <i class="fa fa-plus mr-2"></i> Add Students</a></h4>
                         
                         
-                    </div>
+                    </div> --}}
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Student Details</h4>
+                            
+                            
+                        </div>
                     <div class="card-body">     
     
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th> Name</th>
+                                    {{-- <th>ID</th> --}}
+                                    {{-- <th> Name</th> --}}
+                                    <th> Username</th>
                                      
-                                    <th>Email</th> 
-                                    <th>Mobile</th> 
+                                    {{-- <th>Email</th> 
+                                    <th>Mobile</th>  --}}
                                     <th>Location</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
@@ -43,12 +50,14 @@
                             <tbody>
                                @foreach ($students as $item)
                                 <tr>
-                                    <td>{{ $item->id }}</td>
-                                    <td>{{ $item->student->name ??'' }}</td>
-                                    <td>{{ $item->student->email ??''}}</td> 
+                                    {{-- <td>{{ $item->id }}</td> --}}
+                                    {{-- <td>{{ $item->student->name ??'' }}</td> --}}
+                                    <td>{{ $item->student->user_name     ??'' }}</td>
+
+                                    {{-- <td>{{ $item->student->email ??''}}</td> 
                              
                                   
-                                    <td>{{ $item->student->personal_phone_no ??'' }}</td>
+                                    <td>{{ $item->student->personal_phone_no ??'' }}</td> --}}
                                     
                                     
                                     <td>{{ $item->student->school_city ??'' }}</td> 

@@ -28,13 +28,13 @@ class contactusController extends Controller
        $user->email = $request->email;
        $user->description = $request->description;
        $user->save();
-    //    $details = [
-    //     'title' => 'Mail from ItSolutionStuff.com',
-    //     'body' => 'This is for testing email using smtp'
-    // ];
+       $details = [
+        'title' => 'Hi admin,' . $request->name . 'has been submitting a contact us form',
+        'body' => $request->description
+    ];
 
-    //     Mail::to($request->email)->send(new \App\Mail\ContactUs($details));
-       return redirect()->back()->with('success','We will contact you soon');
+        Mail::to($request->email)->send(new \App\Mail\ContactUs($details));
+       return redirect()->back()->with('success','Thanks! We will contact you soon');
 
     }
 
@@ -53,34 +53,40 @@ class contactusController extends Controller
         return view('admin.Message.viewmessages',compact('messages'));
 
     }
-    public function replyMessages($id){
+    public function replyMessages(Request $req, $id){
 
+        $messageBody = $req->description;
+        
         $messages=  ContactUs::find($id);
 
-        return view('admin.Message.replymessages',compact('messages'));
+        return view('admin.Message.replymessages',compact('messages','messageBody'));
 
     }
     public function DeleteMessages($id){
+        
 
         $deleteMessage =  ContactUs::find($id);
-
         $deleteMessage->delete();
 
         return redirect()->back()->with('error','Message Deleted Successfully');
 
     }
 
-    public function replyMessagestoUser(){
+    public function replyMessagestoUser(Request $req, $id){
+        $messages=  ContactUs::find($id);
+        $messages->status = 1;
+        $messages->update();
+        $messageBody = $req->description;
 
-        $details = [
-            'title' => 'Mail from ItSolutionStuff.com',
-            'body' => 'This is for testing email using smtp'
+        $user = [
+            // 'name' => $messages->name,
+            'desciption' =>  $messageBody
         ];
 
-        Mail::to('your_receiver_email@gmail.com')->send(new \App\Mail\ContactUs($details));
+        Mail::to($messages->email)->send(new \App\Mail\ReplyMessages($user));
 
-
-        return view('admin.Message.replymessages',compact('messages'));
+        return redirect('admin/messages')->with('success','Message delivered successfully.');
+        // return view('admin.Message.replymessages',compact('messages','messageBody'))->with('success', 'Message delivered successfully.');
 
     }
 

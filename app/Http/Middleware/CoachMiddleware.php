@@ -33,6 +33,6 @@ class CoachMiddleware
 
                 return redirect()->back()->with('error', 'Access Denied');
             }
-        
+            
     }
 }
