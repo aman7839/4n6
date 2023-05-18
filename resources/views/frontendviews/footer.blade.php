@@ -2,12 +2,12 @@
     <footer class="space">
         <div class="custom_container">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-6 col-lg-3">
                 <div>
                     <a href="{{url('/')}}" class="footer_logo"><img src="{{asset('/public/4n61/images/fanatic_logo_white.svg')}}" alt=""></a>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-6 col-lg-3">
                 <div>
                <p>
                     4N6 Speech & Drama <br>
@@ -18,18 +18,20 @@
                     <a href="mailto:laurie@4n6speech&drama.com">laurie@4n6speech&drama.com</a>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-6 col-lg-2">
                 <div class="quick_links">
                     <ul>
                         <li><a href="{{url('aboutUs')}}">About Us</a></li>
                         <li><a href="{{url('documents')}}">Documents
                         </a></li>
                         <li><a href="{{url('contactUs')}}">Contact Us</a></li>
+                        <li><a href="{{url('reviews')}}">Reviews</a></li>
+                        <li><a href="{{url('faq')}}">Faq's</a></li>
                         <li><a href="">Privacy Policy</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6 col-lg-4">
                 <div class="subscritpion">
                     <h4>Join Our Mailing List</h4>
                     <form action="">

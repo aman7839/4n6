@@ -38,7 +38,7 @@
                           <tbody>
                             <tr>
                                 
-                           <td><strong><a href="{{$links->address}}"  target="_blank">{{$links->title}}</a></strong></td>
+                           <td><strong><a href="{{$links->address}}" class="resource_link"  target="_blank">{{$links->title}}</a></strong></td>
                            <td>{{$links->description}}</td>
                             </tr>
                           
@@ -49,7 +49,7 @@
                       </div>
                 </div>
 
-                <p><strong><a href="{{url("freeresources")}}">Back to Free Resources</a></strong></p>
+                <p><strong><a class="resource_link"  href="{{url("freeresources")}}">Back to Free Resources</a></strong></p>
                 
             </div>
         </div>
