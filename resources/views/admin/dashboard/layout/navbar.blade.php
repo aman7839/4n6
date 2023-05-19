@@ -361,6 +361,11 @@
                         <a href="{{url('coach/vault')}}"><i class="menu-icon fa fa-table"></i> Vault</a>
 
                     </li>
+                    <li class="nav-item {{ request()->is('coach/vaultaccess') ? 'active' : ''}}">  
+
+                        <a href="{{url('coach/vaultaccess')}}"><i class="menu-icon fa fa-table"></i> Vault Access</a>
+
+                    </li>
                     <li class="nav-item {{ request()->is('coach/search') ? 'active' : ''}}">  
 
                         <a href="{{url('coach/search')}}"><i class="menu-icon fa fa-table"></i> Search Database</a>

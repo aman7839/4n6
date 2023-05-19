@@ -57,8 +57,18 @@
             </ul>
 
            
-
+     @auth
+     @if(auth()->user()->role == "coach")
             <form action="{{url('coach/search')}}" method = "POST">
+@endif
+
+@if(auth()->user()->role == "student")
+            <form action="{{url('student/search')}}" method = "POST">
+@endif
+@if(auth()->user()->role == "admin")
+            <form action="{{url('admin/search')}}" method = "POST">
+@endif
+              @endauth
               @csrf
                <div class="row">
 
@@ -289,12 +299,20 @@
                   <input type="submit" class="cmn_btn" value ="Search">
 
                        {{-- <button class="cmn_btn"> Search </button> --}}
+          @auth
+                       @if(auth()->user()->role == "coach")
+                       <a href="{{url('coach/search')}}" class="cmn_btn">Reset</a> 
+                     @endif
+                     @if(auth()->user()->role == "student")
+                     <a href="{{url('student/search')}}" class="cmn_btn">Reset</a> 
+                   @endif
+                   @if(auth()->user()->role == "admin")
+                   <a href="{{url('admin/search')}}" class="cmn_btn">Reset</a> 
+                 @endif
 
-                        <a href="{{url('coach/search')}}" class="cmn_btn">Reset</a> 
 
 
-
-
+        @endauth
 
                 </div>
 
@@ -325,10 +343,21 @@
                 </div>
 
     @if($search->count()>0)
-
+@auth
                 {{-- @if($pendingsession>0) --}}
-                <form action="{{url('coach/searchprints')}}" method="POST" id="formSearch"  enctype="multipart/form-data">
+                @if(auth()->user()->role == "coach")
 
+                <form action="{{url('coach/searchprints')}}" method="POST" id="formSearch"  enctype="multipart/form-data">
+@endif
+@if(auth()->user()->role == "student")
+
+                <form action="{{url('student/searchprints')}}" method="POST" id="formSearch"  enctype="multipart/form-data">
+@endif
+@if(auth()->user()->role == "admin")
+
+                <form action="{{url('admin/searchprints')}}" method="POST" id="formSearch"  enctype="multipart/form-data">
+@endif
+@endauth
                   @csrf
                   @foreach($search as $item)
 

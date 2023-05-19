@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\CoachStudent;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use App\Models\states;
@@ -12,12 +11,9 @@ use App\Models\users_guide;
 use App\Models\offerPrice;
 use App\Models\TopicRole;
 use App\Models\User;
-
 use App\Models\ISG;
 use App\Models\category;
 use App\Models\categoryLinks;
-
-
 use App\Models\awards;
 use App\Models\Extemp;
 use App\Models\Theme;
@@ -26,9 +22,7 @@ use App\Models\ExtempTopic;
 use Illuminate\Support\Facades\DB;
 use App\Models\playCategory;
 use App\Models\Reviews;
-
 use Illuminate\Support\Facades\Auth;
-
 
 class CoachesController extends Controller
 {
@@ -528,5 +522,23 @@ class CoachesController extends Controller
 
     }
 
+    public function vaultAccess(){
+    
+        return view("Coaches.vaultaccess", );
+           
+    }
+    public function vaultAccessToStudent(Request $request){
+
+        $coachId = Auth::user()->id;
+        $vaultAccessCoachId = CoachStudent::where('coach_id',$coachId)->get();
+        $studentId = $vaultAccessCoachId[0]->student_id;
+        $student =  User::find($studentId);
+        $student->vault_access = $request->vault_access;
+
+        $student->update();
+
+        return redirect('coach/vault')->with('success','Vault access updated successfully');
+      
+    }
 
 }

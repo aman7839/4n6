@@ -58,7 +58,7 @@
                               @endif
 
                               @if(auth()->user()->role == 'admin' )                          
-                              <li><a class="dropdown-item" href="{{url('coach/extemp')}}">Extemp Topic Generator</a></li>
+                              <li><a class="dropdown-item" href="{{url('admin/extemp')}}">Extemp Topic Generator</a></li>
 
                               @endif
 
@@ -128,12 +128,22 @@
                     @endif     
 
                         @if(auth()->user()->role == 'student')
+
+                        <li class="nav-item">
+                            
+                            <a class="nav-link  {{ request()->is('student/search') ? 'active' : ''}}" href="{{url('student/search')}}">Search Database</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link  {{ request()->is('dashboard') ? 'active' : ''}}" href="{{url('/student/dashboard')}}">Dashboard</a>
                         </li>
                       @endif    
 
                     @if(auth()->user()->role == 'admin')
+
+                    <li class="nav-item">
+                            
+                        <a class="nav-link  {{ request()->is('admin/search') ? 'active' : ''}}" href="{{url('admin/search')}}">Search Database</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link  {{ request()->is('dashboard') ? 'active' : ''}}" href="{{url('/admin/dashboard')}}">Dashboard</a>
                     </li>
