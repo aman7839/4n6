@@ -93,7 +93,7 @@
                             
                             <a class="nav-link  {{ request()->is('demosearch') ? 'active' : ''}}" href="{{url('demosearch')}}">Demo Search</a>
                         </li>
-                        
+                        @endif
                         @if(!Auth::user())
                 
                 
