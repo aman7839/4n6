@@ -32,11 +32,11 @@
                                 @endif
                             @endauth
                             @csrf
-                        <div class="row w-100">
+                        <div class="row m-0 w-100">
 
                             
                                
-                                    <div class="col-md-4">
+                                    <div class="col-md-6 col-lg-4">
                                         <div class="form-group">
                                             <label for="">Domestic Topics</label>
                                             <div class="filter_wrap">
@@ -63,7 +63,7 @@
                                      </div>
                                 
                        
-                                    <div class="col-md-4">                           
+                                    <div class="col-md-6 col-lg-4">                           
                                         <div class="form-group">
                                             <label for="">Foreign Topics</label>
                                             <div class="filter_wrap">
@@ -93,7 +93,7 @@
                                         </div>                                
                                     </div>
 
-                                    <div class="col-md-4">
+                                    <div class="col-md-12 col-lg-4">
                                         <div class="form-group">
                                             <label for="">Date</label>
                                             <div class="filter_wrap">
@@ -134,8 +134,8 @@
                            </div>
                             <div class="view_filters">
                                
-                                <div class="d-flex align-itms-center justify-content-center">
-                                    <a href=""></a>
+                                <div class="d-flex align-itms-center justify-content-center flex-wrap">
+                                    
 
                                    <input type="submit" name = "doAction" Value = "View Questions From Both" class="cmn_btn reset"> 
 
@@ -148,7 +148,7 @@
                             </div>
 
                            
-                            <div class="responsive mt-4">
+                            <div class="table-responsive mt-4">
 
                                 @if($topicData != '' && $allDomesticTopics == '' && $allForeignTopics == '')
                                
@@ -189,7 +189,7 @@
                             
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="responsive mt-4" id = "print_domestic">
+                                    <div class="table-responsive mt-4">
                                         <table class="table table-bordered">
                                             <thead>
                                                 <th>Domestic Topics</th>
@@ -224,7 +224,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="responsive mt-4">
+                                    <div class="table-responsive mt-4">
                                         <table class="table table-bordered">
                                             <thead>
                                                 <th>Foreign Topics</th>
