@@ -73,9 +73,13 @@ public function getFolderData($id){
       $vaultAccessToStudent = User::where('vault_access',1)->where('id',$studentID)->get();
 
       // echo '<pre>'; print_r(($vaultAccessToStudent)->toArray()); echo '</pre>'; exit;
+       $studentDetails = CoachStudent::where('student_id',$studentID )->get();
 
-      $coachID = Auth::user()->id;
-      // CoachStudent::where('student_id',  $studentID  )->get();
+      $coachID =        $studentDetails[0]->coach_id;
+      // echo '<pre>'; print_r($coachID); echo '</pre>'; exit;
+
+      // $coachID = Auth::user()->id;
+      CoachStudent::where('coach_id',  $coachID  )->get();
       $membership = Membership::where('user_id', $coachID)-> whereDate('start_date', '<=', $today)
       ->whereDate('end_date', '>=', $today)->where('status',1)
       ->first();
