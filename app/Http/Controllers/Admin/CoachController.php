@@ -50,7 +50,6 @@ public function getFolderData($id){
 }
     public function getData(){
         $today = date('Y-m-d H:i:s');
-
         // echo $today;
         $coachID = Auth::user()->id;
         $membership = Membership::where('user_id', $coachID)-> whereDate('start_date', '<=', $today)

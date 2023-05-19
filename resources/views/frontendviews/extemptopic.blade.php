@@ -27,7 +27,9 @@
                             @if(auth()->user()->role == "student")
                         <form action="{{url('student/extemp')}}" method="POST" enctype="multipart/form-data">
                             @endif
-
+                            @if(auth()->user()->role == "admin")
+                            <form action="{{url('admin/extemp')}}" method="POST" enctype="multipart/form-data">
+                                @endif
                             @endauth
                             @csrf
                         <div class="row w-100">
@@ -111,10 +113,20 @@
                                             </select>
 
                                         @endif
-                                        
-                                            <button  class="cmn_btn reset"><a href="{{url('/extemp')}}">Reset</a></button>
-                                  
-                                                                                                  
+                                        @auth 
+                        @if(auth()->user()->role == "coach")
+
+                                            <button  class="cmn_btn reset"><a href="{{url('coach/extemp')}}">Reset</a></button>
+                                  @endif
+                                  @if(auth()->user()->role == "student")
+
+                                  <button  class="cmn_btn reset"><a href="{{url('student/extemp')}}">Reset</a></button>
+                        @endif
+                        @if(auth()->user()->role == "admin")
+
+                                  <button  class="cmn_btn reset"><a href="{{url('admin/extemp')}}">Reset</a></button>
+                        @endif
+                                            @endauth                                                       
                                             </div>
                                         </div>
                                     </div>
@@ -181,7 +193,21 @@
                                         <table class="table table-bordered">
                                             <thead>
                                                 <th>Domestic Topics</th>
+
+                                                @auth 
+                                            @if(auth()->user()->role == "coach")
+
                                                <h4> <a href="{{url('coach/printdomestic')}}" target = "_blank">click to print</a></h4>
+                                               @endif
+                                               @if(auth()->user()->role == "student")
+
+                                               <h4> <a href="{{url('student/printdomestic')}}" target = "_blank">click to print</a></h4>
+                                               @endif
+                                               @if(auth()->user()->role == "admin")
+
+                                               <h4> <a href="{{url('admin/printdomestic')}}" target = "_blank">click to print</a></h4>
+                                               @endif
+                                               @endauth
                                                 <tbody>
                                                     @foreach ($allDomesticTopics as $domestictopics)
 
@@ -202,9 +228,21 @@
                                         <table class="table table-bordered">
                                             <thead>
                                                 <th>Foreign Topics</th>
+
+                                                @auth 
+                                            @if(auth()->user()->role == "coach")
+
                                                <h4> <a href="{{url('coach/printforiegn')}}" target = "_blank">click to print</a></h4>
+                                                @endif
+                                                @if(auth()->user()->role == "student")
 
+                                                <h4> <a href="{{url('student/printforiegn')}}" target = "_blank">click to print</a></h4>
+                                                 @endif
+                                                 @if(auth()->user()->role == "admin")
 
+                                                 <h4> <a href="{{url('admin/printforiegn')}}" target = "_blank">click to print</a></h4>
+                                                  @endif
+                                               @endauth
                                                 <tbody>
                                             @foreach ($allForeignTopics as $questions)
                                                     

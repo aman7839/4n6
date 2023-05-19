@@ -215,8 +215,16 @@ Route::get('/viewmembership/{id}',[MembershipController::class, 'adminViewMember
 Route::get('/editmembership/{id}',[MembershipController::class, 'adminEditMembership'])->name('admin.editMembership');
 Route::post('/updatemembership',[MembershipController::class, 'updateMembership'])->name('admin.updateMembership');
 // Route::post('/sendemail/{id}', [contactusController::class,'replyMessagestoUser']);
-
-
+// search database
+Route::get('/search', [CoachesController::class,'demoSearch']);
+Route::post('/search', [CoachesController::class,'demoSearchPost']);
+Route::post('/searchprints', [CoachesController::class,'demoSearchPrint']);
+Route::get('/searchprint', [CoachesController::class,'demoSearchPrint']);
+//  extemp topic route
+Route::get('/extemp', [HomeController::class,'extempTopicGenerator']);
+Route::post('/extemp', [HomeController::class,'extempTopicGeneratorPost']);
+Route::get('/printdomestic', [CoachesController::class,'printDomesticTopic']);
+Route::get('/printforiegn', [CoachesController::class,'printForiegnTopic']);
 
 
 
@@ -314,16 +322,16 @@ Route::get('user-membership', [MembershipController::class, 'coachMemberships'])
 ///VaultRoute//
 
 Route::get('vault', [CoachController::class, 'getData']);
-
 Route::get('coach_folder_data/{id}', [VaultController::class, 'getFolderData']);
+// vault access
+Route::get('/vaultaccess', [CoachesController::class,'vaultAccess']);
+Route::post('/vaultaccess', [CoachesController::class,'vaultAccessToStudent']);
 
 //  extemp topic route
 Route::get('/extemp', [HomeController::class,'extempTopicGenerator']);
 Route::post('/extemp', [HomeController::class,'extempTopicGeneratorPost']);
 Route::get('/printdomestic', [CoachesController::class,'printDomesticTopic']);
-// Route::post('/printdomestic', [HomeController::class,'printDomesticTopic']);
 Route::get('/printforiegn', [CoachesController::class,'printForiegnTopic']);
-// Route::post('/printforiegn', [HomeController::class,'printForiegnTopic']);
 
 // search database 
 
@@ -331,6 +339,8 @@ Route::get('/search', [CoachesController::class,'demoSearch']);
 Route::post('/search', [CoachesController::class,'demoSearchPost']);
 Route::post('/searchprints', [CoachesController::class,'demoSearchPrint']);
 Route::get('/searchprint', [CoachesController::class,'demoSearchPrint']);
+
+
 
 
 
@@ -348,9 +358,22 @@ Route::get('/logout', [StudentsController::class, 'logout']);
 Route::get('/extemp', [HomeController::class,'extempTopicGenerator']);
 Route::post('/extemp', [HomeController::class,'extempTopicGeneratorPost']);
 Route::get('vault', [CoachController::class, 'getData']);
-
+// search database
+Route::get('/search', [CoachesController::class,'demoSearch']);
+Route::post('/search', [CoachesController::class,'demoSearchPost']);
+Route::post('/searchprints', [CoachesController::class,'demoSearchPrint']);
+Route::get('/searchprint', [CoachesController::class,'demoSearchPrint']);
   
-    
+//  extemp topic route
+Route::get('/extemp', [HomeController::class,'extempTopicGenerator']);
+Route::post('/extemp', [HomeController::class,'extempTopicGeneratorPost']);
+Route::get('/printdomestic', [CoachesController::class,'printDomesticTopic']);
+Route::get('/printforiegn', [CoachesController::class,'printForiegnTopic']);
+
+// vault routes
+
+Route::get('vault', [StudentsController::class, 'getData']);
+Route::get('coach_folder_data/{id}', [VaultController::class, 'getFolderData']);
     
 });
     });
