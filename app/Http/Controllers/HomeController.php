@@ -32,6 +32,11 @@ class HomeController extends Controller
         return view("frontendviews.aboutUs");
     }
 
+    public function index()
+    {
+        return view("frontendviews.home");
+    }
+
     public function faq()
     {
         return view("frontendviews.faq");
