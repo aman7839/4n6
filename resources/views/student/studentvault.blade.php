@@ -18,8 +18,9 @@
         <div class="">
 
             <div class="row">
-                @if($membership)
-
+                {{-- @if($membership) --}}
+                 @if (!empty($membership && $vaultAccessToStudentID == '1'))
+                 
                 <div class="col-md-3 border-right pl-0">
                     <div class="tree">
                         <ul id="myUL">
@@ -44,6 +45,10 @@
                         </ul>
                     </div>
                 </div>
+             
+         {{-- @endif --}}
+
+         
                 <div class="col-md-9">
                   <div class="folder_breadcrumb" id="folder_breadcrumb"></div>
                     <div class="btn_selections">
@@ -87,9 +92,21 @@
 
 
                     </div>
-                    @else
-                    <div> You are not authorised to view the Vault.</div>
+                    {{-- @else --}}
+                    {{-- <div> You are not authorised to view the Vault.</div> --}}
                     @endif
+
+                 @if (!empty($membership && $vaultAccessToStudentID == '0'))
+
+                 <h5 class="text-center mt-3">VAULT ACCESS HAS BEEN LIMITED BY YOUR COACH. PLEASE CONTACT YOUR COACH FOR VIEWING THE FILES IN THE FOLDERS
+                </h5> 
+                        @endif
+
+                        @if (empty($membership) )
+                    <div> You are not authorised to view the Vault.</div>
+
+                               @endif
+
                 </div>
             </div>
 

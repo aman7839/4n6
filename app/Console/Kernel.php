@@ -6,13 +6,27 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
+
+
 {
     /**
      * Define the application's command schedule.
      *
+     
+
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
      * @return void
      */
+
+     protected $commands = [
+        \App\Console\Commands\MembershipRenew::class,
+        \App\Console\Commands\SecondMembershipReminder::class,
+        \App\Console\Commands\ThirdMembershipReminder::class,
+
+
+    ];
+    
+    
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
@@ -20,8 +34,13 @@ class Kernel extends ConsoleKernel
         //->weeklyOn(1, '8:00');
 
         // DB::table('recent_users')->delete();
-        $schedule->command('membership:email')->daily();
-    }
+        // $schedule->command('membershipreminderone:email')->everyMinute();
+        $schedule->command('membershipreminderone:email')->weekly()->mondays()->at('15:00')->timezone('America/Los_Angeles');
+        $schedule->command('membershipremindersecond:email')->weekly()->mondays()->at('15:00')->timezone('America/Los_Angeles');
+        $schedule->command('membershipreminderthird:email')->weekly()->mondays()->at('15:00')->timezone('America/Los_Angeles');
+
+}
+    
 
     /**
      * Register the commands for the application.

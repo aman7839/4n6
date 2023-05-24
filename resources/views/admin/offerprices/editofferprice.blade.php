@@ -43,7 +43,7 @@
         <input type="text" name ="description" value = "{{$editOfferPrice->description}}" class="form-control" id="description" aria-describedby="emailHelp" >
         <span class ="text-danger">@error('description'){{$message}} @enderror</span>
       </div>
-      <div class="form-group mt-3">
+      {{-- <div class="form-group mt-3">
         <label for="status">Select Status</label>
         <select name="status" id="status" class = "form-control">
             <option  value="" disabled >Select One</option>
@@ -55,7 +55,7 @@
         </select>
         
     </div>
-      
+       --}}
       
       <a href="{{url('admin/offerprice')}}" class="btn btn-danger">Cancel</a>
     

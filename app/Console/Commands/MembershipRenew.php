@@ -3,9 +3,10 @@
 namespace App\Console\Commands;
 use App\Models\User;
 use App\Mail\MembershipExpire;
+use App\Models\Membership;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
-
+use Carbon\Carbon;
 class MembershipRenew extends Command
 {
     /**
@@ -13,7 +14,7 @@ class MembershipRenew extends Command
      *
      * @var string
      */
-    protected $signature = 'membership:email';
+    protected $signature = 'membershipreminderone:email';
 
     /**
      * The console command description.
@@ -39,14 +40,38 @@ class MembershipRenew extends Command
      */
     public function handle()
     {
-        $users = User::all();
+       
+            // $reminderDate = Carbon::now()->addWeeks(3)->startOfWeek()->setTimezone('America/Los_Angeles')->setHour(15)->setMinute(0)->setSecond(0);
+            $reminderDate = Carbon::now()->addWeeks(3);
+            $membershipExpireUsers= Membership::whereDate('end_date', $reminderDate)->with('user')->get();
+            // $details = [
+            //     // 'name' => $messages->name,
+            //     'user_name' =>  $request->name,
+            //     'school_name'=> $request->school_name
+            // ];
+           
+            foreach ($membershipExpireUsers as $users) {
+               
+                $details = [
 
-if ($users->count() > 0) {
-foreach ($users as $user) {
-    Mail::to($user->email)->send(new MembershipExpire($user));
-}
+
+                    'coach_name' =>  $users->user->name,
+                    'assist_coach_name'=> $users->user->assistant_coach_name,
+                    'expiration_date'=> date('Y-m-d', strtotime($users->end_date)),
+                    'school_name'=> $users->user->school_name
+                    
+                ];
+               
+                Mail::to($users->user->email)->send(new MembershipExpire($details));
+                Mail::to($users->user->assistant_coach_email_address)->send(new MembershipExpire($details));
+
+            }
+        
+            // $this->info('Reminder emails sent successfully.');
+        
+        
 }
 
-return 0;
+
     }
-}
+

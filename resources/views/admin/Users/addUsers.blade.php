@@ -95,7 +95,7 @@
         
 
       </div>
-
+{{-- 
         <div class="form-group">
 
           <label for="images">Images</label>
@@ -110,7 +110,7 @@
 
       @endif
 
-        </div>
+        </div> --}}
 
         
 

@@ -294,6 +294,17 @@
                   </div>
                   <p class="payment_method">Payment Method</p>
                   <p>(Accounts require an approved PO or payment prior to activation)</p>
+
+                  <div class="input-group mt-3">
+                     <input type="radio" id="yes" name="payment_method" value="credit" checked>
+                      <label for="html">Credit</label>
+                          
+                  </div>
+                  <div class="input-group mt-3">
+                   <input type="radio" id="no" name="payment_method" value="check/po" >
+                      <label for="css">PO/Check</label>
+                          
+                  </div>
               </div>
             </section>
 

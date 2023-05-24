@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Vault;
 use App\Models\User;
 use App\Models\CoachStudent;
-
+use Mail;
 
 use App\Models\Membership;
 class StudentsController extends Controller
@@ -65,37 +65,34 @@ public function getFolderData($id){
   }
 }
   public function getData(){
+
       $today = date('Y-m-d H:i:s');
 
       // echo $today;
       $studentID = Auth::user()->id;
 
-      $vaultAccessToStudent = User::where('vault_access',1)->where('id',$studentID)->get();
+      $coachStudent = User::where('id',$studentID)->get();
 
+       $vaultAccessToStudentID = $coachStudent[0]->vault_access;
+
+    
       // echo '<pre>'; print_r(($vaultAccessToStudent)->toArray()); echo '</pre>'; exit;
+
        $studentDetails = CoachStudent::where('student_id',$studentID )->get();
+       
+      $coachID =     $studentDetails[0]->coach_id;
 
-      $coachID =        $studentDetails[0]->coach_id;
-      // echo '<pre>'; print_r($coachID); echo '</pre>'; exit;
-
-      // $coachID = Auth::user()->id;
-      CoachStudent::where('coach_id',  $coachID  )->get();
       $membership = Membership::where('user_id', $coachID)-> whereDate('start_date', '<=', $today)
       ->whereDate('end_date', '>=', $today)->where('status',1)
       ->first();
+
       $vault_tree=[];
-      if($membership){
+      // if(!empty($membership && !empty($vaultAccessToStudent))){
       $vault = Vault::with('items','nestedCategories.items',)->whereNull('parent_id')->where('student_access',1)->get();
       $vault_tree = $this->buildTree($vault->toArray());
-  }
+  // }
 
-     return view('student/studentvault',compact('membership','vault_tree','coachID','vaultAccessToStudent'));
-
-
-
-     
-
-     
+     return view('student/studentvault',compact('membership','vault_tree','coachID','vaultAccessToStudentID'));
 
       // try{
 

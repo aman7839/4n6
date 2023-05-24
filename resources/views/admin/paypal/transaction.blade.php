@@ -10,12 +10,14 @@
          
       
             <div class="paypal_info">
-               <h3>Membership amount: <strong> @if($offerPrice){!! $offerPrice ? '<del>': ''!!}{{$price->price}}{!! $offerPrice ? '</del>': '' !!} @endif {{$payablePrice}}</strong></h3>
+              <h3>Membership amount: <strong > @if($offerPrice){!! $offerPrice->price ? '<del>': ''!!}${{$offerPrice->price}}{!! $offerPrice ? '</del>': '' !!} @endif ${{$payablePrice}}</strong></h3>
+             
+              {{-- <h3>Membership amount: <strong> @if($offerPrice){!! $offerPrice ? '<del>': ''!!}{{$price->price}}{!! $offerPrice ? '</del>': '' !!} @endif {{$payablePrice}}</strong></h3> --}}
             </div>
    
 
             <ul class="nav nav-tabs mt-3" id="myTab" role="tablist">
-              <li class="nav-item">
+              <li class="nav-item"> 
                 <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">PayPal</a>
               </li>
               {{-- <li class="nav-item">

@@ -359,7 +359,7 @@ Route::get('/logout', [StudentsController::class, 'logout']);
 Route::get('/logout', [StudentsController::class, 'logout']);
 Route::get('/extemp', [HomeController::class,'extempTopicGenerator']);
 Route::post('/extemp', [HomeController::class,'extempTopicGeneratorPost']);
-Route::get('vault', [CoachController::class, 'getData']);
+// Route::get('vault', [CoachController::class, 'getData']);
 // search database
 Route::get('/search', [CoachesController::class,'demoSearch']);
 Route::post('/search', [CoachesController::class,'demoSearchPost']);

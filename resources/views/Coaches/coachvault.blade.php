@@ -484,6 +484,7 @@
                                 }
 
                             }
+                            
                             jQuery('#files_list').html(filesHtml)
                         }
 

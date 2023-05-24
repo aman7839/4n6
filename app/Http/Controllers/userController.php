@@ -16,6 +16,7 @@ use PhpOffice\PhpSpreadsheet\Reader\Exception;
 use PhpOffice\PhpSpreadsheet\Writer\Xls;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 
 
 
@@ -51,7 +52,7 @@ class userController extends Controller
         //     'image' => 'required|image|mimes:jpg,jpeg,png,gif|max:2048',
 
         ]);
-
+        
 
         // Validator::make($request->student_username, [
         //     'student_username' => ['required','different:user_name','unique:users'],
@@ -70,6 +71,13 @@ class userController extends Controller
 
 
                 if($request->user_name != $request->student_username){
+
+
+                    $details = [
+                        // 'name' => $messages->name,
+                        'user_name' =>  $request->name,
+                        'school_name'=> $request->school_name
+                    ];
                     $usercoach = new User;
 
                     // if ($request->hasfile('image')) {
@@ -112,12 +120,30 @@ class userController extends Controller
                         $usercoach->billing_email_address = $request->billing_email_address;
             
                         $usercoach->billing_phone_no = $request->billing_phone_no;
-            
+
+                        $usercoach->payment_method = $request->payment_method;
+           
                         $usercoach->password = Hash::make($request->password);
             
                         $usercoach->role = 'coach';
+                       
+                        if($request->payment_method == "check/po"){
+                
+                        Mail::to($request->email)->send(new \App\Mail\SignUpMail($details));
+                        Mail::to($request->assistant_coach_email_address)->send(new \App\Mail\SignUpMail($details));
+                        Mail::to($request->billing_email_address)->send(new \App\Mail\SignUpMail($details));
+
+                        // ->cc($request->assistant_coach_email_address)
+                        // ->bcc($request->billing_email_address)
+                
+                
+                        }
             
                             $usercoach->save();
+
+
+
+                            
             
                           $user = new User;
             
@@ -132,7 +158,7 @@ class userController extends Controller
             
                         $user->school_email_address = $request->school_email_address;
             
-                        $user->email = $request->email;
+                        // $user->email = $request->email;
             
                         $user->assistant_coach_email_address = $request->assistant_coach_email_address;
             
@@ -161,7 +187,9 @@ class userController extends Controller
                         $user->billing_email_address = $request->billing_email_address;
             
                         $user->billing_phone_no = $request->billing_phone_no;
-            
+                        
+                        $usercoach->payment_method = $request->payment_method;
+                        
                         $user->password = Hash::make($request->student_password);
             
                         $user->role = 'student';
@@ -178,7 +206,7 @@ class userController extends Controller
             
                        $coach_student->save();
                         
-                        return redirect('login')->with('success','User Added Successfully');
+                        return redirect('login')->with('success','You have been registered successfully');
             
 
                 }else{
@@ -204,6 +232,18 @@ class userController extends Controller
 
             return redirect()->back()->with('error',$error);
         }
+
+        // $details = [
+        //     // 'name' => $messages->name,
+        //     'user_name' =>  $request->name,
+        //     'school_name'=> $request->school_name
+        // ];
+        // if($request->payment_method == "check/po"){
+
+        // Mail::to($request->email)->send(new \App\Mail\SignUpMail($details));
+
+
+        // }
 
         // $usercoach = new User;
 
@@ -484,6 +524,7 @@ class userController extends Controller
                     $coachMembership->start_date =  date('Y-m-d H:i:s', strtotime($startDate));
                     $coachMembership->end_date =  date('Y-m-d H:i:s', strtotime($endDate));
                     $coachMembership->payment_mode =  $payMethod;
+                    $coachMembership->status =  "1";
                     $coachMembership->paypal_transaction_id =  ($cheque == "Credit Card") ? 'Credit Card' : '';
                     $coachMembership->cheque_number =  ($cheque != "Credit Card") ? $cheque : '';
                     
@@ -522,17 +563,53 @@ class userController extends Controller
      
         }
          public function exportData(){
-            $data = DB::table('users')->get();
-            $data_array [] = array("name","personal_phone_no","school_address","school_city","school_zip_code","school_state");
+            $data = DB::table('users')->where('role','coach')->get();
+            // $coachID = $data[0]->id;
+            // $datamembership = CoachStudent::where('coach_id',$coachID)->get();
+
+
+            // echo "<pre>"; print_r((($datamembership))->toArray()); echo "</pre>"; exit;
+            // $datamembership = DB::table('membership')->get();
+            // $datamembership = Membership::with('user')->get();
+            // $datamembership = CoachStudent::with('student')->get();
+
+
+            // $coachStudent = DB::table('coach_student')->get();
+
+
+
+            // $data_array [] = array("Name","Personal PhoneNo","School Address","School City","School Zip Code","School State","School Name");
+            
+            $data_array [] = array("School Address","School City","School Zip Code","School State","School Name","Head Coach Name","Head Coach Personal Email","Head Coach School Email","Head Coach School Phone No", "Assistant Coach Name","Assistant Coach Email","Billing Contact Email","Billing Contact Name", "Coach UserID", "Vault Access To Student", "Payment Method");
             foreach($data as $data_item)
             {
                 $data_array[] = array(
-                    'name' =>$data_item->name,
-                    'personal_phone_no' => $data_item->personal_phone_no,
-                    'school_address' => $data_item->school_address,
-                    'school_city' => $data_item->school_city,
-                    'school_zip_code' => $data_item->school_zip_code,
-                    'school_state' =>$data_item->school_state
+                    // 'Name' =>$data_item->name,
+                    // 'Personal PhoneNo' => $data_item->personal_phone_no,
+                    'School Address' => $data_item->school_address,
+                    'School City' => $data_item->school_city,
+                    'School Zip Code' => $data_item->school_zip_code,
+                    'School State' =>$data_item->school_state,
+                    // 'Expiration Date' =>$datamembership->end_date,
+                    'School Name' =>$data_item->school_name,
+                    'Head Coach Name' =>$data_item->name,         
+                    'Head Coach Personal Email' =>$data_item->email,
+                    'Head Coach School Email' =>$data_item->school_email_address,
+                    'Head Coach School Phone No' =>$data_item->school_phone_no,
+                    'Assistant Coach Name' =>$data_item->assistant_coach_name,
+                    'Assistant Coach Email' =>$data_item->assistant_coach_email_address,
+                    'Billing Contact Email' =>$data_item->billing_email_address,
+                    'Billing Contact Name' =>$data_item->billing_contact_name,
+                    'Coach UserID' =>$data_item->user_name,
+                    // 'Student UserID' =>$coachStudent->user_name,
+                    'Vault Access To Student' =>($data_item->vault_access == 1 ? 'yes': "no"),
+                    // 'Amount Paid' =>$data_item->user->amount,
+                    'Payment Method' =>$data_item->payment_method,
+
+
+
+
+
                 );
             }
             $this->ExportExcel($data_array);

@@ -204,8 +204,8 @@
                             <i class="menu-icon fa fa-id-card" aria-hidden="true"></i> Membership <i class="fa fa-chevron-right arrown_style"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <a class="dropdown-item" href="{{route('admin.activeMembership')}}"> <i class="menu-icon fa fa-id-card" aria-hidden="true"></i>Active Memberships</a>
-                          <a class="dropdown-item" href="{{route('admin.pastMembership')}}"> <i class="menu-icon fa fa-id-card" aria-hidden="true"></i>Past Memberships</a>
+                          <a class="dropdown-item {{ request()->is('admin/activemembership') ? 'active' : ''}}" href="{{route('admin.activeMembership')}}"  > <i class="menu-icon fa fa-id-card" aria-hidden="true"></i>Active Memberships</a>
+                          <a class="dropdown-item {{ request()->is('admin/pastmembership') ? 'active' : ''}}" href="{{route('admin.pastMembership')}}"> <i class="menu-icon fa fa-id-card" aria-hidden="true"></i>Past Memberships</a>
                         
                         </div>
                       </li>
@@ -344,7 +344,7 @@
                             <i class="menu-icon fa fa-id-card" aria-hidden="true"></i> Limited Prep Events <i class="fa fa-chevron-right arrown_style"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <a class="dropdown-item" href="{{url('/regeneratetopics')}}"> <i class="menu-icon fa fa-id-card" aria-hidden="true"></i> Impromptu Duet Acting (IDA)</a>
+                          <a class="dropdown-item"  href="{{url('/regeneratetopics')}}"> <i class="menu-icon fa fa-id-card" aria-hidden="true"></i> Impromptu Duet Acting (IDA)</a>
                           <a class="dropdown-item" href="{{url('/isg')}}"> <i class="menu-icon fa fa-id-card" aria-hidden="true"></i>Impromptu Speech Topic Generator</a>
                           <a class="dropdown-item" href="{{url('coach/extemp')}}"> <i class="menu-icon fa fa-id-card" aria-hidden="true"></i>Extemp Topic Generator</a>
                             

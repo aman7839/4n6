@@ -13,4 +13,8 @@ class Membership extends Model
     public function user() {
         return $this->belongsTo(User::class,"user_id","id");
     }
+
+    public function offer() {
+        return $this->belongsTo(offerPrice::class,"offer_id","id");
+    }
 }
