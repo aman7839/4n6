@@ -6,11 +6,13 @@
     @section('content')
     
 
-    <div class="container pt-4 pb-4">
+    <div class="container-fluid pt-4 pb-4">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
+                        <h4 class="title_cmn">Messages</h4>
+                    </div>
     
                     <div class="card-body">     
     
