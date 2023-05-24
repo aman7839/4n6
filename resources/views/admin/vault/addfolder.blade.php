@@ -14,14 +14,11 @@
 
 
     <div class="content">
-
         <div class="">
-
             <div class="row">
-                <div class="col-md-3 border-right pl-0">
+                <div class="col-md-12 col-lg-4 col-xl-3">
                     <div class="tree">
                         <ul id="myUL">
-
                             @foreach ($vault_tree as $valult)
                                 <li>
                                     <span class="caret {{ count($valult->nested_categories) == 0 ? 'empty_folder' : '' }}"><i
@@ -42,7 +39,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-12 col-lg-8 col-xl-9">
                   <div class="folder_breadcrumb" id="folder_breadcrumb"></div>
                     <div class="btn_selections">
                         <div>
@@ -65,8 +62,8 @@
                         </div>
                     </div>
                     <div class="get_files">
-
-                        <table class="table table-bordered">
+                      <div class="card">
+                      <table class="table table-bordered table-striped mb-0">
                             <thead>
                                 <tr>
                                     <th scope="col">Name</th>
@@ -78,19 +75,13 @@
                             <tbody id="files_list">
                             </tbody>
                         </table>
-
-
+                      </div>
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
     <!-- Modal -->
-
-
-
     <div class="modal fade" id="foldermodel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -101,22 +92,17 @@
                             <span aria-hidden="true">&times;</span>
                         </button></h5>
                     <!-- <input type="text" id="selectedid"> -->
-
                 </div>
                 <div class="modal-body">
                     <form class="vault_form" method="post" id="create_folder_form" action="{{ url('admin/savefolder') }}">
-
                         @csrf
-
                         <div class="form-outline">
                             <label class="form-label" for="form2Example1">Parent Folder: </label> <span
                                 class="parent_name_class" id="parent-name"></span>
                         </div>
-
                         <div class="form-outline">
                             {{-- <label class="form-label" for="form2Example1">Folder Name</label>
 <input type="text" name="name" class="form-control"  value= ""/> --}}
-
                             <div class="">
                                 <div class="form-group">
                                     <label for="name"> Folder Name <span class="text-danger">*</span> </label>
@@ -140,17 +126,12 @@
                                     <input type="checkbox" name="student_access"> Student Access
                                 </div>
                             </div>
-
-
-
                             <span class="text-danger">
                                 @error('name')
                                     {{ $message }}
                                 @enderror
                             </span>
                         </div>
-
-
                         <div class="form-outline">
 
 

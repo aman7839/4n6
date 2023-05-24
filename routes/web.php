@@ -26,6 +26,7 @@ use App\Http\Controllers\Paypal\PayPalController;
 use App\Http\Controllers\cheque\ChequeController;
 use App\Http\Controllers\Admin\UserController as AdminUsers;
 use App\Http\Controllers\Admin\MembershipController;
+
 // Route::get('/', function () {
 //     return view('frontendviews.login');
 // });

@@ -74,7 +74,7 @@
                   
                     <div class="get_files">
 
-                        <table class="table table-bordered">
+                        <table class="table table-bordered mb-0">
                             <thead>
                                 <tr>
                                     <th scope="col">Name</th>

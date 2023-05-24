@@ -19,7 +19,7 @@
 
             <div class="row">
                 @if($membership)
-                <div class="col-md-3 border-right pl-0">
+                <div class="col-md-12 col-lg-4 col-xl-3  border-right">
                     <div class="tree">
                         <ul id="myUL">
 
@@ -43,7 +43,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-12 col-lg-8 col-xl-9">
                   <div class="folder_breadcrumb" id="folder_breadcrumb"></div>
                     <div class="btn_selections">
                         <div>
@@ -68,7 +68,8 @@
                   
                     <div class="get_files">
 
-                        <table class="table table-bordered">
+                      <div class="card">
+                      <table class="table table-bordered mb-0">
                             <thead>
                                 <tr>
                                     <th scope="col">Name</th>
@@ -83,6 +84,8 @@
                             <tbody id="files_list">
                             </tbody>
                         </table>
+                        
+                      </div>
 
 
                     </div>

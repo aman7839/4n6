@@ -329,11 +329,11 @@
                     </li>    --}}
                     <li class="nav-item dropdown admin_dropdown">
                         <a class=" dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="menu-icon fa fa-id-card" aria-hidden="true"></i> Membership <i class="fa fa-chevron-right arrown_style"></i>
+                            <i class="menu-icon fa fa-diamond" aria-hidden="true"></i> Membership <i class="fa fa-chevron-right arrown_style"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <a class="dropdown-item" href="{{route('coachmembership')}}"> <i class="menu-icon fa fa-id-card" aria-hidden="true"></i> Active Membership</a>
-                          <a class="dropdown-item" href="{{route('createTransaction')}}"> <i class="menu-icon fa fa-id-card" aria-hidden="true"></i>New Membership</a>
+                          <a class="dropdown-item" href="{{route('coachmembership')}}"> <i class="menu-icon fa fa-dot-circle-o" aria-hidden="true"></i> Active Membership</a>
+                          <a class="dropdown-item" href="{{route('createTransaction')}}"> <i class="menu-icon fa fa-dot-circle-o" aria-hidden="true"></i>New Membership</a>
                         
                         </div>
                       </li>
@@ -341,12 +341,19 @@
 
                       <li class="nav-item dropdown admin_dropdown">
                         <a class=" dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="menu-icon fa fa-id-card" aria-hidden="true"></i> Limited Prep Events <i class="fa fa-chevron-right arrown_style"></i>
+                            <i class="menu-icon fa fa-calendar" aria-hidden="true"></i> Limited Prep Events <i class="fa fa-chevron-right arrown_style"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <a class="dropdown-item"  href="{{url('/regeneratetopics')}}"> <i class="menu-icon fa fa-id-card" aria-hidden="true"></i> Impromptu Duet Acting (IDA)</a>
-                          <a class="dropdown-item" href="{{url('/isg')}}"> <i class="menu-icon fa fa-id-card" aria-hidden="true"></i>Impromptu Speech Topic Generator</a>
-                          <a class="dropdown-item" href="{{url('coach/extemp')}}"> <i class="menu-icon fa fa-id-card" aria-hidden="true"></i>Extemp Topic Generator</a>
+                          <a class="dropdown-item" href="{{url('/regeneratetopics')}}" data-toggle="tooltip" data-placement="right" title="Impromptu Speech Topic Generator"> 
+                            <i class="menu-icon fa fa-dot-circle-o" aria-hidden="true"></i> 
+                            IDA  
+                        </a>
+                          <a class="dropdown-item" href="{{url('/isg')}}" data-toggle="tooltip" data-placement="right" title="Impromptu Speech Topic Generator"> 
+                            <i class="menu-icon fa fa-dot-circle-o" aria-hidden="true"></i>
+                            IST Generator
+                        </a>
+                          <a class="dropdown-item" href="{{url('coach/extemp')}}" data-toggle="tooltip" data-placement="right" title="Extemp Topic Generator"> 
+                            <i class="menu-icon fa fa-dot-circle-o" aria-hidden="true"></i>ET Generator</a>
                             
                         </div>
                       </li>
@@ -358,17 +365,17 @@
                     </li>
                     <li class="nav-item {{ request()->is('coach/vault') ? 'active' : ''}}">  
 
-                        <a href="{{url('coach/vault')}}"><i class="menu-icon fa fa-table"></i> Vault</a>
+                        <a href="{{url('coach/vault')}}"><i class="menu-icon fa fa-file"></i> Vault</a>
 
                     </li>
                     <li class="nav-item {{ request()->is('coach/vaultaccess') ? 'active' : ''}}">  
 
-                        <a href="{{url('coach/vaultaccess')}}"><i class="menu-icon fa fa-table"></i> Vault Access</a>
+                        <a href="{{url('coach/vaultaccess')}}"><i class="menu-icon fa fa-universal-access"></i> Vault Access</a>
 
                     </li>
                     <li class="nav-item {{ request()->is('coach/search') ? 'active' : ''}}">  
 
-                        <a href="{{url('coach/search')}}"><i class="menu-icon fa fa-table"></i> Search Database</a>
+                        <a href="{{url('coach/search')}}"><i class="menu-icon fa fa-search"></i> Search Database</a>
 
                     </li>
 
@@ -392,12 +399,12 @@
 
                     <li class="nav-item {{ request()->is('/reviews') ? 'active' : ''}}">  
 
-                        <a href="{{url('/reviews')}}"><i class="menu-icon fa fa-table"></i> Reviews</a>
+                        <a href="{{url('/reviews')}}"><i class="menu-icon fa fa-comments"></i> Reviews</a>
 
                     </li>
                     <li class="nav-item {{ request()->is('/contactUs') ? 'active' : ''}}">  
 
-                        <a href="{{url('/contactUs')}}"><i class="menu-icon fa fa-table"></i> Contact Us</a>
+                        <a href="{{url('/contactUs')}}"><i class="menu-icon fa fa-phone-square"></i> Contact Us</a>
                             
                         {{-- <a class="nav-link  {{ request()->is('contactUs') ? 'active' : ''}}" href="{{url('contactUs')}}">Contact Us</a> --}}
                     </li>
@@ -431,18 +438,25 @@
 
                     <li class="nav-item dropdown admin_dropdown">
                         <a class=" dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="menu-icon fa fa-id-card" aria-hidden="true"></i> Limited Prep Events <i class="fa fa-chevron-right arrown_style"></i>
+                            <i class="menu-icon fa fa-calendar" aria-hidden="true"></i> Limited Prep Events <i class="fa fa-chevron-right arrown_style"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <a class="dropdown-item" href="{{url('/regeneratetopics')}}"> <i class="menu-icon fa fa-id-card" aria-hidden="true"></i> Impromptu Duet Acting (IDA)</a>
-                          <a class="dropdown-item" href="{{url('/isg')}}"> <i class="menu-icon fa fa-id-card" aria-hidden="true"></i>Impromptu Speech Topic Generator</a>
-                          <a class="dropdown-item" href="{{url('student/extemp')}}"> <i class="menu-icon fa fa-id-card" aria-hidden="true"></i>Extemp Topic Generator</a>
+                          <a class="dropdown-item" href="{{url('/regeneratetopics')}}" data-toggle="tooltip" data-placement="right" title="Impromptu Speech Topic Generator"> 
+                            <i class="menu-icon fa fa-dot-circle-o" aria-hidden="true"></i> 
+                            IDA  
+                        </a>
+                          <a class="dropdown-item" href="{{url('/isg')}}" data-toggle="tooltip" data-placement="right" title="Impromptu Speech Topic Generator"> 
+                            <i class="menu-icon fa fa-dot-circle-o" aria-hidden="true"></i>
+                            IST Generator
+                        </a>
+                          <a class="dropdown-item" href="{{url('coach/extemp')}}" data-toggle="tooltip" data-placement="right" title="Extemp Topic Generator"> 
+                            <i class="menu-icon fa fa-dot-circle-o" aria-hidden="true"></i>ET Generator</a>
                             
                         </div>
                       </li>
                       <li class="nav-item {{ request()->is('/demosearch') ? 'active' : ''}}">  
 
-                        <a href="{{url('/demosearch')}}"><i class="menu-icon fa fa-table"></i> Search Database</a>
+                        <a href="{{url('/demosearch')}}"><i class="menu-icon fa fa-search"></i> Search Database</a>
 
                     </li>
 

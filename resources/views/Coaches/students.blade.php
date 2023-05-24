@@ -3,7 +3,7 @@
 
     @section('content')
 
-    <div class="container">
+    <div class="container pt-4">
         <div class="row m-2">
            <div class="col-md-12">
             {{-- <form action="">
@@ -25,7 +25,7 @@
                         
                         
                     </div> --}}
-                    <div class="card">
+                 
                         <div class="card-header">
                             <h4>Student Details</h4>
                             
@@ -87,7 +87,7 @@
     
                     </div>  
                    
-                </div>
+              
             </div>
         </div>
     </div>
