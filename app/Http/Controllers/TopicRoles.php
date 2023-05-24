@@ -78,6 +78,8 @@ class TopicRoles extends Controller
 
 
         $topic = TopicRole::find($id);
+
+        $topic->delete();
         return redirect()->back()->with('error','Record Deleted Successfuly', compact('topic'));
     }
     public function importData(Request $request){

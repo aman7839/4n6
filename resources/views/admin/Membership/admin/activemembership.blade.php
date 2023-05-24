@@ -25,7 +25,14 @@
                         @foreach ($activeMembership as  $activemember)
                         <tr>
                             <td scope="row">{{$activemember->id}}</td>
+
+                            {{-- @if(isset($activemember->user->id)) --}}
                             <td><a href="{{url('admin/viewUsers/'.$activemember->user->id)}}">{{$activemember->user->name ?? ''}}</a></td>
+                            {{-- @endif --}}
+                        {{-- <th><a href="{{url('admin/viewUsers/'.$activemember->user->id)}}">{{$activemember->user->name ?? ''}}</a></th> --}}
+
+                            {{-- <td>{{($activemember->user->name)}}</td> --}}
+
                             <td>{{date('Y-m-d', strtotime($activemember->start_date))}}</td>
                             <td>{{date('Y-m-d', strtotime($activemember->end_date))}}</td>
                             <td>{{$activemember->amount}}</td>
@@ -41,7 +48,7 @@
                                 Canceled
                                 @break
                             @default
-                                New
+                                Inactive
                     @endswitch
                             </td>
                             <td><div class="d-flex">

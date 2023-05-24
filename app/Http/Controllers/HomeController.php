@@ -10,6 +10,10 @@ use App\Models\TopicRole;
 use App\Models\User;
 
 use App\Models\ISG;
+use App\Models\Membership;
+use App\Models\CoachStudent;
+
+
 use App\Models\category;
 use App\Models\categoryLinks;
 
@@ -195,13 +199,21 @@ class HomeController extends Controller
     {
         $review = Reviews::find($id);
 
-        if ($review->count() > 0) {
+        // echo"<pre>"; print_r(($review)->toArray()); echo "</pre>"; exit;
+
+        if ($review->screenshot != "") {
             unlink(public_path("images/" . $review->screenshot));
             $review->delete();
+
+        }else{
+            $review->delete();
+        }
             return redirect()
                 ->back()
                 ->with("error", "Review deleted successfully");
-        }
+            
+            
+        
     }
 
     public function getReviews()
@@ -355,8 +367,25 @@ class HomeController extends Controller
         $allExtempQuestions =    $request['View All Extemp Questions'];
         $dateSelected = $request['date'];
         $monthName = array('01'=>'JAN','02'=>'FEB','03'=>'MAR','04'=>'APR','05'=>'MAY','06'=>'JUNE','07'=>'JULY','08'=>'AUG','09'=>'SEP','10'=>'OCT','11'=>'NOV','12'=>'DEC',);
+        $today = date('Y-m-d H:i:s');
+        // echo $today;
+        $coachID = Auth::user()->id;
+        $membership = Membership::where('user_id', $coachID)-> whereDate('start_date', '<=', $today)
+        ->whereDate('end_date', '>=', $today)->where('status',1)
+        ->first();
+    //     if(Auth::user()->id = "student"){
 
-        
+    //     $today = date('Y-m-d H:i:s');
+
+    //   $studentID = Auth::user()->id;
+    // //   $coachStudent = User::where('id',$studentID)->get();
+    // //    $vaultAccessToStudentID = $coachStudent[0]->vault_access;
+    //    $studentDetails = CoachStudent::where('student_id',$studentID )->get();    
+    //   $coachID =     $studentDetails[0]->coach_id;
+    //   $membershipStudent = Membership::where('user_id', $coachID)-> whereDate('start_date', '<=', $today)
+    //   ->whereDate('end_date', '>=', $today)->where('status',1)
+    //   ->first();
+    //     }
         $domesticTopic = Extemp::where('type','domestic')->with('topic')->groupBy('topic_id')->get();
 
         $foreignTopic = Extemp::where('type','foreign')->with('topic')->groupBy('topic_id')->get();
@@ -365,7 +394,7 @@ class HomeController extends Controller
        
         $topicData = DB::table('extemps')->leftJoin('extemp_topics', 'extemps.topic_id', '=', 'extemp_topics.id')->limit(3)->get();
 
-        return view("frontendviews.extemptopic", compact('monthName','allDomesticTopics','allForeignTopics','allExtempQuestions','type', 'allForeignTopics','allDomesticTopics', 'domesticTopic','foreignTopic','monthdate','domesticName','foriegnName','dateSelected', 'topicData') );
+        return view("frontendviews.extemptopic", compact('monthName','allDomesticTopics','membership','allForeignTopics','allExtempQuestions','type', 'allForeignTopics','allDomesticTopics', 'domesticTopic','foreignTopic','monthdate','domesticName','foriegnName','dateSelected', 'topicData') );
         //   echo "<pre>"; print_r($domesticTopicList->toArray()); echo "</pre>";
     //        exit;   
     }
@@ -382,6 +411,23 @@ class HomeController extends Controller
         $dateSelected = $request['date'];
         $type = strtolower($request['doAction']);
         $allExtempQuestions =$request['View All Extemp Questions'];
+        $today = date('Y-m-d H:i:s');
+        // echo $today;
+        $coachID = Auth::user()->id;
+        $membership = Membership::where('user_id', $coachID)-> whereDate('start_date', '<=', $today)
+        ->whereDate('end_date', '>=', $today)->where('status',1)
+        ->first();
+        $today = date('Y-m-d H:i:s');
+// if(Auth::user()->id = "student"){
+//         $studentID = Auth::user()->id;
+//       //   $coachStudent = User::where('id',$studentID)->get();
+//       //    $vaultAccessToStudentID = $coachStudent[0]->vault_access;
+//          $studentDetails = CoachStudent::where('student_id',$studentID )->get();    
+//         $coachID =     $studentDetails[0]->coach_id;
+//         $membershipStudent = Membership::where('user_id', $coachID)-> whereDate('start_date', '<=', $today)
+//         ->whereDate('end_date', '>=', $today)->where('status',1)
+//         ->first();
+// }
         
         $monthName = array('01'=>'JAN','02'=>'FEB','03'=>'MAR','04'=>'APR','05'=>'MAY','06'=>'JUNE','07'=>'JULY','08'=>'AUG','09'=>'SEP','10'=>'OCT','11'=>'NOV','12'=>'DEC',);
         $domesticTopic = Extemp::where('type','domestic')->with('topic')->groupBy('topic_id')->get();
@@ -456,7 +502,7 @@ class HomeController extends Controller
         }
 
 
-        return view("frontendviews.extemptopic", compact('topicData','allExtempQuestions','allDomesticTopics','allForeignTopics','topicData','type', 'dateSelected','domesticName','foriegnName','monthName','domesticTopic','foreignTopic','monthdate'));
+        return view("frontendviews.extemptopic", compact('topicData','membership','allExtempQuestions','allDomesticTopics','allForeignTopics','topicData','type', 'dateSelected','domesticName','foriegnName','monthName','domesticTopic','foreignTopic','monthdate'));
 
         
     }

@@ -48,7 +48,7 @@
 
                         <a href="{{url('/admin/topicroles')}}"   class="btn btn-primary btn-sm mt-3">IDA Manager</a>
                         <a href="{{url('/admin/viewisg')}}" class="btn btn-primary btn-sm mt-3">ISG Manager</a>
-                      <a href="{{url('/admin/extemp')}}" class="btn btn-primary btn-sm mt-3">Extemp Manager</a>
+                      <a href="{{url('/admin/extempview')}}" class="btn btn-primary btn-sm mt-3">Extemp Manager</a>
 
 
                         
@@ -108,6 +108,10 @@
                             </tbody>
                             
                         </table>
+
+                        @if($data->count()== 0)
+                        <h5 class="text-center mt-3">No data found</h5> 
+                  @endif
                         <span>{{ $data->Links()}}</span>
                         <style>
                             .w-5{

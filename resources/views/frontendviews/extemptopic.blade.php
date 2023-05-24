@@ -151,6 +151,7 @@
                             <div class="table-responsive mt-4">
 
                                 @if($topicData != '' && $allDomesticTopics == '' && $allForeignTopics == '')
+                                {{-- @if($membership != "") --}}
                                
                                 <table class="table table-bordered">
                                     <thead>
@@ -180,11 +181,21 @@
                                     
                                     
                                 </table>
+                                {{-- @else
+                <h5 class="text-center mt-3">You are not authorised to search Extemp Topics, please take membership to <a href="{{url('coach/create-transaction')}}">continue your search</a></h5>
+
+                                @endif --}}
+
+                                @if($topicData->count() == 0)
+
+                <h5 class="text-center mt-3"> No data found</h5>
+           @endif
                                 @endif
                             </div>
 
                                 @if($allDomesticTopics != '' && $allForeignTopics != '')
 
+                                {{-- @if($membership != "") --}}
                                    
                             
                             <div class="row">
@@ -257,6 +268,10 @@
                                     </div>
                                 </div>
                             </div>
+                            {{-- @else
+                <h5 class="text-center mt-3">You are not authorised to search Extemp Topics, please take membership to <a href="{{url('coach/create-transaction')}}">continue your search</a></h5>
+
+                            @endif --}}
                             @endif
                           
             </div>

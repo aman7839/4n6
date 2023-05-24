@@ -11,7 +11,7 @@
         <h2 >Extemp Manager</h2>
         
 
-        <form action="{{url("admin/extemp")}}" method="post" enctype="multipart/form-data">
+        <form action="{{url("admin/extemppost")}}" method="post" enctype="multipart/form-data">
       @csrf
             <div class="extemp_search">
            
@@ -71,7 +71,7 @@
                    <div class="align-self-end col-md-3 mb-3">
                     <div class="button_actions d-flex   ">
                         <input type="submit"  class="cmn_btn mr-2" name="doAction" value="Search">
-                         <a href="{{url('admin/extemp')}}" class="cmn_btn cmn_clear">Clear</a>
+                         <a href="{{url('admin/extempview')}}" class="cmn_btn cmn_clear">Clear</a>
 
                     </div>
                    </div>
@@ -144,7 +144,7 @@
                                 </td>
                                 <td>
                                     
-                                    <a href={{url('admin/deletedata/'.$item->id)}} class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')" ><i class="fa fa-trash" aria-hidden="true"></i>
+                                    <a href={{url('admin/deleteextempdata/'.$item->id)}} class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')" ><i class="fa fa-trash" aria-hidden="true"></i>
                                     </a>
                                 </td>
                             </tr>
@@ -162,7 +162,7 @@
                      </style> 
 
                      @else
-                      <h2>No data found</h2>
+                      <h3>No data found</h3>
 
                       @endif
 

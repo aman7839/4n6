@@ -146,7 +146,7 @@ Route::post('/savedata', [DataController::class, 'saveData']);
 Route::get('/editdata/{id}', [DataController::class, 'editData']);
 Route::put('/updatedata/{id}', [DataController::class, 'updateData']);
 
-Route::get('/deletedata/{id}', [DataController::class, 'delete']);
+Route::get('/deleteextempdata/{id}', [DataController::class, 'deleteData']);
 Route::get('/addtopicroles', [TopicRoles::class, 'TopicRole']);
 Route::post('/savetopicroles', [TopicRoles::class, 'saveTopicRole']);
 Route::get('/topicroles', [TopicRoles::class, 'viewTopicRole']);
@@ -169,14 +169,16 @@ Route::get('/addextemptopics', [ExtempController::class, 'addExtempTopics']);
 Route::post('/saveextemptopics', [ExtempController::class, 'saveExtempTopics']);
 Route::get('/editextemptopics/{id}', [ExtempController::class, 'editExtempTopics']);
 Route::put('/updateextemptopics/{id}', [ExtempController::class, 'updateExtempTopics']);
-Route::get('/extemp', [ExtempController::class, 'viewEXtemp']);
-Route::post('/extemp', [ExtempController::class, 'viewEXtempPost']);
+Route::get('/extempview', [ExtempController::class, 'viewEXtemp']);
+Route::post('/extemppost', [ExtempController::class, 'viewEXtempPost']);
 
 Route::post('/importextempdata', [ExtempController::class, 'importData']);
 
 Route::get('/addextemp', [ExtempController::class, 'addEXtemp']);
 Route::post('/saveextemp', [ExtempController::class, 'saveEXtemp']);
 Route::get('/editextemp/{id}', [ExtempController::class, 'editExtemp']);
+// Route::get('/deleteextemp/{id}', [ExtempController::class, 'deleteExtempData']);
+
 Route::put('/updateextemp/{id}', [ExtempController::class, 'updateExtemp']);
 Route::get('/messages', [contactusController::class, 'index']);
 Route::get('/viewmessages/{id}', [contactusController::class, 'viewMessages']);

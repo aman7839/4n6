@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\ExtempTopic;
 use App\Models\Extemp;
+use App\Models\Data;
+
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Reader\Exception;
 use PhpOffice\PhpSpreadsheet\Writer\Xls;
@@ -24,6 +26,17 @@ class ExtempController extends Controller
        return view('admin.Data.addextemptopics');
                
            }
+
+
+        //    public function deleteExtempData($id){
+                    
+        //         $data = Data::find($id);
+
+        //         $data->delete();
+
+        //         return redirect()->back()->with('error', "Data deleted successfully");
+
+        //    }
            public function saveExtempTopics(Request $request){
 
             $request->validate([
@@ -141,7 +154,7 @@ class ExtempController extends Controller
             $topic->year = $request->year;
             $topic->save();
 
-            return redirect('admin/extemp')->with('success', 'Data Added successfully');
+            return redirect('admin/extempview')->with('success', 'Data Added successfully');
 
                    
                }
@@ -183,7 +196,7 @@ class ExtempController extends Controller
                     $topic->year = $request->input('year');
                     $topic->update();
         
-                    return redirect('admin/extemp')->with('success', 'Data Updated successfully');
+                    return redirect('admin/extempview')->with('success', 'Data Updated successfully');
         
                            
                        }

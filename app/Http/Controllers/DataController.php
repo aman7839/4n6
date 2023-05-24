@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Data;
 use App\Models\awards;
+use App\Models\Extemp;
 use App\Models\Theme;
 use App\Models\playCategory;
 
@@ -110,12 +111,12 @@ if ($search != ""){
             return view('admin.Data.editdata',compact('data','awards','theme','category'));
 
          }
-         public function delete($id)
+         public function deleteData($id)
          { 
- 
-             
-                 $data = Data::find($id);
- 
+                // echo  $id; 
+                 
+                 $data = Extemp::find($id);
+                //  echo $data; exit;
                  $data->delete();
                  return redirect()->back()->with('error', 'Data Deleted Successfully');
              

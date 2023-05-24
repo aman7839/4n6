@@ -7,10 +7,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\CoachStudent;
+use App\Models\states;
+
+use App\Models\Membership;
+use Illuminate\Support\Facades\DB;
+
+
 use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Response;
-use DB;
+// use DB;
 
 
 
@@ -223,48 +231,407 @@ class DashboardController extends Controller
 
     public function addusers()
     {
+        $states = states::all();
 
-        return view('admin.Users.addUsers');
+        return view('admin.Users.addUsers', compact('states'));
     }
+    // public function saveUsers(Request $request)
+    // {
+
+
+
+    //     $request->validate([
+
+    //         'user_name' => 'required|min:4|unique:users',
+    //         'email' => 'required|email|unique:users,email',
+    //         'personal_phone_no' => 'required|numeric|unique:users,personal_phone_no|digits:10',
+    //         'school_city' => 'required',
+    //         'password' => 'required',
+    //         'role' => 'required',
+
+    //         'image' => 'required|image|mimes:jpg,jpeg,png,gif|max:2048',
+
+    //     ]);
+    //     if ($request->hasfile('image')) {
+    //         $file = $request->file('image');
+    //         $imageName = time() . '-' . $file->getClientOriginalName();
+    //         $file->move('public/images/', $imageName);
+
+    //         $user = new user;
+
+    //         $user->user_name = $request->user_name;
+    //         $user->email = $request->email;
+    //         $user->image =   $imageName;
+    //         $user->personal_phone_no = $request->personal_phone_no;
+    //         $user->role = $request->role;
+    //         $user->name = $request->name;
+
+    //         $user->school_city = $request->school_city;
+    //         $user->password = Hash::make($request->password);
+    //         $user->save();
+    //         return redirect('admin/users')->with('success','User Added Successfully');
+
+            
+    //     }
+    // }
     public function saveUsers(Request $request)
     {
 
-
-
         $request->validate([
+          
+            // 'user_name' => ['required', 'string',  'regex:/^[a-zA-Z]+$/u','max:255', 'unique:users'],
+            'user_name' => ['required', 'unique:users'],
 
-            'user_name' => 'required|min:4|unique:users',
+           // 'student_username' => ['required','different:user_name','unique:users'],
+            'school_email' => 'required',
+            // 'confirm_school_email'=> 'required_with:school_email_address|same:school_email_address|',
             'email' => 'required|email|unique:users,email',
+            // 'confirm_email'=> 'required_with:email|same:email|',
             'personal_phone_no' => 'required|numeric|unique:users,personal_phone_no|digits:10',
+            'assist_email'=>'required',
+            // 'confirm_assistant_coach_email_address'=> 'required_with:assistant_coach_email_address|same:assistant_coach_email_address|',
+            'billing_email'=>'required',
+            // 'confirm_billing_email'=> 'required_with:billing_email_address|same:billing_email_address|',
+            'school_phone_no' => 'required',
+            'billing_phone_no' => 'required',
+            'school_name' => 'required',
+            'name' => 'required',
+            'school_address' => 'required',
+            'assist_name' => 'required',
             'school_city' => 'required',
+            'school_state' => 'required',
+            'school_zip' => 'required',
+            'billing_name' => 'required',
             'password' => 'required',
-            'role' => 'required',
+            'student_password' => 'required',
+            'registration_date' => 'required',
+            'expiration_date' => 'required',
+            'amount' => 'required',
+            'student_user_name'=> 'required',
+            'status' => 'required'
 
-            'image' => 'required|image|mimes:jpg,jpeg,png,gif|max:2048',
+        //     'image' => 'required|image|mimes:jpg,jpeg,png,gif|max:2048',
 
         ]);
-        if ($request->hasfile('image')) {
-            $file = $request->file('image');
-            $imageName = time() . '-' . $file->getClientOriginalName();
-            $file->move('public/images/', $imageName);
+        
 
-            $user = new user;
+        // Validator::make($request->student_username, [
+        //     'student_username' => ['required','different:user_name','unique:users'],
+        // ]);
 
-            $user->user_name = $request->user_name;
-            $user->email = $request->email;
-            $user->image =   $imageName;
-            $user->personal_phone_no = $request->personal_phone_no;
-            $user->role = $request->role;
-            $user->name = $request->name;
 
-            $user->school_city = $request->school_city;
-            $user->password = Hash::make($request->password);
-            $user->save();
-            return redirect('admin/users')->with('success','User Added Successfully');
+        if(isset($request->user_name) && isset($request->student_user_name)){
+
+            $error ="";
+
+            //Check Student username from database users table. 
+            $IsStudentUsername =count(DB::table('users')->where('user_name','=',$request->student_user_name)->get());
+
+            if( $IsStudentUsername == 0){
+
+
+
+                if($request->user_name != $request->student_user_name){
+
+
+                    // $details = [
+                    //     // 'name' => $messages->name,
+                    //     'user_name' =>  $request->name,
+                    //     'school_name'=> $request->school_name
+                    // ];
+                    $usercoach = new User;
+
+                    // if ($request->hasfile('image')) {
+                    //     $file = $request->file('image');
+                    //     $imageName = time() . '-' . $file->getClientOriginalName();
+                    //     $file->move('/public/images/', $imageName);
+                    // $user->image =   $imageName;}
+            
+                        
+                        $usercoach->user_name = $request->user_name;
+            
+                        $usercoach->school_email_address = $request->school_email;
+            
+                        $usercoach->email = $request->email;
+            
+                        $usercoach->assistant_coach_email_address = $request->assist_email;
+            
+                        $usercoach->billing_email_address = $request->billing_email;
+            
+                        $usercoach->school_phone_no = $request->school_phone_no;
+            
+                        $usercoach->billing_phone_no = $request->billing_phone_no;
+            
+                        $usercoach->school_name = $request->school_name;
+            
+                        $usercoach->name = $request->name;
+            
+                        $usercoach->school_address = $request->school_address;
+            
+                        $usercoach->assistant_coach_name = $request->assist_name;
+                        $usercoach->school_city = $request->school_city;
+            
+                        $usercoach->personal_phone_no = $request->personal_phone_no;
+                        $usercoach->school_state = $request->school_state;
+            
+                        $usercoach->school_zip_code = $request->school_zip;
+            
+                        $usercoach->billing_contact_name = $request->billing_name;
+            
+                        $usercoach->billing_email_address = $request->billing_email;
+            
+                        $usercoach->billing_phone_no = $request->billing_phone_no;
+
+                        // $usercoach->payment_method = $request->payment_method;
+           
+                        $usercoach->password = Hash::make($request->password);
+            
+                        $usercoach->role = 'coach';
+                       
+                        // if($request->payment_method == "check/po"){
+                
+                        // Mail::to($request->email)->send(new \App\Mail\SignUpMail($details));
+                        // Mail::to($request->assistant_coach_email_address)->send(new \App\Mail\SignUpMail($details));
+                        // Mail::to($request->billing_email_address)->send(new \App\Mail\SignUpMail($details));
+
+                        // // ->cc($request->assistant_coach_email_address)
+                        // // ->bcc($request->billing_email_address)
+                
+                
+                        // }
+            
+                            $usercoach->save();
+
+
+
+                            
+            
+                          $user = new User;
+            
+                    // if ($request->hasfile('image')) {
+                    //     $file = $request->file('image');
+                    //     $imageName = time() . '-' . $file->getClientOriginalName();
+                    //     $file->move('/public/images/', $imageName);
+                    // $user->image =   $imageName;}
+            
+                        
+                        $user->user_name = $request->student_user_name;
+            
+                        $user->school_email_address = $request->school_email;
+            
+                        // $user->email = $request->email;
+            
+                        $user->assistant_coach_email_address = $request->assist_email;
+            
+                        $user->billing_email_address = $request->billing_email;
+            
+                        $user->school_phone_no = $request->school_phone_no;
+            
+                        $user->billing_phone_no = $request->billing_phone_no;
+            
+                        $user->school_name = $request->school_name;
+            
+                        // $user->name = $request->name;
+            
+                        $user->school_address = $request->school_address;
+            
+                        $user->assistant_coach_name = $request->assist_name;
+                        $user->school_city = $request->school_city;
+            
+                        $user->personal_phone_no = $request->personal_phone_no;
+                        $user->school_state = $request->school_state;
+            
+                        $user->school_zip_code = $request->school_zip;
+            
+                        $user->billing_contact_name = $request->billing_name;
+            
+                        $user->billing_email_address = $request->billing_email;
+            
+                        $user->billing_phone_no = $request->billing_phone_no;
+                        
+                        // $usercoach->payment_method = $request->payment_method;
+                        
+                        $user->password = Hash::make($request->student_password);
+            
+                        $user->role = 'student';
+            
+                          $user->save();
+            
+                       $coach_id= $usercoach->id;
+                       $student_id = $user->id;
+            
+                       $coach_student= new CoachStudent();
+               
+                       $coach_student->coach_id = $coach_id;
+                      $coach_student->student_id = $student_id;
+            
+                       $coach_student->save();
+
+                       $coach_membership = new Membership();
+
+                       $coach_membership->start_date = $request->registration_date;
+                       $coach_membership->end_date = $request->expiration_date;
+                       $coach_membership->amount = $request->amount;
+                       $coach_membership->user_id = $coach_id;
+
+                       $coach_membership->status = $request->status;
+
+                       $coach_membership->save();
+
+
+                        
+                        return redirect()->back()->with('success','Coach added successfully');
+            
+
+                }else{
+    
+                    $error = "Coach username and Student username should be unique.";
+    
+                }
+
+            }else{
+
+                $error = "Student username already exist.";
+
+            }
+           
 
             
+        }else{
+
+            $error = " Please fill required fields.";
+
         }
-    }
+        if($error != ""){
+
+            return redirect()->back()->with('error',$error);
+        }
+
+        // $details = [
+        //     // 'name' => $messages->name,
+        //     'user_name' =>  $request->name,
+        //     'school_name'=> $request->school_name
+        // ];
+        // if($request->payment_method == "check/po"){
+
+        // Mail::to($request->email)->send(new \App\Mail\SignUpMail($details));
+
+
+        // }
+
+        // $usercoach = new User;
+
+        // if ($request->hasfile('image')) {
+        //     $file = $request->file('image');
+        //     $imageName = time() . '-' . $file->getClientOriginalName();
+        //     $file->move('/public/images/', $imageName);
+        // $user->image =   $imageName;}
+
+            
+            // $usercoach->user_name = $request->user_name;
+
+            // $usercoach->school_email_address = $request->school_email_address;
+
+            // $usercoach->email = $request->email;
+
+            // $usercoach->assistant_coach_email_address = $request->assistant_coach_email_address;
+
+            // $usercoach->billing_email_address = $request->billing_email_address;
+
+            // $usercoach->school_phone_no = $request->school_phone_no;
+
+            // $usercoach->billing_phone_no = $request->billing_phone_no;
+
+            // $usercoach->school_name = $request->school_name;
+
+            // $usercoach->name = $request->name;
+
+            // $usercoach->school_address = $request->school_address;
+
+            // $usercoach->assistant_coach_name = $request->assistant_coach_name;
+            // $usercoach->school_city = $request->school_city;
+
+            // $usercoach->personal_phone_no = $request->personal_phone_no;
+            // $usercoach->school_state = $request->school_state;
+
+            // $usercoach->school_zip_code = $request->school_zip_code;
+
+            // $usercoach->billing_contact_name = $request->billing_contact_name;
+
+            // $usercoach->billing_email_address = $request->billing_email_address;
+
+            // $usercoach->billing_phone_no = $request->billing_phone_no;
+
+            // $usercoach->password = Hash::make($request->password);
+
+            // $usercoach->role = 'coach';
+
+            //     $usercoach->save();
+
+            //   $user = new User;
+
+        // if ($request->hasfile('image')) {
+        //     $file = $request->file('image');
+        //     $imageName = time() . '-' . $file->getClientOriginalName();
+        //     $file->move('/public/images/', $imageName);
+        // $user->image =   $imageName;}
+
+            
+        //     $user->user_name = $request->student_username;
+
+        //     $user->school_email_address = $request->school_email_address;
+
+        //     $user->email = $request->email;
+
+        //     $user->assistant_coach_email_address = $request->assistant_coach_email_address;
+
+        //     $user->billing_email_address = $request->billing_email_address;
+
+        //     $user->school_phone_no = $request->school_phone_no;
+
+        //     $user->billing_phone_no = $request->billing_phone_no;
+
+        //     $user->school_name = $request->school_name;
+
+        //     $user->name = $request->name;
+
+        //     $user->school_address = $request->school_address;
+
+        //     $user->assistant_coach_name = $request->assistant_coach_name;
+        //     $user->school_city = $request->school_city;
+
+        //     $user->personal_phone_no = $request->personal_phone_no;
+        //     $user->school_state = $request->school_state;
+
+        //     $user->school_zip_code = $request->school_zip_code;
+
+        //     $user->billing_contact_name = $request->billing_contact_name;
+
+        //     $user->billing_email_address = $request->billing_email_address;
+
+        //     $user->billing_phone_no = $request->billing_phone_no;
+
+        //     $user->password = Hash::make($request->student_password);
+
+        //     $user->role = 'student';
+
+        //       $user->save();
+
+        //    $coach_id= $usercoach->id;
+        //    $student_id = $user->id;
+
+        //    $coach_student= new CoachStudent();
+   
+        //    $coach_student->coach_id = $coach_id;
+        //   $coach_student->student_id = $student_id;
+
+        //    $coach_student->save();
+            
+        //     return redirect('login')->with('success','User Added Successfully');
+   
+
+
+        }
     public function editUsers($id)
     {
 

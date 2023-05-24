@@ -425,7 +425,7 @@ class userController extends Controller
                 $sheet        = $spreadsheet->getActiveSheet();
                 $row_limit    = $sheet->getHighestDataRow();
                 $column_limit = $sheet->getHighestDataColumn();
-                $row_range    = range( 2, $row_limit );
+                $row_range    = range( 3, $row_limit );
                 $column_range = range( 'F', $column_limit );
                 $startcount = 2;
                 $data = array();
@@ -442,34 +442,42 @@ class userController extends Controller
                     // ];
                     /// SAVE COACH DATA
                     ///
-                    $coachUsername=$sheet->getCell( 'N' . $row )->getValue();
-                    $password=Hash::make($sheet->getCell('O'.$row)->getValue());
-                    $name = $sheet->getCell( 'E' . $row )->getValue();
-                    $schoolName = $sheet->getCell( 'F' . $row )->getValue();
-                    $schoolState = $sheet->getCell( 'G' . $row )->getValue();
-                    $schoolAddress = $sheet->getCell( 'W' . $row )->getValue();
-                    $schoolCity = $sheet->getCell( 'X' . $row )->getValue();
-                    $schoolZip = $sheet->getCell( 'Y' . $row )->getValue();
-                    $schoolPhone = $sheet->getCell( 'Z' . $row )->getValue();
-                    $schoolState = $sheet->getCell( 'G' . $row )->getValue();
-                    $startDate = $sheet->getCell('L' . $row )->getFormattedValue();
+                    $coachUsername=$sheet->getCell( 'W' . $row )->getValue();
+                    $password=Hash::make($sheet->getCell('X'.$row)->getValue());
+                    $name = $sheet->getCell( 'J' . $row )->getValue();
+                    $schoolName = $sheet->getCell( 'B' . $row )->getValue();
+                    $schoolState = $sheet->getCell( 'E' . $row )->getValue();
+                    $schoolAddress = $sheet->getCell( 'C' . $row )->getValue();
+                    $schoolCity = $sheet->getCell( 'D' . $row )->getValue();
+                    $schoolZip = $sheet->getCell( 'F' . $row )->getValue();
+                    $schoolPhone = $sheet->getCell( 'N' . $row )->getValue();
+                    // $schoolState = $sheet->getCell( 'G' . $row )->getValue();
+                    $startDate = $sheet->getCell('AL' . $row )->getFormattedValue();
 
                  
-                    $endDate = $sheet->getCell( 'K' . $row )->getFormattedValue();     
+                    $endDate = $sheet->getCell( 'H' . $row )->getFormattedValue();     
                                         
-                    $amount = $sheet->getCell( 'I' . $row )->getValue();
-                    $payMethod = $sheet->getCell( 'U' . $row )->getValue();
-                    $cheque = $sheet->getCell( 'V' . $row )->getValue();
+                    $amount = $sheet->getCell( 'AM' . $row )->getValue();
+                    $payMethod = $sheet->getCell( 'AN' . $row )->getValue();
+                    $cheque = $sheet->getCell( 'AO' . $row )->getValue();
                         
-                    $email = $sheet->getCell( 'AA' . $row )->getValue();
-                    $schoolEmailAddress = $sheet->getCell( 'AB' . $row )->getValue();
-                    $assistantCoachEmailAddress = $sheet->getCell( 'AC' . $row )->getValue();
+                    $email = $sheet->getCell( 'M' . $row )->getValue();
+                    $schoolEmailAddress = $sheet->getCell( 'L' . $row )->getValue();
+                    $assistantCoachEmailAddress = $sheet->getCell( 'R' . $row )->getValue();
+                    $assistantCoachName = $sheet->getCell( 'P' . $row )->getValue();
 
+                    $billingContactName = $sheet->getCell( 'AC' . $row )->getValue();
+
+                    // $billingContactName = $sheet->getCell( 'R' . $row )->getValue();
+
+                    $billingContactEmail = $sheet->getCell( 'AF' . $row )->getValue();
+
+                        $vaultAccess = $sheet->getCell( 'AA' . $row )->getValue();
                    
-                    $student_username= $sheet->getCell( 'R' . $row )->getFormattedValue();
+                    $student_username= $sheet->getCell( 'Y' . $row )->getFormattedValue();
 
                 
-                   $student_password=Hash::make($sheet->getCell('S'.$row)->getValue());
+                   $student_password=Hash::make($sheet->getCell('Z'.$row)->getValue());
                     // $school_city = $sheet->getCell( 'D' . $row )->getValue();
 
                     $new_coach = new User;
@@ -480,14 +488,17 @@ class userController extends Controller
                     $new_coach->school_name= $schoolName;
                     $new_coach->school_state= $schoolState;
                     $new_coach->school_address= $schoolAddress;
+                    $new_coach->billing_contact_name= $billingContactName;
+                    $new_coach->billing_email_address= $billingContactEmail;
+                    $new_coach->vault_access= ($vaultAccess == 'Yes') ? 1 : 0;
                     $new_coach->school_zip_code= $schoolZip;
                     $new_coach->school_phone_no= $schoolPhone;
-                    $new_coach->school_phone_no= $schoolPhone;
+                    // $new_coach->school_phone_no= $schoolPhone;
                     $new_coach->email= $email;
+                    $new_coach->payment_method = $payMethod;
                     $new_coach->school_email_address= $schoolEmailAddress;
                     $new_coach->assistant_coach_email_address =  $assistantCoachEmailAddress;
-
-
+                    $new_coach->assistant_coach_name =  $assistantCoachName;
 
                     $new_coach->role='coach';
 
@@ -504,7 +515,12 @@ class userController extends Controller
                     $new_student->school_address= $schoolAddress;
                     $new_student->school_zip_code= $schoolZip;
                     $new_student->school_phone_no= $schoolPhone;
-                    $new_student->school_phone_no= $schoolPhone;
+                    // $new_student->school_phone_no= $schoolPhone;
+                    $new_student->billing_contact_name= $billingContactName;
+                    $new_student->billing_email_address= $billingContactEmail;
+                    $new_student->assistant_coach_email_address =  $assistantCoachEmailAddress;
+                    $new_student->assistant_coach_name =  $assistantCoachName;
+                    $new_student->vault_access= "1";
                     $new_student->role='student';
                     $new_student->save();
 
@@ -525,8 +541,10 @@ class userController extends Controller
                     $coachMembership->end_date =  date('Y-m-d H:i:s', strtotime($endDate));
                     $coachMembership->payment_mode =  $payMethod;
                     $coachMembership->status =  "1";
-                    $coachMembership->paypal_transaction_id =  ($cheque == "Credit Card") ? 'Credit Card' : '';
-                    $coachMembership->cheque_number =  ($cheque != "Credit Card") ? $cheque : '';
+                    // $coachMembership->paypal_transaction_id =  ($cheque == "Credit Card") ? 'Credit Card' : '';
+                    // $coachMembership->cheque_number =  ($cheque != "Credit Card") ? $cheque : '';
+                    $coachMembership->cheque_number = $cheque;
+
                     
                     $coachMembership->save();
 

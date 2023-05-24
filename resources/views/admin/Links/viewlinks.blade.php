@@ -70,6 +70,8 @@
                             </tbody>
                             
                         </table>
+
+                       
                         <span>{{ $catlinks->withQueryString()->links()}}</span>
                         <style>
                             .w-5{

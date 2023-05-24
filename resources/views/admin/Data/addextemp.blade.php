@@ -100,7 +100,7 @@
 
       
     
-      <a href="{{url('admin/extemp')}}" class="btn btn-danger">Cancel</a>
+      <a href="{{url('admin/extempview')}}" class="btn btn-danger">Cancel</a>
       
       <button type="submit" name="submit" class="btn btn-success">Submit</button>
     </form>

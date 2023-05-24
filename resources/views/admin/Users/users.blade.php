@@ -51,7 +51,7 @@
       
 					@if($coach_id=="")
 						<div class="card-header d-flex">
-							<a href="{{ url('admin/addusers')}}"  class="btn btn-primary btn-sm "> <i class="fa fa-plus mr-2"></i> Add Users</a>  <a href="{{url("admin/exporttdata")}}" class="btn btn-success ml-auto" >Export Excel Data</a>
+							<a href="{{ url('admin/addusers')}}"  class="btn btn-primary btn-sm "> <i class="fa fa-plus mr-2"></i> Add User</a>  <a href="{{url("admin/exporttdata")}}" class="btn btn-success ml-auto" >Export Excel Data</a>
 						</div>
 					@endif	
                     <div class="card-body">     
@@ -60,7 +60,7 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th> User Name</th>
+                                    <th> Coach Name</th>
                                     
                                     {{-- <th>Email</th>  --}}
                                     <th>
@@ -99,6 +99,8 @@
                                 </tr>
                             </thead>
                             <tbody>
+
+                               
                                 @foreach ($user as $item)
                                 <tr>
                                     <td>{{ $item->id }}</td>
@@ -127,6 +129,11 @@
                             </tbody>
                             
                         </table>
+
+                        @if($user->count()== 0)
+                        <h5 class="text-center mt-3">No data found</h5> 
+
+                @endif
                         <span>{{ $user->links()}}</span>
                         <style>
                             .w-5{

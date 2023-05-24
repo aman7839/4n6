@@ -71,6 +71,10 @@
                             </tbody>
                             
                         </table>
+
+                        @if($category->count()== 0)
+                        <h5 class="text-center mt-3">No data found</h5> 
+                  @endif
                         <span>{{ $category->Links()}}</span>
                         <style>
                             .w-5{

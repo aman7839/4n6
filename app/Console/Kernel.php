@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Console;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -35,6 +35,16 @@ class Kernel extends ConsoleKernel
 
         // DB::table('recent_users')->delete();
         // $schedule->command('membershipreminderone:email')->everyMinute();
+
+        // $schedule->call(function(){
+
+        //     DB::table('users')->insert([
+        //         'name' => "test user a",
+        //         'email' => "test@gmail.com",
+        //         'password' => "test123",
+        //       ]);
+
+        // })->everyMinute();
         $schedule->command('membershipreminderone:email')->weekly()->mondays()->at('15:00')->timezone('America/Los_Angeles');
         $schedule->command('membershipremindersecond:email')->weekly()->mondays()->at('15:00')->timezone('America/Los_Angeles');
         $schedule->command('membershipreminderthird:email')->weekly()->mondays()->at('15:00')->timezone('America/Los_Angeles');

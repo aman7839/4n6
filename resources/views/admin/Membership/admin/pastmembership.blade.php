@@ -41,7 +41,7 @@
                                 Canceled
                                 @break
                             @default
-                                New
+                                Inactive
                     @endswitch    
                         </td>
                         <td><div class="d-flex">

@@ -16,6 +16,8 @@ use App\Models\category;
 use App\Models\categoryLinks;
 use App\Models\awards;
 use App\Models\Extemp;
+use App\Models\Membership;
+
 use App\Models\Theme;
 use App\Models\Data;
 use App\Models\ExtempTopic;
@@ -184,7 +186,12 @@ class CoachesController extends Controller
         $themes = $request["theme_name"];
         $categories = $request["category_name"];
         $fullSearch = $request["wide_search"];
-
+        $today = date('Y-m-d H:i:s');
+        // echo $today;
+        $coachID = Auth::user()->id;
+        $membership = Membership::where('user_id', $coachID)-> whereDate('start_date', '<=', $today)
+        ->whereDate('end_date', '>=', $today)->where('status',1)
+        ->first();
     
         // $pendingsession = 3;
         // if (count($request->all()) > 0) {
@@ -293,6 +300,7 @@ class CoachesController extends Controller
                 "author",
                 "type",
                 "characters",
+                "membership"
                 // "pendingsession"
             )
         );
@@ -312,7 +320,15 @@ class CoachesController extends Controller
         $categories = $request["category_name"];
         $fullSearch = $request["wide_search"];
 
-    
+        $today = date('Y-m-d H:i:s');
+        // echo $today;
+        $coachID = Auth::user()->id;
+        $membership = Membership::where('user_id', $coachID)-> whereDate('start_date', '<=', $today)
+        ->whereDate('end_date', '>=', $today)->where('status',1)
+        ->first();
+        // echo $membership; exit;
+
+
         // $pendingsession = 3;
         // if (count($request->all()) > 0) {
         //     if ($request->session()->has("search_count")) {
@@ -419,6 +435,7 @@ class CoachesController extends Controller
                 "author",
                 "type",
                 "characters",
+                "membership"
                 // "pendingsession"
             )
         );

@@ -67,6 +67,11 @@
                             @endforeach
                         </tbody>
                     </table>
+
+                    @if($document->count()== 0)
+                    <h5 class="text-center mt-3">No data found</h5> 
+
+            @endif
                     <span>{{ $document->links() }}</span>
                     <style>
                         .w-5{

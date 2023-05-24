@@ -67,21 +67,11 @@ public function getFolderData($id){
   public function getData(){
 
       $today = date('Y-m-d H:i:s');
-
-      // echo $today;
       $studentID = Auth::user()->id;
-
       $coachStudent = User::where('id',$studentID)->get();
-
        $vaultAccessToStudentID = $coachStudent[0]->vault_access;
-
-    
-      // echo '<pre>'; print_r(($vaultAccessToStudent)->toArray()); echo '</pre>'; exit;
-
-       $studentDetails = CoachStudent::where('student_id',$studentID )->get();
-       
+       $studentDetails = CoachStudent::where('student_id',$studentID )->get();    
       $coachID =     $studentDetails[0]->coach_id;
-
       $membership = Membership::where('user_id', $coachID)-> whereDate('start_date', '<=', $today)
       ->whereDate('end_date', '>=', $today)->where('status',1)
       ->first();

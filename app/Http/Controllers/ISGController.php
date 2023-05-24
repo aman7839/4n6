@@ -65,7 +65,9 @@ class ISGController extends Controller
     }
     public function deleteIsg($id){
         $topic = ISG::find($id);
-        return redirect()->back()->with('error','Record Deleted Successfuly', compact('topic'));
+
+        $topic->delete();
+        return redirect()->back()->with('error','Record Deleted Successfuly',compact('topic'));
     }
 
     public function importData(Request $request){

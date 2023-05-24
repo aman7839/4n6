@@ -14,20 +14,20 @@ class MembershipController extends Controller
         $user_id= Auth::user()->id;
         $activeMembership =  Membership::where('start_date','<=',Carbon::now())->where('end_date','>=',Carbon::now())->where('id',$user_id)->first();
         $pastMemberships = Membership::where('end_date','<',Carbon::now())->where('id',$user_id)->get();
-        // echo "<pre>"; print_r($pastMemberships->toArray()); 
+        // echo "<pre>"; print_r($activeMembership->toArray()); 
         // exit;
         return view('admin.Membership.coach.activemembership',compact('activeMembership','pastMemberships'));
     }
 
     public function adminActiveMemberships(Request $request){
-        $activeMembership =  Membership::with(['user'])->where('start_date','<=',Carbon::now())->where('end_date','>=',Carbon::now())->paginate(10);
-        //   echo "<pre>"; print_r($activeMembership->toArray()); 
+        $activeMembership =  Membership::with(['user'])->where('start_date','<=',Carbon::now())->where('end_date','>=',Carbon::now())->paginate(20);
+        //   echo "<pre>"; print_r($activeMembership->toArray()); echo"</pre>";
         // exit;
         return view('admin.Membership.admin.activemembership',compact('activeMembership'));
     }
 
     public function adminPastMembership(Request $request){
-        $pastmembership = Membership::with(['user'])->where('end_date','<',Carbon::now())->paginate(10);
+        $pastmembership = Membership::with(['user'])->where('end_date','<',Carbon::now())->paginate(20);
         return view('admin.Membership.admin.pastmembership',compact('pastmembership'));
     }
 

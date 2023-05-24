@@ -341,8 +341,9 @@
                 </div>
 
     @if($search->count()>0)
+    {{-- @if($membership != "") --}}
+
 @auth
-                {{-- @if($pendingsession>0) --}}
                 @if(auth()->user()->role == "coach")
 
                 <form action="{{url('coach/searchprints')}}" method="POST" id="formSearch"  enctype="multipart/form-data">
@@ -443,9 +444,8 @@
 
                 <div id="validationError"></div>
 
-                {{-- @elseif ($pendingsession == 0)
-                
-                <h5 class="text-center mt-3">You are out of Demo Searches! Please subscribe to 4N6 Fanatics to <a href="{{url('login')}}">continue your research!</a></h5>
+                {{-- @else
+                <h5 class="text-center mt-3">You are not authorised to search database, please take membership to <a href="{{url('coach/create-transaction')}}">continue your search</a></h5>
 
                @endif --}}
      @endif
