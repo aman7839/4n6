@@ -31,14 +31,14 @@
                 @endif
                 @else
 
-                <p><a class="btn btn-primary" href="{{route('createTransaction')}}">Add New Membership</a></p>
-
-                   <div class="no_membership">
-
-                    <div class="no_membership">
-                      <img src="{{asset('/public/4n61/images/undraw_subscribe_vspl.svg')}}" class="img-fluid" alt="">
-                      <p>No membership found.</p>
-                     </div>
+                
+                <div class="no_membership">
+                  
+                  <div class="no_membership">
+                    <img src="{{asset('/public/4n61/images/undraw_subscribe_vspl.svg')}}" class="img-fluid" alt="">
+                    <p>No membership found.</p>
+                  </div>
+                  <p><a class="btn btn-primary" href="{{route('createTransaction')}}">Add New Membership</a></p>
                    </div>
                 @endif
                </div>

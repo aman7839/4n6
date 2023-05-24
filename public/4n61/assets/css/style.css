@@ -1176,7 +1176,7 @@ header .form-inline {
       text-align: center;
       border-radius: 50%;
       line-height: 40px;
-      background: orange;
+      background: #ef8a17;
       color: #fff;
       font-weight: 600;
       margin: 0;
@@ -2195,7 +2195,8 @@ footer.site-footer {
           display: none; }
       aside.left-panel .navbar .navbar-nav li > a {
         max-width: 60px;
-        padding-left: 0; }
+        padding-left: 0; 
+      padding-right: 0px;}
       aside.left-panel .navbar .navbar-nav li.menu-item-has-children {
         overflow: hidden; }
         aside.left-panel .navbar .navbar-nav li.menu-item-has-children a:before {
@@ -2520,6 +2521,7 @@ ul, #myUL {
   line-height: 1.5;
   color: #212529;
   min-height: calc(100vh - 85px);
+  padding: 30px 17px;
 }
 .tree span {
   font-size: 13px;
@@ -2549,8 +2551,8 @@ ul, #myUL {
 .tree ul li:before {
   position: absolute;
   top: 15px;
-  left: 21px;
-  width: 10px;
+  left: 8px;
+  width: 21px;
   height: 1px;
   margin: auto;
   content: '';
@@ -2560,7 +2562,7 @@ ul, #myUL {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 21px;
+  left: 7px;
   width: 1px;
   height: 100%;
   content: '';
@@ -2582,27 +2584,36 @@ span.caret {
 span.caret::after {
   position: absolute;
   content: "+";
-  left: 2px;
+  left: -14px;
   color: #000;
   z-index: 3;
+  background: #ddd;
+  width: 16px;
+  text-align: center;
+  height: 16px;
+  line-height: 15px;
 }
 
 span.caret.caret-down::after {
   content: "-";
-  left: 4px;
-  top: -3px;
+  left: -14px;
+
+  background: #ddd;
+  width: 16px;
+  text-align: center;
+  height: 16px;
+  line-height: 15px;
 }
 
-span.caret::before {
+/* span.caret::before {
   position: absolute;
   background: #ddd;
-  width: 12px;
-  height: 12px;
+  width: 17px;
+  height: 19px;
   content: "";
-  left: 0;
-  top: 1px;
+  left: -4px;
   z-index: 2;
-}
+} */
 span.caret.empty_folder::before, span.caret.empty_folder::after {
   display: none;
 }
@@ -2636,18 +2647,23 @@ span.tree_folder.tree_folder_name.tree_folder_editname {
   text-transform: capitalize;
 }
 .get_files th, .get_files td {
-  padding: 0px;
   font-size: 13px;
   font-weight: 600;
   text-align: center;
-  padding: 6px 10px;
+  padding: 10px;
+}
+#files_list a{
+  color: #ef8a17;
+}
+.get_files td{
+  font-weight: 400;
+
 }
 span.active_folder {
   font-weight: 600;
   padding: 8px;
   border-radius: 7px;
-  color: #000;
-  background: #dbdbdb;
+  color: #ef8a17;
 }
 ul.nested.active {
   padding-top: 10px;
@@ -2762,7 +2778,7 @@ li.nav-item.dropdown a.dropdown-item:active,li.nav-item.dropdown a.dropdown-item
   font-weight: 600;
   background: #ffa50029;
   border-radius: 35px;
-  color: orange;
+  color: #ef8a17;
   box-shadow: 0px 0px 5px rgba(0,0,0,15%);
   text-align: center;
 }
@@ -2770,7 +2786,7 @@ li.nav-item.dropdown a.dropdown-item:active,li.nav-item.dropdown a.dropdown-item
 .transactions ul.nav.nav-tabs li a.active {
   border-radius: 35px;
   border: unset;
-  background: orange;
+  background: #ef8a17;
   color: #fff;
 }
 .transcetion_card {
@@ -2780,6 +2796,9 @@ li.nav-item.dropdown a.dropdown-item:active,li.nav-item.dropdown a.dropdown-item
   background: #ffff;
   box-shadow: 0px 0px 3px rgba(0,0,0,20%);
   border-radius: 7px;
+}
+.get_files .card {
+  border-radius: 10px;
 }
 
 .paypal_info {text-align: center;}
@@ -2809,10 +2828,10 @@ li.nav-item.dropdown a.dropdown-item:active,li.nav-item.dropdown a.dropdown-item
 .no_membership p {
   font-size: 20px;
   margin-top: 20px;
-  color: orange;
+  color: #ef8a17;
 }
 .card thead {
-  background: orange;
+  background: #ef8a17;
   color: #fff;
 }
 
@@ -2919,4 +2938,15 @@ font-size: 16x;
 }
 a.cmn_btn.cmn_clear {
   background: #efefef;
+}
+
+
+/* custom media */
+
+@media(max-width:991px){
+  .tree {
+    min-height: unset;
+    padding: 17px 17px;
+    margin-bottom: 20px;
+}
 }
