@@ -317,11 +317,11 @@
 
                     
 
-                    <li class="nav-item {{ request()->is('coach/dashboard') ? 'active' : ''}}">
+                    {{-- <li class="nav-item {{ request()->is('coach/dashboard') ? 'active' : ''}}">
 
                         <a href="{{url('coach/dashboard')}}"><i class="menu-icon fa fa-tachometer"></i>Dashboard </a>
 
-                    </li>
+                    </li> --}}
                     {{-- <li class="nav-item {{ request()->is('coach/dashboard') ? 'active' : ''}}">
 
                         <a href="{{route('createTransaction')}}"><i class="menu-icon fa fa-id-card" aria-hidden="true"></i>Membership</a>
@@ -430,11 +430,11 @@
 
 
 
-                    <li class="nav-item {{ request()->is('student/dashboard') ? 'active' : ''}}">
+                    {{-- <li class="nav-item {{ request()->is('student/dashboard') ? 'active' : ''}}">
 
                         <a href="{{url('student/dashboard')}}"><i class="menu-icon fa fa-tachometer"></i>Dashboard </a>
 
-                    </li>
+                    </li> --}}
 
                     <li class="nav-item dropdown admin_dropdown">
                         <a class=" dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
