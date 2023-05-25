@@ -68,28 +68,41 @@
 
 
 <script>
+    jQuery(document).ready(function() {
+
+        toastr.options.timeOut = 10000;
+
+        @if(Session::has('error'))
+
+        toastr.error('{{ Session::get('
+            error ') }}');
+
+        @elseif(Session::has('success'))
+
+        toastr.success('{{ Session::get('
+            success ') }}');
+
+        @endif
 
 
+        if (jQuery('.dropdown-item').hasClass('active')) {
+            jQuery(".dropdown").addClass("show")
+            jQuery(".dropdown-menu").addClass("show")
+        } else {
+            jQuery(".dropdown").removeClass("show")
+            jQuery(".dropdown-menu").removeClass("show")
+        }
 
+    jQuery("#add_toggle").click(function() {
+        if(jQuery("#left-panel").hasClass("left-panel")){
+            jQuery("#left-panel").toggleClass("left_mobile_panel") 
+        }
+        else{
+            jQuery("#left-panel").removeClass("left_mobile_panel") 
+        }
+        });
 
-
-
-
-jQuery(document).ready(function() {
-
-             toastr.options.timeOut = 10000;
-
-             @if (Session::has('error'))
-
-                 toastr.error('{{ Session::get('error') }}');
-
-             @elseif(Session::has('success'))
-
-                 toastr.success('{{ Session::get('success') }}');
-
-             @endif
-
-         });
+    });
 
 
 
@@ -470,14 +483,8 @@ jQuery(document).ready(function() {
     //     // Bar Chart #flotBarChart End
 
     // });
-
-
-
-    
-
 </script>
 
 </body>
 
 </html>
-

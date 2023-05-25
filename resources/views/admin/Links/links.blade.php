@@ -65,6 +65,11 @@
                         </tbody>
 
                     </table>
+                    @if($category->count()== 0)
+                        <div class="nodata_found">
+                            <img src="{{asset('/public/4n61/images/no_data.svg')}}" alt="">
+                        </div>
+                  @endif
                     <span>{{ $category->Links()}}</span>
                     <style>
                         .w-5 {

@@ -160,7 +160,9 @@
                 </style>
 
                 @else
-                <h2>No data found</h2>
+                <div class="nodata_found">
+                            <img src="{{asset('/public/4n61/images/no_data.svg')}}" alt="">
+                        </div>
 
                 @endif
 
