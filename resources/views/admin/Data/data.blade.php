@@ -103,7 +103,7 @@
                                     </td>
                                     <td>
                                         
-                                        <a href={{url('admin/deletedata/'.$item->id)}} class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')" ><i class="fa fa-trash" aria-hidden="true"></i>
+                                        <a href={{url('admin/deletedaaata/'.$item->id)}} class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')" ><i class="fa fa-trash" aria-hidden="true"></i>
                                         </a>
                                     </td>
                                 </tr>

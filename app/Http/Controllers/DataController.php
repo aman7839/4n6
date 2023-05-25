@@ -121,6 +121,17 @@ if ($search != ""){
                  return redirect()->back()->with('error', 'Data Deleted Successfully');
              
          }
+
+         public function delete($id)
+         { 
+                // echo  $id; 
+                 
+                 $data = Data::find($id);
+                //  echo $data; exit;
+                 $data->delete();
+                 return redirect()->back()->with('error', 'Data Deleted Successfully');
+             
+         }
          public function updateData(Request $request,$id){
             $request->validate([
 

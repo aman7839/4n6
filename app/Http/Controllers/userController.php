@@ -7,6 +7,9 @@ use App\Models\User;
 use App\Models\awards;
 use App\Models\CoachStudent;
 use App\Models\Membership;
+use App\Models\state;
+use App\Models\states;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -233,129 +236,7 @@ class userController extends Controller
             return redirect()->back()->with('error',$error);
         }
 
-        // $details = [
-        //     // 'name' => $messages->name,
-        //     'user_name' =>  $request->name,
-        //     'school_name'=> $request->school_name
-        // ];
-        // if($request->payment_method == "check/po"){
-
-        // Mail::to($request->email)->send(new \App\Mail\SignUpMail($details));
-
-
-        // }
-
-        // $usercoach = new User;
-
-        // if ($request->hasfile('image')) {
-        //     $file = $request->file('image');
-        //     $imageName = time() . '-' . $file->getClientOriginalName();
-        //     $file->move('/public/images/', $imageName);
-        // $user->image =   $imageName;}
-
-            
-            // $usercoach->user_name = $request->user_name;
-
-            // $usercoach->school_email_address = $request->school_email_address;
-
-            // $usercoach->email = $request->email;
-
-            // $usercoach->assistant_coach_email_address = $request->assistant_coach_email_address;
-
-            // $usercoach->billing_email_address = $request->billing_email_address;
-
-            // $usercoach->school_phone_no = $request->school_phone_no;
-
-            // $usercoach->billing_phone_no = $request->billing_phone_no;
-
-            // $usercoach->school_name = $request->school_name;
-
-            // $usercoach->name = $request->name;
-
-            // $usercoach->school_address = $request->school_address;
-
-            // $usercoach->assistant_coach_name = $request->assistant_coach_name;
-            // $usercoach->school_city = $request->school_city;
-
-            // $usercoach->personal_phone_no = $request->personal_phone_no;
-            // $usercoach->school_state = $request->school_state;
-
-            // $usercoach->school_zip_code = $request->school_zip_code;
-
-            // $usercoach->billing_contact_name = $request->billing_contact_name;
-
-            // $usercoach->billing_email_address = $request->billing_email_address;
-
-            // $usercoach->billing_phone_no = $request->billing_phone_no;
-
-            // $usercoach->password = Hash::make($request->password);
-
-            // $usercoach->role = 'coach';
-
-            //     $usercoach->save();
-
-            //   $user = new User;
-
-        // if ($request->hasfile('image')) {
-        //     $file = $request->file('image');
-        //     $imageName = time() . '-' . $file->getClientOriginalName();
-        //     $file->move('/public/images/', $imageName);
-        // $user->image =   $imageName;}
-
-            
-        //     $user->user_name = $request->student_username;
-
-        //     $user->school_email_address = $request->school_email_address;
-
-        //     $user->email = $request->email;
-
-        //     $user->assistant_coach_email_address = $request->assistant_coach_email_address;
-
-        //     $user->billing_email_address = $request->billing_email_address;
-
-        //     $user->school_phone_no = $request->school_phone_no;
-
-        //     $user->billing_phone_no = $request->billing_phone_no;
-
-        //     $user->school_name = $request->school_name;
-
-        //     $user->name = $request->name;
-
-        //     $user->school_address = $request->school_address;
-
-        //     $user->assistant_coach_name = $request->assistant_coach_name;
-        //     $user->school_city = $request->school_city;
-
-        //     $user->personal_phone_no = $request->personal_phone_no;
-        //     $user->school_state = $request->school_state;
-
-        //     $user->school_zip_code = $request->school_zip_code;
-
-        //     $user->billing_contact_name = $request->billing_contact_name;
-
-        //     $user->billing_email_address = $request->billing_email_address;
-
-        //     $user->billing_phone_no = $request->billing_phone_no;
-
-        //     $user->password = Hash::make($request->student_password);
-
-        //     $user->role = 'student';
-
-        //       $user->save();
-
-        //    $coach_id= $usercoach->id;
-        //    $student_id = $user->id;
-
-        //    $coach_student= new CoachStudent();
-   
-        //    $coach_student->coach_id = $coach_id;
-        //   $coach_student->student_id = $student_id;
-
-        //    $coach_student->save();
-            
-        //     return redirect('login')->with('success','User Added Successfully');
-   
-
+        
 
         }
         public function loginUser(Request $request)
@@ -548,6 +429,7 @@ class userController extends Controller
                     
                     $coachMembership->save();
 
+                    
                     //// SAVE STUDENT DATA
                     // $startcount++;
                 }
@@ -587,7 +469,7 @@ class userController extends Controller
                 ->select("users.*","coach_student.student_id","membership.start_date","membership.end_date","membership.amount","states.name as statename")
                 ->leftJoin('coach_student', 'users.id', '=', 'coach_student.coach_id')
                 ->leftJoin('membership','membership.user_id','=','users.id')
-                ->leftJoin('states','states.id','=','users.school_state')
+                ->leftJoin('states','states.state_abb','=','users.school_state')
                 ->where('users.role','=','coach')
                 ->where('membership.start_date', '<=', Carbon::now())
                 ->where('membership.end_date', '>=', Carbon::now())

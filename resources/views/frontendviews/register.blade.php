@@ -218,7 +218,7 @@
                                     @foreach ($states as $item)
                                         
                                     
-                                      <option value="{{$item->id}}">{{ucFirst(trans($item->name))}}</option>
+                                      <option value="{{$item->state_abb}}">{{ucFirst(trans($item->name))}}</option>
                                         
                                         
                                         @endforeach

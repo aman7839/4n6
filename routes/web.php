@@ -147,6 +147,8 @@ Route::get('/editdata/{id}', [DataController::class, 'editData']);
 Route::put('/updatedata/{id}', [DataController::class, 'updateData']);
 
 Route::get('/deleteextempdata/{id}', [DataController::class, 'deleteData']);
+Route::get('/deletedaaata/{id}', [DataController::class, 'delete']);
+
 Route::get('/addtopicroles', [TopicRoles::class, 'TopicRole']);
 Route::post('/savetopicroles', [TopicRoles::class, 'saveTopicRole']);
 Route::get('/topicroles', [TopicRoles::class, 'viewTopicRole']);
