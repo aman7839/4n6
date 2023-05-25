@@ -3,14 +3,14 @@
 
     @section('content')
 
-    <div class="container">
+    <div class="p-3">
         <div class="row m-2">
            
             <div class="col-md-12 mt-2">
                 <div class="card">
                     <div class="card-header">
                         {{-- <h4><a href="{{ url('admin/addofferprice')}}"  class="btn btn-primary btn-sm mt-2"> <i class="fa fa-plus mr-2"></i> Add Offer</a></h4> --}}
-                        
+                       <h4 class="title_cmn"> Offer Price</h4>
                         
                     </div>
                     <div class="card-body">     

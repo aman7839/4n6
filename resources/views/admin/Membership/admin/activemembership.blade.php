@@ -6,7 +6,7 @@
         <div class="content">
           <div class="card">
             <div class="card-header mb-3">
-                <h4>Subsciptions details</h4>
+                <h4 class="title_cmn">Subsciptions details</h4>
             </div>
             <div class="p-2">
                 <table class="table table-bordered table-striped">
@@ -51,7 +51,7 @@
                                 Inactive
                     @endswitch
                             </td>
-                            <td><div class="d-flex">
+                            <td><div class="d-flex justify-content-center">
                                 <a href={{url('admin/editmembership/'.$activemember->id)}} class="btn btn-primary btn-sm m-1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                 </a>
                                 <a href={{url('admin/viewmembership/'.$activemember->id)}} class="btn btn-success btn-sm m-1"><i class="fa fa-eye" aria-hidden="true"></i>

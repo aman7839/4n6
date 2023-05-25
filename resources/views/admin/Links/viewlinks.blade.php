@@ -4,7 +4,7 @@
 
     @section('content')
 
-    <div class="container pt-4 pb-4">
+    <div class="p-3 pt-4 pb-4">
         <div class="row m-2">
            <div class="col-md-12">
             {{-- <form action="">
@@ -21,8 +21,9 @@
            </div>
             <div class="col-md-12 mt-2">
                 <div class="card">
-                    <div class="card-header">
-                        <h4><a href="{{ url('admin/addlinks?cat_id='.$catid)}}"  class="btn btn-primary btn-sm mt-2"> <i class="fa fa-plus mr-2"></i> Add Links</a></h4>
+                    <div class="card-header ida_header">
+                    <h4 class="title_cmn">Links</h4>
+                        <h4><a href="{{ url('admin/addlinks?cat_id='.$catid)}}"  class="btn btn-primary btn-sm admin_cm_btn"> <i class="fa fa-plus mr-2"></i> Add Links</a></h4>
                         {{-- <h4><a href="{{url('/admin/logout')}}" class="btn btn-primary btn-sm mt-3">Logout</a></h4> --}}
                         
                         

@@ -14,7 +14,7 @@
          <div class="py-4">
             <div class="card">
                <div class= "card-header">
-                  <h4>Edit Profile</a></h4>
+                  <h4 class="title_cmn">Edit Profile</a></h4>
                </div>
                <div class ="card-body">
                   <form action="{{url('admin/updateProfile/'.$user->id)}}" method ="post" enctype="multipart/form-data">
@@ -49,16 +49,19 @@
                               <span class ="text-danger">@error('school_city'){{$message}} @enderror</span>
                            </div>
                         </div>  
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                            <div class="form-group">
                               <label for="image">Images</label>
                               <input type="file" name="image"  class="form-control mb-3" id="image" aria-describedby="emailHelp" >
                               {{-- <img  src="{{asset('/public/images/'. $user->image)}}" width="20%" class="user-avatar rounded-circle" alt="User Avatar"> --}}
                            </div>
-                        </div>                   
+                        </div>  
+                        <div class="col-12">
+                        <a href="{{url('/admin/users')}}" class="btn btn-danger ">Cancel</a>
+                     <button type="submit" name="submit" class="btn btn-primary admin_cm_btn">Submit</button>
+                        </div>                 
                      </div>
-                     <a href="{{url('/admin/users')}}" class="btn btn-danger ">Cancel</a>
-                     <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                    
                   </form>
                </div>
             </div>

@@ -4,14 +4,14 @@
 
     @section('content')
 
-    <div class="container">
+    <div class="">
         <div class="row m-2">
            <div class="col-md-12">
             <form action="">
                 <div class="form-group mt-4 search_bar">
                
                   <input type="search" name="search" id="" class="form-control" placeholder="Search by author or title" aria-describedby="helpId" value = "{{$search}}">
-                  <button  class="btn btn-primary">Search</button>
+                  <button  class="btn btn-primary admin_cm_btn">Search</button>
                   <a href="{{url('admin/data')}}"><i class="fa fa-times"></i></a>
                   
                 </div>
@@ -23,7 +23,7 @@
                 <div class="card">
                     {{-- <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                          <button class="nav-link active" id="nav-home-tab" data-toggle="tab" data-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Manage Data</button>
+                          <button class="nav-link active " id="nav-home-tab" data-toggle="tab" data-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Manage Data</button>
                           <button class="nav-link" id="nav-profile-tab" data-toggle="tab" data-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">IDA Manager</button>
                           <button class="nav-link" id="nav-contact-tab" data-toggle="tab" data-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">ISG Manager</button>
                           <button class="nav-link" id="nav-contact-tab" data-toggle="tab" data-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Extemp Manager</button>
@@ -36,7 +36,7 @@
                         <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
                       </div> --}}
                     <div class="card-header">
-                    <a href="{{ url('admin/adddata')}}"  class="btn btn-primary btn-sm mt-3"> <i class="fa fa-plus mr-2"></i> Add Data</a>
+                    <a href="{{ url('admin/adddata')}}"  class="btn btn-success btn-sm mt-3"> <i class="fa fa-plus mr-2"></i> Add Data</a>
                     {{-- <li class="nav-item {{ request()->is('admin/data') ? 'active' : ''}}">
 
                         <a href="{{url('admin/data')}}"> Manage Data</a>
@@ -46,6 +46,9 @@
                         {{-- <a href="{{url('admin/data')}}"   class="btn btn-primary btn-sm mt-3">Data Manager</a> --}}
                         {{-- <a href="{{url('admin/data')}}"  class="btn btn-primary btn-sm mt-3"> Manage Data</a> --}}
 
+                        <a href="{{url('/admin/topicroles')}}"   class="btn btn-primary admin_cm_btn btn-sm mt-3">IDA Manager</a>
+                        <a href="{{url('/admin/viewisg')}}" class="btn btn-primary admin_cm_btn btn-sm mt-3">ISG Manager</a>
+                      <a href="{{url('/admin/extemp')}}" class="btn btn-primary admin_cm_btn btn-sm mt-3">Extemp Manager</a>
                         <a href="{{url('/admin/topicroles')}}"   class="btn btn-primary btn-sm mt-3">IDA Manager</a>
                         <a href="{{url('/admin/viewisg')}}" class="btn btn-primary btn-sm mt-3">ISG Manager</a>
                       <a href="{{url('/admin/extempview')}}" class="btn btn-primary btn-sm mt-3">Extemp Manager</a>

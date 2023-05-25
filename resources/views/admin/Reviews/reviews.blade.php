@@ -3,7 +3,7 @@
 
     @section('content')
 
-    <div class="container pb-4 pt-4">
+    <div class="container-fluid pb-4 pt-4">
         <div class="row m-2">
             {{-- <form action="">
                 <div class="form-group mt-2">
@@ -63,7 +63,7 @@
 
                         </div>
 
-                        <button type="submit" class="btn btn-success">Add Screenshot</button>
+                        <button type="submit" class="btn btn-primary btn-sm admin_cm_btn">Add Screenshot</button>
 
 
                     </form>
@@ -79,8 +79,9 @@
 
             <div class="col-md-12 mt-2">
                 <div class="card">
-                    <div class="card-header">
-                        <h4 id="screenshot"  class="btn btn-primary btn-sm mt-2"><i class="fa fa-plus mr-2"></i>  Add Screenshort </h4>
+                    <div class="card-header ida_header">
+                        <h4 class="title_cmn">Reviews</h4>
+                        <h4 id="screenshot"  class="btn btn-primary btn-sm admin_cm_btn"><i class="fa fa-plus mr-2"></i>  Add Screenshort </h4>
                         {{-- <h4><a href="{{url('/admin/logout')}}" class="btn btn-primary btn-sm mt-3">Logout</a></h4> --}}
                         
                         

@@ -4,16 +4,28 @@
 
     @section('content')
 
-    <div class="container">
+    <div class="">
         <div class="row m-2">
-           <div class="col-md-12">
-            <h2 >ISG Manager</h2>
+            <div class="col-md-12 mt-2">
+                <div class="card">
+                    <div class="card-header ida_header">
+                 <div class="d-flex">
+                       <h4><a href="{{ url('admin/data')}}" class="btn btn-secondary btn-sm "> <i class="fa fa-chevron-left"></i> Back</a></h4>
+                    <h4 class="title_cmn">ISG Manager</h4>     
+                 </div>       
+                        <h4><a href="{{ url('admin/addisg')}}"  class="btn btn-primary btn-sm admin_cm_btn"> <i class="fa fa-plus mr-2"></i> Add Record</a></h4>
+                        
 
-            <form action="">
-                <div class="form-group mt-4 search_bar">
+                        {{-- <h4><a href="{{url('/admin/logout')}}" class="btn btn-primary btn-sm mt-3">Logout</a></h4> --}}
+                        
+                        
+                    </div>
+                    <div class="card-body">     
+                    <form action="">
+                <div class="form-group search_bar">
                
                   <input type="search" name="search" id="" class="form-control" placeholder="Search Here" aria-describedby="helpId" value = "{{$search}}">
-                  <button  class="btn btn-primary">Search</button>
+                  <button  class="btn btn-primary admin_cm_btn">Search</button>
                   <a href="{{url('admin/viewisg')}}"><i class="fa fa-times"></i></a>
                   
                 </div>
@@ -25,10 +37,10 @@
                 @csrf
                 <fieldset>
                     <label>Select File to Upload  <small class="warning text-muted">{{__('Please upload only Excel (.xlsx or .xls) files')}}</small></label>
-                    <div class="input-group d-flex">
-                        <input type="file" required class="form-control" style="height:44px" name="uploaded_file" id="uploaded_file">
+                    <div class="form-group search_bar">
+                        <input type="file" required class="form-control" name="uploaded_file" id="uploaded_file">
                         <div class="input-group-append" id="button-addon2">
-                            <button class="btn btn-primary square" type="submit"><i class="ft-upload mr-1"></i> Import Data</button>
+                            <button class="btn btn-primary square admin_cm_btn" type="submit"><i class="ft-upload mr-1"></i> Import Data</button>
                         </div>
                     </div>
                     @if ($errors->has('uploaded_file'))
@@ -39,20 +51,6 @@
                    
                 </fieldset>
             </form>
-           </div>
-            <div class="col-md-12 mt-2">
-                <div class="card">
-                    <div class="card-header">
-                        
-                        <h4><a href="{{ url('admin/addisg')}}"  class="btn btn-primary btn-sm mt-2"> <i class="fa fa-plus mr-2"></i> Add Record</a></h4>
-                        <h4><a href="{{ url('admin/data')}}"  class="btn btn-primary btn-sm mt-2">  Back</a></h4>
-
-                        {{-- <h4><a href="{{url('/admin/logout')}}" class="btn btn-primary btn-sm mt-3">Logout</a></h4> --}}
-                        
-                        
-                    </div>
-                    <div class="card-body">     
-    
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>

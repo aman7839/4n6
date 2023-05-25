@@ -11,6 +11,7 @@
             <div class="card">
                 <div class="card-header ida_header">
                     <h4 class="title_cmn">Manage Links</h4>
+                    <h4><a href="{{ url('admin/addcategory  ')}}" class="btn btn-primary btn-sm admin_cm_btn"> <i class="fa fa-plus mr-2"></i> Add Category</a></h4>
                 </div>
                 <div class="card-body">
                     <form action="">
@@ -21,9 +22,6 @@
                             <a href="{{url('admin/category')}}"><i class="fa fa-times"></i></a>
                         </div>
                     </form>
-
-                    <h4><a href="{{ url('admin/addcategory  ')}}" class="btn btn-primary btn-sm admin_cm_btn"> <i class="fa fa-plus mr-2"></i> Add Category</a></h4><br>
-
                     <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
@@ -36,54 +34,49 @@
                                 <th>View Links</th>
 
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($category as $item)
-                                <tr>
-                                    <td>{{ $item->id }}</td>
-                                    <td>{{ $item->name }}</td>
-                                   
-                                  
-                                    <td>
-                                        <a href={{url("admin/editlinks/".$item->id)}} class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        
-                                        <a href={{url("admin/deletelinks/".$item->id)}} class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')" ><i class="fa fa-trash" aria-hidden="true"></i>
-                                        </a>
-                                       
-                                    </td>
-                                    <td>
-                                        
-                                        <a href={{url("admin/links?cat_id=".$item->id)}} class="btn btn-info btn-sm" >View Links
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($category as $item)
+                            <tr>
+                                <td>{{ $item->id }}</td>
+                                <td>{{ $item->name }}</td>
 
-                                        </a>
-                                       
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                            
-                        </table>
 
-                        @if($category->count()== 0)
-                        <h5 class="text-center mt-3">No data found</h5> 
-                  @endif
-                        <span>{{ $category->Links()}}</span>
-                        <style>
-                            .w-5{
-                                display:none;
+                                <td>
+                                    <a href={{url("admin/editlinks/".$item->id)}} class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    </a>
+                                </td>
+                                <td>
 
-                            }
-                         </style> 
+                                    <a href={{url("admin/deletelinks/".$item->id)}} class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')"><i class="fa fa-trash" aria-hidden="true"></i>
+                                    </a>
 
-                         
-    
-                    </div>  
-                   
+                                </td>
+                                <td>
+
+                                    <a href={{url("admin/links?cat_id=".$item->id)}} class="btn btn-info btn-sm admin_cm_btn">View Links
+
+                                    </a>
+
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+
+                    </table>
+                    <span>{{ $category->Links()}}</span>
+                    <style>
+                        .w-5 {
+                            display: none;
+
+                        }
+                    </style>
+
+
+
                 </div>
+
             </div>
         </div>
     </div>

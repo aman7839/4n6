@@ -1,62 +1,59 @@
+@extends('admin.dashboard.layout.main')
 
-    @extends('admin.dashboard.layout.main')
-
-    @section('content')
+@section('content')
 
 <div class="container-fluid pt-4 pb-4">
     <div class="row">
         <div class="col-md-12">
-            <form action="">
-                <div class="form-group mt-4 search_bar">
-               
-                  <input type="search" name="search" id="" class="form-control" placeholder="Search here" aria-describedby="helpId" value = "{{$search}}">
-                  <button  class="btn btn-primary">Search</button>
-                  <a href="{{url('admin/documents')}}"><i class="fa fa-times"></i></a>
-                  
-                </div>
 
-                
-            </form>
-      
+
             <div class="card">
-                <div class="card-header">
-                    <h4><a href="{{ url('admin/adddocuments')}}"  class="btn btn-primary btn-sm mt-2"><i class="fa fa-plus mr-2"></i> Add Documents</a></h4>
+                <div class="card-header ida_header">
+                    <h4 class="title_cmn">Documents</h4>
+                    <h4><a href="{{ url('admin/adddocuments')}}" class="btn btn-primary btn-sm admin_cm_btn"><i class="fa fa-plus mr-2"></i> Add Documents</a></h4>
                     {{-- <h4><a href="{{url('/admin/logout')}}" class="btn btn-primary btn-sm mt-3">Logout</a></h4> --}}
-                    
-                    
-                </div>
-                <div class="card-body">         
 
+
+                </div>
+                <div class="card-body">
+                    <form action="">
+                        <div class="form-group search_bar">
+                            <input type="search" name="search" id="" class="form-control" placeholder="Search here" aria-describedby="helpId" value="{{$search}}">
+                            <button class="btn btn-primary admin_cm_btn">Search</button>
+                            <a href="{{url('admin/documents')}}"><i class="fa fa-times"></i></a>
+
+                        </div>
+                    </form>
                     <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th> Id</th>    
-                                
-                                <th> Document Name</th>    
-                                <th> Last Updted</th>                            
+                                <th> Id</th>
+
+                                <th> Document Name</th>
+                                <th> Last Updted</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
-                              
-                                                                
+
+
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($document as $item)
-                            <tr>    
-                             
+                            <tr>
+
                                 {{-- <a href="{{'download/'. $item->image }} ">Download Now</a> --}}
                                 {{-- <a href="{{ asset('/public/images/'. $item->image)}}" target="_blank"> view Pdf </a>; --}}
                                 <td> {{$item->id}}</td>
 
                                 <td> {{$item->image}}</td>
                                 <td>{{ $item->updated_at }}</td>
-                               
-                              
+
+
                                 {{-- <td><img src= "images/{{$item->image}}" width="30%" class="img-circle" ></td> --}}
                                 {{-- <td><img src="{{ asset('images/'.$item->image) }}" width="60%" class="img-circle alt=" title=""></td> --}}
-                              
-                              
-                               
+
+
+
                                 <td>
                                     <a href={{url('admin/editdocuments/'.$item->id)}} class="btn btn-primary btn-sm"> <i class="fa fa-pencil-square-o"></i> </a>
                                 </td>
@@ -74,20 +71,20 @@
             @endif
                     <span>{{ $document->links() }}</span>
                     <style>
-                        .w-5{
-                            display:none;
+                        .w-5 {
+                            display: none;
 
                         }
                     </style>
 
-                     
+
 
                 </div>
-               
+
             </div>
-   
+
+        </div>
     </div>
-</div>
 
 
-@endsection
+    @endsection

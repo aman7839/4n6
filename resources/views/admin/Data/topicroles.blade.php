@@ -1,59 +1,50 @@
+@extends('admin.dashboard.layout.main')
 
+@section('content')
+<div class=" pt-4 pb-4 p-3">
+  <div class="card">
+    <div class="card-header d-flex">
 
-  @extends('admin.dashboard.layout.main')
+      <h4 class="title_cmn">Add Record</h4>
 
-  @section('content')
-    <div class="container mt-1 pt-4 pb-4">
-        <div class="card">
-          <div class="card-header d-flex">
+    </div>
 
-            <h4>Add Record</h4>
-            
+    <div class="card-body">
+      <form action="{{url('admin/savetopicroles')}}" method="post" enctype="multipart/form-data">
+        @csrf
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="name"> Type</label>
+              <select name="name" id="name" class="form-control required">
+                <option value="" disabled>Select One</option>
+                <option value="profession" selected>Profession</option>
+                <option value="situation">Situation</option>
+                <option value="location">Places</option>
+              </select>
+              <span class="text-danger">@error('name'){{$message}} @enderror</span>
+
+            </div>
           </div>
-    
-   <div class="card-body">
-    <form action="{{url('admin/savetopicroles')}}" method ="post" enctype="multipart/form-data">
-      @csrf
-     
-     
-      
-      
-      
-      
-      <div class="form-group">
-        <label for="name">  </label>
-        <select name="name" id="name" class="form-control required">    
-            <option   value="" disabled>Select One</option>
-            <option value="profession" selected>Profession</option>
-              <option value="situation">Situation</option>
-              <option value="location">Places</option>  
-            </select>
-            <span class ="text-danger">@error('name'){{$message}} @enderror</span>
-      
-    </div>
-    
-    
-    
-       
-        
-    <div class="form-group mt-3">
-        <label for="info">  Info </label>
-        <input type="text" name ="info" value = "{{old('info')}}" class="form-control" id="info" aria-describedby="emailHelp" >
-        <span class ="text-danger">@error('info'){{$message}} @enderror</span>
-      
-      </div>
-    
-      <a href="{{url('admin/topicroles')}}" class="btn btn-danger">Cancel</a>
-      
-      <button type="submit" name="submit" class="btn btn-success">Submit</button>
-    </form>
-   </div>
-    
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="info"> Info </label>
+              <input type="text" name="info" value="{{old('info')}}" class="form-control" id="info" aria-describedby="emailHelp">
+              <span class="text-danger">@error('info'){{$message}} @enderror</span>
 
-    </div>
+            </div>
+          </div>
+        </div> <a href="{{url('admin/topicroles')}}" class="btn btn-danger">Cancel</a>
+
+        <button type="submit" name="submit" class="btn btn-success admin_cm_btn">Submit</button>
+      </form>
     </div>
 
-    @endsection
+
+  </div>
+</div>
+
+@endsection
 
 {{-- </body>
 </html> --}}
