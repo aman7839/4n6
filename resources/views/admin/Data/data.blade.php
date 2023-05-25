@@ -48,10 +48,10 @@
 
                         <a href="{{url('/admin/topicroles')}}"   class="btn btn-primary admin_cm_btn btn-sm mt-3">IDA Manager</a>
                         <a href="{{url('/admin/viewisg')}}" class="btn btn-primary admin_cm_btn btn-sm mt-3">ISG Manager</a>
-                      <a href="{{url('/admin/extemp')}}" class="btn btn-primary admin_cm_btn btn-sm mt-3">Extemp Manager</a>
-                        <a href="{{url('/admin/topicroles')}}"   class="btn btn-primary btn-sm mt-3">IDA Manager</a>
+                      <a href="{{url('/admin/extempview')}}" class="btn btn-primary admin_cm_btn btn-sm mt-3">Extemp Manager</a>
+                        {{-- <a href="{{url('/admin/topicroles')}}"   class="btn btn-primary btn-sm mt-3">IDA Manager</a>
                         <a href="{{url('/admin/viewisg')}}" class="btn btn-primary btn-sm mt-3">ISG Manager</a>
-                      <a href="{{url('/admin/extempview')}}" class="btn btn-primary btn-sm mt-3">Extemp Manager</a>
+                      <a href="{{url('/admin/extempview')}}" class="btn btn-primary btn-sm mt-3">Extemp Manager</a> --}}
 
 
                         

@@ -100,7 +100,7 @@
           </div>
 
           <div class="col-12">
-            <a href="{{url('admin/extemp')}}" class="btn btn-danger">Cancel</a>
+            <a href="{{url('admin/extempview')}}" class="btn btn-danger">Cancel</a>
 
             <button type="submit" name="submit" class="btn btn-success admin_cm_btn">Submit</button>
           </div>
@@ -109,9 +109,9 @@
 
       
     
-      <a href="{{url('admin/extempview')}}" class="btn btn-danger">Cancel</a>
+      {{-- <a href="{{url('admin/extempview')}}" class="btn btn-danger">Cancel</a>
       
-      <button type="submit" name="submit" class="btn btn-success">Submit</button>
+      <button type="submit" name="submit" class="btn btn-success">Submit</button> --}}
     </form>
    </div>
     
