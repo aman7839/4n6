@@ -18,7 +18,7 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 
-
+ use Carbon\Carbon;
 
 
 class userController extends Controller
@@ -581,55 +581,55 @@ class userController extends Controller
      
         }
          public function exportData(){
-            $data = DB::table('users')->where('role','coach')->get();
-            // $coachID = $data[0]->id;
-            // $datamembership = CoachStudent::where('coach_id',$coachID)->get();
+            // $data = User::where('role','coach')->with('student','membership')->get();   
 
+            $data =  DB::table('users')
+                ->select("users.*","coach_student.student_id","membership.start_date","membership.end_date","membership.amount","states.name as statename")
+                ->leftJoin('coach_student', 'users.id', '=', 'coach_student.coach_id')
+                ->leftJoin('membership','membership.user_id','=','users.id')
+                ->leftJoin('states','states.id','=','users.school_state')
+                ->where('users.role','=','coach')
+                ->where('membership.start_date', '<=', Carbon::now())
+                ->where('membership.end_date', '>=', Carbon::now())
+                ->get();
 
-            // echo "<pre>"; print_r((($datamembership))->toArray()); echo "</pre>"; exit;
-            // $datamembership = DB::table('membership')->get();
-            // $datamembership = Membership::with('user')->get();
-            // $datamembership = CoachStudent::with('student')->get();
-
-
-            // $coachStudent = DB::table('coach_student')->get();
-
-
-
-            // $data_array [] = array("Name","Personal PhoneNo","School Address","School City","School Zip Code","School State","School Name");
-            
-            $data_array [] = array("School Address","School City","School Zip Code","School State","School Name","Head Coach Name","Head Coach Personal Email","Head Coach School Email","Head Coach School Phone No", "Assistant Coach Name","Assistant Coach Email","Billing Contact Email","Billing Contact Name", "Coach UserID", "Vault Access To Student", "Payment Method");
+//   dd($data);    
+           
+            // echo "<pre>"; print_r((($data))->toArray()); echo "</pre>"; exit;
+                       
+            $data_array [] = array("School Address","School City","School Zip Code","School State", "Registration Date", "Expiration Date","School Name","Head Coach Name","Head Coach Personal Email","Head Coach School Email","Head Coach School Phone No", "Assistant Coach Name","Assistant Coach Email","Billing Contact Email","Billing Contact Name", "Coach UserID","Student UserID", "Vault Access To Student", "Amount Paid","Payment Method");
             foreach($data as $data_item)
             {
+                $student =  DB::table('users')->where('id',$data_item->student_id)->get();
+                
                 $data_array[] = array(
                     // 'Name' =>$data_item->name,
                     // 'Personal PhoneNo' => $data_item->personal_phone_no,
-                    'School Address' => $data_item->school_address,
-                    'School City' => $data_item->school_city,
-                    'School Zip Code' => $data_item->school_zip_code,
-                    'School State' =>$data_item->school_state,
-                    // 'Expiration Date' =>$datamembership->end_date,
-                    'School Name' =>$data_item->school_name,
-                    'Head Coach Name' =>$data_item->name,         
-                    'Head Coach Personal Email' =>$data_item->email,
-                    'Head Coach School Email' =>$data_item->school_email_address,
-                    'Head Coach School Phone No' =>$data_item->school_phone_no,
-                    'Assistant Coach Name' =>$data_item->assistant_coach_name,
-                    'Assistant Coach Email' =>$data_item->assistant_coach_email_address,
-                    'Billing Contact Email' =>$data_item->billing_email_address,
-                    'Billing Contact Name' =>$data_item->billing_contact_name,
-                    'Coach UserID' =>$data_item->user_name,
-                    // 'Student UserID' =>$coachStudent->user_name,
+                    'School Address' => $data_item->school_address ?? "",
+                    'School City' => $data_item->school_city ?? "",
+                    'School Zip Code' => $data_item->school_zip_code ?? "",
+                    'School State' =>$data_item->statename ?? "",                   
+                    'Registration Date' => $data_item->start_date ?? "" ,                 
+                    'Expiration Date' =>$data_item->end_date ?? "" ,
+                    'School Name' =>$data_item->school_name ?? "",
+                    'Head Coach Name' =>$data_item->name ??"",         
+                    'Head Coach Personal Email' =>$data_item->email ?? "",
+                    'Head Coach School Email' =>$data_item->school_email_address ?? "",
+                    'Head Coach School Phone No' =>$data_item->school_phone_no ?? "",
+                    'Assistant Coach Name' =>$data_item->assistant_coach_name ?? "",
+                    'Assistant Coach Email' =>$data_item->assistant_coach_email_address ?? "",
+                    'Billing Contact Email' =>$data_item->billing_email_address ?? "",
+                    'Billing Contact Name' =>$data_item->billing_contact_name ?? "",
+                    'Coach UserID' =>$data_item->user_name ?? "",
+                    'Student UserID' =>$student[0]->user_name ?? "" ,
                     'Vault Access To Student' =>($data_item->vault_access == 1 ? 'yes': "no"),
-                    // 'Amount Paid' =>$data_item->user->amount,
-                    'Payment Method' =>$data_item->payment_method,
-
-
-
+                    'Amount Paid' =>$data_item->amount ?? "" ,
+                    'Payment Method' =>$data_item->payment_method ?? "",
 
 
                 );
             }
+            
             $this->ExportExcel($data_array);
         }
         

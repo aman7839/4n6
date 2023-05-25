@@ -107,6 +107,9 @@ if($req->hasFile('files')) {
     $files = $req->file('files');
     foreach($files as $file) {
         $fileName = time().'_'.$file->getClientOriginalName();
+
+        // $filePath =  $file->move('images/', $fileName);
+
         $filePath = $file->storeAs('uploads', $fileName, 'public');
         $fileModel = new VaultFiles;
         $fileModel->name = $file->getClientOriginalName();

@@ -548,11 +548,21 @@ class CoachesController extends Controller
 
         $coachId = Auth::user()->id;
         $vaultAccessCoachId = CoachStudent::where('coach_id',$coachId)->get();
+
+        // echo "<pre>"; print_r(($vaultAccessCoachId)->toArray()); exit;
         $studentId = $vaultAccessCoachId[0]->student_id;
+        $coachId = $vaultAccessCoachId[0]->coach_id;
+
         $student =  User::find($studentId);
         $student->vault_access = $request->vault_access;
 
         $student->update();
+
+        $coach =  User::find($coachId);
+        $coach->vault_access = $request->vault_access;
+
+        $coach->update();
+
 
         return redirect('coach/vault')->with('success','Vault access updated successfully');
       

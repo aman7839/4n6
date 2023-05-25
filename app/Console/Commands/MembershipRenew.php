@@ -7,6 +7,7 @@ use App\Models\Membership;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 class MembershipRenew extends Command
 {
     /**
@@ -40,7 +41,7 @@ class MembershipRenew extends Command
      */
     public function handle()
     {
-       
+        // Log::info("Cron is working fine!");
             // $reminderDate = Carbon::now()->addWeeks(3)->startOfWeek()->setTimezone('America/Los_Angeles')->setHour(15)->setMinute(0)->setSecond(0);
             $reminderDate = Carbon::now()->addWeeks(3);
             $membershipExpireUsers= Membership::whereDate('end_date', $reminderDate)->with('user')->get();

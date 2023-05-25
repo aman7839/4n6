@@ -55,5 +55,15 @@ class User extends Authenticatable
     // protected $appends = [
     //     'profile_photo_url',
     // ];
+
+    public function student() {
+        return $this->hasMany(CoachStudent::class,"coach_id","id");
+    }
+    public function membership() {
+        return $this->hasMany(Membership::class,"user_id","id");
+    }
+    // public function student() {
+    //     return $this->hasMany(CoachStudent::class,"student_id","id");
+    // }
     
 }
