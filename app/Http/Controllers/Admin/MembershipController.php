@@ -27,7 +27,7 @@ class MembershipController extends Controller
     }
 
     public function adminPastMembership(Request $request){
-        $pastmembership = Membership::with(['user'])->where('end_date','<',Carbon::now())->paginate(20);
+        $pastmembership = Membership::with(['user'])->where('end_date','<',Carbon::now())->paginate(15);
         return view('admin.Membership.admin.pastmembership',compact('pastmembership'));
     }
 

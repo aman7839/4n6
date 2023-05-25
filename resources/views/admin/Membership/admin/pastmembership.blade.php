@@ -24,8 +24,11 @@
                 <tbody>
                     @foreach ($pastmembership as  $pastmember)
                     <tr>
-                        <th scope="row">{{$pastmember->id}}</th>
-                        <th><a href="{{url('admin/viewUsers/'.$pastmember->user->id)}}">{{$pastmember->user->name ?? ''}}</a></th>
+                        <th scope="row">{{$pastmember->id ?? ''}}</th>
+                        <?php
+                        $id = $pastmember->user->id ?? 0;
+                        ?>
+                        <th><a href="{{url('admin/viewUsers/'.$id)}}">{{$pastmember->user->name ?? ''}}</a></th>
                         <td>{{date('Y-m-d', strtotime($pastmember->start_date))}}</td>
                         <td>{{date('Y-m-d', strtotime($pastmember->end_date))}}</td>
                         <td>{{$pastmember->amount}}</td>
@@ -56,7 +59,7 @@
                     @endforeach
                </tbody>
               </table>
-              <span>{{ $pastmembership->links()}}</span>
+              <span>{{ $pastmembership->onEachSide(1)->links()}}</span>
                 </div>
         </div>
     </section>

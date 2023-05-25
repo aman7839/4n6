@@ -129,6 +129,11 @@
                         </tbody>
 
                     </table>
+                    @if($user->count()== 0)
+                        <div class="nodata_found">
+                            <img src="{{asset('/public/4n61/images/no_data.svg')}}" alt="">
+                        </div>
+                  @endif
                     <span>{{ $user->links()}}</span>
                     <style>
                         .w-5 {

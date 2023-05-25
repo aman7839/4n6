@@ -204,8 +204,8 @@
                             <i class="menu-icon fa fa-id-card" aria-hidden="true"></i> Membership <i class="fa fa-chevron-right arrown_style"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <a class="dropdown-item {{ request()->is('admin/activemembership') ? 'active' : ''}}" href="{{route('admin.activeMembership')}}"  > <i class="menu-icon fa fa-id-card" aria-hidden="true"></i>Active Memberships</a>
-                          <a class="dropdown-item {{ request()->is('admin/pastmembership') ? 'active' : ''}}" href="{{route('admin.pastMembership')}}"> <i class="menu-icon fa fa-id-card" aria-hidden="true"></i>Past Memberships</a>
+                          <a class="dropdown-item {{ request()->is('admin/activemembership') ? 'active' : ''}}" href="{{route('admin.activeMembership')}}"  > <i class="menu-icon fa fa-dot-circle-o" aria-hidden="true"></i>Active Memberships</a>
+                          <a class="dropdown-item {{ request()->is('admin/pastmembership') ? 'active' : ''}}" href="{{route('admin.pastMembership')}}"> <i class="menu-icon fa fa-dot-circle-o" aria-hidden="true"></i>Past Memberships</a>
                         
                         </div>
                       </li>
@@ -223,7 +223,7 @@
                     </li>
                     <li class="nav-item {{ request()->is('admin/offerprice') ? 'active' : ''}}">
 
-                        <a href="{{url('admin/offerprice')}}"><i class="menu-icon fa fa-file-text"></i>Offer Price </a>
+                        <a href="{{url('admin/offerprice')}}"><i class="menu-icon fa fa-certificate"></i>Offer Price </a>
 
                     </li>
 
@@ -246,7 +246,7 @@
 
                     <li class="nav-item {{ request()->is('admin/data') ? 'active' : ''}}">
 
-                        <a href="{{url('admin/data')}}"><i class="menu-icon fa fa-table"></i> Manage Data</a>
+                        <a href="{{url('admin/data')}}"><i class="menu-icon fa fa-database"></i> Manage Data</a>
 
                     </li>
 
@@ -332,8 +332,8 @@
                             <i class="menu-icon fa fa-diamond" aria-hidden="true"></i> Membership <i class="fa fa-chevron-right arrown_style"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <a class="dropdown-item" href="{{route('coachmembership')}}"> <i class="menu-icon fa fa-dot-circle-o" aria-hidden="true"></i> Active Membership</a>
-                          <a class="dropdown-item" href="{{route('createTransaction')}}"> <i class="menu-icon fa fa-dot-circle-o" aria-hidden="true"></i>New Membership</a>
+                          <a class="dropdown-item {{ request()->is('coach/user-membership') ? 'active' : ''}}" href="{{route('coachmembership')}}"> <i class="menu-icon fa fa-dot-circle-o" aria-hidden="true"></i> Active Membership</a>
+                          <a class="dropdown-item {{ request()->is('coach/create-transaction') ? 'active' : ''}}" href="{{route('createTransaction')}}"> <i class="menu-icon fa fa-dot-circle-o" aria-hidden="true"></i>New Membership</a>
                         
                         </div>
                       </li>

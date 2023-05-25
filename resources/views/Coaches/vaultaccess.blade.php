@@ -3,10 +3,10 @@
 @extends('admin.dashboard.layout.main')
 
 @section('content')
-  <div class="container mt-1 pt-4 pb-4">
+  <div class="container-fluid pt-4 pb-4">
       <div class="card">
         <div class="card-header d-flex">
-          <h4>Vault Access To Student</h4>
+          <h4 class="title_cmn">Vault Access To Student</h4>
         </div>
   
  <div class="card-body">
@@ -28,7 +28,7 @@
         </div>
 
     
-    <input type="submit" name="submit" class="btn btn-success" value = "Submit" >
+    <input type="submit" name="submit" class="btn btn-success admin_cm_btn" value = "Submit" >
 
     <a href="{{url('coach/vault')}}" class="btn btn-danger">Cancel</a>
 

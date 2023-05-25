@@ -66,7 +66,9 @@
                     </table>
 
                     @if($document->count()== 0)
-                    <h5 class="text-center mt-3">No data found</h5> 
+                    <div class="nodata_found">
+                            <img src="{{asset('/public/4n61/images/no_data.svg')}}" alt="">
+                        </div>
 
             @endif
                     <span>{{ $document->links() }}</span>

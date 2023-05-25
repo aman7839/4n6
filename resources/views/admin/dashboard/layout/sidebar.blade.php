@@ -188,7 +188,8 @@
 
                 <div class="user-area dropdown float-right">
 
-                    @if(file_exists(asset('/public/images/'. Auth::user()->image)))   
+                  <div class="d-flex">
+                  @if(file_exists(asset('/public/images/'. Auth::user()->image)))   
                     <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {{-- <?php    // print_r(Auth::user()->image); exit; ?> --}}
                         <img class="user-avatar rounded-circle" src="{{asset('/public/images/'. Auth::user()->image)}}" alt="User Avatar">
@@ -197,14 +198,15 @@
                         <p class="empty_image">{{ substr(Auth::user()->name, 0, 2) }}</p>
 
                         @endif
-                    
+                      <a class="mobile_toggle" id="add_toggle"><img src="{{asset('/public/4n61/images/toggle_icon.svg')}}" alt="Logo"></a>
 
+                  </div>
                     
 
                     {{-- <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
                         <img class="user-avatar rounded-circle" src="{{asset('/public/images/'. Auth::user()->image)}}" alt="User Avatar">
-
+                      
                     </a> --}}
 
 
@@ -230,7 +232,7 @@
                         
 
                     </div>  --}}
-
+                    
                 </div>
 
 
