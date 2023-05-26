@@ -78,13 +78,10 @@
 jQuery(document).ready(function() {
 
              toastr.options.timeOut = 10000;
-toastr.options.timeOut = 10000;
 
              @if (Session::has('error'))
-@if (Session::has('error'))
 
                  toastr.error('{{ Session::get('error') }}');
-    toastr.error('{{ Session::get('error') }}');
 
              @elseif(Session::has('success'))
 
@@ -500,4 +497,3 @@ jQuery(document).ready(function(){
 </body>
 
 </html>
-
