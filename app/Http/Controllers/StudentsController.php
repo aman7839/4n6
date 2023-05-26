@@ -70,11 +70,16 @@ public function getFolderData($id){
       $studentID = Auth::user()->id;
       $coachStudent = User::where('id',$studentID)->get();
        $vaultAccessToStudentID = $coachStudent[0]->vault_access;
-       $studentDetails = CoachStudent::where('student_id',$studentID )->get();    
+       $studentDetails = CoachStudent::where('student_id', $studentID )->get();    
+    //    dd($studentID);
+
       $coachID =     $studentDetails[0]->coach_id;
+
       $membership = Membership::where('user_id', $coachID)-> whereDate('start_date', '<=', $today)
       ->whereDate('end_date', '>=', $today)->where('status',1)
       ->first();
+
+    //   dd($membership);
 
       $vault_tree=[];
       // if(!empty($membership && !empty($vaultAccessToStudent))){

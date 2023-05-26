@@ -58,59 +58,61 @@
                         
                     </div>
                     <div class="card-body">     
+                        <div class="table-responsive">
+
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th> Title</th>
+                                         
+                                        <th>Author</th> 
+                                        <th>Category Name</th>                                      
+                                        <th>Award Name</th>                                      
+                                        <th>Theme Name</th>  
+                                        {{-- <th>Public</th>   --}}
     
-                        <table class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th> Title</th>
-                                     
-                                    <th>Author</th> 
-                                    <th>Category Name</th>                                      
-                                    <th>Award Name</th>                                      
-                                    <th>Theme Name</th>  
-                                    {{-- <th>Public</th>   --}}
-
-
-                                    
-                                    <th>Edit</th>
-                                    <th>Delete</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($data as $item)
-                                <tr>
-                                    <td>{{ $item->id }}</td>
-                                    <td>{{ $item->title }}</td>
-                                    <td>{{ $item->author }}</td>
-                                    
-                                    <td>{{ $item->category['name'] ?? '' }}</td>
-
-                                    <td>{{ $item->awards['awards_name'] ?? '' }}</td>
-
-
-                                    <td>{{ $item->theme['name'] ?? '' }}</td> 
-                                    {{-- <td>{{ $item->public ? 'Public' : 'Hidden'  }}</td> --}}
-
-
-
-                                  
-                                  
-                                   
-                                    <td>
-                                        <a href={{url('admin/editdata/'.$item->id)}} class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                        </a>
-                                    </td>
-                                    <td>
+    
                                         
-                                        <a href={{url('admin/deletedaaata/'.$item->id)}} class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')" ><i class="fa fa-trash" aria-hidden="true"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                            
-                        </table>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($data as $item)
+                                    <tr>
+                                        <td>{{ $item->id }}</td>
+                                        <td>{{ $item->title }}</td>
+                                        <td>{{ $item->author }}</td>
+                                        
+                                        <td>{{ $item->category['name'] ?? '' }}</td>
+    
+                                        <td>{{ $item->awards['awards_name'] ?? '' }}</td>
+    
+    
+                                        <td>{{ $item->theme['name'] ?? '' }}</td> 
+                                        {{-- <td>{{ $item->public ? 'Public' : 'Hidden'  }}</td> --}}
+    
+    
+    
+                                      
+                                      
+                                       
+                                        <td>
+                                            <a href={{url('admin/editdata/'.$item->id)}} class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            
+                                            <a href={{url('admin/deletedaaata/'.$item->id)}} class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')" ><i class="fa fa-trash" aria-hidden="true"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                                
+                            </table>
+                        </div>
 
                         @if($data->count()== 0)
                         <div class="nodata_found">

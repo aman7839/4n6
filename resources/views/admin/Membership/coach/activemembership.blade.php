@@ -47,6 +47,7 @@
             <div class="tab-pane fade" id="pastsMembership" role="tabpanel" aria-labelledby="pastMembership-tab">
               <div class="transcetion_card">
                 @if(count($pastMemberships)>0)
+                <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
                       <tr>
@@ -71,6 +72,7 @@
                         @endforeach
                    </tbody>
                   </table>
+                </div>
                   @else
                  <div class="no_membership">
                   <img src="{{asset('/public/4n61/images/undraw_subscribe_vspl.svg')}}" class="img-fluid" alt="">

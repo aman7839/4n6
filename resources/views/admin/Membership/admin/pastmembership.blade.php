@@ -9,6 +9,7 @@
                     <h4>Past Membership</h4>
                 </div>
                 <div class="p-2">
+                <div class="table-responsive">
                     <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
@@ -59,6 +60,7 @@
                     @endforeach
                </tbody>
               </table>
+                </div>
               <span>{{ $pastmembership->onEachSide(1)->links()}}</span>
                 </div>
         </div>

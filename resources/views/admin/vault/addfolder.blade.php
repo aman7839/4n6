@@ -63,6 +63,7 @@
                     </div>
                     <div class="get_files">
                       <div class="card">
+                      <div class="table-responsive">
                       <table class="table table-bordered table-striped mb-0">
                             <thead>
                                 <tr>
@@ -75,6 +76,7 @@
                             <tbody id="files_list">
                             </tbody>
                         </table>
+                      </div>
                       </div>
                     </div>
                 </div>

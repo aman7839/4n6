@@ -143,6 +143,7 @@
                         </div>
                         <div class="card-body--">
                             <div class="table-stats order-table ov-h">
+                            <div class="table-responsive">
                                 <table class="table ">
                                     <thead>
                                         <tr>
@@ -233,6 +234,7 @@
                                         </tr>
                                     </tbody>
                                 </table>
+                            </div>
                             </div> <!-- /.table-stats -->
                         </div>
                     </div> <!-- /.card -->

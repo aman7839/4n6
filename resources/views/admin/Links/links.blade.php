@@ -22,54 +22,56 @@
                             <a href="{{url('admin/category')}}"><i class="fa fa-times"></i></a>
                         </div>
                     </form>
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
 
 
-                                <th>Edit</th>
-                                <th>Delete</th>
-                                <th>View Links</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                    <th>View Links</th>
 
 
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($category as $item)
-                            <tr>
-                                <td>{{ $item->id }}</td>
-                                <td>{{ $item->name }}</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($category as $item)
+                                <tr>
+                                    <td>{{ $item->id }}</td>
+                                    <td>{{ $item->name }}</td>
 
 
-                                <td>
-                                    <a href={{url("admin/editlinks/".$item->id)}} class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    </a>
-                                </td>
-                                <td>
+                                    <td>
+                                        <a href={{url("admin/editlinks/".$item->id)}} class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                        </a>
+                                    </td>
+                                    <td>
 
-                                    <a href={{url("admin/deletelinks/".$item->id)}} class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')"><i class="fa fa-trash" aria-hidden="true"></i>
-                                    </a>
+                                        <a href={{url("admin/deletelinks/".$item->id)}} class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')"><i class="fa fa-trash" aria-hidden="true"></i>
+                                        </a>
 
-                                </td>
-                                <td>
+                                    </td>
+                                    <td>
 
-                                    <a href={{url("admin/links?cat_id=".$item->id)}} class="btn btn-info btn-sm admin_cm_btn">View Links
+                                        <a href={{url("admin/links?cat_id=".$item->id)}} class="btn btn-info btn-sm admin_cm_btn">View Links
 
-                                    </a>
+                                        </a>
 
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
 
-                    </table>
+                        </table>
+                    </div>
                     @if($category->count()== 0)
-                        <div class="nodata_found">
-                            <img src="{{asset('/public/4n61/images/no_data.svg')}}" alt="">
-                        </div>
-                  @endif
+                    <div class="nodata_found">
+                        <img src="{{asset('/public/4n61/images/no_data.svg')}}" alt="">
+                    </div>
+                    @endif
                     <span>{{ $category->Links()}}</span>
                     <style>
                         .w-5 {
