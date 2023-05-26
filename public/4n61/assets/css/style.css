@@ -3001,6 +3001,10 @@ span[aria-current="page"] span {
   padding: 20px 0px;
 }
 /* custom media */
+/* database search */
+.all_results {
+  padding: 15px;
+}
 @media(max-width:1440px){
   .transcetion_card{
     max-width: 65%;

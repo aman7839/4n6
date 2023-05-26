@@ -449,14 +449,14 @@
                             <i class="menu-icon fa fa-dot-circle-o" aria-hidden="true"></i>
                             IST Generator
                         </a>
-                          <a class="dropdown-item" href="{{url('coach/extemp')}}" data-toggle="tooltip" data-placement="right" title="Extemp Topic Generator"> 
+                          <a class="dropdown-item" href="{{url('student/extemp')}}" data-toggle="tooltip" data-placement="right" title="Extemp Topic Generator"> 
                             <i class="menu-icon fa fa-dot-circle-o" aria-hidden="true"></i>ET Generator</a>
                             
                         </div>
                       </li>
-                      <li class="nav-item {{ request()->is('/demosearch') ? 'active' : ''}}">  
+                      <li class="nav-item {{ request()->is('student/search') ? 'active' : ''}}">  
 
-                        <a href="{{url('/demosearch')}}"><i class="menu-icon fa fa-search"></i> Search Database</a>
+                        <a href="{{url('student/search')}}"><i class="menu-icon fa fa-search"></i> Search Database</a>
 
                     </li>
 
