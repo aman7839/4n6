@@ -15,7 +15,7 @@
                     </div>
     
                     <div class="card-body">     
-    
+                    <div class="table-responsive">
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
@@ -50,6 +50,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                    </div>
                         <span>{{ $messages->links() }}</span>
                         <style>
                             .w-5{

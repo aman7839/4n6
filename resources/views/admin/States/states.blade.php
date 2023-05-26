@@ -34,7 +34,7 @@
                         
                     </div>
                     <div class="card-body">     
-    
+                    <div class="table-responsive">
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
@@ -73,6 +73,7 @@
                             </tbody>
                             
                         </table>
+                    </div>
                         <span>{{ $state->Links()}}</span>
                         <style>
                             .w-5{
