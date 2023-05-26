@@ -447,18 +447,25 @@ class userController extends Controller
             ini_set('max_execution_time', 0);
             ini_set('memory_limit', '4000M');
             try {
+                ob_start();
                 $spreadSheet = new Spreadsheet();
+              
                 $spreadSheet->getActiveSheet()->getDefaultColumnDimension()->setWidth(20);
                 $spreadSheet->getActiveSheet()->fromArray($customer_data);
                 $Excel_writer = new Xls($spreadSheet);
-                header('Content-Type: application/vnd.ms-excel');
-                header('Content-Disposition: attachment;filename="Customer_ExportedData.xls"');
-                header('Cache-Control: max-age=0');
+                 
+                
+                
+                header("Content-Type: application/vnd.ms-excel");
+                
+               header('Content-Disposition: attachment;filename="Customer_ExportedData.xls"');
+                header("Cache-Control: max-age=0");
+                
                 ob_end_clean();
                 $Excel_writer->save('php://output');
                 exit();
             } catch (Exception $e) {
-                return;
+                return ;
             }
      
         }

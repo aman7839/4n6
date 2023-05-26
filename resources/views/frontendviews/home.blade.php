@@ -19,7 +19,7 @@
           
            @foreach ($offerPrice as $item)
 
-                @if ($item->status == '1' && $item->to_date >= $today )
+                @if ($item->to_date >= $today )
                 {{-- @if($item->from_date == $today || $item->to_date == $today ) --}}
 
                 <div class="col-lg-3">

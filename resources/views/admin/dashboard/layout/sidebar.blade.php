@@ -5,7 +5,8 @@
     <header id="header" class="header">
 
         <div class="top-left">
-
+@auth 
+            @if (Auth::User()->role == "admin")
             <div class="navbar-header">
 
                 <a class="navbar-brand" href="{{URL::to('/admin')}}"><img src="{{asset('/public/4n61/images/fanatic_logo.svg')}}" alt="Logo"></a>
@@ -15,6 +16,36 @@
                 {{-- <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a> --}}
 
             </div>
+
+            @endif
+
+            @if (Auth::User()->role == "student")
+            <div class="navbar-header">
+
+                <a class="navbar-brand" href="{{url('/')}}"><img src="{{asset('/public/4n61/images/fanatic_logo.svg')}}" alt="Logo"></a>
+
+                <a class="navbar-brand hidden" href="{{url('/')}}"><img src="{{asset('/public/4n61//images/logo2.png')}}" alt="Logo"></a>
+
+                {{-- <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a> --}}
+
+            </div>
+
+            @endif
+
+            @if (Auth::User()->role == "coach")
+            <div class="navbar-header">
+
+                <a class="navbar-brand" href="{{url('/')}}"><img src="{{asset('/public/4n61/images/fanatic_logo.svg')}}" alt="Logo"></a>
+
+                <a class="navbar-brand hidden" href="{{url('/')}}"><img src="{{asset('/public/4n61//images/logo2.png')}}" alt="Logo"></a>
+
+                {{-- <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a> --}}
+
+            </div>
+
+            @endif
+
+            @endauth
 
         </div>
 

@@ -320,12 +320,41 @@ class CoachesController extends Controller
         $categories = $request["category_name"];
         $fullSearch = $request["wide_search"];
 
+
+        // $coachId = Auth::user()->id;
+        // $studentID = Auth::user()->id;
+
+
+        if (Auth::user()->role == "coach"){
+
         $today = date('Y-m-d H:i:s');
         // echo $today;
         $coachID = Auth::user()->id;
         $membership = Membership::where('user_id', $coachID)-> whereDate('start_date', '<=', $today)
         ->whereDate('end_date', '>=', $today)->where('status',1)
         ->first();
+
+        //          echo "<pre>"; print_r($membership); echo "</pre>";
+        //    exit;
+        }
+
+        if (Auth::user()->role == "student"){
+
+        
+            $today = date('Y-m-d H:i:s');
+            $studentID = Auth::user()->id;
+            $coachStudent = User::where('id',$studentID)->get();
+            //  $vaultAccessToStudentID = $coachStudent[0]->vault_access;
+             $studentDetails = CoachStudent::where('student_id',$studentID )->get();   
+             
+        //          echo "<pre>"; print_r($studentDetails->toArray()); echo "</pre>";
+        //    exit;
+            $coachID =     $studentDetails[0]->coach_id;
+            $membership = Membership::where('user_id', $coachID)-> whereDate('start_date', '<=', $today)
+            ->whereDate('end_date', '>=', $today)->where('status',1)
+            ->first();
+            
+        }
         // echo $membership; exit;
 
 

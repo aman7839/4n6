@@ -429,7 +429,18 @@
       <div id="validationError"></div>
 
       {{-- @else
+
+      @auth
+
+      @if (Auth::user()->role == "coach")
         <h5 class="text-center mt-3">You are not authorised to search database, please take membership to <a href="{{url('coach/create-transaction')}}">continue your search</a></h5>
+       @endif
+
+       @if (Auth::user()->role == "student")
+       <h5 class="text-center mt-3">You are not authorised to search database, please contact your coach</h5>
+      @endif
+        @endauth
+
 
       @endif --}}
       @endif
