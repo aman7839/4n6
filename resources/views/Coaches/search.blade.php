@@ -1,16 +1,19 @@
-@extends('frontendviews.main')
+{{-- @extends('frontendviews.main')
 
 
 
-    @section('content')
+    @section('content') --}}
 
+    @extends('admin.dashboard.layout.main')
+
+  @section('content')
 
 
     <section class="cmn_header_section space" style="background-image:{{asset('url(public/4n61/images/demo_bg.jpg)')}};">
 
         <div class="custom_container">
 
-            <h1>Demo</h1>
+            {{-- <h1>Demo</h1> --}}
 
         </div>
 
@@ -36,7 +39,7 @@
 
         <div class="container">
 
-            <ul class="p-0">
+            {{-- <ul class="p-0">
 
                 <li>A detailed USER'S GUIDE is available on the User's Guides page of this website.</li>
 
@@ -54,7 +57,7 @@
 
                             in the VAULT, email us at laurie@4n6fanatics.com and we'd be happy to send a sample to you for your review.</li>
 
-            </ul>
+            </ul> --}}
 
            
      @auth
