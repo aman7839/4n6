@@ -26,9 +26,12 @@
                         <tr>
                             <td scope="row">{{$activemember->id}}</td>
 
-                            {{-- @if(isset($activemember->user->id)) --}}
+                          @if(isset($activemember->user->id)) 
                             <td><a href="{{url('admin/viewUsers/'.$activemember->user->id)}}">{{$activemember->user->name ?? ''}}</a></td>
-                            {{-- @endif --}}
+                            @else
+                            <td>NIl</td>
+                        
+                         @endif 
                         {{-- <th><a href="{{url('admin/viewUsers/'.$activemember->user->id)}}">{{$activemember->user->name ?? ''}}</a></th> --}}
 
                             {{-- <td>{{($activemember->user->name)}}</td> --}}
