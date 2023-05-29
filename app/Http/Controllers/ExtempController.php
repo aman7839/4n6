@@ -102,6 +102,8 @@ class ExtempController extends Controller
         }
 
         public function viewExtempPost(Request $request){
+
+          
             $date = Extemp::groupBy('month','year')->orderBy('year', 'ASC')->orderBy('month', 'ASC')->get();
             $Topic = Extemp::groupBy('topic_id')->with('topic')->get();
             $monthName = array('01'=>'JAN','02'=>'FEB','03'=>'MAR','04'=>'APR','05'=>'MAY','06'=>'JUNE','07'=>'JULY','08'=>'AUG','09'=>'SEP','10'=>'OCT','11'=>'NOV','12'=>'DEC',);
@@ -120,7 +122,8 @@ class ExtempController extends Controller
     
                 }
                                    
-              $topic =   $topic->paginate(10);
+              $topic =   $topic->paginate(3);
+              $topic->appends($request->only(['topic_name', 'date']));
     
                return view('admin.Data.extemp',compact('topic','date','Topic','dateselected','monthName','topicName'));
                    

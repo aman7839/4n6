@@ -171,8 +171,8 @@ Route::get('/addextemptopics', [ExtempController::class, 'addExtempTopics']);
 Route::post('/saveextemptopics', [ExtempController::class, 'saveExtempTopics']);
 Route::get('/editextemptopics/{id}', [ExtempController::class, 'editExtempTopics']);
 Route::put('/updateextemptopics/{id}', [ExtempController::class, 'updateExtempTopics']);
-Route::get('/extempview', [ExtempController::class, 'viewEXtemp']);
-Route::post('/extemppost', [ExtempController::class, 'viewEXtempPost']);
+Route::get('/extempview', [ExtempController::class, 'viewExtemp']);
+// Route::post('/extempview', [ExtempController::class, 'viewExtempPost']);
 
 Route::post('/importextempdata', [ExtempController::class, 'importData']);
 

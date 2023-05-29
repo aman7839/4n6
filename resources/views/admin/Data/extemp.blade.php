@@ -10,8 +10,9 @@
 
 
 
-        <form action="{{url("admin/extemppost")}}" method="post" enctype="multipart/form-data">
-            @csrf
+        {{-- <form action="{{url("admin/extempview")}}" method="post" enctype="multipart/form-data"> --}}
+            <form action="">
+            {{-- @csrf --}}
             <div class="extemp_search">
 
                 <div class="row m-0">
@@ -54,7 +55,7 @@
                                             @foreach ($Topic as $topics)
 
 
-                                            <option value={{$topics->topic_id}} {{$topics->topic_id == $topicName ? 'selected' : ''}}>{{$topics->topic->name}}</option>
+                                            <option value={{$topics->topic_id}} {{$topics->topic_id == $topicName ? 'selected' : ''}}>{{$topics->topic->name ?? ''}}</option>
 
                                             @endforeach
 
@@ -111,6 +112,7 @@
 
                     </fieldset>
                 </form>
+
                 @if($topic->count()>0)
                 <div class="table-responsive">
                 <table class="table table-bordered table-striped">
@@ -131,19 +133,19 @@
                     <tbody>
                         @foreach ($topic as $item)
                         <tr>
-                            <td>{{ $item->id }}</td>
-                            <td>{{ $item->topic['name'] }}</td>
-                            <td>{{ $item->question }}</td>
-                            <td>{{ $monthName[$item->month]}}/{{$item->year}}</td>
+                            <td>{{ $item->id  ?? ''}}</td>
+                            <td>{{ $item->topic['name'] ?? '' }}</td>
+                            <td>{{ $item->question ?? '' }}</td>
+                            <td>{{ $monthName[$item->month] ?? ''}}/{{$item->year  ?? ''}}</td>
                             {{-- $$monthName[$monthday->month]}}[$monthday->month]}} --}}
 
                             <td>
-                                <a href={{url('admin/editextemp/'.$item->id)}} class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                <a href={{url('admin/editextemp/'.$item->id ?? '')}} class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                 </a>
                             </td>
                             <td>
 
-                                <a href={{url('admin/deleteextempdata/'.$item->id)}} class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')"><i class="fa fa-trash" aria-hidden="true"></i>
+                                <a href={{url('admin/deleteextempdata/'.$item->id ?? '')}} class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')"><i class="fa fa-trash" aria-hidden="true"></i>
                                 </a>
                             </td>
                         </tr>
@@ -152,7 +154,12 @@
 
                 </table>
                 </div>
-                <span>{{ $topic->Links()}}</span>
+                <span>
+                    
+                    {{ $topic->withQueryString()->Links()}}
+                {{-- {{$topic->render()}} --}}
+                
+                </span>
                 <style>
                     .w-5 {
                         display: none;

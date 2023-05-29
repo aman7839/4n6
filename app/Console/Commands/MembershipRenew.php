@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 use App\Models\User;
 use App\Mail\MembershipExpire;
 use App\Models\Membership;
+use App\Models\offerPrice;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
@@ -45,6 +46,8 @@ class MembershipRenew extends Command
             // $reminderDate = Carbon::now()->addWeeks(3)->startOfWeek()->setTimezone('America/Los_Angeles')->setHour(15)->setMinute(0)->setSecond(0);
             $reminderDate = Carbon::now()->addWeeks(3);
             $membershipExpireUsers= Membership::whereDate('end_date', $reminderDate)->with('user')->get();
+
+            $offerPrice = offerPrice::where('from_date','<=', Carbon::now())->where ('to_date', '>=', Carbon::now())->first();
             // $details = [
             //     // 'name' => $messages->name,
             //     'user_name' =>  $request->name,
@@ -59,7 +62,9 @@ class MembershipRenew extends Command
                     'coach_name' =>  $users->user->name,
                     'assist_coach_name'=> $users->user->assistant_coach_name,
                     'expiration_date'=> date('Y-m-d', strtotime($users->end_date)),
-                    'school_name'=> $users->user->school_name
+                    'school_name'=> $users->user->school_name,
+                    'offer_price' => $offerPrice->offer_price,
+                    'actual_price'=> $offerPrice->price,
                     
                 ];
                

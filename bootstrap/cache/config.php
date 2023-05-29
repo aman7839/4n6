@@ -467,11 +467,11 @@
       'smtp' => 
       array (
         'transport' => 'smtp',
-        'host' => 'smtp.zoho.in',
-        'port' => '465',
-        'encryption' => 'ssl',
-        'username' => 'suraj@ultivic.com',
-        'password' => 'Suraj@16080',
+        'host' => 'smtp.gmail.com',
+        'port' => '587',
+        'encryption' => 'tls',
+        'username' => 'amansingh7839@gmail.com',
+        'password' => 'excyqpgtvdwdhdih',
         'timeout' => NULL,
         'auth_mode' => NULL,
       ),
@@ -504,8 +504,8 @@
     ),
     'from' => 
     array (
-      'address' => 'suraj@ultivic.com',
-      'name' => 'amankumar',
+      'address' => 'amansingh7839@gmail.com',
+      'name' => 'AmanKumar',
     ),
     'markdown' => 
     array (

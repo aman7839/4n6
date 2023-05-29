@@ -46,7 +46,7 @@
                                     {{-- <a href="{{ asset('/public/images/'. $item->image)}}" target="_blank"> view Pdf </a>; --}}
                                     <td> {{$item->id}}</td>
 
-                                    <td> {{$item->image}}</td>
+                                    <td> {{$item->name}}</td>
                                     <td>{{ $item->updated_at }}</td>
 
 

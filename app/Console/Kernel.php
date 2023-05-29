@@ -34,7 +34,7 @@ class Kernel extends ConsoleKernel
         //->weeklyOn(1, '8:00');
 
         // DB::table('recent_users')->delete();
-        // $schedule->command('membershipreminderone:email')->everyMinute();
+        // $schedule->command('membershipremindersecond:email')->everyMinute();
 
         // $schedule->call(function(){
 

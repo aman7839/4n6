@@ -7,6 +7,8 @@ use App\Mail\MembershipExpire;
 use App\Models\Membership;
 use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
+use App\Models\offerPrice;
+
 class SecondMembershipReminder extends Command
 {
     /**
@@ -44,6 +46,9 @@ class SecondMembershipReminder extends Command
         $reminderDate = Carbon::now()->addWeeks(2);
 
         $membershipExpireUsers= Membership::whereDate('end_date', $reminderDate)->with('user')->get();
+
+        $offerPrice = offerPrice::where('from_date','<=', Carbon::now())->where ('to_date', '>=', Carbon::now())->first();
+
         // $details = [
         //     // 'name' => $messages->name,
         //     'user_name' =>  $request->name,
@@ -58,7 +63,9 @@ class SecondMembershipReminder extends Command
                 'coach_name' =>  $users->user->name,
                 'assist_coach_name'=> $users->user->assistant_coach_name,
                 'expiration_date'=> date('Y-m-d', strtotime($users->end_date)),
-                'school_name'=> $users->user->school_name
+                'school_name'=> $users->user->school_name,
+                'offer_price' => $offerPrice->offer_price,
+                'actual_price'=> $offerPrice->price,
                 
             ];
            

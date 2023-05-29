@@ -35,7 +35,7 @@
        
        
         <li>
-         As a special thank-you to our members, renewals will be processed at our reduced renewal rate . . . only $200.00 instead of $250.00!
+         As a special thank-you to our members, renewals will be processed at our reduced renewal rate . . . only ${{$details['offer_price']}} instead of ${{$details['actual_price']}}!
         </li>
     </ul>
 
