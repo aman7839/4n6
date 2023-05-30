@@ -29,7 +29,7 @@ class contactusController extends Controller
        $user->description = $request->description;
        $user->save();
        $details = [
-        'title' => 'Hi admin,' . $request->name . 'has been submitting a contact us form',
+        'title' => 'Hi admin,' . $request->name . 'has been submitted a contact us form, please check messages section to answer the query.',
         'body' => $request->description
     ];
 

@@ -9,6 +9,8 @@ use App\Models\Price;
 use App\Models\offerPrice;
 use App\Models\Membership;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
+
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 class PayPalController extends Controller
@@ -121,9 +123,16 @@ class PayPalController extends Controller
                 $membership->offer_id=$offerPrice->id;
             }
             $membership->save();
+            // $details = [
+            //     'desciption' => 'Hi admin,' . Auth::user()->user_name . 'has been taken a new membership via paypal.',
+            //     // 'body' => $request->description
+            // ];
+            // Mail::to($request->email)->send(new \App\Mail\RenewMembership ($details));
+
             return redirect()
                 ->route('createTransaction')
                 ->with('success', 'Transaction complete.');
+
         } else {
             return redirect()
                 ->route('createTransaction')

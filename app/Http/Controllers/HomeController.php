@@ -16,7 +16,7 @@ use App\Models\CoachStudent;
 
 use App\Models\category;
 use App\Models\categoryLinks;
-
+use App\Models\SubscribeUs;
 
 use App\Models\awards;
 use App\Models\Extemp;
@@ -294,7 +294,7 @@ class HomeController extends Controller
         $updateOfferPrice->offer_price = $request->input("offer_price");
         $updateOfferPrice->from_date = $request->input("from_date");
         $updateOfferPrice->to_date = $request->input("to_date");
-        $updateOfferPrice->status = $request->input("status");
+        // $updateOfferPrice->status = $request->input("status");
         $updateOfferPrice->description = $request->input("description");
         $updateOfferPrice->update();
 
@@ -763,5 +763,26 @@ class HomeController extends Controller
         );
     }
 
+
+    public function joinUS(Request $request)
+{
+
+    $request->validate([
+
+        
+        "email" => "required",
+        
+    ]);
+
+        $subscribeUs = new SubscribeUs;
+
+        $subscribeUs->email = $request->email;
+
+        $subscribeUs->save();
+
+        return redirect()->back()->with('success','You have been subscribed successfully.');
+
+
+}
    
 }

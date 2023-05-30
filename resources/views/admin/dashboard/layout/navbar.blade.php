@@ -62,7 +62,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
 
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/4.0.13/css/froala_editor.pkgd.min.css">
 
     <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet" />
 
@@ -173,6 +173,13 @@
                         <a href="{{url('admin/dashboard')}}"><i class="menu-icon fa fa-tachometer"></i>Dashboard </a>
 
                     </li>
+
+                    <li class="nav-item {{ request()->is('admin/content') ? 'active' : ''}}">
+
+                        <a href="{{url('admin/content')}}"><i class="menu-icon fa fa-tachometer"></i>Content Editor </a>
+
+                    </li>
+
 
 
 
@@ -337,6 +344,12 @@
                         
                         </div>
                       </li>
+
+                      <li class="nav-item {{ request()->is('coach/home') ? 'active' : ''}}">  
+
+                        <a href="{{url('coach/home')}}"><i class="menu-icon fa fa-file"></i> Home</a>
+
+                    </li>
 
 
                       <li class="nav-item dropdown admin_dropdown">

@@ -21,7 +21,7 @@
             <div class="col-md-6 col-lg-2">
                 <div class="quick_links">
                     <ul>
-                        <li><a href="{{url('aboutUs')}}">About Us</a></li>
+                        <li><a href="{{url('aboutUs')}}">Our Story</a></li>
                         <li><a href="{{url('documents')}}">Documents
                         </a></li>
                         <li><a href="{{url('contactUs')}}">Contact Us</a></li>
@@ -34,9 +34,14 @@
             <div class="col-md-6 col-lg-4">
                 <div class="subscritpion">
                     <h4>Join Our Mailing List</h4>
-                    <form action="">
+                    <form action="{{url('joinus')}}" method = "post">
+
+                        @csrf
                         <div>
-                            <input type="email" placeholder="Email">
+                            <input type="email"  name =  "email" placeholder="Email">
+
+                            <span class ="text-danger">@error('email'){{$message}} @enderror</span>
+
                            <div>
                             <button>Send</button>
                            </div>

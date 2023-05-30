@@ -17,6 +17,8 @@ use App\Models\categoryLinks;
 use App\Models\awards;
 use App\Models\Extemp;
 use App\Models\Membership;
+use App\Models\EditPage;
+
 
 use App\Models\Theme;
 use App\Models\Data;
@@ -36,6 +38,22 @@ class CoachesController extends Controller
       return View('Coaches.dashboard');
 
     }
+
+    public function homePage()
+
+    {
+        
+     $pageContent = EditPage::where('page_title','Coach Home Page')->get();
+
+    // $weeklyReports =   users_guide::where("name", "Like", "%" ."weekly". "%")->orderBy('updated_at','asc')->get();
+
+    // $userGuides =   users_guide::where("name", "Like", "%" ."User's Guide". "%")->first();
+
+      return View('Coaches.home', compact('pageContent'));
+
+    }
+
+   
     public function logout()
 
     {

@@ -71,6 +71,12 @@ Route::post('/saveUsers', [DashboardController::class, 'saveUsers'])->name('user
 
 Route::get('/editUsers/{id}', [DashboardController::class, 'editUsers']);
 Route::get('/viewUsers/{id}', [DashboardController::class, 'viewUser']);
+Route::get('/content', [DashboardController::class, 'showPageContent']);
+Route::get('/editcontent/{id}', [DashboardController::class, 'editPageContent']);
+Route::put('/editcontent/{id}', [DashboardController::class, 'savePageContent']);
+
+
+
 
 
 Route::put('/updateUsers/{id}', [DashboardController::class, 'updateUsers'])->name('update.users');
@@ -243,6 +249,9 @@ Route::get('/printforiegn', [CoachesController::class,'printForiegnTopic']);
 Route::get('/aboutUs', [HomeController::class,'aboutUs']);
 Route::get('/home', [HomeController::class,'Home']);
 Route::get('/', [HomeController::class,'Home']);
+Route::get('/', [HomeController::class,'Home']);
+Route::post('/joinus', [HomeController::class,'joinUS']);
+
 
 
 Route::get('/contactUs', [HomeController::class,'contactUs']);
@@ -311,6 +320,9 @@ Route::put('/updatestudent/{id}', [CoachesController::class, 'updateStudent']);
 Route::get('/deletestudent/{id}', [CoachesController::class, 'DeleteStudent']);
 Route::get('/editProfile/{id}', [DashboardController::class, 'editProfile']);
 Route::put('/updateProfile/{id}', [DashboardController::class, 'updateprofile']);
+
+Route::get('/home', [CoachesController::class, 'homePage']);
+
 
 /// PAYPAL ROUTES
 Route::get('create-transaction', [PayPalController::class, 'createTransaction'])->name('createTransaction');

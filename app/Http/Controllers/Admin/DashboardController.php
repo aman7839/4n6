@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\CoachStudent;
+use App\Models\EditPage;
 use App\Models\states;
 
 use App\Models\Membership;
@@ -535,6 +536,38 @@ class DashboardController extends Controller
         }
     }
 
+    public function showPageContent(){
+
+
+      $pageContent = EditPage::all();
+
+      return view('admin.contentEditor.coachHome', compact('pageContent'));
+
+
+    }
+
+    public function editPageContent($id){
+    
+       
+        $editPageContent = EditPage::find($id);
+
+      return view('admin.contentEditor.editcoachHome', compact('editPageContent'));
+
+    }
+
+    public function savePageContent(Request $request,$id){
+    
+        
+
+        $editPageContent = EditPage::find($id);
+
+        $editPageContent->page_description = $request->input('description');
+
+        $editPageContent->update();
+
+      return view('admin.contentEditor.editcoachHome', compact('editPageContent'));
+
+    }
 
     public function updateUsers(Request $request, $id)
     {
