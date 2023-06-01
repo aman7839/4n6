@@ -26,6 +26,7 @@ use App\Models\ExtempTopic;
 use Illuminate\Support\Facades\DB;
 use App\Models\playCategory;
 use App\Models\Reviews;
+use App\Models\Tutorial;
 use Illuminate\Support\Facades\Auth;
 
 class CoachesController extends Controller
@@ -613,6 +614,13 @@ class CoachesController extends Controller
 
         return redirect('coach/vault')->with('success','Vault access updated successfully');
       
+    }
+
+    public function viewTutorial(){
+
+        $videos = Tutorial::limit(3)->orderBy('updated_at','desc')->get();
+        
+        return view("Coaches.tutorial",compact('videos') );
     }
 
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tutorial;
 use App\Models\users_guide;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -120,6 +121,10 @@ class UsersGuideController extends Controller
     public function deleteDocuments($id)
     { 
             $document = users_guide::find($id);
+            if($document->count()>0){
+                unlink(public_path('/images/'.$document->image));
+    
+                }
             $document->delete();
             return redirect()->back()->with('error', 'Document Deleted Successfully');
         
@@ -129,6 +134,110 @@ class UsersGuideController extends Controller
         $file_path = ('public/images/'.$file);
         return response()->file( $file_path);
     }
+
+    public function tutorial(){
+
+
+        $video = Tutorial::all();
+        return view('admin.Tutorial.tutorial', compact('video'));
+
+
+    }
+
+    public function addtutorial(){
+
+       
+
+        return view('admin.Tutorial.addTutorial');
+
+
+    }
+
+    public function saveTutorial(Request $request)
+    {           
+        $request->validate([
+
+            'name' => 'required',
+            // 'file'  => 'mimes:mp4,mov,ogg | max:20000'
+            'video' => 'required|mimes:mp4,mov,ogg | max:50000',
+
+        ]);
+           $tutorialVideo = new Tutorial();
+
+        if ($request->hasfile('video')) {
+            $file = $request->file('video');
+            $imageName = time() . '-' . $file->getClientOriginalName();
+            
+            $file->move('public/images/', $imageName);
+
+            $tutorialVideo->video =   $imageName;
+            $tutorialVideo->name =   $request->name;
+            $tutorialVideo->save();
+            if ($tutorialVideo) {
+                return redirect('admin/tutorial')->with('success', 'Video Added Successfully');
+            } else {
+                return redirect()->back()->with('error', 'Document Not Added');
+            }
+        }
+
+    }
+
+    public function deleteTutorial($id)
+    { 
+
+        
+            $video = Tutorial::find($id);
+
+            if($video->count()>0){
+            unlink(public_path('/images/'.$video->video));
+
+            }
+            $video->delete();
+            return redirect()->back()->with('error', 'Video Deleted Successfully');
+        
+    }
+
+    public function editTutorial($id){
+
+        $editVideo = Tutorial::find($id);
+
+        return view('admin.Tutorial.edittutorial', compact('editVideo'));
+    }
     
 
+    public function updateVideo(Request $request, $id)
+
+    
+    {
+        $request->validate([
+
+            'name' => 'required',
+            
+            'video' => 'required|mimes:mp4,mov,ogg | max:50000',
+
+
+        ]);
+      
+       $Video = Tutorial::find($id);
+
+       $Video->name =  $request->input('name');
+       if ($request->hasfile('video')) {
+        $destination = 'public/images/' . $Video->image;
+        if (File::exists($destination)) {
+            File::delete($destination);
+        }
+        $file = $request->file('video');
+        $videoname = time() . '-' . $file->getClientOriginalName();
+        $file->move('public/images/', $videoname);
+        $Video->video =   $videoname;
+  
+         $Video->update();
+
+
+
+    return redirect('admin/tutorial')->with('success', 'Video updated Successfully');
+
+    }
+
+}
 }

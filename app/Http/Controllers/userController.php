@@ -132,7 +132,8 @@ class userController extends Controller
                        
                         if($request->payment_method == "check/po"){
                 
-                        Mail::to($request->email)->send(new \App\Mail\SignUpMail($details));
+                            
+                        Mail::to($request->email)->send(new \App\Mail\SignUpMail($details)); 
                         Mail::to($request->assistant_coach_email_address)->send(new \App\Mail\SignUpMail($details));
                         Mail::to($request->billing_email_address)->send(new \App\Mail\SignUpMail($details));
 

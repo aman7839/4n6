@@ -237,6 +237,20 @@ Route::post('/extemp', [HomeController::class,'extempTopicGeneratorPost']);
 Route::get('/printdomestic', [CoachesController::class,'printDomesticTopic']);
 Route::get('/printforiegn', [CoachesController::class,'printForiegnTopic']);
 
+//  tutorial routes
+Route::get('/tutorial', [UsersGuideController::class,'tutorial']);
+Route::get('/addtutorial', [UsersGuideController::class,'addtutorial']);
+Route::post('/savetutorial', [UsersGuideController::class,'saveTutorial']);
+Route::get('/deletetutorial/{id}', [UsersGuideController::class,'deleteTutorial']);
+Route::get('/edittutorial/{id}', [UsersGuideController::class,'editTutorial']);
+Route::put('/savetutorial/{id}', [UsersGuideController::class,'updateVideo']);
+
+
+
+
+
+
+
 
 
 
@@ -358,6 +372,8 @@ Route::get('/search', [CoachesController::class,'demoSearch']);
 Route::post('/search', [CoachesController::class,'demoSearchPost']);
 Route::post('/searchprints', [CoachesController::class,'demoSearchPrint']);
 Route::get('/searchprint', [CoachesController::class,'demoSearchPrint']);
+Route::get('/tutorial', [CoachesController::class,'viewTutorial']);
+
 
 
 
@@ -376,6 +392,8 @@ Route::get('/logout', [StudentsController::class, 'logout']);
 Route::get('/logout', [StudentsController::class, 'logout']);
 Route::get('/extemp', [HomeController::class,'extempTopicGenerator']);
 Route::post('/extemp', [HomeController::class,'extempTopicGeneratorPost']);
+Route::get('/home', [CoachesController::class, 'homePage']);
+
 // Route::get('vault', [CoachController::class, 'getData']);
 // search database
 Route::get('/search', [CoachesController::class,'demoSearch']);
@@ -388,6 +406,8 @@ Route::get('/extemp', [HomeController::class,'extempTopicGenerator']);
 Route::post('/extemp', [HomeController::class,'extempTopicGeneratorPost']);
 Route::get('/printdomestic', [CoachesController::class,'printDomesticTopic']);
 Route::get('/printforiegn', [CoachesController::class,'printForiegnTopic']);
+Route::get('/tutorial', [CoachesController::class,'viewTutorial']);
+
 
 // vault routes
 

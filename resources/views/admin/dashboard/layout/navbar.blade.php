@@ -228,6 +228,12 @@
                         <a href="{{url('admin/documents')}}"><i class="menu-icon fa fa-file-text"></i>User Guides/Documents </a>
 
                     </li>
+
+                    <li class="nav-item {{ request()->is('admin/tutorial') ? 'active' : ''}}">
+
+                        <a href="{{url('admin/tutorial')}}"><i class="menu-icon fa fa-file-text"></i>Tutorial Videos</a>
+
+                    </li>
                     <li class="nav-item {{ request()->is('admin/offerprice') ? 'active' : ''}}">
 
                         <a href="{{url('admin/offerprice')}}"><i class="menu-icon fa fa-certificate"></i>Offer Price </a>
@@ -392,6 +398,12 @@
 
                     </li>
 
+                    <li class="nav-item {{ request()->is('coach/tutorial') ? 'active' : ''}}">  
+
+                        <a href="{{url('coach/tutorial')}}"><i class="menu-icon fa fa-search"></i> Tutorials</a>
+
+                    </li>
+
                     {{-- <li class="nav-item {{ request()->is('coach/extemp') ? 'active' : ''}}">  
 
                         <a href="{{url('coach/extemp')}}"><i class="menu-icon fa fa-table"></i> Extemp Topic Generator</a>
@@ -449,6 +461,12 @@
 
                     </li> --}}
 
+                    <li class="nav-item {{ request()->is('student/home') ? 'active' : ''}}">  
+
+                        <a href="{{url('student/home')}}"><i class="menu-icon fa fa-file"></i> Home</a>
+
+                    </li>
+
                     <li class="nav-item dropdown admin_dropdown">
                         <a class=" dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="menu-icon fa fa-calendar" aria-hidden="true"></i> Limited Prep Events <i class="fa fa-chevron-right arrown_style"></i>
@@ -470,6 +488,12 @@
                       <li class="nav-item {{ request()->is('student/search') ? 'active' : ''}}">  
 
                         <a href="{{url('student/search')}}"><i class="menu-icon fa fa-search"></i> Search Database</a>
+
+                    </li>
+
+                    <li class="nav-item {{ request()->is('student/tutorial') ? 'active' : ''}}">  
+
+                        <a href="{{url('student/tutorial')}}"><i class="menu-icon fa fa-search"></i> Tutorials</a>
 
                     </li>
 

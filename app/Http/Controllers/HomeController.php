@@ -26,6 +26,7 @@ use App\Models\ExtempTopic;
 use Illuminate\Support\Facades\DB;
 use App\Models\playCategory;
 use App\Models\Reviews;
+use App\Models\Tutorial;
 use Illuminate\Support\Facades\Auth;
 
 use Carbon\Carbon;
@@ -88,7 +89,15 @@ class HomeController extends Controller
 
     public function documents()
     {
-        $document = users_guide::all();
+        $document =   users_guide::where("name", "Like", "%" ."Price Quote". "%")
+        ->orwhere("name", "Like", "%" ."W-9". "%")
+        ->orwhere("name", "Like", "%" ."VPAT". "%")
+        ->orwhere("name", "Like", "%" ."Sole Source". "%")
+        ->orwhere("name", "Like", "%" ."Privacy Policy/Terms ". "%")
+        ->get();
+
+        
+// dd($document);
 
         return view("frontendviews.documents", compact("document"));
     }
@@ -119,7 +128,9 @@ class HomeController extends Controller
     }
     public function tutorial()
     {
-        return view("frontendviews.tutorial");
+
+        $videos = Tutorial::limit(3)->orderBy('updated_at','desc')->get();
+        return view("frontendviews.tutorial", compact('videos'));
     }
     public function services()
     {

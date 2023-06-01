@@ -1,21 +1,21 @@
-@extends('frontendviews.main')
+@extends('admin.dashboard.layout.main')
 
-    @section('content')
+@section('content')
 
     <section class="cmn_header_section space" style="background-image:url('{{asset('/public/4n61/images/service_bg.jpg')}}');">
-        <div class="custom_container">
+        <div class="custom_container ml-5 ">
             <h1>Tutorial</h1>
         </div>
     </section>
 
 
-    <div class="custom_container space">
+    <div class="custom_container space ml-5">
         <div class="cmn_heading">
             <h2>Instructions</h2>
         </div>
     </div>
     <section class="instructor_content">
-        <div class="custom_container">
+        <div class="custom_container ml-5">
             <div class="row">
                 <div class="col-md-6">
                     <div class="tutorial_video">
@@ -25,7 +25,7 @@
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen></iframe> --}}
 
-                            <video width="600" height="300" controls>
+                            <video width="400" height="300" controls>
                                 <source src="{{asset('/public/images/'.$videos[0]->video ?? "")}}" type="video/mp4">
                                 {{-- <source src="movie.ogg" type="video/ogg"> --}}
                               Your browser does not support the video tag.
@@ -65,7 +65,7 @@
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen></iframe> --}}
 
-                            <video width="600" height="300" controls>
+                            <video width="400" height="300" controls>
                                 <source src="{{asset('/public/images/'.$videos[1]->video ?? "")}}" type="video/mp4">
                                 {{-- <source src="movie.ogg" type="video/ogg"> --}}
                               Your browser does not support the video tag.
@@ -81,7 +81,7 @@
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen></iframe> --}}
 
-                            <video width="600" height="300" controls>
+                            <video width="400" height="300" controls>
                                 <source src="{{asset('/public/images/'.$videos[2]->video ?? "" )}}" type="video/mp4">
                                   
                                 {{-- <source src="movie.ogg" type="video/ogg"> --}}

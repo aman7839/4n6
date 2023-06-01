@@ -28,11 +28,11 @@
                             <div class="doc_icon">
                               
                                     
-                                   <a href="{{'download/'. $item->image }}"target="_blank" > <img src="{{asset('/public/4n61/images/doc_icon.png')}}" alt=""></a>
+                                   <a href="{{'download/'. $item->image ?? '' }}"target="_blank" > <img src="{{asset('/public/4n61/images/doc_icon.png')}}" alt=""></a>
                             </div>
-                            <p class="doc_date">Name: {{$item->name}} </p>
+                            <p class="doc_date">Name: {{$item->name ?? ''}} </p>
 
-                            <p class="doc_date"> Date: {{$item->created_at}} pm </p>
+                            <p class="doc_date"> Date: {{date('Y-m-d h:i:s A', strtotime($item->created_at ?? ''))}} </p>
 
                     </div>
                 </div>

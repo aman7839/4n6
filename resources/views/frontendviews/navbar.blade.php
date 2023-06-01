@@ -164,7 +164,7 @@
                 <div class="navigates desktop">
 
                    @if(!Auth::user())
-                    <a href="#" class="facebook_link"><img src="{{asset('/public/4n61/images/facebook-square.svg')}}"></a>
+                    <a href="https://www.facebook.com/groups/4n6fanatics/" class="facebook_link"><img src="{{asset('/public/4n61/images/facebook-square.svg')}}"></a>
                     <a href="{{url('login')}}" class="cmn_btn">Member Login</a>
             @endif
                     @auth
