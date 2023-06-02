@@ -146,7 +146,6 @@ class UsersGuideController extends Controller
 
     public function addtutorial(){
 
-       
 
         return view('admin.Tutorial.addTutorial');
 
@@ -158,7 +157,7 @@ class UsersGuideController extends Controller
         $request->validate([
 
             'name' => 'required',
-            // 'file'  => 'mimes:mp4,mov,ogg | max:20000'
+          
             'video' => 'required|mimes:mp4,mov,ogg | max:50000',
 
         ]);
@@ -166,11 +165,11 @@ class UsersGuideController extends Controller
 
         if ($request->hasfile('video')) {
             $file = $request->file('video');
-            $imageName = time() . '-' . $file->getClientOriginalName();
+            $videoName = time() . '-' . $file->getClientOriginalName();
             
-            $file->move('public/images/', $imageName);
-
-            $tutorialVideo->video =   $imageName;
+            $file->move('public/images/', $videoName);
+ 
+            $tutorialVideo->video =   $videoName;
             $tutorialVideo->name =   $request->name;
             $tutorialVideo->save();
             if ($tutorialVideo) {

@@ -33,9 +33,13 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarScroll">
                     <ul class="navbar-nav me-auto my-2 my-lg-0 " style="--bs-scroll-height: 100px;">
+
+                        @if(!Auth::user())
                         <li class="nav-item ">
                             <a class="nav-link {{ request()->is('/') ? 'active' : ''}}" aria-current="page" href="{{url('/')}}">Home</a>
                         </li>
+
+                        @endif
                         {{-- <li class="nav-item ">
                             <a class="nav-link {{ request()->is('regeneratetopics') ? 'active' : ''}}" href="{{url('/regeneratetopics')}}">IDA</a>
                         </li> --}}
@@ -66,7 +70,7 @@
                             </ul>
                           </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->is('tutorial') ? 'active' : ''}}" href="{{url('tutorial')}}">Tutorial</a>
+                            <a class="nav-link {{ request()->is('tutorial') ? 'active' : ''}}" href="{{url('tutorial')}}">Tutorials</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('reviews') ? 'active' : ''}}" href="{{url('reviews')}}">Reviews</a>

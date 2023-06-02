@@ -253,7 +253,7 @@
                     </li>
                     <li class="nav-item {{ request()->is('admin/reviews') ? 'active' : ''}}">
 
-                        <a href="{{url('admin/reviews')}}"><i class="menu-icon fa fa-commenting"></i> Reviews</a>
+                        <a href="{{url('admin/reviews')}}"><i class="menu-icon fa fa-commenting"></i> Manage Reviews</a>
 
                     </li>
 
@@ -266,7 +266,7 @@
                    
                         <li class="nav-item {{ request()->is('admin/vault') ? 'active' : ''}}">
 
-                        <a href="{{url('admin/vault')}}"><i class="menu-icon fa fa-table"></i> Vault</a>
+                        <a href="{{url('admin/vault')}}"><i class="menu-icon fa fa-table"></i> Manage Vault</a>
 
                     </li>
 

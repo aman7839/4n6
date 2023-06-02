@@ -11,7 +11,7 @@
                     <div class="banner_content">
                         <h1 class="pb-4">The Ultimate Resources <br>
                             for Forensics (4N6), Speech <br>
-                            and/or Drama Coaches & Students</h1>
+                            and Drama Coaches & Students</h1>
                         <a href="{{url('login')}}" class="cmn_btn">Member Login</a>
                     </div>
                 </div>

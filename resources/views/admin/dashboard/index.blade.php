@@ -416,7 +416,7 @@
                     </div>
                 </div><!-- /.card -->
             </div>
-        </div> --}}
+        </div> 
         <!-- /Calender Chart Weather -->
         <!-- Modal - Calendar - Add New Event -->
         <div class="modal fade none-border" id="event-modal">
