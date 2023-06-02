@@ -3006,6 +3006,45 @@ span[aria-current="page"] span {
   text-align: center;
   padding: 20px 0px;
 }
+.tutorial_content {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+/* coaches */
+section.instructor_content .space {
+  padding: 70px 0px;
+}
+section.instructor_content .row {
+align-items: center;
+width: 100%;
+}
+.tutorial_content {
+  position: relative;
+}
+.top_icon {
+  position: absolute;
+  bottom: auto;
+  right: 20px;
+  top: 0;
+  left: auto;
+  width: 85px;
+}
+.tutorial_content ul li {
+  margin-bottom: 20px;
+  color: #000;
+}
+.tutorial_content li {
+  font-size: 18px;
+}
+.bottom_icon {
+  position: absolute;
+  bottom:  -30px;
+  right: 20px;
+  top: auto;
+  left: auto;
+  width: 85px;
+}
 /* custom media */
 /* database search */
 .all_results {
@@ -3041,4 +3080,19 @@ li.nav-item.dropdown.admin_dropdown .dropdown-menu {
   .transcetion_card{
     max-width: 100%;
   } 
+ .tutorial_content.order-2-sm {
+    order: 2;
+}
+.tutorial_video{
+  margin-bottom: 40px;
+}
+section.instructor_content .space {
+  padding: 40px 0px;
+}
+section.instructor_content video{
+  height: unset;
+}
+.bottom_icon{
+  bottom: 0px;
+}
 }

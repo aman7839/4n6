@@ -19,19 +19,27 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="tutorial_video">
-                        @if (count($videos)>0)
-                            <video width="600" height="300" controls>
+                        {{-- <iframe  height="450" src="https://www.youtube.com/embed/yAoLSRbwxL8" --}}
+                        {{-- <iframe  height="450" src="{{'../public/images'.$videos[0]->video}}}"
+                            title="Dummy Video" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe> --}}
+                            @if (count($videos)>0)
+                           
+                            <video width="100%" height="300" controls>
                                 <source src="{{asset('/public/images/'.$videos[0]->video ?? "")}}" type="video/mp4">
                                 {{-- <source src="movie.ogg" type="video/ogg"> --}}
-                            Your browser does not support the video tag.
-                          </video>
-                        @else
-                        <iframe  height="450" src="https://www.youtube.com/embed/yAoLSRbwxL8"
-                        title="Dummy Video" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe>
-                        @endif
-                                                 
+                              Your browser does not support the video tag.
+                              </video>
+
+                              @else
+
+                               <iframe  height="450" src="https://www.youtube.com/embed/yAoLSRbwxL8"
+                            title="Dummy Video" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                              @endif
+                           
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-5 tutorial_content">
@@ -62,13 +70,42 @@
                 </div>
                 <div class="col-md-6">
                     <div class="tutorial_video order-1-sm">
-                       
+                        {{-- <iframe  height="450" src="https://www.youtube.com/embed/yAoLSRbwxL8"
+                            title="Dummy Video" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe> --}}
 
-                        @if (count($videos)>0)
-
-
-                            <video width="600" height="300" controls>
+                            @if (count($videos)>0)
+                           
+                            <video width="100%" height="300" controls>
                                 <source src="{{asset('/public/images/'.$videos[1]->video ?? "")}}" type="video/mp4">
+                                {{-- <source src="movie.ogg" type="video/ogg"> --}}
+                              Your browser does not support the video tag.
+                              </video>
+
+                              @else
+                              <iframe  height="450" src="https://www.youtube.com/embed/yAoLSRbwxL8"
+                              title="Dummy Video" frameborder="0"
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                              allowfullscreen></iframe>
+
+                              @endif
+                          
+                    </div>
+                </div>
+            </div>
+            <div class="row space pt-0">
+                <div class="col-md-6 ">
+                    <div class="tutorial_video">
+                        {{-- <iframe  height="450" src="https://www.youtube.com/embed/yAoLSRbwxL8"
+                            title="Dummy Video" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe> --}}
+                          
+                            @if (count($videos)>0)
+                            <video width="100%" height="300" controls>
+                                <source src="{{asset('/public/images/'.$videos[2]->video ?? "" )}}" type="video/mp4">
+                                  
                                 {{-- <source src="movie.ogg" type="video/ogg"> --}}
                               Your browser does not support the video tag.
                               </video>
@@ -79,38 +116,8 @@
                               title="Dummy Video" frameborder="0"
                               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                               allowfullscreen></iframe>
-
-                            @endif
-
-                            {{-- <video width="600" height="300" controls>
-                                <source src="{{asset('/public/images/'.$videos[1]->video ?? "")}}" type="video/mp4"> --}}
-                                {{-- <source src="movie.ogg" type="video/ogg"> --}}
-                              {{-- Your browser does not support the video tag.
-                              </video> --}}
-                    </div>
-                </div>
-            </div>
-            <div class="row space pt-0">
-                <div class="col-md-6 ">
-                    <div class="tutorial_video">
-                       
-                        @if (count($videos)>0)
-
-                            <video width="600" height="300" controls>
-                                <source src="{{asset('/public/images/'.$videos[2]->video ?? "" )}}" type="video/mp4">
-                                  
-                                {{-- <source src="movie.ogg" type="video/ogg"> --}}
-                              Your browser does not support the video tag.
-                              </video>
-
-                              @else
-
-                               <iframe  height="450" src="https://www.youtube.com/embed/yAoLSRbwxL8"
-                            title="Dummy Video" frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-
-                            @endif
+                              @endif
+                              
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-5 tutorial_content">

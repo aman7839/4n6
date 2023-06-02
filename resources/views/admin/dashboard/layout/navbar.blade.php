@@ -231,7 +231,7 @@
 
                     <li class="nav-item {{ request()->is('admin/tutorial') ? 'active' : ''}}">
 
-                        <a href="{{url('admin/tutorial')}}"><i class="menu-icon fa fa-file-text"></i>Tutorial Videos</a>
+                        <a href="{{url('admin/tutorial')}}"><i class="menu-icon fa fa-file-video-o"></i>Tutorial Videos</a>
 
                     </li>
                     <li class="nav-item {{ request()->is('admin/offerprice') ? 'active' : ''}}">
@@ -400,7 +400,7 @@
 
                     <li class="nav-item {{ request()->is('coach/tutorial') ? 'active' : ''}}">  
 
-                        <a href="{{url('coach/tutorial')}}"><i class="menu-icon fa fa-search"></i> Tutorials</a>
+                        <a href="{{url('coach/tutorial')}}"><i class="menu-icon fa fa-file-video-o"></i> Tutorials</a>
 
                     </li>
 
@@ -493,7 +493,7 @@
 
                     <li class="nav-item {{ request()->is('student/tutorial') ? 'active' : ''}}">  
 
-                        <a href="{{url('student/tutorial')}}"><i class="menu-icon fa fa-search"></i> Tutorials</a>
+                        <a href="{{url('student/tutorial')}}"><i class="menu-icon fa fa-file-video-o"></i> Tutorials</a>
 
                     </li>
 
