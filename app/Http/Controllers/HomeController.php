@@ -130,6 +130,7 @@ class HomeController extends Controller
     {
 
         $videos = Tutorial::limit(3)->orderBy('updated_at','desc')->get();
+        
         return view("frontendviews.tutorial", compact('videos'));
     }
     public function services()

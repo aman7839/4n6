@@ -139,8 +139,11 @@ class UsersGuideController extends Controller
 
 
         $video = Tutorial::all();
-        return view('admin.Tutorial.tutorial', compact('video'));
 
+
+    return view('admin.Tutorial.tutorial', compact('video'));
+
+       
 
     }
 

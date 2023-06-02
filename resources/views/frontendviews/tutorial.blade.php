@@ -24,12 +24,13 @@
                             title="Dummy Video" frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen></iframe> --}}
-
-                            <video width="600" height="300" controls>
+                           
+                            <video width="100%" height="300" controls>
                                 <source src="{{asset('/public/images/'.$videos[0]->video ?? "")}}" type="video/mp4">
                                 {{-- <source src="movie.ogg" type="video/ogg"> --}}
                               Your browser does not support the video tag.
                               </video>
+                           
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-5 tutorial_content">
@@ -64,12 +65,12 @@
                             title="Dummy Video" frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen></iframe> --}}
-
-                            <video width="600" height="300" controls>
+                            <video width="100%" height="300" controls>
                                 <source src="{{asset('/public/images/'.$videos[1]->video ?? "")}}" type="video/mp4">
                                 {{-- <source src="movie.ogg" type="video/ogg"> --}}
                               Your browser does not support the video tag.
                               </video>
+                          
                     </div>
                 </div>
             </div>
@@ -80,13 +81,15 @@
                             title="Dummy Video" frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen></iframe> --}}
+                          
 
-                            <video width="600" height="300" controls>
+                            <video width="100%" height="300" controls>
                                 <source src="{{asset('/public/images/'.$videos[2]->video ?? "" )}}" type="video/mp4">
                                   
                                 {{-- <source src="movie.ogg" type="video/ogg"> --}}
                               Your browser does not support the video tag.
                               </video>
+                              
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-5 tutorial_content">

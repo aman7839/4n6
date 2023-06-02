@@ -781,6 +781,7 @@ p.discount span {
   width: 85px;
 }
 /* coaches */
+
 p.states {
   display: inline-block;
   margin: auto;
@@ -1314,6 +1315,9 @@ section.instructor_content {
 }
 .tutorial_video, .tutorial_content {
   padding-bottom: 50px;
+}
+.tutorial_video video {
+  height: unset;
 }
 .bottom_icon {
   top: 0;
