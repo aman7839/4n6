@@ -66,7 +66,11 @@
                 </div>
             </div>
         </div>
+
+        <div id = "mapContainer" ></div>
     </section>
+
+   
 
 
 

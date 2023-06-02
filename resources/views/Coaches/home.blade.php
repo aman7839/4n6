@@ -9,7 +9,13 @@
 
   
                 {{-- @foreach ($pageContent as $content) --}}
+
+                @if(count($pageContent)>0)
                 {!! ($pageContent[0]->page_description) !!}
+
+                @else
+                    <h3>No data found</h3>
+                @endif
                 {{-- @endforeach --}}
                   
                     
