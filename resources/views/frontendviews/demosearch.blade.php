@@ -10,7 +10,7 @@
 
         <div class="custom_container">
 
-            <h1>Demo</h1>
+            <h1>Demo Search</h1>
 
         </div>
 
@@ -58,7 +58,7 @@
 
            
 
-            <form action="{{url('demosearch')}}" method = "POST">
+            <form action="{{url('demosearch')}}" method = "get">
               @csrf
                <div class="row">
 
@@ -100,6 +100,8 @@
                     </div>
 
                 </div>
+
+                
 
                 
 
@@ -179,7 +181,7 @@
 
                 </div> --}}
 
-                <div class="col-md-6">
+                {{-- <div class="col-md-6">
 
                     <div class="form-group">
 
@@ -201,7 +203,19 @@
 
                     </div>
 
-                </div>
+                </div> --}}
+
+                <div class="col-md-6">
+
+                  <div class="form-group">
+
+                      <label for="vault">Search Vault</label>
+
+                      <input type="text"  name = "vault"  value = "{{$vault}}" class="form-control" placeholder="search by author name">
+
+                  </div>
+
+              </div>
 
                 <div class="col-md-6">
 
@@ -311,7 +325,7 @@
 
 
 
-    @if($title || $author || $type || $characters || $award || $themes ||  $categories || $fullSearch != "")
+    @if($title || $author || $type || $characters || $award || $themes ||  $categories || $fullSearch || $vault != "")
 
            <div class="all_results">
 

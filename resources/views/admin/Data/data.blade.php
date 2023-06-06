@@ -18,6 +18,25 @@
 
                 
             </form>
+
+            {{-- <form action="{{url("admin/importmaindata")}}" method="post" enctype="multipart/form-data">
+                @csrf
+                <fieldset>
+                    <label>Select File to Upload <small class="warning text-muted">{{__('Please upload only Excel (.xlsx or .xls) files')}}</small></label>
+                    <div class="form-group search_bar">
+                        <input type="file" required class="form-control" name="uploaded_file" id="uploaded_file">
+                        <div class="input-group-append" id="button-addon2">
+                            <button class="btn btn-primary square admin_cm_btn" type="submit"><i class="ft-upload mr-1"></i> Import Data</button>
+                        </div>
+                    </div>
+                    @if ($errors->has('uploaded_file'))
+                    <p class="mb-0">
+                        <small class="text-danger" id="file-error">{{ $errors->first('uploaded_file') }}</small>
+                    </p>
+                    @endif
+
+                </fieldset>
+            </form> --}}
            </div>
             <div class="col-md-12 mt-2">
                 <div class="card">

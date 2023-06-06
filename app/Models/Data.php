@@ -34,6 +34,11 @@ class Data extends Model
         return $this->belongsTo(playCategory::class,"category_id","id");
     }
 
+    public function files()
+    {
+        return $this->belongsTo(VaultFiles::class, 'author','author_name');
+    }
+
     public function getAwardNameAttribute(){
         $data = $this->belongsTo(Data::class,"id")->first();
         $ids = explode(",",strval($this->award_id));

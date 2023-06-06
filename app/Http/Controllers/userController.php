@@ -326,7 +326,9 @@ class userController extends Controller
                     ///
                     $coachUsername=$sheet->getCell( 'W' . $row )->getValue();
                     $password=Hash::make($sheet->getCell('X'.$row)->getValue());
-                    $name = $sheet->getCell( 'J' . $row )->getValue();
+                    $firstName = $sheet->getCell( 'J' . $row )->getValue();
+                    $lastName = $sheet->getCell( 'K' . $row )->getValue();
+
                     $schoolName = $sheet->getCell( 'B' . $row )->getValue();
                     $schoolState = $sheet->getCell( 'E' . $row )->getValue();
                     $schoolAddress = $sheet->getCell( 'C' . $row )->getValue();
@@ -346,9 +348,13 @@ class userController extends Controller
                     $email = $sheet->getCell( 'M' . $row )->getValue();
                     $schoolEmailAddress = $sheet->getCell( 'L' . $row )->getValue();
                     $assistantCoachEmailAddress = $sheet->getCell( 'R' . $row )->getValue();
-                    $assistantCoachName = $sheet->getCell( 'P' . $row )->getValue();
+                    $assistantCoachNameFirst = $sheet->getCell( 'P' . $row )->getValue();
+                    $assistantCoachNameLast = $sheet->getCell( 'Q' . $row )->getValue();
 
-                    $billingContactName = $sheet->getCell( 'AC' . $row )->getValue();
+
+                    $billingContactNameFirst = $sheet->getCell( 'AC' . $row )->getValue();
+                    $billingContactNameLast = $sheet->getCell( 'AD' . $row )->getValue();
+
 
                     // $billingContactName = $sheet->getCell( 'R' . $row )->getValue();
 
@@ -366,11 +372,11 @@ class userController extends Controller
                     $new_coach->user_name= $coachUsername;
                     $new_coach->password= $password;
                     $new_coach->school_city= $schoolCity;
-                    $new_coach->name= $name;
+                    $new_coach->name=  $firstName.",".$lastName;
                     $new_coach->school_name= $schoolName;
                     $new_coach->school_state= $schoolState;
                     $new_coach->school_address= $schoolAddress;
-                    $new_coach->billing_contact_name= $billingContactName;
+                    $new_coach->billing_contact_name= $billingContactNameFirst.",".$billingContactNameLast;
                     $new_coach->billing_email_address= $billingContactEmail;
                     $new_coach->vault_access= ($vaultAccess == 'Yes') ? 1 : 0;
                     $new_coach->school_zip_code= $schoolZip;
@@ -380,7 +386,7 @@ class userController extends Controller
                     $new_coach->payment_method = $payMethod;
                     $new_coach->school_email_address= $schoolEmailAddress;
                     $new_coach->assistant_coach_email_address =  $assistantCoachEmailAddress;
-                    $new_coach->assistant_coach_name =  $assistantCoachName;
+                    $new_coach->assistant_coach_name =  $assistantCoachNameFirst.",".$assistantCoachNameLast;
 
                     $new_coach->role='coach';
 
@@ -398,10 +404,10 @@ class userController extends Controller
                     $new_student->school_zip_code= $schoolZip;
                     $new_student->school_phone_no= $schoolPhone;
                     // $new_student->school_phone_no= $schoolPhone;
-                    $new_student->billing_contact_name= $billingContactName;
+                    $new_student->billing_contact_name= $billingContactNameFirst.",".$billingContactNameLast;
                     $new_student->billing_email_address= $billingContactEmail;
                     $new_student->assistant_coach_email_address =  $assistantCoachEmailAddress;
-                    $new_student->assistant_coach_name =  $assistantCoachName;
+                    $new_student->assistant_coach_name =  $assistantCoachNameFirst.",".$assistantCoachNameLast;
                     $new_student->vault_access= "1";
                     $new_student->role='student';
                     $new_student->save();

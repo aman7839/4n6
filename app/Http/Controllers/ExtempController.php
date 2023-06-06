@@ -202,7 +202,7 @@ class ExtempController extends Controller
                     return redirect('admin/extempview')->with('success', 'Data Updated successfully');
         
                            
-                       }
+            }
 
                        public function importData(Request $request){
 
@@ -228,17 +228,42 @@ class ExtempController extends Controller
                                  $question = $sheet->getCell( 'B' . $row )->getValue();   
                                  $year = $sheet->getCell( 'D' . $row )->getValue();   
                                 $month = $sheet->getCell( 'C' . $row )->getValue();
-                                $topic_id = $sheet->getCell( 'E' . $row )->getValue();   
 
 
+                                $topic_name = $sheet->getCell( 'E' . $row )->getValue();   
+                                
+                                $topicArray = ExtempTopic::where('name', trim($topic_name))->get();
+
+                               
+                            
                                  
                                  $extempTopic = new Extemp;               
                                  $extempTopic->type= $type;               
                                  $extempTopic->question= $question;  
                                  $extempTopic->month= $month;             
 
-                                 $extempTopic->year= $year;             
-                                 $extempTopic->topic_id= $topic_id;             
+                                 $extempTopic->year= $year;     
+                                 
+                                
+                                 if(($topicArray->count()) > 0 ){
+
+                                    $extempTopic->topic_id= $topicArray['0']['id'];  
+
+                                    }else{
+
+                                        $extempTopicName = new ExtempTopic;
+
+                                        $extempTopicName->name = $topic_name;
+                                       $extempTopicName->save();
+
+                                     
+
+                                        $extempTopic->topic_id = $extempTopicName->id;
+                                    }
+                            
+
+                                
+            
 
                                  $extempTopic->save();
                               

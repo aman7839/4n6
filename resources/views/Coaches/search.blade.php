@@ -37,14 +37,14 @@
             <div class="card">
     @auth
     @if(auth()->user()->role == "coach")
-    <form action="{{url('coach/search')}}" method="POST">
+    <form action="{{url('coach/search')}}" method="get">
       @endif
 
       @if(auth()->user()->role == "student")
-      <form action="{{url('student/search')}}" method="POST">
+      <form action="{{url('student/search')}}" method="get">
         @endif
         @if(auth()->user()->role == "admin")
-        <form action="{{url('admin/search')}}" method="POST">
+        <form action="{{url('admin/search')}}" method="get">
           @endif
           @endauth
           @csrf
@@ -87,6 +87,19 @@
                   </div>
 
                 </div>
+
+                <div class="col-md-6 col-lg-4">
+
+                  <div class="form-group">
+
+                    <label for="vault">Search Vault</label>
+
+                    <input type="text" name="vault" value="{{$vault}}" class="form-control" placeholder="search vault by author name">
+
+                  </div>
+
+                </div>
+
 
 
 
@@ -166,7 +179,7 @@
 
     </div> --}}
 
-                <div class="col-md-6 col-lg-4">
+                {{-- <div class="col-md-6 col-lg-4">
 
                   <div class="form-group">
 
@@ -188,7 +201,7 @@
 
                   </div>
 
-                </div>
+                </div> --}}
 
                 <div class="col-md-6 col-lg-4">
 
@@ -304,7 +317,7 @@
             </div>
             
           </form>
-          @if($title || $author || $type || $characters || $award || $themes || $categories || $fullSearch != "")
+          @if($title || $author || $type || $characters || $award || $themes || $categories || $fullSearch || $vault != "")
 
 <div class="all_results">
 
@@ -342,7 +355,15 @@
         @endif
         @endauth
         @csrf
+
+        
         @foreach($search as $item)
+
+
+
+  {{-- // echo "<pre>"; echo print_r($item->files); echo "</pre>"; exit;  --}}
+       
+
 
         <div class="search_item">
 
@@ -359,6 +380,8 @@
                 <tr>
 
                   <th scope="col">Book/Link</th>
+                 
+
 
                   <th scope="col">Publisher</th>
 
@@ -371,6 +394,7 @@
                   <th scope="col">Character</th>
 
                   <th scope="col">Category</th>
+                  <th scope="col">Vault File</th>
 
                   {{-- <th scope="col">Rating</th> --}}
 
@@ -387,7 +411,9 @@
                 <tr>
 
                   <td> <a href="{{$item->book}}" target="_blank">Link</a></td>
+                
 
+                
                   <td>{{$item->publisher}}</td>
 
                   <td> #{{$item->isbn}}</td>
@@ -399,6 +425,16 @@
                   <td>{{$item->characters}}</td>
 
                   <td>{{$item->category->name}}</td>
+
+            @if($item->files)
+                                    
+                              
+                  <td> <a href="{{asset('public/'.$item->files->file) }}" target="_blank">Download</a></td>
+            @else
+            <td>No File</td>
+
+            @endif
+
 
                   {{-- <td>PG-13 - High School</td> --}}
 

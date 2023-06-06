@@ -5,7 +5,7 @@
 
     <section class="cmn_header_section space" style="background-image:url('{{asset('/public/4n61/images/service_bg.jpg')}}') ;">
         <div class="custom_container">
-            <h1>Documents</h1>
+            <h1>Free Resources</h1>
         </div>
     </section>
     

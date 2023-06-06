@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Vault;
+use App\Models\Data;
+
 use App\Models\VaultFiles;
 
 
@@ -40,9 +42,11 @@ public function addFolder()
 {   
     $vault = Vault::with('items','nestedCategories.items',)->whereNull('parent_id')->get();
     $vault_tree = $this->buildTree($vault->toArray());
+
+   $author_name = Data::groupBy('author')->get();
     // echo '<pre>';  print_r(json_encode($vault_tree)); echo '</pre>';
     // exit; 
-    return view('admin.vault.addfolder', compact('vault_tree'));
+    return view('admin.vault.addfolder', compact('vault_tree','author_name'));
 }
 
 public function getFolderData($id){
@@ -115,6 +119,7 @@ if($req->hasFile('files')) {
         $fileModel->name = $file->getClientOriginalName();
         $fileModel->file = '/storage/' . $filePath;
         $fileModel->vault_id = $req->vault_id;
+        $fileModel->author_name = $req->author_name;
         $fileModel->save();
     }
     return back()

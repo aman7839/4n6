@@ -75,10 +75,6 @@ Route::get('/content', [DashboardController::class, 'showPageContent']);
 Route::get('/editcontent/{id}', [DashboardController::class, 'editPageContent']);
 Route::put('/editcontent/{id}', [DashboardController::class, 'savePageContent']);
 
-
-
-
-
 Route::put('/updateUsers/{id}', [DashboardController::class, 'updateUsers'])->name('update.users');
 
 Route::get('deleteuser/{id}', [DashboardController::class, 'destroy']);
@@ -181,6 +177,8 @@ Route::get('/extempview', [ExtempController::class, 'viewExtemp']);
 // Route::post('/extempview', [ExtempController::class, 'viewExtempPost']);
 
 Route::post('/importextempdata', [ExtempController::class, 'importData']);
+Route::post('/importmaindata', [DataController::class, 'importData']);
+
 
 Route::get('/addextemp', [ExtempController::class, 'addEXtemp']);
 Route::post('/saveextemp', [ExtempController::class, 'saveEXtemp']);
@@ -263,7 +261,7 @@ Route::put('/savetutorial/{id}', [UsersGuideController::class,'updateVideo']);
 Route::get('/aboutUs', [HomeController::class,'aboutUs']);
 Route::get('/home', [HomeController::class,'Home']);
 Route::get('/', [HomeController::class,'Home']);
-Route::get('/', [HomeController::class,'Home']);
+// Route::get('/', [HomeController::class,'Home']);
 Route::post('/joinus', [HomeController::class,'joinUS']);
 
 

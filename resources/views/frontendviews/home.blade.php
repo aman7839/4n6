@@ -12,7 +12,11 @@
                         <h1 class="pb-4">The Ultimate Resources <br>
                             for Forensics (4N6), Speech <br>
                             and Drama Coaches & Students</h1>
+
+                            @if(!Auth::user())
                         <a href="{{url('login')}}" class="cmn_btn">Member Login</a>
+
+                        @endif
                     </div>
                 </div>
 
@@ -89,7 +93,9 @@
                                 Interp and Dramatic Interp) – Leave off
                                 Declamation, not a huge draw for most states.</li>
                         </ul>
+                        @if (!Auth::user())
                         <a href="{{url('register')}}" class="cmn_btn">Become a Member</a>
+                        @endif
                     </div>
                 </div>
                    </div>
@@ -110,7 +116,9 @@
                                     out Gender (so many of our students are 
                                     outside the binary gender norms) .</li>
                             </ul>
+                            @if (!Auth::user())
                             <a href="{{url('register')}}" class="cmn_btn">Become a Member</a>
+                            @endif
                         </div>
                     </div>
                    
@@ -145,7 +153,11 @@
                                 
                                
                         </ul>
+
+                        @if (!Auth::user())
                         <a href="{{url('register')}}" class="cmn_btn">Become a Member</a>
+
+                        @endif
                     </div>
                    </div>
                 </div>

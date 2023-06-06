@@ -4,7 +4,7 @@
    
     <section class="cmn_header_section space" style="background-image:{{asset('url(public/4n61/images/demo_bg.jpg)')}};">
         <div class="custom_container">
-            <h1>Improve Scene <br>
+            <h1>Impromptu Speech Topic <br>
                  Generator</h1>
         </div>
     </section>

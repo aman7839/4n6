@@ -26,7 +26,7 @@
           <div class="col-md-6">
             <div class="form-group mt-3">
               <label for="author"> Author</label>
-              <input type="text" name="author" value="{{$data->title}}" class="form-control" id="author" aria-describedby="emailHelp">
+              <input type="text" name="author" value="{{$data->author}}" class="form-control" id="author" aria-describedby="emailHelp">
               <span class="text-danger">@error('author'){{$message}} @enderror</span>
 
             </div>
@@ -59,8 +59,8 @@
               <label for="type"> Type</label>
               <select name="type" id="type" class="form-control required">
                 <option value="" disabled>Select One</option>
-                <option value="humorous" {{$data->type == 'humorous'? 'selected':''}}>Humorous</option>
-                <option value="serious" {{$data->type == 'serious' ? 'selected':''}}>Serious</option>
+                <option value="humorous" {{$data->type == 'Humorous'? 'selected':''}}>Humorous</option>
+                <option value="serious" {{$data->type == 'Serious' ? 'selected':''}}>Serious</option>
 
 
               </select>
@@ -75,9 +75,15 @@
               <label for="characters"> Characters </label>
               <select name="characters" id="characters" class="form-control required">
                 <option value="" disabled>Select One</option>
-                <option value="male" {{$data->characters == 'male'? 'selected':''}}>Male</option>
-                <option value="female" {{$data->characters == 'female'? 'selected':''}}>Female</option>
-                <option value="all" {{$data->characters == 'all'? 'selected':''}}>All</option>
+                <option value="Male" {{$data->characters == 'Male'? 'selected':''}}>Male</option>
+                <option value="Female" {{$data->characters == 'Female'? 'selected':''}}>Female</option>
+                <option value="All" {{$data->characters == 'All'? 'selected':''}}>All</option>
+                <option value="M/F" {{$data->characters == 'M/F'? 'selected':''}}>M/F</option>
+
+                <option value="M/M" {{$data->characters == 'M/M'? 'selected':''}}>M/M</option>
+
+                <option value="F/F" {{$data->characters == 'F/F'? 'selected':''}}>F/F</option>
+
               </select>
               <span class="text-danger">@error('characters'){{$message}} @enderror</span>
 

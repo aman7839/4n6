@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{asset('/public/css/font.min.css')}}">
     <link rel="stylesheet" href="{{asset('/public/4n61/css/steps.css')}}">
     <link rel="stylesheet" href="{{asset('/public/css/toast.css')}}">
+    <link rel="icon" type="image/png" href="{{asset('/public/4n61/images/Favicon.png')}}" />
 
 
 
@@ -36,12 +37,12 @@
                 <div class="collapse navbar-collapse" id="navbarScroll">
                     <ul class="navbar-nav me-auto my-2 my-lg-0 " style="--bs-scroll-height: 100px;">
 
-                        @if(!Auth::user())
+                   
                         <li class="nav-item ">
                             <a class="nav-link {{ request()->is('/') ? 'active' : ''}}" aria-current="page" href="{{url('/')}}">Home</a>
                         </li>
 
-                        @endif
+                        
                         {{-- <li class="nav-item ">
                             <a class="nav-link {{ request()->is('regeneratetopics') ? 'active' : ''}}" href="{{url('/regeneratetopics')}}">IDA</a>
                         </li> --}}
@@ -128,7 +129,7 @@
                             <a class="nav-link  {{ request()->is('coach/search') ? 'active' : ''}}" href="{{url('coach/search')}}">Search Database</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link  {{ request()->is('dashboard') ? 'active' : ''}}" href="{{url('/coach/dashboard')}}">Dashboard</a>
+                            <a class="nav-link  {{ request()->is('dashboard') ? 'active' : ''}}" href="{{url('/coach/search')}}">Dashboard</a>
                         </li>
                         
                     @endif     
@@ -140,7 +141,7 @@
                             <a class="nav-link  {{ request()->is('student/search') ? 'active' : ''}}" href="{{url('student/search')}}">Search Database</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link  {{ request()->is('dashboard') ? 'active' : ''}}" href="{{url('/student/dashboard')}}">Dashboard</a>
+                            <a class="nav-link  {{ request()->is('dashboard') ? 'active' : ''}}" href="{{url('/student/search')}}">Dashboard</a>
                         </li>
                       @endif    
 
@@ -151,7 +152,7 @@
                         <a class="nav-link  {{ request()->is('admin/search') ? 'active' : ''}}" href="{{url('admin/search')}}">Search Database</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link  {{ request()->is('dashboard') ? 'active' : ''}}" href="{{url('/admin/dashboard')}}">Dashboard</a>
+                        <a class="nav-link  {{ request()->is('dashboard') ? 'active' : ''}}" href="{{url('/admin/search')}}">Dashboard</a>
                     </li>
 
                     @endif  

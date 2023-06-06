@@ -52,8 +52,20 @@
 <script src="{{asset('/public/assets/js/init/fullcalendar-init.js')}}"></script> --}}
 
 <script src="{{asset('/public/js/toast.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
+<script>
+    // In your Javascript (external .js resource or <script> tag)
+        jQuery(document).ready(function() {
+            // Select2 Multiple
+            jQuery('.author_name').select2({
+                placeholder: "Select",
+                allowClear: true,
+                dropdownParent: jQuery('#fileupload')
+            });
 
+        });
+</script>
 
 <!--Local Stuff-->
 

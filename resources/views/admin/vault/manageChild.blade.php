@@ -1,6 +1,6 @@
 <ul class="nested">
     @foreach ($childs as $category)
-   <li>
+   <li id="{{$category['id']}}">
 
     <span class="caret {{count($category['nested_categories']) == 0 ? 'empty_folder': ''}}"><i class="fa fa-folder-open"></i> </span>
    <span class="tree_folder tree_folder_name tree_folder_editname"  data-name="{{$category['name']}}" data-id="{{$category['id']}}">{{$category["name"]}}</span>

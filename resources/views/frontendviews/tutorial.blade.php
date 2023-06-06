@@ -75,7 +75,7 @@
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen></iframe> --}}
 
-                            @if (count($videos)>0)
+                            @if (count($videos)>1)
                            
                             <video width="100%" height="300" controls>
                                 <source src="{{asset('/public/images/'.$videos[1]->video ?? "")}}" type="video/mp4">
@@ -102,7 +102,7 @@
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen></iframe> --}}
                           
-                            @if (count($videos)>0)
+                            @if (count($videos)>2)
                             <video width="100%" height="300" controls>
                                 <source src="{{asset('/public/images/'.$videos[2]->video ?? "" )}}" type="video/mp4">
                                   

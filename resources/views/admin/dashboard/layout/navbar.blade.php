@@ -26,9 +26,9 @@
 
     
 
-    <link rel="icon" type="png" href="{{asset('/public/images/fanatic_logo.svg')}}">
+    {{-- <link rel="icon" type="png" href="{{asset('/public/images/fanatic_logo.svg')}}"> --}}
 
-    <link rel="shortcut icon" type="png" href="{{asset('/public/images/mariano_fav.png')}}">
+    {{-- <link rel="shortcut icon" type="png" href="{{asset('/public/images/mariano_fav.png')}}"> --}}
 
 
 
@@ -46,7 +46,7 @@
     <link rel="stylesheet" href="{{asset('/public/4n61/assets/css/cs-skin-elastic.css')}}">
 
     <link rel="stylesheet" href="{{asset('/public/4n61/assets/css/style.css')}}">
-
+    <link rel="icon" type="image/png" href="{{asset('/public/4n61/images/Favicon.png')}}" />
     <link rel="stylesheet" href="{{asset('/public/css/toast.css')}}">
     <link rel="stylesheet" href="{{asset('/public/css/daterangepicker.css')}}">
 
@@ -67,6 +67,7 @@
     <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet" />
 
     {{-- <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" /> --}}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
   
 
@@ -168,11 +169,11 @@
 
 
 
-                    <li class="nav-item {{ request()->is('admin/dashboard') ? 'active' : ''}}">
+                    {{-- <li class="nav-item {{ request()->is('admin/dashboard') ? 'active' : ''}}">
 
                         <a href="{{url('admin/dashboard')}}"><i class="menu-icon fa fa-tachometer"></i>Dashboard </a>
 
-                    </li>
+                    </li> --}}
 
                     <li class="nav-item {{ request()->is('admin/content') ? 'active' : ''}}">
 
@@ -237,6 +238,12 @@
                     <li class="nav-item {{ request()->is('admin/offerprice') ? 'active' : ''}}">
 
                         <a href="{{url('admin/offerprice')}}"><i class="menu-icon fa fa-certificate"></i>Offer Price </a>
+
+                    </li>
+
+                    <li class="nav-item {{ request()->is('admin/search') ? 'active' : ''}}">  
+
+                        <a href="{{url('admin/search')}}"><i class="menu-icon fa fa-search"></i> Search Database</a>
 
                     </li>
 

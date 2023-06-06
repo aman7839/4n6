@@ -6,6 +6,10 @@ use App\Models\awards;
 use App\Models\Extemp;
 use App\Models\Theme;
 use App\Models\playCategory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Reader\Exception;
+use PhpOffice\PhpSpreadsheet\Writer\Xls;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 
 
@@ -59,7 +63,7 @@ if ($search != ""){
                 'type' => 'required',
                 'characters'=>'required',
                 'rating'=>'required',
-                'public'=>'required',
+                // 'public'=>'required',
 
                
                 'category_id'=>'required',
@@ -94,7 +98,7 @@ if ($search != ""){
             $data->category_id = $request->category_id;
             $data->characters = $request->characters;
             $data->rating = $request->rating;
-            $data->public = $request->public;
+            // $data->public = $request->public;
 
             $data->save();
             return redirect('admin/data')->with('success','Data Added Successfully');
@@ -172,5 +176,123 @@ if ($search != ""){
             return redirect('admin/data')->with('success','Data Updated Successfully');
 
 
+         }
+
+         public function importData(Request $request){
+         
+            set_time_limit(0);
+    
+             $this->validate($request, [
+                 'uploaded_file' => 'required|file|mimes:xls,xlsx'
+             ]);
+             $the_file = $request->file('uploaded_file');
+             try{
+                 $spreadsheet = IOFactory::load($the_file->getRealPath());
+                 $sheet        = $spreadsheet->getActiveSheet();
+                 $row_limit    = $sheet->getHighestDataRow();
+                 $column_limit = $sheet->getHighestDataColumn();
+                 $row_range    = range( 2, $row_limit );
+                 $column_range = range( 'F', $column_limit );
+                 $startcount = 2;
+                 $data = array();
+                 foreach ( $row_range as $row ) {   
+                     
+                     $tite = $sheet->getCell( 'A' . $row )->getValue();  
+                                                                     
+                     $author = $sheet->getCell( 'B' . $row )->getValue();   
+                     $book = $sheet->getCell( 'C' . $row )->getValue();   
+                    $publisher = $sheet->getCell( 'D' . $row )->getValue();
+
+
+                    $summary = $sheet->getCell( 'E' . $row )->getValue();   
+                    $awardName = $sheet->getCell( 'F' . $row )->getValue();   
+
+                    $categoryName = $sheet->getCell( 'G' . $row )->getValue();   
+
+                    $themeName = $sheet->getCell( 'H' . $row )->getValue();   
+
+                    $type = $sheet->getCell( 'I' . $row )->getValue();   
+                    $character = $sheet->getCell( 'J' . $row )->getValue();   
+
+                    $rating = $sheet->getCell( 'K' . $row )->getValue();  
+                    $isbn = $sheet->getCell( 'L' . $row )->getValue();   
+
+
+                    
+                    $awardArray = awards::where('awards_name', trim($awardName))->get();
+                    $themeArray = Theme::where('name', trim($themeName))->get();
+
+                    $categoryArray = PlayCategory::where('name', trim($categoryName))->get();
+                     
+                     $data = new Data;               
+                     $data->title= $tite;               
+                     $data->author= $author;  
+                     $data->book= $book;             
+
+                     $data->publisher= $publisher; 
+                     $data->summary= $summary;     
+
+                     if(($awardArray->count()) > 0 ){
+
+                        $data->award_id= $awardArray['0']['id'];  
+
+                        }else{
+
+                            $awards = new awards;
+
+                            $awards->awards_name = $awardName;
+                           $awards->save();
+                            $data->award_id = $awards->id;
+                        }
+                        if(($themeArray->count()) > 0 ){
+
+                            $data->theme_id= $themeArray['0']['id'];  
+    
+                            }else{
+    
+                                $theme = new Theme;
+    
+                                $theme->name = $themeName;
+                               $theme->save();
+                                $data->theme_id = $theme->id;
+                            }
+                
+            
+                            if(($categoryArray->count()) > 0 ){
+
+                                $data->category_id= $categoryArray['0']['id']; 
+        
+                                }
+                                else {
+        
+                                    $category = new PlayCategory;
+        
+                                    $category->name = $categoryName;
+                                    $category->save();
+
+                                    $data->category_id = $category->id;
+                                }
+
+                
+
+                   
+                     $data->type= $type;     
+
+                     $data->characters= $character;     
+
+                     $data->rating= $rating;     
+                     $data->isbn= $isbn;     
+            
+                   $data->save();
+                  
+                 }
+                 // echo "<pre>"; print_r($data); echo "</pre>";
+                 // exit;
+                 // DB::table('users')->insert($data);
+             } catch (Exception $e) {
+                 // $error_code = $e->errorInfo[1];
+                 return redirect()->back()->withErrors('There was a problem uploading the data!');
+             }
+             return redirect()->back()->withSuccess('Great! Data has been successfully uploaded.');
          }
 }

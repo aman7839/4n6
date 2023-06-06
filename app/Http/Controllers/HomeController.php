@@ -528,13 +528,17 @@ class HomeController extends Controller
         $category = playCategory::all();
 
         $title = $request["title"];
-        $author = trim($request["author"]);
+        // $author = trim($request["author"]);
+        $author = ($request["author"]);
+
         $type = $request["type"];
         $characters = $request["characters"];
         $award = $request["award_name"];
         $themes = $request["theme_name"];
         $categories = $request["category_name"];
         $fullSearch = $request["wide_search"];
+        $vault = $request["vault"];
+
 
     
         $pendingsession = 3;
@@ -583,12 +587,17 @@ class HomeController extends Controller
                   ->orWhereHas('category', function ($query) use ($fullSearch) {
                                 $query->where('name', 'like', '%' . $fullSearch . '%');
                             })
+                            ->orWhereHas('files', function ($query) use ($fullSearch) {
+                                $query->where('author_name', 'like', '%' . $fullSearch . '%');
+                            })
+                          
+                            
 
                 
                 ->groupBy("category_id")
     
                ->get();
-   
+             
         //            echo "<pre>"; print_r($data->toArray()); echo "</pre>";
         //    exit;
 
@@ -600,7 +609,7 @@ class HomeController extends Controller
                     DB::raw("group_concat(award_id) as award_id")
                 )
                     ->where("title", "Like", "%" . $title . "%")
-                    ->where("author", "Like", "%" . $authorname . "%")
+                    ->where("author", "Like", "%" . $author . "%")
                     ->where("type", "Like", "%" . $type . "%")
                     ->where("characters", "Like", $characters)
                     ->when($award, function ($q) use ($request) {
@@ -618,13 +627,21 @@ class HomeController extends Controller
                             $request
                         ) {
                             $query->where("id", $request->category_name);
+                        });            
+                        
+                    })
+                    ->when($vault, function ($q) use ($request) {
+                        return $q->whereHas("files", function ($query) use (
+                            $request)
+                         {
+                            $query->where("author_name","Like", "%" . $request->vault . "%");
                         });
                     })
                     ->groupBy("category_id")
         
                     ->get();
 
-
+                  
                }      
 
         //    echo "<pre>"; print_r($search->toArray()); echo "</pre>";
@@ -644,7 +661,8 @@ class HomeController extends Controller
                 "author",
                 "type",
                 "characters",
-                "pendingsession"
+                "pendingsession",
+                "vault"
             )
         );
     }
@@ -710,11 +728,14 @@ class HomeController extends Controller
                   ->orWhereHas('category', function ($query) use ($fullSearch) {
                                 $query->where('name', 'like', '%' . $fullSearch . '%');
                             })
+                           
 
                 
                 ->groupBy("category_id")
     
                ->get();
+
+            //    dd($search);
    
         //            echo "<pre>"; print_r($data->toArray()); echo "</pre>";
         //    exit;

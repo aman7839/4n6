@@ -20,13 +20,13 @@
                     <div class="tree">
                         <ul id="myUL">
                             @foreach ($vault_tree as $valult)
-                                <li>
+                                {{-- <li > --}}
+                                    <li data-folder-id="{{ $valult->id }}" id="{{ $valult->id }}">
                                     <span class="caret {{ count($valult->nested_categories) == 0 ? 'empty_folder' : '' }}"><i
                                             class="fa fa-folder-open"></i> </span>
                                     <span class="tree_folder tree_folder_name tree_folder_editname"
                                         data-name="{{ $valult->name }}" data-id="{{ $valult->id }}">{{ $valult->name }}
                                     </span>
-
 
 
                                     @if (count($valult->nested_categories) > 0)
@@ -36,6 +36,7 @@
                                     @endif
                                 </li>
                             @endforeach
+                            <div id="ss"></div>
                         </ul>
                     </div>
                 </div>
@@ -64,8 +65,9 @@
                     <div class="get_files">
                       <div class="card">
                       <div class="table-responsive">
-                      <table class="table table-bordered table-striped mb-0">
+                      <table class="table table-bordered table-striped mb-0" id = "folder_table" >
                             <thead>
+                                
                                 <tr>
                                     <th scope="col">Name</th>
                                     <th scope="col">Modified</th>
@@ -74,7 +76,8 @@
                                 </tr>
                             </thead>
                             <tbody id="files_list">
-                            </tbody>
+
+                         </tbody>
                         </table>
                       </div>
                       </div>
@@ -111,6 +114,12 @@
                                     <input type="text" name="name" class="form-control" placeholder="Folder Name">
                                 </div>
                             </div>
+                            {{-- <div class="">
+                                <div class="form-group">
+                                    <label for="author_name"> Author Name <span class="text-danger">*</span> </label>
+                                    <input type="text" name="author_name" class="form-control" placeholder="Author Name">
+                                </div>
+                            </div> --}}
 
                             <label class="form-label" for="form2Example1">Description</label>
                             <input type="text" name="description" class="form-control" value="" />
@@ -133,6 +142,12 @@
                                     {{ $message }}
                                 @enderror
                             </span>
+
+                            {{-- <span class="text-danger">
+                                @error('author_name')
+                                    {{ $message }}
+                                @enderror
+                            </span> --}}
                         </div>
                         <div class="form-outline">
 
@@ -193,6 +208,14 @@
                                 </div>
                             </div>
 
+                            {{-- <div class="">
+                                <div class="form-group">
+                                    <label for="edit_author_name"> Author Name <span class="text-danger">*</span> </label>
+                                    <input type="text" id="edit_author_name" name="edit_author_name" class="form-control"
+                                        placeholder="Author Name">
+                                </div>
+                            </div> --}}
+
                             <label class="form-label" for="form2Example1">Description</label>
                             <input type="text" id="edit_desc" name="description" class="form-control" value="" />
                             {{--           
@@ -215,6 +238,12 @@
                                     {{ $message }}
                                 @enderror
                             </span>
+
+                            {{-- <span class="text-danger">
+                                @error('edit_author_name')
+                                    {{ $message }}
+                                @enderror
+                            </span> --}}
                         </div>
 
 
@@ -251,7 +280,25 @@
                     <form class="vault_form" action="{{ route('uploadfile') }}" method="post" enctype="multipart/form-data">
 
                         @csrf
+                        {{-- <div class="">
+                            <div class="form-group">
+                                <label for="author_name"> Author Name <span class="text-danger"></span> </label>
+                                <input type="text" id="author_name" name="author_name" class="form-control"
+                                    placeholder="Author Name">
+                            </div>
+                        </div> --}}
+                        <div>
+                            <label class="form-label" for="form2Example1">Author Name</label>
 
+                        <select class="author_name js-example-basic-single" name="author_name">
+
+                            @foreach($author_name as $author)
+                            <option value="{{$author->author}}">{{$author->author}}</option>
+                            {{-- <option value="WY">Wyoming</option> --}}
+
+                            @endforeach
+                        </select>
+                        </div>
                         <input type="file" name="files[]" required multiple >
                         <input type="hidden" name="vault_id" id="vault_id" value="">
                         <button type="submit" class="btn btn-success">Upload</button>
@@ -274,6 +321,7 @@
     </div>
 @section('footer-scripts')
     <script>
+        
         jQuery(document).ready(function() {
             // var toggler = document.getElementsByClassName("caret");
             var parent_name = "";
@@ -331,10 +379,33 @@
                             type: 'post',
                             data: paramObj, 
                             success: function(data) {
+
+                              //  alert(JSON.stringify(data))
                                 if (data.status == true) {
-                                    // jQuery('#foldermodel').modal('hide');
-            
-                                    window.location.reload()
+    //                                 jQuery('#foldermodel').modal('hide');
+    //                                 var folderName = data.data.name; // Retrieve the folder name from the response
+    //     var folderId = data.data.id; // Retrieve the folder ID from the response
+    //     var parentId = data.data.parent_id; // Retrieve the parent folder ID from the response
+
+    //     // Find the parent <li> element using the parent folder ID
+    //     var parentElement = jQuery('li[data-folder-id="' + parentId + '"]');
+
+    //     // Find the nested <ul> element within the parent <li>
+    //    // var nestedUl = parentElement.children('ul');
+
+    //     // Create a new <li> element for the new folder
+    //     var newFolderElement = '<li data-folder-id="' + folderId + '" id="' + folderId + '">' +
+    //                                 '<span class="caret empty_folder"><i class="fa fa-folder-open"></i></span>' +
+    //                                 '<span class="tree_folder tree_folder_name tree_folder_editname" data-name="' + folderName + '" data-id="' + folderId + '">' + folderName + '</span>' +
+    //                                 '<ul></ul>' + // Empty nested <ul> for potential child folders
+    //                             '</li>';
+                                       
+    //                          
+    //                             jQuery('#'+parentId+' ul.nested').append(newFolderElement);
+    //                            
+
+                            
+                                   window.location.reload()
                                 }
                             },
                             error: function(error) {
@@ -391,14 +462,10 @@
             });
 
 
-
-
-
-
-
             jQuery('#create_button').on('click', function() {
                 if (parent_name == "") {
-                    parent_name = "root"
+                    parent_name = "root"              
+
                 }
                 jQuery(".parent_name_class").html(parent_name);
                 jQuery('#foldermodel').modal('toggle');
@@ -444,6 +511,9 @@
                             let filesHtml = ""
                             jQuery('#files_list').html('')
                             if (data.data.items && data.data.items.length > 0) {
+
+                    // jQuery("#folder_table").css("display", "flex")
+
                                 var storagePath = "<?php echo asset('public/'); ?>";
                                 for (let i = 0; i < data.data.items.length; i++) {
                                     const timestamp = data.data.items[i].updated_at;
@@ -463,6 +533,14 @@
                             }
 
                             jQuery('#files_list').html(filesHtml)
+
+                            if (data.data.items && data.data.items.length == 0){
+
+                            jQuery('#files_list').html("<tr><td> No files to display</td> <td><td></td></td></tr>")
+                                
+                            }
+
+                      
                         }
 
                     },
@@ -484,6 +562,8 @@
             jQuery('#delete_button').on('click', function() {
               var text;
                 if (confirm("are you sure") == true) {
+                   
+              
                     jQuery.ajax({
                         url: "{{ 'deletefolder' }}" + '/' + parent_id,
                         type: 'post',
@@ -492,6 +572,7 @@
                         },
                         success: function(data) {
                             if (data.status == true) {
+
                                 window.location.reload()
                             }
                         },
