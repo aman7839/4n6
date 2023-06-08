@@ -2529,11 +2529,11 @@ ul, #myUL {
   display: none;
 }
 
-.active {
-  display: block;
+
+
+.select_item {
+  margin-bottom: 10px;
 }
-
-
 .tree {
   position: relative;
   background: white;
@@ -2880,6 +2880,18 @@ li.nav-item.dropdown a.dropdown-item:active,li.nav-item.dropdown a.dropdown-item
 .content label {
   font-weight: 600;
   font-size: 15px;
+}
+.active {
+  display: block;
+}
+
+
+.select_item .select2-container {
+  width: 100% !important;
+  min-height: 40px;
+}
+.select2-container .select2-selection--single {
+height: 34px !important;
 }
 /*  */
 
