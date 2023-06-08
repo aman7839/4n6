@@ -471,7 +471,7 @@ class DashboardController extends Controller
                        $coach_membership->end_date = $request->expiration_date;
                        $coach_membership->amount = $request->amount;
                        $coach_membership->user_id = $coach_id;
-
+                       $coach_membership->payment_mode = 'Check';
                        $coach_membership->status = $request->status;
 
                        $coach_membership->save();

@@ -113,7 +113,7 @@ class PayPalController extends Controller
             $membership->user_id=Auth::user()->id;
             $membership->paypal_transaction_id=$response['id'];
             $membership->amount = $payablePrice;
-            $membership->payment_mode = 'paypal';
+            $membership->payment_mode = 'Paypal';
             $membership->accountholder_name = $response['payer']['name']['given_name'].' '.$response['payer']['name']['surname'];
             $membership->start_date = date("Y-m-d H:i:s");
             $membership->end_date = date('Y-m-d H:i:s', strtotime(' + 1 year'));

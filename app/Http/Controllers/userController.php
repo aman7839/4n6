@@ -481,7 +481,7 @@ class userController extends Controller
             // $data = User::where('role','coach')->with('student','membership')->get();   
 
             $data =  DB::table('users')
-                ->select("users.*","coach_student.student_id","membership.start_date","membership.end_date","membership.amount","states.name as statename")
+                ->select("users.*","coach_student.student_id","membership.start_date","membership.payment_mode","membership.end_date","membership.amount","states.name as statename")
                 ->leftJoin('coach_student', 'users.id', '=', 'coach_student.coach_id')
                 ->leftJoin('membership','membership.user_id','=','users.id')
                 ->leftJoin('states','states.state_abb','=','users.school_state')
@@ -521,7 +521,7 @@ class userController extends Controller
                     'Student UserID' =>$student[0]->user_name ?? "" ,
                     'Vault Access To Student' =>($data_item->vault_access == 1 ? 'yes': "no"),
                     'Amount Paid' =>$data_item->amount ?? "" ,
-                    'Payment Method' =>$data_item->payment_method ?? "",
+                    'Payment Method' =>$data_item->payment_mode ?? "",
 
 
                 );
