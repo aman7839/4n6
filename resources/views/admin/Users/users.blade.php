@@ -63,7 +63,10 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
+                                    <th>  Name</th>
                                     <th> User Name</th>
+
+
 
                                     {{-- <th>Email</th>  --}}
                                     <th>
@@ -103,9 +106,14 @@
                             </thead>
                             <tbody>
                                 @foreach ($user as $item)
+
+                                
                                 <tr>
                                     <td>{{ $item->id }}</td>
                                     <td>{{ $item->name }}</td>
+                                    <td>{{ $item->user_name }}</td>
+
+
                                     <td>{{ $item->email }}</td>
                                     <td>{{ $item->school_name }}</td>
 

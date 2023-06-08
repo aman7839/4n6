@@ -11,7 +11,29 @@
             font-size: 14px;
         }
     </style>
+<div>
 
+
+
+     <form action="{{url("admin/importvaultfiles")}}" method="post" enctype="multipart/form-data">
+                @csrf
+                <fieldset>
+                    <label>Select File to Upload <small class="warning text-muted">{{__('Please upload only Excel (.xlsx or .xls) files')}}</small></label>
+                    <div class="form-group search_bar">
+                        <input type="file" required class="form-control" name="uploaded_file" id="uploaded_file">
+                        <div class="input-group-append" id="button-addon2">
+                            <button class="btn btn-primary square admin_cm_btn" type="submit"><i class="ft-upload mr-1"></i> Import Data</button>
+                        </div>
+                    </div>
+                    @if ($errors->has('uploaded_file'))
+                    <p class="mb-0">
+                        <small class="text-danger" id="file-error">{{ $errors->first('uploaded_file') }}</small>
+                    </p>
+                    @endif
+
+                </fieldset>
+            </form>
+</div>
 
     <div class="content">
         <div class="">
@@ -287,10 +309,10 @@
                                     placeholder="Author Name">
                             </div>
                         </div> --}}
-                        <div>
+                        <div class="form-control"  >
                             <label class="form-label" for="form2Example1">Author Name</label>
 
-                        <select class="author_name js-example-basic-single" name="author_name">
+                        <select class="author_name js-example-basic-single form-control" name="author_name">
 
                             @foreach($author_name as $author)
                             <option value="{{$author->author}}">{{$author->author}}</option>

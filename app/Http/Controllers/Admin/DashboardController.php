@@ -172,7 +172,6 @@ class DashboardController extends Controller
     {
         Auth::logout();
 
-        
         return redirect('login');
     }
 
@@ -214,11 +213,11 @@ class DashboardController extends Controller
 			} elseif($sortColumn != null)
             {
 				// $user = User::paginate(10);
-                $user = User::orderBy($sortColumn, $sortOrder)->paginate(20);
+                $user = User::where('role','coach')->orderBy($sortColumn, $sortOrder)->paginate(20);
                 $user->appends(['sort' => $sortColumn, 'order' => $sortOrder]);
 			}else {
 
-				$user = User::paginate(20);
+				$user = User::where('role','coach')->paginate(20);
 
             }
 

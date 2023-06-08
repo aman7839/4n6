@@ -19,7 +19,7 @@
                 
             </form>
 
-            {{-- <form action="{{url("admin/importmaindata")}}" method="post" enctype="multipart/form-data">
+            <form action="{{url("admin/importmaindata")}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <fieldset>
                     <label>Select File to Upload <small class="warning text-muted">{{__('Please upload only Excel (.xlsx or .xls) files')}}</small></label>
@@ -36,7 +36,7 @@
                     @endif
 
                 </fieldset>
-            </form> --}}
+            </form>
            </div>
             <div class="col-md-12 mt-2">
                 <div class="card">

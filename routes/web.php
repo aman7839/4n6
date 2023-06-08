@@ -242,6 +242,8 @@ Route::post('/savetutorial', [UsersGuideController::class,'saveTutorial']);
 Route::get('/deletetutorial/{id}', [UsersGuideController::class,'deleteTutorial']);
 Route::get('/edittutorial/{id}', [UsersGuideController::class,'editTutorial']);
 Route::put('/savetutorial/{id}', [UsersGuideController::class,'updateVideo']);
+Route::post('/importvaultfiles', [userController::class,'importVaultData']);
+
 
 
 
@@ -371,9 +373,6 @@ Route::post('/search', [CoachesController::class,'demoSearchPost']);
 Route::post('/searchprints', [CoachesController::class,'demoSearchPrint']);
 Route::get('/searchprint', [CoachesController::class,'demoSearchPrint']);
 Route::get('/tutorial', [CoachesController::class,'viewTutorial']);
-
-
-
 
 
 

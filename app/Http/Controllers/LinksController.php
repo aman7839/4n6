@@ -29,7 +29,7 @@ class LinksController extends Controller
     public function addCategory(){
 
        
-        return view('admin.Links.addlinks');
+        return view('admin.Links.addLinks');
 
     }
 

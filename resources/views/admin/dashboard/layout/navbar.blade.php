@@ -46,7 +46,7 @@
     <link rel="stylesheet" href="{{asset('/public/4n61/assets/css/cs-skin-elastic.css')}}">
 
     <link rel="stylesheet" href="{{asset('/public/4n61/assets/css/style.css')}}">
-    <link rel="icon" type="image/png" href="{{asset('/public/4n61/images/Favicon.png')}}" />
+    <link rel="icon" type="image/svg" href="{{asset('/public/4n61/images/faviconnew.svg')}}" />
     <link rel="stylesheet" href="{{asset('/public/css/toast.css')}}">
     <link rel="stylesheet" href="{{asset('/public/css/daterangepicker.css')}}">
 
@@ -175,11 +175,11 @@
 
                     </li> --}}
 
-                    <li class="nav-item {{ request()->is('admin/content') ? 'active' : ''}}">
+                    {{-- <li class="nav-item {{ request()->is('admin/content') ? 'active' : ''}}">
 
                         <a href="{{url('admin/content')}}"><i class="menu-icon fa fa-tachometer"></i>Content Editor </a>
 
-                    </li>
+                    </li> --}}
 
 
 
@@ -358,11 +358,11 @@
                         </div>
                       </li>
 
-                      <li class="nav-item {{ request()->is('coach/home') ? 'active' : ''}}">  
+                      {{-- <li class="nav-item {{ request()->is('coach/home') ? 'active' : ''}}">  
 
                         <a href="{{url('coach/home')}}"><i class="menu-icon fa fa-file"></i> Home</a>
 
-                    </li>
+                    </li> --}}
 
 
                       <li class="nav-item dropdown admin_dropdown">
@@ -468,11 +468,11 @@
 
                     </li> --}}
 
-                    <li class="nav-item {{ request()->is('student/home') ? 'active' : ''}}">  
+                    {{-- <li class="nav-item {{ request()->is('student/home') ? 'active' : ''}}">  
 
                         <a href="{{url('student/home')}}"><i class="menu-icon fa fa-file"></i> Home</a>
 
-                    </li>
+                    </li> --}}
 
                     <li class="nav-item dropdown admin_dropdown">
                         <a class=" dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

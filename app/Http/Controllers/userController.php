@@ -9,7 +9,8 @@ use App\Models\CoachStudent;
 use App\Models\Membership;
 use App\Models\state;
 use App\Models\states;
-
+use App\Models\Vault;
+use App\Models\VaultFiles;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -268,7 +269,7 @@ class userController extends Controller
                     }
                     elseif(Auth::user()->role =='student'){
         
-                        return redirect('student/dashboard')->with('success','welcome Student');
+                        return redirect('student/vault')->with('success','welcome Student');
 
                     } 
 
@@ -529,6 +530,100 @@ class userController extends Controller
             $this->ExportExcel($data_array);
         }
         
+
+        // import valut
+
+        public function importVaultData(Request $request){
+         
+            set_time_limit(0);
+    
+             $this->validate($request, [
+                 'uploaded_file' => 'required|file|mimes:xls,xlsx'
+             ]);
+             $the_file = $request->file('uploaded_file');
+             try{
+                 $spreadsheet = IOFactory::load($the_file->getRealPath());
+                 $sheet        = $spreadsheet->getActiveSheet();
+                 $row_limit    = $sheet->getHighestDataRow();
+                 $column_limit = $sheet->getHighestDataColumn();
+                 $row_range    = range( 2, $row_limit );
+                 $column_range = range( 'F', $column_limit );
+                 $startcount = 2;
+                 $data = array();
+                 $childParent_id = [];
+                 $vault_id = [];
+                 foreach ( $row_range as $row ) {   
+                     
+                    $parent_id = trim($sheet->getCell( 'A' . $row )->getValue());
+
+                    // dd($parent_id);
+                    $name = $sheet->getCell( 'B' . $row )->getValue();   
+                    $coach_access = $sheet->getCell( 'C' . $row )->getValue();   
+                    $student_access = $sheet->getCell( 'D' . $row )->getValue();
+                    $filePath = $sheet->getCell( 'E' . $row )->getValue();   
+                    $fileName = $sheet->getCell( 'F' . $row )->getValue();   
+                    $authorName = $sheet->getCell( 'G' . $row )->getValue();
+
+                  
+                    if(isset($name)){
+
+                        $data = new Vault();    
+                        if($parent_id == 0){  
+                            $data->parent_id= null; 
+                        }elseif($parent_id == 1){
+                        
+                            $rootParentID = Vault::where('name','4n6fanatics')->get();
+                            $data->parent_id = $rootParentID[0]->id;                        
+                            
+                        } elseif($parent_id == 2){
+
+                            $data->parent_id = $childParent_id[0];
+                        }                    
+                                    
+                        $data->name= $name;  
+                        $data->coach_access= $coach_access;             
+                        $data->student_access= $student_access;  
+                        $data->save(); 
+
+                        if($parent_id == 1){
+                            $childParent_id[0] =$data->id;
+
+                        }
+
+                        if($parent_id == 2){
+                            $vault_id[0] =$data->id;
+                        }                                       
+                          
+                    }else{
+
+                        $files = new VaultFiles();   
+                        if($parent_id === 'fileupload1'){ 
+
+                            $files->vault_id= $childParent_id[0];
+
+                        }elseif($parent_id === 'fileupload2'){                      
+                            
+                            $files->vault_id = $vault_id[0];
+                        }                       
+                    
+                        $files->name = $fileName;
+                        $files->file = $filePath;
+                        $files->author_name = $authorName;
+                        $files->save();
+
+
+
+                    }
+                                    
+            
+                 }
+                
+             } catch (Exception $e) {
+                 // $error_code = $e->errorInfo[1];
+                 return redirect()->back()->withErrors('There was a problem uploading the data!');
+             }
+             return redirect()->back()->withSuccess('Great! Data has been successfully uploaded.');
+         }
        
     
     
