@@ -6,10 +6,25 @@
 
 
     <style>
-        label.error {
+        /* label.error {
             color: #dc3545;
             font-size: 14px;
         }
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+       width: 300px;
+          } */
+       /* .auther_outer{
+       margin: 12px 0px;
+        }
+        .select_item {
+    position: absolute;
+    top: -2px;
+    left: 100px;
+}
+
+.author_inner_element {
+    position: relative;
+} */
     </style>
 <div>
 
@@ -309,19 +324,23 @@
                                     placeholder="Author Name">
                             </div>
                         </div> --}}
-                        <div class="form-control"  >
-                            <label class="form-label" for="form2Example1">Author Name</label>
-
-                        <select class="author_name js-example-basic-single form-control" name="author_name">
-
-                            @foreach($author_name as $author)
-                            <option value="{{$author->author}}">{{$author->author}}</option>
-                            {{-- <option value="WY">Wyoming</option> --}}
-
-                            @endforeach
-                        </select>
+                        <div class="auther_outer">
+                            <div class="author_inner_element">
+                                <label class="form-label" for="form2Example1">Author Name</label>
+                            </div>
+                            <div class="select_item">
+                                <select class="author_name js-example-basic-single form-control" name="author_name">
+        
+                                    @foreach($author_name as $author)
+                                    <option value="{{$author->author}}">{{$author->author}}</option>
+                                    {{-- <option value="WY">Wyoming</option> --}}
+        
+                                    @endforeach
+                                </select>
+                             </div>
                         </div>
-                        <input type="file" name="files[]" required multiple >
+                        <label class="form-label mb-2" for="form2Example1">Upload File</label>
+                        <input type="file" name="files[]" class="form-control mb-3" required multiple >
                         <input type="hidden" name="vault_id" id="vault_id" value="">
                         <button type="submit" class="btn btn-success">Upload</button>
 
