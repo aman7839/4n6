@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{asset('/public/css/font.min.css')}}">
     <link rel="stylesheet" href="{{asset('/public/4n61/css/steps.css')}}">
     <link rel="stylesheet" href="{{asset('/public/css/toast.css')}}">
-    <link rel="icon" type="image/png" href="{{asset('/public/4n61/images/Favicon.png')}}" />
+    <link rel="icon" type="image/svg" href="{{asset('/public/4n61/images/newlogo.svg')}}" />
 
 
 
@@ -51,29 +51,35 @@
                                 Limited Prep Events
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                              <li><a class="dropdown-item" href="{{url('/regeneratetopics')}}">Impromptu Duet Acting (IDA)</a></li>
+                              <li><a class="dropdown-item" href="{{url('/regeneratetopics')}}">Improv Scene Generator </a></li>
                               <li><a class="dropdown-item" href="{{url('/isg')}}">Impromptu Speech Topic Generator</a></li>  
-                              @auth
+
+                              
+                              {{-- @auth
                               @if(auth()->user()->role == 'coach' )                          
-                              <li><a class="dropdown-item" href="{{url('coach/extemp')}}">Extemp Topic Generator</a></li>
+                              <li><a class="dropdown-item" href="{{url('coach/extemp')}}">Extempt Topic Generator</a></li>
 
                               @endif
 
                               @if(auth()->user()->role == 'student' )                          
-                              <li><a class="dropdown-item" href="{{url('student/extemp')}}">Extemp Topic Generator</a></li>
+                              <li><a class="dropdown-item" href="{{url('student/extemp')}}">Extempt Topic Generator</a></li>
 
                               @endif
 
                               @if(auth()->user()->role == 'admin' )                          
-                              <li><a class="dropdown-item" href="{{url('admin/extemp')}}">Extemp Topic Generator</a></li>
+                              <li><a class="dropdown-item" href="{{url('admin/extemp')}}">Extempt Topic Generator</a></li>
 
                               @endif
 
-                              @endauth
+                              @endauth --}}
                             </ul>
                           </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link {{ request()->is('tutorial') ? 'active' : ''}}" href="{{url('tutorial')}}">Tutorials</a>
+                        </li> --}}
+                        {{-- <li><a href="{{url('faq')}}">Faq's</a></li> --}}
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is('faq') ? 'active' : ''}}" href="{{url('faq')}}">FAQ'S</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('reviews') ? 'active' : ''}}" href="{{url('reviews')}}">Reviews</a>

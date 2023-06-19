@@ -13,11 +13,64 @@
 
     </div> --}}
 
+  <!--  reply Modal -->
+  <div class="modal fade" id="replyReview" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Reply<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button></h5>
+                <!-- <input type="text" id="selectedid"> -->
+
+            </div>
+            <div class="modal-body">
+                <form class="vault_form" method="post" id="editReview" action="{{ url('admin/addscreenshot') }}" enctype="multipart/form-data">
+
+                    @csrf
 
 
 
-    <!--  Modal -->
-    <div class="modal fade" id="addscreenshot" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="form-outline">
+                        {{-- <label class="form-label" for="form2Example1">Folder Name</label>
+      <input type="text" name="name" class="form-control"  value= ""/> --}}
+
+                        <div class="">
+                            <div class="form-group">
+                                <label for="screenshot"> Reply <span class="text-danger"></span> </label>
+                                <input type="text" id="" name="replyMessage" class="form-control" placeholder="Reply">
+                            </div>
+                        </div>
+
+
+                        <span class="text-danger">
+                            @error('screenshot')
+                            {{ $message }}
+                            @enderror
+                        </span>
+                    </div>
+
+
+                    <div class="form-outline">
+
+
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-sm admin_cm_btn">Reply</button>
+
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{{-- end modal --}}
+ 
+
+     <!--  Modal -->
+     <div class="modal fade" id="addscreenshot" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -88,10 +141,15 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th> Review</th>
+                                <th> Review Comment</th>
+                                <th>Reply Message</th>
+
                                 <th>Screenshot</th>
                                 <th>Status</th>
-                                <th>Approve</th>
+
+                                <th>Reply Review</th>
+                                {{-- <th>Approve</th> --}}
+                                
 
                                 {{-- <th>Edit</th> --}}
                                 <th>Delete</th>
@@ -102,25 +160,61 @@
                             <tr>
                                 <td>{{ $reviews->id }}</td>
                                 <td>{{ $reviews->comment }}</td>
+                                <td>{{ $reviews->reply }}</td>
+
                                 <td><a class="example-image-link" href="{{ asset('/public/images/'.$reviews->screenshot) }}" data-lightbox="example-set" data-title="Click the right half of the image to move forward."><img src="{{ asset('/public/images/'.$reviews->screenshot) }}" width="100" class=" rounded-circle " title=""></a></td>
 
 
                                 <td>{{ $reviews->approved == 1 ? 'Approved' : 'Pending' }}</td>
 
+                                
+                                {{-- <td>{{ $reviews->reply }}</td> --}}
+
+                               
+
+
+
+                               {{-- <td> --}}
+                                   {{-- <button id = "reply" class="btn btn-primary btn-sm"> Reply </button>  --}}
+                                   {{-- <a href={{url('admin/approveview/'.$reviews->id)}} class="btn btn-primary btn-sm" onclick="return confirm('Are you sure?')"  >Reply</a> --}}
+
+
+                                {{-- </td> --}}
+
+                                @if($reviews->approved == 0 )
+
+                                 <td> 
+                                    <a href={{url('admin/replyreview/'.$reviews->id)}} class="btn btn-primary btn-sm" id = "reply"  >Reply and Approve</a>
+                                    
+                                     {{-- <button class="btn btn-primary btn-sm" id = "reply">Reply</button> --}}
+ 
+                                 </td>
+
+                                 @endif
+
+                                 @if($reviews->approved == 1  )
+
+                                 <td> 
+                                    {{-- <a href={{url('admin/replyreview/'.$reviews->id)}} class="btn btn-primary btn-sm" id = "reply"  >Approved</a> --}}
+                                    
+                                     <button class="btn btn-success btn-sm" >Approved</button>
+ 
+                                 </td>
+
+                                 @endif
 
                                 {{-- <td>
-                                        <a href={{url('admin/editstate/'.$reviews->id)}} class="btn btn-primary btn-sm">Edit</a>
+                                   <a href={{url('admin/approveview/'.$reviews->id)}} class="btn btn-primary btn-sm" onclick="return confirm('Are you sure?')"  >Approve</a>
+
                                 </td> --}}
-
-                                <td>
-                                    <a href={{url('admin/approveview/'.$reviews->id)}} class="btn btn-primary btn-sm" onclick="return confirm('Are you sure?')">Approve</a>
-                                </td>
                                 <td>
 
-                                    <a href={{url('admin/deletereview/'.$reviews->id)}} class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+                                    <a href={{url('admin/deletereview/'.$reviews->id)}} class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')"  >Delete</a>
                                     {{-- <a class="btn btn-danger" onclick="return confirm('Are you sure?')" href={{url('deleteuser/'.$item->id)}} ><i class="fa fa-trash"></i></a> --}}
                                 </td>
                             </tr>
+
+                           
                             @endforeach
                         </tbody>
 
@@ -143,9 +237,9 @@
 </div>
 </div>
 
-@section('footer-scripts')
-<script>
-    jQuery(document).ready(function() {
+        @section('footer-scripts')
+        <script>
+            jQuery(document).ready(function() {
 
         jQuery("#screenshot").on('click', function() {
 
@@ -153,8 +247,11 @@
 
         })
 
-
     })
+
+
+
+          
 </script>
 
 @endsection

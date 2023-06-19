@@ -186,6 +186,8 @@ Route::get('/editextemp/{id}', [ExtempController::class, 'editExtemp']);
 // Route::get('/deleteextemp/{id}', [ExtempController::class, 'deleteExtempData']);
 
 Route::put('/updateextemp/{id}', [ExtempController::class, 'updateExtemp']);
+Route::get('/dumprecords', [ExtempController::class, 'dumpRecords']);
+
 Route::get('/messages', [contactusController::class, 'index']);
 Route::get('/viewmessages/{id}', [contactusController::class, 'viewMessages']);
 Route::get('/replymessages/{id}', [contactusController::class, 'replyMessages']);
@@ -209,7 +211,11 @@ Route::post('/uploadfile',[VaultController::class, 'fileUpload'])->name('uploadf
 Route::get('/reviews',[HomeController::class, 'adminViewReviews']);
 Route::post('/addscreenshot',[HomeController::class, 'addScreenshot']);
 
-Route::get('/approveview/{id}', [HomeController::class, 'approveReview']);
+Route::post('/approveview/{id}', [HomeController::class, 'approveReview']);
+// Route::post('/replyview/{id}', [HomeController::class, 'approveReview']);
+Route::get('/replyreview/{id}', [HomeController::class, 'showReplyView']);
+
+
 Route::get('/deletereview/{id}', [HomeController::class, 'deleteReview']);
 
 Route::post('/importdata', [userController::class,'importData']);
@@ -245,6 +251,14 @@ Route::put('/savetutorial/{id}', [UsersGuideController::class,'updateVideo']);
 Route::post('/importvaultfiles', [userController::class,'importVaultData']);
 
 
+// imrpoc scene generator
+
+Route::get('/regeneratetopics', [HomeController::class,'idaSearch']);
+
+
+// isg
+
+Route::get('/isg', [HomeController::class,'IsgSearch']);
 
 
 
@@ -374,6 +388,15 @@ Route::post('/searchprints', [CoachesController::class,'demoSearchPrint']);
 Route::get('/searchprint', [CoachesController::class,'demoSearchPrint']);
 Route::get('/tutorial', [CoachesController::class,'viewTutorial']);
 
+// imrpoc scene generator
+
+Route::get('/regeneratetopics', [HomeController::class,'idaSearch']);
+
+// isg
+
+Route::get('/isg', [HomeController::class,'IsgSearch']);
+
+
 
 
 });
@@ -410,6 +433,14 @@ Route::get('/tutorial', [CoachesController::class,'viewTutorial']);
 
 Route::get('vault', [StudentsController::class, 'getData']);
 Route::get('coach_folder_data/{id}', [VaultController::class, 'getFolderData']);
+
+// imrpoc scene generator
+
+Route::get('/regeneratetopics', [HomeController::class,'idaSearch']);
+
+// isg
+
+Route::get('/isg', [HomeController::class,'IsgSearch']);
     
 });
     });

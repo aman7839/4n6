@@ -5,9 +5,9 @@
 </head>
 <body>
     {{-- <p>Hi {{ $user['name'] }},</p> --}}
-    <p>{{ $user['desciption'] }}</p>
+    <p>{{ $details['desciption'] }}</p>
    
-    {{-- <p class="spacing">
+    <p class="spacing">
 
         Laurie Mooney, 4N6 Fanatics  <br>
        <a class="hilight" href="tel:541-821-7612"> Phone: 541-821-7612</a> <br>
@@ -16,6 +16,6 @@
         Happy Valley, OR 97086 <br>
        <a class="hilight" href="www.4n6fanatics.com">www.4n6fanatics.com</a>
 
-    </p> --}}
+    </p>
 </body>
 </html>

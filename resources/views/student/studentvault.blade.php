@@ -94,7 +94,7 @@
                 {{-- <div> You are not authorised to view the Vault.</div> --}}
                 @endif
 
-                @if (!empty($membership && $vaultAccessToStudentID == '0'))
+                @if (!empty($membership && $vaultAccessToStudentID == '0' || !empty($membership && $vaultAccessToStudentID == null )))
 
                 <h5 class="text-center mt-3">VAULT ACCESS HAS BEEN LIMITED BY YOUR COACH. PLEASE CONTACT YOUR COACH FOR VIEWING THE FILES IN THE FOLDERS
                 </h5>
@@ -316,9 +316,7 @@
         var parent_id = "";
         var toggler = jQuery('.caret');
         var i;
-        var vault_tree = {
-            !!json_encode($vault_tree) !!
-        };
+        var vault_tree = {!!json_encode($vault_tree)!!};
         console.log(vault_tree)
         const getAncestors = (target, children, ancestors = []) => {
             for (let node of children) {
@@ -498,6 +496,12 @@
 
                         }
                         jQuery('#files_list').html(filesHtml)
+
+                        if (data.data.items && data.data.items.length == 0){
+
+                        jQuery('#files_list').html("<tr><td> No files to display</td> <td><td></td></td></tr>")
+    
+                        }
                     }
 
                 },

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\ExtempTopic;
 use App\Models\Extemp;
 use App\Models\Data;
-
+use App\Models\SubscribeUs;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Reader\Exception;
 use PhpOffice\PhpSpreadsheet\Writer\Xls;
@@ -18,7 +18,7 @@ class ExtempController extends Controller
 {
     public function index(){
        
-    $topic = ExtempTopic::paginate(10);
+    $topic = ExtempTopic::paginate(30);
    return view('admin.Data.extemptopics',compact('topic'));
         
     }
@@ -59,6 +59,17 @@ class ExtempController extends Controller
         $topic = ExtempTopic::find($id);
         return view('admin.Data.editextemptopics',compact('topic'));
     }
+
+
+
+    public function dumpRecords()
+    { 
+           // echo  $id; 
+            
+              Extemp::truncate();
+            return redirect()->back()->with('error', 'Extempt data deleted successfully');
+        
+    }
    
             public function updateExtempTopics(Request $request,$id){
  
@@ -95,7 +106,7 @@ class ExtempController extends Controller
 
             }
                                
-          $topic =   $topic->paginate(10);
+          $topic =   $topic->paginate(30);
 
            return view('admin.Data.extemp',compact('topic','date','Topic','dateselected','monthName','topicName'));
                
@@ -225,12 +236,12 @@ class ExtempController extends Controller
                                  
                                  $type = $sheet->getCell( 'A' . $row )->getValue();  
                                                                                  
-                                 $question = $sheet->getCell( 'B' . $row )->getValue();   
-                                 $year = $sheet->getCell( 'D' . $row )->getValue();   
-                                $month = $sheet->getCell( 'C' . $row )->getValue();
+                                 $question = $sheet->getCell( 'C' . $row )->getValue();   
+                                 $year = $sheet->getCell( 'E' . $row )->getValue();   
+                                $month = $sheet->getCell( 'D' . $row )->getValue();
 
 
-                                $topic_name = $sheet->getCell( 'E' . $row )->getValue();   
+                                $topic_name = $sheet->getCell( 'B' . $row )->getValue();   
                                 
                                 $topicArray = ExtempTopic::where('name', trim($topic_name))->get();
 

@@ -1,17 +1,18 @@
-@extends('frontendviews.main')
+{{-- @extends('frontendviews.main') --}}
+@extends('admin.dashboard.layout.main')
 
     @section('content')
    
     <section class="cmn_header_section space" style="background-image:{{asset('url(public/4n61/images/demo_bg.jpg)')}};">
         <div class="custom_container">
-            <h1>Extemp Topic  <br>
-                Generator</h1>
+            {{-- <h1>Extempt Topic  <br>
+                Generator</h1> --}}
         </div>
     </section>
 
     <div class="custom_container space pb-5">
         <div class="cmn_heading">
-          <h2> Extemp Topic Generator</h2>
+          <h2> Extempt Topic Generator</h2>
            
         </div>
     </div>

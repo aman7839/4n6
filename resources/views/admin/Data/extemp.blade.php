@@ -35,7 +35,7 @@
                                                 @endif
 
 
-                                                >{{$monthName[$monthday->month]}} {{$monthday->year}}</option>
+                                                >{{$monthName[$monthday->month] ?? ''}} {{$monthday->year ?? ''}}</option>
                                             @endforeach
                                         </select>
 
@@ -92,6 +92,8 @@
                     <h4 class="title_cmn">Extemp Manager</h4>
                 </div>
                 <h4><a href="{{ url('admin/addextemp')}}" class="btn btn-primary btn-sm admin_cm_btn"> <i class="fa fa-plus mr-2"></i> Add Topics</a></h4>
+                <h4><a href="{{ url('admin/dumprecords')}}" class="btn btn-primary btn-sm admin_cm_btn" onclick="return confirm('Warning, this is not reversable!!')"> Dump Records</a></h4>
+
             </div>
             <div class="card-body">
                 <form action="{{url("admin/importextempdata")}}" method="post" enctype="multipart/form-data">

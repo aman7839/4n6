@@ -217,7 +217,7 @@ class DashboardController extends Controller
                 $user->appends(['sort' => $sortColumn, 'order' => $sortOrder]);
 			}else {
 
-				$user = User::where('role','coach')->paginate(20);
+				$user = User::where('role','coach')->orderBy('id','desc')->paginate(20);
 
             }
 

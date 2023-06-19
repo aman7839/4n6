@@ -33,7 +33,7 @@ class contactusController extends Controller
         'body' => $request->description
     ];
 
-        Mail::to($request->email)->send(new \App\Mail\ContactUs($details));
+        Mail::to('laurie@4n6fantaics.com')->send(new \App\Mail\ContactUs($details));
        return redirect()->back()->with('success','Thanks! We will contact you soon');
 
     }

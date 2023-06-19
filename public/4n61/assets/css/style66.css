@@ -574,7 +574,7 @@ aside.left-panel {
   position: fixed;
   left: 0;
   bottom: 0;
-  top: 83px;
+  top: 55px;
   z-index: 999; }
   aside.left-panel:hover {
     overflow-x: scroll; }
@@ -873,9 +873,9 @@ aside.left-panel {
 /* Right panel */
 .right-panel {
   background: #f1f2f7;
-  min-height: calc(100vh - 83px);
+  min-height: 100vh;
   margin-left: 280px;
-  margin-top: 83px; }
+  margin-top: 55px; }
   /* .right-panel .top-left {
     float: left; } */
   .right-panel .top-rigth {
@@ -914,7 +914,8 @@ aside.left-panel {
   -webkit-box-shadow: none;
           box-shadow: none;
   clear: both;
-  padding: 15px 30px;
+  padding: 0 30px;
+  height: 55px;
   position: fixed;
   left: 280px;
   left: 0;
@@ -922,13 +923,11 @@ aside.left-panel {
   top: 0;
   display: flex;
   justify-content: space-between;
-  z-index: 999; align-items: center;}
-  a.navbar-brand img {
-    width: 40%;
-}
+  z-index: 999; }
 .right-panel .navbar-brand {
-
+  width: 106px;
   padding: 0;
+    padding-top: 7px;
   display: inline-block; }
 .right-panel .menutoggle {
   padding-top: 7px; }
@@ -940,7 +939,8 @@ aside.left-panel {
     display: inline-block; }
 .right-panel .navbar-brand {
   line-height: 42px; }
-
+  .right-panel .navbar-brand img {
+    max-width: 134px; }
   .right-panel .navbar-brand.hidden {
     display: none; }
 
@@ -1112,7 +1112,6 @@ header .form-inline {
       line-height: 55px; }
 .user-area .d-flex{
   padding-right: 20px;
-  align-items: center;
 }
 .user-area .dropdown-toggle {
   position: relative;
@@ -1191,6 +1190,7 @@ header .form-inline {
       color: #fff;
       font-weight: 600;
       margin: 0;
+      margin-top: 7px;
   }
   .user-area .user-info .name {
     color: #8c8c8c;
@@ -2397,9 +2397,8 @@ footer.site-footer {
   aside.left-panel {
     overflow: scroll; }
 
-    a.navbar-brand img {
-      width: 49%;
-  }
+  .right-panel header.header {
+    height: 62px; }
   /* .right-panel .top-left, .right-panel .top-right {
     width: 100%;
     float: none;
@@ -2453,6 +2452,10 @@ footer.site-footer {
       display: none; }
     #left-panel .navbar .sub-menu.children.show {
       display: block; }
+
+  .right-panel .navbar-brand {
+    width: 102px;
+    padding-bottom: 5px; }
   .right-panel .menutoggle {
     width: 20px; } }
 #cellPaiChart {

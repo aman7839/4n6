@@ -17,11 +17,11 @@ class ISGController extends Controller
         $search = $request['search'];
         if ($search != ""){
 
-            $topic = ISG::where('topic', 'Like', '%'.$search. '%' )->orWhere('info', 'Like', '%'.$search. '%')->paginate('10');
+            $topic = ISG::where('topic', 'Like', '%'.$search. '%' )->orWhere('info', 'Like', '%'.$search. '%')->paginate('30');
            
         }else{
 
-        $topic = ISG::paginate(10);
+        $topic = ISG::paginate(30);
     }
 
         return view('admin.Data.isg',compact('topic','search'));
@@ -89,10 +89,10 @@ class ISGController extends Controller
              $data = array();
              foreach ( $row_range as $row ) {   
                  
-                 $topic = $sheet->getCell( 'A' . $row )->getValue();    
+                 $topic = $sheet->getCell( 'B' . $row )->getValue();    
                  
                 
-                 $info = $sheet->getCell( 'B' . $row )->getValue();   
+                 $info = $sheet->getCell( 'C' . $row )->getValue();   
                  
                  $isgTopic = new ISG;               
                  $isgTopic->topic= $topic;               

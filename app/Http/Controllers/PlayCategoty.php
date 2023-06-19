@@ -10,7 +10,7 @@ class PlayCategoty extends Controller
 {
     //
     public function index(){
-   $category = PlayCategory::paginate(5);
+   $category = PlayCategory::paginate(30);
         return view('admin.Links.playcategory',compact('category'));
     }
     

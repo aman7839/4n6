@@ -193,9 +193,13 @@ class CoachesController extends Controller
 
     public function demoSearch(Request $request)
     {
-        $awards = awards::all();
-        $theme = Theme::all();
-        $category = playCategory::all();
+        // $awards = awards::all();
+        // $theme = Theme::all();
+        // $category = playCategory::all();
+
+        $awards = awards::orderBY('awards_name','asc')->get();
+        $theme = Theme::orderBY('name','asc')->get();
+        $category = PlayCategory::orderBY('name','asc')->get();
         $membership = "";
 
         $title = $request["title"];
@@ -222,7 +226,7 @@ class CoachesController extends Controller
         if ($fullSearch != null) {
             $search = Data::select(
                 "data.*",
-                DB::raw("group_concat(award_id) as award_id")
+                DB::raw("group_concat(award_id) as awards_id")
             )
                 ->orwhere("title", "Like", "%" . $fullSearch . "%")
                 ->orwhere("publisher", "Like", "%" . $fullSearch . "%")
@@ -246,10 +250,12 @@ class CoachesController extends Controller
 
                 
                 ->groupBy("category_id")
-    
-               ->get();
+                ->groupBy("title")
+                ->paginate(25);
+
+                $search->appends(['wide_search' => $fullSearch]);
    
-        //            echo "<pre>"; print_r($data->toArray()); echo "</pre>";
+        //            echo "<pre>"; print_r($search->toArray()); echo "</pre>";
         //    exit;
 
             } else
@@ -257,7 +263,7 @@ class CoachesController extends Controller
                 
                 $search = Data::select(
                     "data.*",
-                    DB::raw("group_concat(award_id) as award_id")
+                    DB::raw("group_concat(award_id) as awards_id")
                 )
 
                   ->where("title", "Like", "%" . $title . "%")
@@ -278,7 +284,8 @@ class CoachesController extends Controller
                 ->when($categories, function ($q) use ($request) {
                     return $q->whereHas("category", function ($query) use (
                         $request) {
-                        $query->where("id", $request->category_name);
+                        // $query->where("id", $request->category_name);
+                        $query->where('name', 'like', '%' . $request->category_name . '%');
                     });
                 })
                 ->when($vault, function ($q) use ($request) {
@@ -289,8 +296,13 @@ class CoachesController extends Controller
                     });
                 })
                     ->groupBy("category_id")
-        
-                    ->get();
+                    ->groupBy("title")
+                    ->paginate(25);
+
+                $search->appends(['title' => $title, 'author' => $author, 'type' => $type, 'characters' => $characters,'award_name' => $award, 'category_name' => $categories, 'theme_name' => $themes]);
+                   
+                                                                                     
+
 // echo "<pre>"; echo print_r($search); echo "</pre>"; exit;
 
                }      

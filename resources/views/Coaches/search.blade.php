@@ -47,14 +47,14 @@
         <form action="{{url('admin/search')}}" method="get">
           @endif
           @endauth
-          @csrf
+        
             <div class="card-header">
               <h4 class="title_cmn">Search Database</h4>
             </div>
             <div class="card-body">
               <div class="row">
 
-                <div class="col-md-6 col-lg-4">
+                {{-- <div class="col-md-6 col-lg-4">
 
                   <div class="form-group">
 
@@ -66,13 +66,13 @@
 
 
 
-                </div>
+                </div> --}}
                 <div class="col-md-6 col-lg-4">
                   <div class="form-group">
 
                     <label for="title">Title</label>
 
-                    <input type="text" name="title" class="form-control" placeholder="eg: 13 Reasons Why" value="{{$title}}">
+                    <input type="text" name="title" class="form-control" placeholder="eg: 10 Classics in 10 Minutes" value="{{$title}}">
 
                   </div>
                 </div>
@@ -82,13 +82,13 @@
 
                     <label for="author">Author</label>
 
-                    <input type="text" name="author" value="{{$author}}" class="form-control" placeholder="eg: king stephen">
+                    <input type="text" name="author" value="{{$author}}" class="form-control" placeholder="eg: stephen">
 
                   </div>
 
                 </div>
 
-                <div class="col-md-6 col-lg-4">
+                {{-- <div class="col-md-6 col-lg-4">
 
                   <div class="form-group">
 
@@ -98,7 +98,7 @@
 
                   </div>
 
-                </div>
+                </div> --}}
 
 
 
@@ -249,7 +249,7 @@
 
 
 
-                      <option value=" {{$item->id}}" {{$item->id == ($categories ) ? 'selected':''}}>{{$item->name}}</option>
+                      <option value=" {{$item->name}}" {{$item->name == ($categories ) ? 'selected':''}}>{{$item->name}}</option>
 
                       @endforeach
 
@@ -328,7 +328,7 @@
     <div>
 
       {{-- <p>Records-found: <b>{{$pendingsession>0 ? $search->count() :$pendingsession }}</b></p> --}}
-      <p>Records-found: <b>{{ $search->count() }}</b></p>
+      <p>Records-found: <b>{{$search->total() }}</b></p>
 
 
       {{-- <p>Searches Remaining: <b>{{$pendingsession}}</b></p> --}}
@@ -354,7 +354,7 @@
       <form action="{{url('admin/searchprints')}}" method="POST" id="formSearch" enctype="multipart/form-data">
         @endif
         @endauth
-        @csrf
+       
 
         
         @foreach($search as $item)
@@ -414,17 +414,17 @@
                 
 
                 
-                  <td>{{$item->publisher}}</td>
+                  <td>{{$item->publisher?? ''}}</td>
 
-                  <td> #{{$item->isbn}}</td>
+                  <td> #{{$item->isbn?? ''}}</td>
 
-                  <td>{{$item->award_name}}</td>
+                  <td>{{$item->award_name ?? ''}}</td>
 
-                  <td>{{$item->type}}</td>
+                  <td>{{$item->type?? ''}}</td>
 
-                  <td>{{$item->characters}}</td>
+                  <td>{{$item->characters ?? ''}}</td>
 
-                  <td>{{$item->category->name}}</td>
+                  <td>{{$item->category->name ?? ''}}</td>
 
             @if($item->files)
                                     
@@ -438,7 +438,7 @@
 
                   {{-- <td>PG-13 - High School</td> --}}
 
-                  <td>{{$item->theme->name}}</td>
+                  <td>{{$item->theme->name ?? ''}}</td>
 
                   <td><input type="checkbox" id="{{$item->id}}" name="printBox[]" value={{$item->id}}></td>
 
@@ -452,7 +452,7 @@
 
           <h5 class="mb-3"><b>Summary</b></h5>
 
-          <p>{{$item->summary}}</p>
+          <p>{{$item->summary ?? ''}}</p>
 
         </div>
 
@@ -463,6 +463,15 @@
       </form>
 
       <div id="validationError"></div>
+
+      <span>{{ $search->links()}}</span>
+                    <style>
+                        .w-5 {
+                            display: none;
+
+                        }
+                    </style> 
+                 
 
       {{-- @else
 

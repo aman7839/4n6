@@ -1148,7 +1148,7 @@ section.cmn_header_section h1 {
   font-size: 20px;
 }
 a.navbar-brand {
-  flex: 0 0 99px;
+  flex: 0 0 100px;
 }
 
 }
@@ -1283,9 +1283,9 @@ footer ul li {
 .fanatic_offer p span {
   top: -8px;
 }
-/* a.navbar-brand {
+a.navbar-brand {
   width: 110px;
-} */
+}
 header a.navbar-brand img {
   width: 100%;
 }

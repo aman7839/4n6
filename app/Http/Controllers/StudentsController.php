@@ -79,12 +79,14 @@ public function getFolderData($id){
       ->whereDate('end_date', '>=', $today)->where('status',1)
       ->first();
 
-    //   dd($membership);
+      // dd($membership);
 
       $vault_tree=[];
       // if(!empty($membership && !empty($vaultAccessToStudent))){
       $vault = Vault::with('items','nestedCategories.items',)->whereNull('parent_id')->where('student_access',1)->get();
+      
       $vault_tree = $this->buildTree($vault->toArray());
+      // dd($vault_tree);
   // }
 
      return view('student/studentvault',compact('membership','vault_tree','coachID','vaultAccessToStudentID'));

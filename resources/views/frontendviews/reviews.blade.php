@@ -35,7 +35,9 @@
                 <div class="review_content">
                     <b> {{$review_list['user']['name'] ?? ""}}</b>
                 @if($review_list->comment)
-                <p> {{$review_list->comment ?? ""}}</p>
+                <p> Comment :{{$review_list->comment ?? ""}}</p>
+                <p> Reply: {{$review_list->reply ?? ""}}</p>
+
                 @endif
                 @if($review_list->screenshot)
                 <p> <a class="example-image-link" href="{{ asset('/public/images/'.$review_list->screenshot) }}"

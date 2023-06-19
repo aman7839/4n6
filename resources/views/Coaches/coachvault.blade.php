@@ -303,9 +303,7 @@
         var parent_id = "";
         var toggler = jQuery('.caret');
         var i;
-        var vault_tree = {
-            !!json_encode($vault_tree) !!
-        };
+        var vault_tree = {!!json_encode($vault_tree)!!};
         console.log(vault_tree)
         const getAncestors = (target, children, ancestors = []) => {
             for (let node of children) {
@@ -324,6 +322,7 @@
 
         for (i = 0; i < toggler.length; i++) {
             toggler[i].addEventListener("click", function() {
+
                 this.parentElement.querySelector(".nested").classList.toggle("active");
                 this.classList.toggle("caret-down");
             });
@@ -486,6 +485,12 @@
                         }
 
                         jQuery('#files_list').html(filesHtml)
+
+                 if (data.data.items && data.data.items.length == 0){
+
+                jQuery('#files_list').html("<tr><td> No files to display</td> <td><td></td></td></tr>")
+                    
+                }
                     }
 
                 },

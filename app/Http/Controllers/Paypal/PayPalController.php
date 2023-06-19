@@ -69,7 +69,7 @@ class PayPalController extends Controller
                         "value" => $payablePrice
                     ]   
                 ]
-            ]
+            ]   
         ]);
         if (isset($response['id']) && $response['id'] != null) {
             // redirect to approve href
@@ -123,11 +123,11 @@ class PayPalController extends Controller
                 $membership->offer_id=$offerPrice->id;
             }
             $membership->save();
-            // $details = [
-            //     'desciption' => 'Hi admin,' . Auth::user()->user_name . 'has been taken a new membership via paypal.',
-            //     // 'body' => $request->description
-            // ];
-            // Mail::to($request->email)->send(new \App\Mail\RenewMembership ($details));
+            $details = [
+                'desciption' => 'Hi admin,' . Auth::user()->user_name . 'has been taken a new membership via Paypal.',
+                // 'body' => $request->description
+            ];
+            Mail::to('laurie@4n6fantaics.com')->send(new \App\Mail\RenewMembership ($details));
 
             return redirect()
                 ->route('createTransaction')

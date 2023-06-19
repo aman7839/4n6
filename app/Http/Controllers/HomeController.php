@@ -148,7 +148,7 @@ class HomeController extends Controller
 
     public function adminViewReviews()
     {
-        $review = Reviews::paginate(10);
+        $review = Reviews::orderBY('id','desc')->paginate(10);
 
         return view("admin.Reviews.reviews", compact("review"));
     }
@@ -188,6 +188,8 @@ class HomeController extends Controller
         $review->user_id = Auth::user()->id;
         $review->approved = 1;
 
+        
+
         $review->save();
 
         return redirect()
@@ -195,18 +197,33 @@ class HomeController extends Controller
             ->with("success", "Review screenshot added successfully");
     }
 
-    public function approveReview($id)
+    public function approveReview(Request $request, $id)
     {
         $review = Reviews::find($id);
 
         $review->approved = 1;
+
+        $review->reply = $request->reply;
+       
+
         $review->save();
 
-        return redirect()
-            ->back()
-            ->with("success", "Review approved successfully");
+        return redirect('admin/reviews')->with("success", "Review approved successfully");
+           
+           
     }
 
+
+    public function showReplyView($id) {
+
+
+        $review = Reviews::find($id);
+
+        return view("admin.Reviews.replyReview", compact("review"));
+
+    }
+
+    
     public function deleteReview($id)
     {
         $review = Reviews::find($id);
@@ -344,6 +361,31 @@ class HomeController extends Controller
             "frontendviews.regeneratetopics",
             compact("location", "situation", "character")
         );
+
+        
+    }
+
+    public function idaSearch()
+    {
+        $location = TopicRole::where("name", "location")
+            ->inRandomOrder()
+            ->limit(3)
+            ->get();
+        $situation = TopicRole::where("name", "situation")
+            ->inRandomOrder()
+            ->limit(3)
+            ->get();
+        $character = TopicRole::where("name", "profession")
+            ->inRandomOrder()
+            ->limit(3)
+            ->get();
+
+        return view(
+            "Coaches.improvscene",
+            compact("location", "situation", "character")
+        );
+
+        
     }
 
     public function IsgTopicGenerator(Request $request)
@@ -364,6 +406,26 @@ class HomeController extends Controller
         //    exit;
 
         return view("frontendviews.isg", compact("topic", "topicName", "info"));
+    }
+
+    public function IsgSearch(Request $request)
+    {
+        $topicName = $request["topic_name"];
+        $topic = DB::table("i_s_g_s")
+            ->groupBy("topic")
+            ->get();
+
+        $info = DB::table("i_s_g_s")
+            // ->select(DB::raw('group_concat(info) as info'))
+            ->where("topic", $topicName)
+            ->inRandomOrder()
+            ->limit(3)
+            ->get();
+
+        //         echo "<pre>"; print_r($info); echo "</pre>";
+        //    exit;
+
+        return view("Coaches.isg", compact("topic", "topicName", "info"));
     }
 
     public function extempTopicGenerator(Request $request)
@@ -569,7 +631,7 @@ class HomeController extends Controller
         if ($fullSearch != null) {
             $search = Data::select(
                 "data.*",
-                DB::raw("group_concat(award_id) as award_id")
+                DB::raw("group_concat(award_id) as awards_id")
             )
                 ->orwhere("title", "Like", "%" . $fullSearch . "%")
                 ->orwhere("publisher", "Like", "%" . $fullSearch . "%")
@@ -595,7 +657,8 @@ class HomeController extends Controller
 
                 
                 ->groupBy("category_id")
-    
+                ->groupBy("title")
+
                ->get();
              
         //            echo "<pre>"; print_r($data->toArray()); echo "</pre>";
@@ -606,7 +669,7 @@ class HomeController extends Controller
                 
                 $search = Data::select(
                     "data.*",
-                    DB::raw("group_concat(award_id) as award_id")
+                    DB::raw("group_concat(award_id) as awards_id")
                 )
                     ->where("title", "Like", "%" . $title . "%")
                     ->where("author", "Like", "%" . $author . "%")
@@ -626,7 +689,9 @@ class HomeController extends Controller
                         return $q->whereHas("category", function ($query) use (
                             $request
                         ) {
-                            $query->where("id", $request->category_name);
+                            // $query->where("id", $request->category_name);
+                        $query->where('name', 'like', '%' . $request->category_name . '%');
+
                         });            
                         
                     })
@@ -637,8 +702,10 @@ class HomeController extends Controller
                             $query->where("author_name","Like", "%" . $request->vault . "%");
                         });
                     })
+                    
                     ->groupBy("category_id")
-        
+                    ->groupBy("title")
+            
                     ->get();
 
                   

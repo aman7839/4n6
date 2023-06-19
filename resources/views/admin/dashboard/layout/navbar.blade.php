@@ -224,9 +224,28 @@
 
                     </li> --}}
 
+                    <li class="nav-item dropdown admin_dropdown">
+                        <a class=" dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="menu-icon fa fa-calendar" aria-hidden="true"></i> Limited Prep Events <i class="fa fa-chevron-right arrown_style"></i>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="{{url('admin/regeneratetopics')}}" data-toggle="tooltip" data-placement="right" title="Improv Scene Generator"> 
+                            <i class="menu-icon fa fa-dot-circle-o" aria-hidden="true"></i> 
+                            Improv Scene Generator
+                        </a>
+                          <a class="dropdown-item" href="{{url('admin/isg')}}" data-toggle="tooltip" data-placement="right" title="Impromptu Speech Topic Generator"> 
+                            <i class="menu-icon fa fa-dot-circle-o" aria-hidden="true"></i>
+                            Impromptu Speech Topic Generator
+                        </a>
+                          <a class="dropdown-item" href="{{url('admin/extemp')}}" data-toggle="tooltip" data-placement="right" title="Extempt Topic Generator"> 
+                            <i class="menu-icon fa fa-dot-circle-o" aria-hidden="true"></i>Extempt Topic Generator</a>
+                            
+                        </div>
+                      </li>
+
                     <li class="nav-item {{ request()->is('admin/documents') ? 'active' : ''}}">
 
-                        <a href="{{url('admin/documents')}}"><i class="menu-icon fa fa-file-text"></i>User Guides/Documents </a>
+                        <a href="{{url('admin/documents')}}"><i class="menu-icon fa fa-file-text"></i>Documents Manager</a>
 
                     </li>
 
@@ -370,16 +389,16 @@
                             <i class="menu-icon fa fa-calendar" aria-hidden="true"></i> Limited Prep Events <i class="fa fa-chevron-right arrown_style"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <a class="dropdown-item" href="{{url('/regeneratetopics')}}" data-toggle="tooltip" data-placement="right" title="Impromptu Speech Topic Generator"> 
+                          <a class="dropdown-item" href="{{url('coach/regeneratetopics')}}" data-toggle="tooltip" data-placement="right" title="Improv Scene Generator"> 
                             <i class="menu-icon fa fa-dot-circle-o" aria-hidden="true"></i> 
-                            IDA  
+                            Improv Scene Generator
                         </a>
-                          <a class="dropdown-item" href="{{url('/isg')}}" data-toggle="tooltip" data-placement="right" title="Impromptu Speech Topic Generator"> 
+                          <a class="dropdown-item" href="{{url('coach/isg')}}" data-toggle="tooltip" data-placement="right" title="Impromptu Speech Topic Generator"> 
                             <i class="menu-icon fa fa-dot-circle-o" aria-hidden="true"></i>
-                            IST Generator
+                            Impromptu Speech Topic Generator
                         </a>
-                          <a class="dropdown-item" href="{{url('coach/extemp')}}" data-toggle="tooltip" data-placement="right" title="Extemp Topic Generator"> 
-                            <i class="menu-icon fa fa-dot-circle-o" aria-hidden="true"></i>ET Generator</a>
+                          <a class="dropdown-item" href="{{url('coach/extemp')}}" data-toggle="tooltip" data-placement="right" title="Extempt Topic Generator"> 
+                            <i class="menu-icon fa fa-dot-circle-o" aria-hidden="true"></i>Extempt Topic Generator</a>
                             
                         </div>
                       </li>
@@ -479,16 +498,16 @@
                             <i class="menu-icon fa fa-calendar" aria-hidden="true"></i> Limited Prep Events <i class="fa fa-chevron-right arrown_style"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <a class="dropdown-item" href="{{url('/regeneratetopics')}}" data-toggle="tooltip" data-placement="right" title="Impromptu Speech Topic Generator"> 
+                          <a class="dropdown-item" href="{{url('student/regeneratetopics')}}" data-toggle="tooltip" data-placement="right" title="Impromptu Speech Topic Generator"> 
                             <i class="menu-icon fa fa-dot-circle-o" aria-hidden="true"></i> 
-                            IDA  
+                            Improv Scene Generator
                         </a>
-                          <a class="dropdown-item" href="{{url('/isg')}}" data-toggle="tooltip" data-placement="right" title="Impromptu Speech Topic Generator"> 
+                          <a class="dropdown-item" href="{{url('student/isg')}}" data-toggle="tooltip" data-placement="right" title="Impromptu Speech Topic Generator"> 
                             <i class="menu-icon fa fa-dot-circle-o" aria-hidden="true"></i>
-                            IST Generator
+                            Impromptu Speech Topic Generator
                         </a>
                           <a class="dropdown-item" href="{{url('student/extemp')}}" data-toggle="tooltip" data-placement="right" title="Extemp Topic Generator"> 
-                            <i class="menu-icon fa fa-dot-circle-o" aria-hidden="true"></i>ET Generator</a>
+                            <i class="menu-icon fa fa-dot-circle-o" aria-hidden="true"></i>Extempt Topic Generator</a>
                             
                         </div>
                       </li>

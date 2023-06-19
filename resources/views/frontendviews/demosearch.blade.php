@@ -265,7 +265,7 @@
 
                             
 
-                        <option value=" {{$item->id}}"  {{$item->id == ($categories ) ? 'selected':''}}>{{$item->name}}</option>
+                        <option value=" {{$item->name}}"  {{$item->name == ($categories ) ? 'selected':''}}>{{$item->name}}</option>
 
                         @endforeach
 

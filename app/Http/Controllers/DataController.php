@@ -25,14 +25,15 @@ $search = $request['search'];
 
 if ($search != ""){
         
-            $data = Data::where('title', 'Like', '%'.$search. '%' )->orWhere('author', 'Like', '%'.$search. '%')->paginate('10');
-           
+            $data = Data::where('title', 'Like', '%'.$search. '%' )->orWhere('author', 'Like', '%'.$search. '%')->paginate(50);
+            // $data->appends($search);
+            $data->appends(['search' => $search]);
         }
         else
         
         {
         
-           $data = Data::with(['awards','theme', 'category'])->paginate(10);
+           $data = Data::with(['awards','theme', 'category'])->paginate(50);
         
         }
         
@@ -41,9 +42,9 @@ if ($search != ""){
             }
    
     public function adddata(){
-        $awards = awards::all();
-        $theme = Theme::all();
-        $category = PlayCategory::all();
+        $awards = awards::orderBY('awards_name','asc')->get();
+        $theme = Theme::orderBY('name','asc')->get();
+        $category = PlayCategory::orderBY('name','asc')->get();
 
 
      
@@ -58,7 +59,7 @@ if ($search != ""){
                 'author' => 'required',
                 'book' => 'url',
                 'publisher' => 'required',
-                'isbn' => 'required|numeric',
+                'isbn' => 'required',
                 'summary' => 'required',
                 'type' => 'required',
                 'characters'=>'required',
@@ -108,9 +109,11 @@ if ($search != ""){
          public function editData($id){
             $data = Data::where('id',$id)->with(['awards','theme','category'])->first();
            
-            $awards = awards::all();
-           $theme = Theme::all();
-           $category = PlayCategory::all();
+      
+
+           $awards = awards::orderBY('awards_name','asc')->get();
+           $theme = Theme::orderBY('name','asc')->get();
+           $category = PlayCategory::orderBY('name','asc')->get();
 
             return view('admin.Data.editdata',compact('data','awards','theme','category'));
 
@@ -143,7 +146,7 @@ if ($search != ""){
                 'author' => 'required',
                 'book' => 'url',
                 'publisher' => 'required',
-                'isbn' => 'required|numeric',
+                'isbn' => 'required',
                 'summary' => 'required',
                 'type' => 'required',
                 'characters'=>'required',
@@ -204,18 +207,18 @@ if ($search != ""){
                     $publisher = $sheet->getCell( 'D' . $row )->getValue();
 
 
-                    $summary = $sheet->getCell( 'E' . $row )->getValue();   
-                    $awardName = $sheet->getCell( 'F' . $row )->getValue();   
+                    $summary = $sheet->getCell( 'M' . $row )->getValue();   
+                    $awardName = $sheet->getCell( 'J' . $row )->getValue();   
 
                     $categoryName = $sheet->getCell( 'G' . $row )->getValue();   
 
-                    $themeName = $sheet->getCell( 'H' . $row )->getValue();   
+                    $themeName = $sheet->getCell( 'K' . $row )->getValue();   
 
-                    $type = $sheet->getCell( 'I' . $row )->getValue();   
-                    $character = $sheet->getCell( 'J' . $row )->getValue();   
+                    $type = $sheet->getCell( 'H' . $row )->getValue();   
+                    $character = $sheet->getCell( 'I' . $row )->getValue();   
 
-                    $rating = $sheet->getCell( 'K' . $row )->getValue();  
-                    $isbn = $sheet->getCell( 'L' . $row )->getValue();   
+                    $rating = $sheet->getCell( 'L' . $row )->getValue();  
+                    $isbn = $sheet->getCell( 'F' . $row )->getValue();   
 
 
                     

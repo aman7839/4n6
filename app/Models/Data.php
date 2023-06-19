@@ -41,8 +41,8 @@ class Data extends Model
 
     public function getAwardNameAttribute(){
         $data = $this->belongsTo(Data::class,"id")->first();
-        $ids = explode(",",strval($this->award_id));
-        $award = awards::whereIn('id', $ids)->pluck('awards_name')->implode(', ');
+        $ids = explode(",",strval($this->awards_id));
+        $award = awards::whereIn('id', $ids)->pluck('awards_name')->implode(',');
         return $award;
     }
 }
