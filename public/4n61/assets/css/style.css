@@ -3073,7 +3073,26 @@ ul.topic_list li {
   line-height: 31px;
 }
 
+p.states {
+  font-size: 25px;
+  text-align: center;
+  padding: 10px 0px;
+  text-transform: capitalize;
+  color: #ef8a17;
+  font-weight: 700;
+}
+button.cmn_btn.reset a {
+  color: #000;
+}
+button.cmn_btn.reset {
+  background: #ddd;
+  color: #000 !important;
+}
 
+.coaches_list li {
+  text-align: center;
+  padding: 10px 0px;
+}
 ul.topic_list {
   padding-top: 10px;
 }

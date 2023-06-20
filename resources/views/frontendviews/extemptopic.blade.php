@@ -10,9 +10,7 @@
                 Generator</h4> 
         </div>
         <div class="card-body">
-            <div class="extempt_heading_outer">
-                <h3 class="title_cmn"> Extempt Topic Generator</h3>     
-            </div>
+        
             <div class="custom_container ">
                 <div class="extemps_filter">
                    
