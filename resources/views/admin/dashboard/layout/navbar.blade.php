@@ -175,11 +175,11 @@
 
                     </li> --}}
 
-                    {{-- <li class="nav-item {{ request()->is('admin/content') ? 'active' : ''}}">
+                    <li class="nav-item {{ request()->is('admin/content') ? 'active' : ''}}">
 
                         <a href="{{url('admin/content')}}"><i class="menu-icon fa fa-tachometer"></i>Content Editor </a>
 
-                    </li> --}}
+                    </li>
 
 
 
@@ -300,6 +300,10 @@
 
                         <a href="{{url('admin/messages')}}"><i class="menu-icon fa fa-commenting-o"></i> Messages</a>
 
+                    </li>
+                    <li class="nav-item {{ request()->is('admin/faq') ? 'active' : ''}}">  
+
+                        <a class="" href="{{ url('admin/faq')}}"><i class=" menu-icon fa fa-users"></i> Manage FAQ's</a>
                     </li>
 
                     <li class="nav-item {{ request()->is('admin/editProfile') ? 'active' : ''}}">  

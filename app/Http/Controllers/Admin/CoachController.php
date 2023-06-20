@@ -56,6 +56,7 @@ public function getFolderData($id){
         ->whereDate('end_date', '>=', $today)->where('status',1)
         ->first();
         $vault_tree=[];
+        
         if($membership){
         $vault = Vault::with('items','nestedCategories.items',)->whereNull('parent_id')->where('coach_access',1)->get();
         $vault_tree = $this->buildTree($vault->toArray());

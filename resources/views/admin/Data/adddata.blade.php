@@ -164,7 +164,7 @@
         <div class="col-md-12">
         <div class="form-group">
       <label for="summary" >Summary</label>
- <textarea name="summary" id="summary"  class="form-control"cols="50" rows="2   ">  {{old('summary')}}  </textarea>        
+ <textarea name="summary" id="summary"  class="form-control" cols="50" rows="2   ">  {{old('summary')}}  </textarea>        
   <span class ="text-danger">@error('summary'){{$message}} @enderror</span>
     </div>
         </div>
@@ -202,4 +202,3 @@
 
 {{-- </body>
 </html> --}}
-Download 

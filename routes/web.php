@@ -26,6 +26,7 @@ use App\Http\Controllers\Paypal\PayPalController;
 use App\Http\Controllers\cheque\ChequeController;
 use App\Http\Controllers\Admin\UserController as AdminUsers;
 use App\Http\Controllers\Admin\MembershipController;
+use App\Http\Controllers\FAQController;
 
 // Route::get('/', function () {
 //     return view('frontendviews.login');
@@ -56,6 +57,7 @@ Route::get('/', [DashboardController::class, 'dashboard']);
 
 
 Route::get('/editProfile/{id}', [DashboardController::class, 'editProfile']);
+
 Route::put('/updateProfile/{id}', [DashboardController::class, 'updateprofile']);
 
 Route::get('/changePassword',[DashboardController::class, 'showChangePasswordGet'])->name('changePasswordGet');
@@ -250,15 +252,25 @@ Route::get('/edittutorial/{id}', [UsersGuideController::class,'editTutorial']);
 Route::put('/savetutorial/{id}', [UsersGuideController::class,'updateVideo']);
 Route::post('/importvaultfiles', [userController::class,'importVaultData']);
 
-
 // imrpoc scene generator
 
 Route::get('/regeneratetopics', [HomeController::class,'idaSearch']);
 
-
-// isg
+// isg routes
 
 Route::get('/isg', [HomeController::class,'IsgSearch']);
+
+// faq routes
+
+Route::get('/faq', [FAQController::class,'index']);
+Route::get('/addfaq', [FAQController::class,'addFaq']);
+Route::post('/addfaq', [FAQController::class,'saveFaq']);
+Route::get('/editfaq/{id}', [FAQController::class,'editFaq']);
+Route::put('/editfaq/{id}', [FAQController::class,'updateFaq']);
+Route::get('/delete/{id}', [FAQController::class,'delete']);
+
+
+
 
 
 
