@@ -5,7 +5,7 @@
 
 
    
-<div class="container-fluid pt-5">
+<div class="container-fluid pt-4">
 <section class="coach_list space pt-0">
 <div class="card">
     <div class="card-header ida_header">
@@ -33,7 +33,7 @@
     
               </li> --}}
           </ul>
-          <div class="row mt-5">
+          <div class="row">
               <div class="col-md-12">
                   <form action= "">
                <div class="select_topic_filter">
@@ -76,7 +76,7 @@
           @if($topicName != "" )
                  
               </div>
-              <div class="result_wrapper">
+              <div class="result_wrapper w-100">
                   <div class="col-12">
                       <p class="states">{{$topicName}}</p>
                    </div>

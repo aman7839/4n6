@@ -6,13 +6,13 @@
     <section class="coach_list">
         <div class="card">
          <div class="card-header ida_header">
-        <h2 class="title_cmn"> Improve Scene 
-            Generator</h2>
+        <h4 class="title_cmn"> Improve Scene 
+            Generator</h4>
          </div>
          <div class="card-body">
           <div class="custom_container">
-          <h6 class="title_cmn"> INSTRUCTIONS: </h6> 
-             <ul class="topic_list">
+          <h6 class="title_cmn "> INSTRUCTIONS: </h6> 
+             <ul class="topic_list mt-3">
                  <li>
                      Each time the "Regenerate Topics" button is clicked, the generator will randomly display 3 Characters, 3 Locations and 3 Situations.
                  </li>
