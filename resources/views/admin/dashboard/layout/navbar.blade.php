@@ -175,11 +175,11 @@
 
                     </li> --}}
 
-                    <li class="nav-item {{ request()->is('admin/content') ? 'active' : ''}}">
+                    {{-- <li class="nav-item {{ request()->is('admin/content') ? 'active' : ''}}">
 
                         <a href="{{url('admin/content')}}"><i class="menu-icon fa fa-tachometer"></i>Content Editor </a>
 
-                    </li>
+                    </li> --}}
 
 
 
