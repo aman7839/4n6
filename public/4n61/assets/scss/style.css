@@ -753,8 +753,18 @@ a:focus {
 
   color: #000; }
 
-
-
+  .custom_container h1 {
+    color: #ef8a17;
+  }
+.custom_container h1{
+    color: #ef8a17;
+  }
+  .custom_container h2{
+    color: #ef8a17;
+  }
+  .custom_container {
+    padding: 20px;
+}
 h1,
 
 h2,
