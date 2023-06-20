@@ -30,7 +30,14 @@
 
 
 
-     <form action="{{url("admin/importvaultfiles")}}" method="post" enctype="multipart/form-data">
+    
+</div>
+
+    <div class="content">
+        <div class="">
+            <div class="row">
+                <div class="col-12">
+                <form action="{{url("admin/importvaultfiles")}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <fieldset>
                     <label>Select File to Upload <small class="warning text-muted">{{__('Please upload only Excel (.xlsx or .xls) files')}}</small></label>
@@ -48,11 +55,7 @@
 
                 </fieldset>
             </form>
-</div>
-
-    <div class="content">
-        <div class="">
-            <div class="row">
+                </div>
                 <div class="col-md-12 col-lg-4 col-xl-3">
                     <div class="tree">
                         <ul id="myUL">

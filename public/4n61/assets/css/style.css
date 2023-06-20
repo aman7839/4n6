@@ -3055,6 +3055,28 @@ width: 100%;
   width: 85px;
 }
 /* custom media */
+.button_actions {
+  margin-top: 20px;
+}
+
+.reset {
+  margin-top: 20px;
+}
+.view_filters input {
+  margin-right: 10px;
+}
+.extempt_heading_outer {
+  padding-bottom: 10px;
+}
+ul.topic_list li {
+  font-size: 16px;
+  line-height: 31px;
+}
+
+
+ul.topic_list {
+  padding-top: 10px;
+}
 /* database search */
 .all_results {
   padding: 15px;

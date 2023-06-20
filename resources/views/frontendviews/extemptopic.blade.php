@@ -3,20 +3,16 @@
 
     @section('content')
    
-    <section class="cmn_header_section space" style="background-image:{{asset('url(public/4n61/images/demo_bg.jpg)')}};">
-        <div class="custom_container">
-            {{-- <h1>Extempt Topic  <br>
-                Generator</h1> --}}
+<div class="container-fluid pt-5">
+    <div class="card">
+        <div class="card-header ida_header">
+        <h4 class="title_cmn">Extempt Topic  
+                Generator</h4> 
         </div>
-    </section>
-
-    <div class="custom_container space pb-5">
-        <div class="cmn_heading">
-          <h2> Extempt Topic Generator</h2>
-           
-        </div>
-    </div>
-        <section class="extemps space pt-0">
+        <div class="card-body">
+            <div class="extempt_heading_outer">
+                <h3 class="title_cmn"> Extempt Topic Generator</h3>     
+            </div>
             <div class="custom_container ">
                 <div class="extemps_filter">
                    
@@ -278,7 +274,13 @@
                             @endif
                           
             </div>
-        </section>
+        
+        </div>
+    </div>
+</div>
+
+   
+        
 
         {{-- @section('script')
         <script>
