@@ -26,6 +26,8 @@ use App\Models\ExtempTopic;
 use Illuminate\Support\Facades\DB;
 use App\Models\playCategory;
 use App\Models\Reviews;
+use App\Models\FAQ;
+
 use App\Models\Tutorial;
 use Illuminate\Support\Facades\Auth;
 
@@ -44,7 +46,12 @@ class HomeController extends Controller
 
     public function faq()
     {
-        return view("frontendviews.faq");
+
+        $generalQuestions = FAQ::where('type', 'GENERAL_QUESTIONS')->get();
+        $membershipQuestions = FAQ::where('type', 'MEMBERSHIP/PAYMENT_QUESTIONS')->get();
+        $serviceQuestions = FAQ::where('type', 'SERVICES_PROVIDED_QUESTIONS')->get();
+
+        return view("frontendviews.faq",compact('generalQuestions','membershipQuestions','serviceQuestions'));
     }
 
 

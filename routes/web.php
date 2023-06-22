@@ -275,11 +275,6 @@ Route::get('/delete/{id}', [FAQController::class,'delete']);
 
 
 
-
-
-
-
-
 });
 
 });
